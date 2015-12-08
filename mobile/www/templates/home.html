@@ -1,0 +1,12 @@
+<ion-view title="Home">
+    <ion-content overflow-scroll="true" padding="'true'" class="has-header">
+        <h4>Welcome to {{campaigns[0].location}}</h4>
+        <ion-list>
+            <ion-item class="item-thumbnail-left" ng-repeat="camps in campaigns">
+                <img>
+                <h2>{{camps.title}}</h2>
+                <p>{{camps.description}}</p>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>
