@@ -20,5 +20,17 @@
     "express": "^4.13.3",
     "gulp": "^3.9.0",
     "gulp-nodemon": "^2.0.4"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-csso": "^1.0.1",
+    "gulp-inject": "^3.0.0",
+    "gulp-jshint": "^2.0.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-mocha": "^2.2.0",
+    "gulp-mocha-phantomjs": "^0.10.1",
+    "gulp-uglify": "^1.5.1",
+    "gulp-watch": "^4.3.5",
+    "jshint": "^2.8.0"
   }
 }
