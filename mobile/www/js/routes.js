@@ -115,6 +115,36 @@ angular.module('app.routes', [])
     })
         
       
+    
+      
+        
+    .state('supplyList', {
+      url: '/supplylist',
+      templateUrl: 'templates/supplyList.html',
+      controller: 'supplyListCtrl'
+    })
+        
+      
+    
+      
+        
+    .state('volunteer', {
+      url: '/volunteer',
+      templateUrl: 'templates/volunteer.html',
+      controller: 'volunteerCtrl'
+    })
+        
+      
+    
+      
+        
+    .state('donateMoney', {
+      url: '/donatemoney',
+      templateUrl: 'templates/donateMoney.html',
+      controller: 'donateMoneyCtrl'
+    })
+        
+      
     ;
 
   // if none of the above states are matched, use this as the fallback
