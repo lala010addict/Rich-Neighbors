@@ -1,16 +1,16 @@
 /**
  * Using Rails-like standard naming convention for endpoints.
- * GET     /api/campaigns              ->  index
- * POST    /api/campaigns              ->  create
- * GET     /api/campaigns/:id          ->  show
- * PUT     /api/campaigns/:id          ->  update
- * DELETE  /api/campaigns/:id          ->  destroy
+ * GET     /api/campaign_items              ->  index
+ * POST    /api/campaign_items              ->  create
+ * GET     /api/campaign_items/:id          ->  show
+ * PUT     /api/campaign_items/:id          ->  update
+ * DELETE  /api/campaign_items/:id          ->  destroy
  */
 
 'use strict';
 
 var _ = require('lodash');
-var Campaign = require('./campaign.model');
+var CampaignItem = require('./campaign_item.model');
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
@@ -59,57 +59,44 @@ function removeEntity(res) {
   };
 }
 
-// Gets a list of Campaigns
+// Gets a list of CampaignItems
 exports.index = function(req, res) {
-  Campaign.findAsync()
+  CampaignItem.findAsync()
     .then(responseWithResult(res))
     .catch(handleError(res));
 };
 
-// Gets a single Campaign from the DB
+// Gets a single CampaignItem from the DB
 exports.show = function(req, res) {
-  Campaign.findByIdAsync(req.params.id)
+  CampaignItem.findByIdAsync(req.params.id)
     .then(handleEntityNotFound(res))
     .then(responseWithResult(res))
     .catch(handleError(res));
 };
 
-// Creates a new Campaign in the DB
+// Creates a new CampaignItem in the DB
 exports.create = function(req, res) {
-  Campaign.createAsync(req.body)
+  CampaignItem.createAsync(req.body)
     .then(responseWithResult(res, 201))
     .catch(handleError(res));
 };
 
-// TODO: Must be tested
-// Updates an existing Campaign in the DB
+// Updates an existing CampaignItem in the DB
 exports.update = function(req, res) {
   if (req.body._id) {
     delete req.body._id;
   }
-  Campaign.findByIdAsync(req.params.id)
-    .then(function (data) {
-      if (data.isOwner(req.user._id)) {
-        return handleEntityNotFound(res)
-          .then(saveUpdates(req.body))
-          .then(responseWithResult(res))
-          .catch(handleError(res));
-      } else {
-        return res.status(403).end();
-      }
-    })
+  CampaignItem.findByIdAsync(req.params.id)
+    .then(handleEntityNotFound(res))
+    .then(saveUpdates(req.body))
+    .then(responseWithResult(res))
+    .catch(handleError(res));
 };
 
-// Deletes a Campaign from the DB
+// Deletes a CampaignItem from the DB
 exports.destroy = function(req, res) {
-  Campaign.findByIdAsync(req.params.id)
-    .then(function (data) {
-      if (data.isOwner(req.user._id)) {
-        return handleEntityNotFound(res)
-          .then(removeEntity(res))
-          .catch(handleError(res));
-      } else {
-        return res.status(403).end();
-      }
-    });
+  CampaignItem.findByIdAsync(req.params.id)
+    .then(handleEntityNotFound(res))
+    .then(removeEntity(res))
+    .catch(handleError(res));
 };
