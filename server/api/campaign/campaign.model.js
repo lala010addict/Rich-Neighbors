@@ -131,24 +131,10 @@ CampaignSchema
  * Validations
  */
 CampaignSchema
-  .path('location.zip')
+  .path('address.zip')
   .validate(function (zip) {
     return zip === 5;
   })
-
-addressValidator.validate( location.full, addressValidator.match.streetAddress, function (err, exact, inexact) {
-    console.log('input: ', address.toString())
-    console.log('match: ', _.map(exact, function(a) {
-      return a.toString();
-    }));
-    console.log('did you mean: ', _.map(inexact, function(a) {
-      return a.toString();
-    }));
-
-    //access some props on the exact match
-    var first = exact[0];
-    console.log(first.streetNumber + ' '+ first.street);
-});
 
 
 /*
