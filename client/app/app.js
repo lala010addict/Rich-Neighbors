@@ -3,6 +3,7 @@
 angular.module('bApp', [
   'bApp.auth',
   'bApp.admin',
+  // 'bApp.campaignProfile',
   'bApp.constants',
   'ngCookies',
   'ngResource',

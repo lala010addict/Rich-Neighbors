@@ -1,3 +1,5 @@
+<!-- 
+
 <div class="navbar navbar-default navbar-static-top" ng-controller="NavbarController">
   <div class="container">
     <div class="navbar-header">
@@ -25,5 +27,47 @@
         <li ng-show="nav.isLoggedIn()"><a ui-sref="logout">Logout</a></li>
       </ul>
     </div>
+  </div>
+</div> -->
+ <div class="slide-info-colors multicol-colors">
+                  <ul class="clearfix">
+                    <li data-color="#0095da" style="width: 7.69231%; background: rgb(0, 149, 218);"></li>
+                    <li data-color="#a6ce38" style="width: 7.69231%; background: rgb(166, 206, 56);"></li>
+                    <li data-color="#ffcb0c" style="width: 7.69231%; background: rgb(255, 203, 12);"></li>
+                    <li data-color="#d7151a" style="width: 7.69231%; background: rgb(215, 21, 26);"></li>
+                    <li data-color="#a54886" style="width: 7.69231%; background: rgb(165, 72, 134);"></li>
+                    <li data-color="#0095da" style="width: 7.69231%; background: rgb(0, 149, 218);"></li>
+                    <li data-color="#a6ce38" style="width: 7.69231%; background: rgb(166, 206, 56);"></li>
+                    <li data-color="#ffcb0c" style="width: 7.69231%; background: rgb(255, 203, 12);"></li>
+                    <li data-color="#d7151a" style="width: 7.69231%; background: rgb(215, 21, 26);"></li>
+                    <li data-color="#a54886" style="width: 7.69231%; background: rgb(165, 72, 134);"></li>
+                    <li data-color="#0095da" style="width: 7.69231%; background: rgb(0, 149, 218);"></li>
+                    <li data-color="#a6ce38" style="width: 7.69231%; background: rgb(166, 206, 56);"></li>
+                    <li data-color="#ffcb0c" style="width: 7.69231%; background: rgb(255, 203, 12);"></li>
+                  </ul>
+                </div>
+<div class="top-bar" ng-controller="NavbarController">
+
+  <div class="top-bar-left">
+    <ul class="menu" data-responsive-menu="accordion">
+      <li class="menu-text">Rich Neighbors</li>
+      <li ng-repeat="item in nav.menu" ui-sref-active="active">
+        <a ui-sref="{{item.state}}">{{item.title}}</a>
+      </li>
+      <li ng-show="nav.isAdmin()" ui-sref-active="active"><a ui-sref="admin">Admin</a></li>
+      <li><a href="#">Three</a></li>
+    </ul>
+  </div>
+  <div class="top-bar-right">
+    <ul class="menu">
+      <li><a href="#">My Account</a></li>
+      <li ng-hide="nav.isLoggedIn()" ui-sref-active="active"><a class="button" ui-sref="login"><i class="fa fa-sign-in"> Login</i></a></li>
+      <li ng-hide="nav.isLoggedIn()" ui-sref-active="active"><a class="button" ui-sref="signup"><i class="fa fa-user"> Sign Up</i></a></li>
+      <li ng-show="nav.isLoggedIn()">
+        <p class="navbar-text">Hello {{ nav.getCurrentUser().name }}</p>
+      </li>
+      <li ng-show="nav.isLoggedIn()" ui-sref-active="active"><a ui-sref="settings"><span class="glyphicon glyphicon-cog"></span></a></li>
+      <li ng-show="nav.isLoggedIn()"><a ui-sref="logout">Logout</a></li>
+    </ul>
   </div>
 </div>
