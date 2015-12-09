@@ -57,7 +57,7 @@
         <a ui-sref="{{item.state}}">{{item.title}}</a>
       </li>
       <li ng-show="nav.isAdmin()" ui-sref-active="active"><a ui-sref="admin">Admin</a></li>
-      <li><a href="#">Three</a></li>
+      <li><a href="/startCampaign" class="button success">Start a Campaign</a></li>
     </ul>
   </div>
   <div class="top-bar-right">
@@ -68,7 +68,7 @@
       <li ng-show="nav.isLoggedIn()">
         <p class="navbar-text">Hello {{ nav.getCurrentUser().name }}</p>
       </li>
-      <li ng-show="nav.isLoggedIn()" ui-sref-active="active"><a ui-sref="settings"><span class="glyphicon glyphicon-cog"></span></a></li>
+      <li ng-show="nav.isLoggedIn()" ui-sref-active="active"><a ui-sref="settings">Settings</span></a></li>
       <li ng-show="nav.isLoggedIn()"><a ui-sref="logout">Logout</a></li>
     </ul>
   </div>
