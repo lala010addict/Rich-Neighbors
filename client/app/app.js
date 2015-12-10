@@ -4,7 +4,7 @@ angular.module('bApp', [
     'bApp.auth',
     'bApp.admin',
     'bApp.geolocation',
-    // 'bApp.campaignProfile',
+    'bApp.MainController',
     'bApp.constants',
     'ngCookies',
     'ngResource',

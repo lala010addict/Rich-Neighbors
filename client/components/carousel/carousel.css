@@ -24,12 +24,20 @@
 
 	/* General */
 
+textarea {
+	min-height: 150px  !important;
+    max-width: 300%;
+}
 
 #geoloc{
-  color:red;
+  color: hsl(173, 70%, 29%);
   font-weight: bold;
 }
 
+.thumbnails{
+	max-width: 100%;
+	height: 185px !important;
+}
 
 
 	.top-bar, .top-bar ul {
@@ -4105,7 +4113,7 @@
 			.multicol-colors li {
 				display: block;
 				float: left;
-				height: 5px;
+				height: 7px;
 				margin: 0 !important;
 				padding: 0 !important;
 				border: 0 !important;

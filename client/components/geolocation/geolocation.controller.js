@@ -57,7 +57,7 @@ angular.module('bApp.geolocation', ["ui.map", "ui.event"])
     $scope.getCity(position.coords.latitude, position.coords.longitude);
 
     var latlng = new google.maps.LatLng($scope.lat, $scope.lng);
-    $scope.model.myMap.setCenter(latlng);
+    // $scope.model.myMap.setCenter(latlng);
     $scope.myMarkers.push(new google.maps.Marker({
       map: $scope.model.myMap,
       position: latlng
