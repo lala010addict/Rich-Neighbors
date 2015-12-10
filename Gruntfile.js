@@ -411,10 +411,16 @@ module.exports = function (grunt) {
         connectCommits: false,
         message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%'
       },
-      heroku: {
+      herokumaster: {
         options: {
-          remote: 'heroku',
+          remote: 'git@heroku.com:richneighbors.git',
           branch: 'master'
+        }
+      },
+      herokustage: {
+        options: {
+          remote: 'git@heroku.com:richneighbors-dev.git',
+          branch: 'develop'
         }
       },
       openshift: {
