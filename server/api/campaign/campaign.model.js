@@ -32,8 +32,8 @@ var CampaignSchema = new Schema({
   },
   // TODO: Remove if comment api works
   comments: [{
-    body: String,
-    date: Date
+    type: Schema.ObjectId,
+    ref: 'Comment'
   }],
   owner: {
     type: Schema.ObjectId,
@@ -41,11 +41,21 @@ var CampaignSchema = new Schema({
   },
   followers: [{
     type:  Schema.ObjectId,
-    ref: 'User'
+    ref: 'User',
   }],
   contributors: [{
-    type:  Schema.ObjectId,
-    ref: 'User'
+    _id: {
+      type:  Schema.ObjectId,
+      ref: 'User'
+    },
+    amount: {
+      type: Number,
+      validate: [
+      function (number) {
+        return number >=1;
+      },
+      'Amount must be $1 or more']
+    }
   }],
   address: {
     street: String,
@@ -63,10 +73,10 @@ var CampaignSchema = new Schema({
       type: String,
       default: 'United States'
     },
-    long: {
+    longitude: {
       type: String
     },
-    lat: {
+    latitude: {
       type: String
     }
   },
@@ -133,11 +143,11 @@ CampaignSchema
 /**
  * Validations
  */
-CampaignSchema
-  .path('address.zip')
-  .validate(function (zip) {
-    return zip === 5;
-  })
+// CampaignSchema
+//   .path('address.zip')
+//   .validate(function (zip) {
+//     return zip === 5;
+//   })
 
 
 /*

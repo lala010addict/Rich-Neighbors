@@ -38,7 +38,7 @@ campaignSchema = JSON.parse(fs.readFileSync(path.join(__dirname, 'seed.campaign.
 
 Campaign.find({}).removeAsync()
   .then(function() {
-    Campaign.create(campaignSchema);
+    Campaign.createAsync(campaignSchema);
   })
   .then(function() {
     console.log('finished populating campaigns');
