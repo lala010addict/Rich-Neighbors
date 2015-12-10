@@ -57,18 +57,31 @@
         <a ui-sref="{{item.state}}">{{item.title}}</a>
       </li>
       <li ng-show="nav.isAdmin()" ui-sref-active="active"><a ui-sref="admin">Admin</a></li>
+<<<<<<< HEAD
       <li><a href="/startCampaign" class="button success">Start a Campaign</a></li>
+=======
+      <li><a href="#">Three</a></li>
+>>>>>>> 96853e0054fbd533474303c8a802260a6aab9549
     </ul>
   </div>
   <div class="top-bar-right">
     <ul class="menu">
       <li><a href="#">My Account</a></li>
+<<<<<<< HEAD
       <li ng-hide="nav.isLoggedIn()" ui-sref-active="active"><a class="button small" ui-sref="login"><i class="fa fa-sign-in">   Login</i></a></li>
       <li ng-hide="nav.isLoggedIn()" ui-sref-active="active"><a class="button small" ui-sref="signup"><i class="fa fa-user">    Sign Up</i></a></li>
       <li ng-show="nav.isLoggedIn()">
         <p class="navbar-text">Hello {{ nav.getCurrentUser().name }}</p>
       </li>
       <li ng-show="nav.isLoggedIn()" ui-sref-active="active"><a ui-sref="settings"><i class="fa fa-cog"></i></a></li>
+=======
+      <li ng-hide="nav.isLoggedIn()" ui-sref-active="active"><a class="button" ui-sref="login"><i class="fa fa-sign-in"> Login</i></a></li>
+      <li ng-hide="nav.isLoggedIn()" ui-sref-active="active"><a class="button" ui-sref="signup"><i class="fa fa-user"> Sign Up</i></a></li>
+      <li ng-show="nav.isLoggedIn()">
+        <p class="navbar-text">Hello {{ nav.getCurrentUser().name }}</p>
+      </li>
+      <li ng-show="nav.isLoggedIn()" ui-sref-active="active"><a ui-sref="settings"><span class="glyphicon glyphicon-cog"></span></a></li>
+>>>>>>> 96853e0054fbd533474303c8a802260a6aab9549
       <li ng-show="nav.isLoggedIn()"><a ui-sref="logout">Logout</a></li>
     </ul>
   </div>
