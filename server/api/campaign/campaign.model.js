@@ -30,11 +30,7 @@ var CampaignSchema = new Schema({
     required: true,
     default: Date.now
   },
-  // TODO: Remove if comment api works
-  comments: [{
-    type: Schema.ObjectId,
-    ref: 'Comment'
-  }],
+  // TODO: Remove if comment api works4 null
   owner: {
     type: Schema.ObjectId,
     ref: 'User'
@@ -47,6 +43,10 @@ var CampaignSchema = new Schema({
     _id: {
       type:  Schema.ObjectId,
       ref: 'User'
+    },
+    private: {
+      type: Boolean,
+      default: false
     },
     amount: {
       type: Number,
