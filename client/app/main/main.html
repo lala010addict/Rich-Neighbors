@@ -1,199 +1,44 @@
-<navbar></navbar>
-<!-- <header class="hero-unit" id="banner">
-  <div class="container">
-    <h1>'Allo, 'Allo!</h1>
-    <p class="lead">Kick-start your next web app with Angular Fullstack</p>
-    <img src="assets/images/yeoman.png" alt="I'm Yeoman">
+<div ng-controller="MainController" ng-init="showData()">
+  <navbar></navbar>
+  <carousel></carousel>
+  <br>
+  <div class="row column text-center">
+    <p class="lead">Campaigns Near Me
+      <geolocation></geolocation>
+    </p>
   </div>
-</header>
-
-<div class="container">
-  <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header">Features:</h1>
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in main.awesomeThings">
-        <li><a href="#" tooltip="{{thing.info}}">{{thing.name}}</a></li>
-      </ul>
+  <div class="row small-up-1 medium-up-2 large-up-3">
+    <div class="column" ng-repeat="x in data | limitTo: paginationLimit()">
+      <div class="callout">
+        <p class="text-center">{{x.title}}</p>
+        <p class="text-center"><img src="{{x.images}}" class="thumbnails" alt="image of a planet called Campaign Image"></p>
+        <p class="lead">{{x.title}}</p>
+        <p class="subheader">Find Earth-like planets life outside the Solar System</p>
+        <!-- .slide-info-inner -->
+        <div class="cause-info">
+          <div class="cause-info-content clearfix">
+            <div class="fl cause-info-donated">
+              <span>${{x.raised}}</span> Donated </div>
+            <!-- .cause-info-donated -->
+            <div class="fr cause-info-funded">
+              <span> {{( x.raised / x.total * 100)| number:2}}%</span> Funded </div>
+            <!-- .cause-info-funded -->
+          </div>
+          <!-- .cause-info-content -->
+          <div class="cause-info-bar" data-raised="0.8%">
+            <span style="width: {{( x.raised / x.total * 100)| number:2}}%;"></span>
+          </div>
+          <!-- .cause-info-bar -->
+          <div class="cause-info-links">
+            <a href="/campaignProfile" class="dd-button orange-light small">MORE DETAILS</a>
+          </div>
+          <!-- .cause-info-links -->
+        </div>
+      </div>
     </div>
   </div>
-</div> -->
-<carousel></carousel>
-<br>
-<div class="row column">
-  <h4><p class="lead">Campaigns Near Me <geolocation></geolocation></p></h2>
+  <div class="row column">
+    <a class="button hollow expanded" ng-show="hasMoreItemsToShow()" ng-click="showMoreItems()">Load More</a>
+  </div>
+  <footer></footer>
 </div>
-<div class="row small-up-1 medium-up-2 large-up-3">
-  <div class="column">
-    <div class="callout">
-      <p>Campaign Title</p>
-      <p><img src="http://thecatapi.com/api/images/get?format=src&type=gif" alt="image of a planet called Campaign Image"></p>
-      <p class="lead">Copernican Revolution caused an uproar</p>
-      <p class="subheader">Find Earth-like planets life outside the Solar System</p>
-      <!-- .slide-info-inner -->
-      <div class="cause-info">
-        <div class="cause-info-content clearfix">
-          <div class="fl cause-info-donated">
-            <span>$64</span> Donated </div>
-          <!-- .cause-info-donated -->
-          <div class="fr cause-info-funded">
-            <span>0.8%</span> Funded </div>
-          <!-- .cause-info-funded -->
-        </div>
-        <!-- .cause-info-content -->
-        <div class="cause-info-bar" data-raised="0.8%">
-          <span style="width: 0.8%;"></span>
-        </div>
-        <!-- .cause-info-bar -->
-        <div class="cause-info-links">
-          <a href="/campaignProfile" class="dd-button orange-light small">MORE DETAILS</a>
-        </div>
-        <!-- .cause-info-links -->
-      </div>
-    </div>
-  </div>
-  <div class="column">
-    <div class="callout">
-      <p>Campaign Title</p>
-      <p><img src="http://thecatapi.com/api/images/get?format=src&type=gif" alt="image of a planet called Campaign Image"></p>
-      <p class="lead">Copernican Revolution caused an uproar</p>
-      <p class="subheader">Find Earth-like planets life outside the Solar System</p>
-      <!-- .slide-info-inner -->
-      <div class="cause-info">
-        <div class="cause-info-content clearfix">
-          <div class="fl cause-info-donated">
-            <span>$64</span> Donated </div>
-          <!-- .cause-info-donated -->
-          <div class="fr cause-info-funded">
-            <span>0.8%</span> Funded </div>
-          <!-- .cause-info-funded -->
-        </div>
-        <!-- .cause-info-content -->
-        <div class="cause-info-bar" data-raised="0.8%">
-          <span style="width: 0.8%;"></span>
-        </div>
-        <!-- .cause-info-bar -->
-        <div class="cause-info-links">
-          <a href="/campaignProfile" class="dd-button orange-light small">MORE DETAILS</a>
-        </div>
-        <!-- .cause-info-links -->
-      </div>
-    </div>
-  </div>
-  <div class="column">
-    <div class="callout">
-      <p>Campaign Title</p>
-      <p><img src="http://thecatapi.com/api/images/get?format=src&type=gif" alt="image of a planet called Campaign Image"></p>
-      <p class="lead">Copernican Revolution caused an uproar</p>
-      <p class="subheader">Find Earth-like planets life outside the Solar System</p>
-      <!-- .slide-info-inner -->
-      <div class="cause-info">
-        <div class="cause-info-content clearfix">
-          <div class="fl cause-info-donated">
-            <span>$64</span> Donated </div>
-          <!-- .cause-info-donated -->
-          <div class="fr cause-info-funded">
-            <span>0.8%</span> Funded </div>
-          <!-- .cause-info-funded -->
-        </div>
-        <!-- .cause-info-content -->
-        <div class="cause-info-bar" data-raised="0.8%">
-          <span style="width: 0.8%;"></span>
-        </div>
-        <!-- .cause-info-bar -->
-        <div class="cause-info-links">
-          <a href="/campaignProfile" class="dd-button orange-light small">MORE DETAILS</a>
-        </div>
-        <!-- .cause-info-links -->
-      </div>
-    </div>
-  </div>
-  <div class="column">
-    <div class="callout">
-      <p>Campaign Title</p>
-      <p><img src="http://thecatapi.com/api/images/get?format=src&type=gif" alt="image of a planet called Campaign Image"></p>
-      <p class="lead">Copernican Revolution caused an uproar</p>
-      <p class="subheader">Find Earth-like planets life outside the Solar System</p>
-      <!-- .slide-info-inner -->
-      <div class="cause-info">
-        <div class="cause-info-content clearfix">
-          <div class="fl cause-info-donated">
-            <span>$64</span> Donated </div>
-          <!-- .cause-info-donated -->
-          <div class="fr cause-info-funded">
-            <span>0.8%</span> Funded </div>
-          <!-- .cause-info-funded -->
-        </div>
-        <!-- .cause-info-content -->
-        <div class="cause-info-bar" data-raised="0.8%">
-          <span style="width: 0.8%;"></span>
-        </div>
-        <!-- .cause-info-bar -->
-        <div class="cause-info-links">
-          <a href="/campaignProfile" class="dd-button orange-light small">MORE DETAILS</a>
-        </div>
-        <!-- .cause-info-links -->
-      </div>
-    </div>
-  </div>
-  <div class="column">
-    <div class="callout">
-      <p>Campaign Title</p>
-      <p><img src="http://thecatapi.com/api/images/get?format=src&type=gif" alt="image of a planet called Campaign Image"></p>
-      <p class="lead">Copernican Revolution caused an uproar</p>
-      <p class="subheader">Find Earth-like planets life outside the Solar System</p>
-      <!-- .slide-info-inner -->
-      <div class="cause-info">
-        <div class="cause-info-content clearfix">
-          <div class="fl cause-info-donated">
-            <span>$64</span> Donated </div>
-          <!-- .cause-info-donated -->
-          <div class="fr cause-info-funded">
-            <span>0.8%</span> Funded </div>
-          <!-- .cause-info-funded -->
-        </div>
-        <!-- .cause-info-content -->
-        <div class="cause-info-bar" data-raised="0.8%">
-          <span style="width: 0.8%;"></span>
-        </div>
-        <!-- .cause-info-bar -->
-        <div class="cause-info-links">
-          <a href="/campaignProfile" class="dd-button orange-light small">MORE DETAILS</a>
-        </div>
-        <!-- .cause-info-links -->
-      </div>
-    </div>
-  </div>
-  <div class="column">
-    <div class="callout">
-      <p>Campaign Title</p>
-      <p><img src="http://thecatapi.com/api/images/get?format=src&type=gif" alt="image of a planet called Campaign Image"></p>
-      <p class="lead">Copernican Revolution caused an uproar</p>
-      <p class="subheader">Find Earth-like planets life outside the Solar System</p>
-      <!-- .slide-info-inner -->
-      <div class="cause-info">
-        <div class="cause-info-content clearfix">
-          <div class="fl cause-info-donated">
-            <span>$64</span> Donated </div>
-          <!-- .cause-info-donated -->
-          <div class="fr cause-info-funded">
-            <span>0.8%</span> Funded </div>
-          <!-- .cause-info-funded -->
-        </div>
-        <!-- .cause-info-content -->
-        <div class="cause-info-bar" data-raised="0.8%">
-          <span style="width: 0.8%;"></span>
-        </div>
-        <!-- .cause-info-bar -->
-        <div class="cause-info-links">
-          <a href="/campaignProfile" class="dd-button orange-light small">MORE DETAILS</a>
-        </div>
-        <!-- .cause-info-links -->
-      </div>
-    </div>
-  </div>
-</div>
-<div class="row column">
-  <a class="button hollow expanded">Load More</a>
-</div>
-
-<footer></footer>

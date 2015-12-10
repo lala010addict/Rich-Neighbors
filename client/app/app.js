@@ -4,7 +4,7 @@ angular.module('bApp', [
     'bApp.auth',
     'bApp.admin',
     'bApp.geolocation',
-    // 'bApp.campaignProfile',
+    'bApp.MainController',
     'bApp.constants',
     'ngCookies',
     'ngResource',
@@ -15,5 +15,6 @@ angular.module('bApp', [
   .config(function($urlRouterProvider, $locationProvider) {
     $urlRouterProvider
       .otherwise('/');
+
     $locationProvider.html5Mode(true);
   });
