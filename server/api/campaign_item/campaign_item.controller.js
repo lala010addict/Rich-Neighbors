@@ -1,16 +1,16 @@
 /**
  * Using Rails-like standard naming convention for endpoints.
- * GET     /api/things              ->  index
- * POST    /api/things              ->  create
- * GET     /api/things/:id          ->  show
- * PUT     /api/things/:id          ->  update
- * DELETE  /api/things/:id          ->  destroy
+ * GET     /api/campaign_items              ->  index
+ * POST    /api/campaign_items              ->  create
+ * GET     /api/campaign_items/:id          ->  show
+ * PUT     /api/campaign_items/:id          ->  update
+ * DELETE  /api/campaign_items/:id          ->  destroy
  */
 
 'use strict';
 
 var _ = require('lodash');
-var Thing = require('./thing.model');
+var CampaignItem = require('./campaign_item.model');
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
@@ -59,43 +59,43 @@ function removeEntity(res) {
   };
 }
 
-// Gets a list of Things
+// Gets a list of CampaignItems
 exports.index = function(req, res) {
-  Thing.findAsync()
+  CampaignItem.findAsync()
     .then(responseWithResult(res))
     .catch(handleError(res));
 };
 
-// Gets a single Thing from the DB
+// Gets a single CampaignItem from the DB
 exports.show = function(req, res) {
-  Thing.findByIdAsync(req.params.id)
+  CampaignItem.findByIdAsync(req.params.id)
     .then(handleEntityNotFound(res))
     .then(responseWithResult(res))
     .catch(handleError(res));
 };
 
-// Creates a new Thing in the DB
+// Creates a new CampaignItem in the DB
 exports.create = function(req, res) {
-  Thing.createAsync(req.body)
+  CampaignItem.createAsync(req.body)
     .then(responseWithResult(res, 201))
     .catch(handleError(res));
 };
 
-// Updates an existing Thing in the DB
+// Updates an existing CampaignItem in the DB
 exports.update = function(req, res) {
   if (req.body._id) {
     delete req.body._id;
   }
-  Thing.findByIdAsync(req.params.id)
+  CampaignItem.findByIdAsync(req.params.id)
     .then(handleEntityNotFound(res))
     .then(saveUpdates(req.body))
     .then(responseWithResult(res))
     .catch(handleError(res));
 };
 
-// Deletes a Thing from the DB
+// Deletes a CampaignItem from the DB
 exports.destroy = function(req, res) {
-  Thing.findByIdAsync(req.params.id)
+  CampaignItem.findByIdAsync(req.params.id)
     .then(handleEntityNotFound(res))
     .then(removeEntity(res))
     .catch(handleError(res));

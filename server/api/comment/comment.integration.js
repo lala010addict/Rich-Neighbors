@@ -3,40 +3,40 @@
 var app = require('../..');
 var request = require('supertest');
 
-var newThing;
+var newComment;
 
-describe('Thing API:', function() {
+describe('Comment API:', function() {
 
-  describe('GET /api/things', function() {
-    var things;
+  describe('GET /y', function() {
+    var comments;
 
     beforeEach(function(done) {
       request(app)
-        .get('/api/things')
+        .get('/y')
         .expect(200)
         .expect('Content-Type', /json/)
         .end(function(err, res) {
           if (err) {
             return done(err);
           }
-          things = res.body;
+          comments = res.body;
           done();
         });
     });
 
     it('should respond with JSON array', function() {
-      things.should.be.instanceOf(Array);
+      comments.should.be.instanceOf(Array);
     });
 
   });
 
-  describe('POST /api/things', function() {
+  describe('POST /y', function() {
     beforeEach(function(done) {
       request(app)
-        .post('/api/things')
+        .post('/y')
         .send({
-          name: 'New Thing',
-          info: 'This is the brand new thing!!!'
+          name: 'New Comment',
+          info: 'This is the brand new comment!!!'
         })
         .expect(201)
         .expect('Content-Type', /json/)
@@ -44,55 +44,55 @@ describe('Thing API:', function() {
           if (err) {
             return done(err);
           }
-          newThing = res.body;
+          newComment = res.body;
           done();
         });
     });
 
-    it('should respond with the newly created thing', function() {
-      newThing.name.should.equal('New Thing');
-      newThing.info.should.equal('This is the brand new thing!!!');
+    it('should respond with the newly created comment', function() {
+      newComment.name.should.equal('New Comment');
+      newComment.info.should.equal('This is the brand new comment!!!');
     });
 
   });
 
-  describe('GET /api/things/:id', function() {
-    var thing;
+  describe('GET /y/:id', function() {
+    var comment;
 
     beforeEach(function(done) {
       request(app)
-        .get('/api/things/' + newThing._id)
+        .get('/y/' + newComment._id)
         .expect(200)
         .expect('Content-Type', /json/)
         .end(function(err, res) {
           if (err) {
             return done(err);
           }
-          thing = res.body;
+          comment = res.body;
           done();
         });
     });
 
     afterEach(function() {
-      thing = {};
+      comment = {};
     });
 
-    it('should respond with the requested thing', function() {
-      thing.name.should.equal('New Thing');
-      thing.info.should.equal('This is the brand new thing!!!');
+    it('should respond with the requested comment', function() {
+      comment.name.should.equal('New Comment');
+      comment.info.should.equal('This is the brand new comment!!!');
     });
 
   });
 
-  describe('PUT /api/things/:id', function() {
-    var updatedThing
+  describe('PUT /y/:id', function() {
+    var updatedComment
 
     beforeEach(function(done) {
       request(app)
-        .put('/api/things/' + newThing._id)
+        .put('/y/' + newComment._id)
         .send({
-          name: 'Updated Thing',
-          info: 'This is the updated thing!!!'
+          name: 'Updated Comment',
+          info: 'This is the updated comment!!!'
         })
         .expect(200)
         .expect('Content-Type', /json/)
@@ -100,27 +100,27 @@ describe('Thing API:', function() {
           if (err) {
             return done(err);
           }
-          updatedThing = res.body;
+          updatedComment = res.body;
           done();
         });
     });
 
     afterEach(function() {
-      updatedThing = {};
+      updatedComment = {};
     });
 
-    it('should respond with the updated thing', function() {
-      updatedThing.name.should.equal('Updated Thing');
-      updatedThing.info.should.equal('This is the updated thing!!!');
+    it('should respond with the updated comment', function() {
+      updatedComment.name.should.equal('Updated Comment');
+      updatedComment.info.should.equal('This is the updated comment!!!');
     });
 
   });
 
-  describe('DELETE /api/things/:id', function() {
+  describe('DELETE /y/:id', function() {
 
     it('should respond with 204 on successful removal', function(done) {
       request(app)
-        .delete('/api/things/' + newThing._id)
+        .delete('/y/' + newComment._id)
         .expect(204)
         .end(function(err, res) {
           if (err) {
@@ -130,9 +130,9 @@ describe('Thing API:', function() {
         });
     });
 
-    it('should respond with 404 when thing does not exist', function(done) {
+    it('should respond with 404 when comment does not exist', function(done) {
       request(app)
-        .delete('/api/things/' + newThing._id)
+        .delete('/y/' + newComment._id)
         .expect(404)
         .end(function(err, res) {
           if (err) {

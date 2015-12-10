@@ -1,3 +1,5 @@
+<!-- 
+
 <div class="navbar navbar-default navbar-static-top" ng-controller="NavbarController">
   <div class="container">
     <div class="navbar-header">
@@ -25,5 +27,30 @@
         <li ng-show="nav.isLoggedIn()"><a ui-sref="logout">Logout</a></li>
       </ul>
     </div>
+  </div>
+</div> -->
+<color-bar></color-bar>
+<div class="top-bar" ng-controller="NavbarController">
+  <div class="top-bar-left">
+    <ul class="menu" data-responsive-menu="accordion">
+      <li class="menu-text">Rich Neighbors</li>
+      <li ng-repeat="item in nav.menu" ui-sref-active="active">
+        <a ui-sref="{{item.state}}">{{item.title}}</a>
+      </li>
+      <li ng-show="nav.isAdmin()" ui-sref-active="active"><a ui-sref="admin">Admin</a></li>
+      <li><a href="/startCampaign" class="button success">Start a Campaign</a></li>
+    </ul>
+  </div>
+  <div class="top-bar-right">
+    <ul class="menu">
+      <li><a href="#">My Account</a></li>
+      <li ng-hide="nav.isLoggedIn()" ui-sref-active="active"><a class="button small" ui-sref="login"><i class="fa fa-sign-in">   Login</i></a></li>
+      <li ng-hide="nav.isLoggedIn()" ui-sref-active="active"><a class="button small" ui-sref="signup"><i class="fa fa-user">    Sign Up</i></a></li>
+      <li ng-show="nav.isLoggedIn()">
+        <p class="navbar-text">Hello {{ nav.getCurrentUser().name }}</p>
+      </li>
+      <li ng-show="nav.isLoggedIn()" ui-sref-active="active"><a ui-sref="settings"><i class="fa fa-cog"></i></a></li>
+      <li ng-show="nav.isLoggedIn()"><a ui-sref="logout">Logout</a></li>
+    </ul>
   </div>
 </div>

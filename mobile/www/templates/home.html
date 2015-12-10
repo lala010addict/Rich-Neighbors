@@ -1,16 +1,16 @@
 <ion-view title="Home">
     <ion-content overflow-scroll="true" padding="'true'" class="has-header">
         <h4>Welcome to {{location}}</h4>
+        <div class="item range">
+        Location:
+            <input type="range" name="volume">
+         <i class="icon ion-ios-location"></i>
+        </div>
         <ion-list>
-            <ion-item class="item-thumbnail-left">
-                <img src="img/wAzjwj5wQ1OeC2afl1X3_A7cILYU.jpg">
-                <h2>Title</h2>
-                <p>Item</p>
-            </ion-item>
-            <ion-item class="item-thumbnail-left">
-                <img>
-                <h2>Title</h2>
-                <p>Item</p>
+            <ion-item class="item-thumbnail-left" ng-repeat="camp in items">
+                <img ng-src="{{camp.src}}">
+                <h2>{{camp.title}}</h2>
+                <p>{{camp.description}}</p>
             </ion-item>
         </ion-list>
     </ion-content>
