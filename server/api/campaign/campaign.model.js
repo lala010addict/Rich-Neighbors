@@ -20,7 +20,7 @@ var CampaignSchema = new Schema({
     type: String,
     required: true,
     validate: [
-    function(name){
+    function (name) {
       return name.trim().length >= 24
     },
     'Description is too short']
@@ -47,9 +47,6 @@ var CampaignSchema = new Schema({
     type:  Schema.ObjectId,
     ref: 'User'
   }],
-  google_map: {
-    type: String,
-  },
   address: {
     street: String,
     neighborhood: String,
@@ -65,6 +62,12 @@ var CampaignSchema = new Schema({
     country: {
       type: String,
       default: 'United States'
+    },
+    long: {
+      type: String
+    },
+    lat: {
+      type: String
     }
   },
   goal: {
@@ -98,7 +101,7 @@ var CampaignSchema = new Schema({
 
 // reterns amount of money raised
 CampaignSchema
-  .virtual( 'goal.raised' )
+  .virtual( 'goal_raised' )
   .get(function () {
     return  _.reduce(this.contributors, function (value, memo) {
       memo = memo + value.amount;
