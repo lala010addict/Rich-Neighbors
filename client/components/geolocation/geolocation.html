@@ -1,0 +1,14 @@
+<div ng-controller="GeolocationController">
+  <!--          <div class="row">
+                <div id="map_canvas" ui-map="model.myMap" class="map" ui-options="mapOptions">
+                </div>
+                <div ng-repeat="marker in myMarkers" ui-map-marker="myMarkers[$index]">
+                </div>
+            </div> -->
+  <div  ng-show="showResult()">
+    <i class="fa fa-map-marker" id='geoloc'>   {{address}}</i>
+  </div>
+  <div ng-show="!showResult()">
+    Error : {{error}} Error Code: {{error.code}}
+  </div>
+</div>
