@@ -106,7 +106,7 @@
     "npm": "^2.14.7"
   },
   "scripts": {
-    "start": "node server",
+    "start": "grunt serve",
     "test": "grunt test",
     "update-webdriver": "node node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager update"
   },
