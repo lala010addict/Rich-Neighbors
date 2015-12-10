@@ -24,6 +24,12 @@
 
 	/* General */
 
+
+#geoloc{
+  color:red;
+  font-weight: bold;
+}
+
 	.top-bar, .top-bar ul {
 		background-color: #172129;
 	}
