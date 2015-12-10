@@ -412,7 +412,7 @@ module.exports = function (grunt) {
       },
       heroku: {
         options: {
-          remote: 'heroku',
+          remote: 'git@heroku.com:richneighbors.git',
           branch: 'master'
         }
       },
