@@ -24,6 +24,10 @@
 
 	/* General */
 
+.callout {
+	background-color: rgba(82, 84, 63, 0.12);
+}
+
 textarea {
 	min-height: 150px  !important;
     max-width: 300%;
