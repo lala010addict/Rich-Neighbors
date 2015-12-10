@@ -2,24 +2,28 @@
     <ion-content overflow-scroll="true" padding="'true'" class="has-header">
         <form class="list">
             <label class="item item-input">
-                <span class="input-label">Campaign Title</span>
+                <span class="input-label">Title</span>
+                <input type="text" ng-model="campaign.title" placeholder="{{campaign.description}}">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Location</span>
                 <input type="text" placeholder="">
             </label>
             <label class="item item-input">
-                <span class="input-label">Location, Zip</span>
-                <input type="text" placeholder="">
-            </label>
-            <label class="item item-input">
-                <span class="input-label">Description</span><textarea placeholder=""> </textarea>
+                <span class="input-label">Description</span><textarea rows="5" ng-model="campaign.description" placeholder=""> </textarea>
             </label>
         </form>
         <form class="list">
-            <label class="item item-select">
-                <span class="input-label">Type of Campaign</span>
-                <select></select>
+            <label class="item item-input">
+                <span class="input-label">Funding Goal</span>
+                <input type="text" ng-model="campaign.total" placeholder="">
             </label>
             <label class="item item-input">
-                <span class="input-label">Supplies?</span>
+                <span class="input-label">Volunteer Goal</span>
+                <input type="text" placeholder="">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Supplies Needed</span>
                 <input type="text" placeholder="">
             </label>
         </form>

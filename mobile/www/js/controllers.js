@@ -42,7 +42,23 @@ angular.module('app.controllers', [])
   $scope.hearts = [];
 })
    
-.controller('createCampaignCtrl', function($scope) {
+.controller('createCampaignCtrl', function($scope, Campaign) {
+  $scope.campaign = {
+    id: '',
+    date:  '',
+    title: '',
+    total: '',
+    raised: '0',
+    description: '',
+    images: '',
+    ip_address: '',
+    supplies: '',
+    volunteer: '',
+    latitude: '',
+    longitude: ''
+  };
+
+
 
 })
       

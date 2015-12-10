@@ -62,7 +62,7 @@ angular.module('app.routes', [])
       url: '/startcampaign',
       views: {
         'tab10': {
-          templateUrl: 'templates/createCampaign.html',
+          templateUrl: '../app/campaign/createCampaign.html',
           controller: 'createCampaignCtrl'
         }
       }
