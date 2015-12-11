@@ -34,8 +34,4 @@ angular.module('app.services', [])
     getCampaigns: getCampaigns
   };
 
-}])
-
-.service('BlankService', [function() {
-
 }]);
