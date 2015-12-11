@@ -20,7 +20,7 @@ var CampaignSchema = new Schema({
     type: String,
     required: true,
     validate: [
-    function(name){
+    function (name) {
       return name.trim().length >= 24
     },
     'Description is too short']
@@ -30,26 +30,33 @@ var CampaignSchema = new Schema({
     required: true,
     default: Date.now
   },
-  // TODO: Remove if comment api works
-  comments: [{
-    body: String,
-    date: Date
-  }],
+  // TODO: Remove if comment api works4 null
   owner: {
     type: Schema.ObjectId,
     ref: 'User'
   },
   followers: [{
     type:  Schema.ObjectId,
-    ref: 'User'
+    ref: 'User',
   }],
   contributors: [{
-    type:  Schema.ObjectId,
-    ref: 'User'
+    _id: {
+      type:  Schema.ObjectId,
+      ref: 'User'
+    },
+    private: {
+      type: Boolean,
+      default: false
+    },
+    amount: {
+      type: Number,
+      validate: [
+      function (number) {
+        return number >=1;
+      },
+      'Amount must be $1 or more']
+    }
   }],
-  google_map: {
-    type: String,
-  },
   address: {
     street: String,
     neighborhood: String,
@@ -65,6 +72,12 @@ var CampaignSchema = new Schema({
     country: {
       type: String,
       default: 'United States'
+    },
+    longitude: {
+      type: String
+    },
+    latitude: {
+      type: String
     }
   },
   goal: {
@@ -98,7 +111,7 @@ var CampaignSchema = new Schema({
 
 // reterns amount of money raised
 CampaignSchema
-  .virtual( 'goal.raised' )
+  .virtual( 'goal_raised' )
   .get(function () {
     return  _.reduce(this.contributors, function (value, memo) {
       memo = memo + value.amount;
@@ -130,11 +143,11 @@ CampaignSchema
 /**
  * Validations
  */
-CampaignSchema
-  .path('address.zip')
-  .validate(function (zip) {
-    return zip === 5;
-  })
+// CampaignSchema
+//   .path('address.zip')
+//   .validate(function (zip) {
+//     return zip === 5;
+//   })
 
 
 /*
