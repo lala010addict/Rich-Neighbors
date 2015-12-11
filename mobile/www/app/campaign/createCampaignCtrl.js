@@ -1,6 +1,6 @@
-angular.controller('createCampaignCtrl', function($scope, $state, Campaign) {
+angular.module('app').controller('createCampaignCtrl', function($scope, $state, Campaign) {
   
-  $scope.campaign = {
+  Campaign.newCampaign = {
     id: '',
     date:  '',
     title: '',
@@ -14,9 +14,10 @@ angular.controller('createCampaignCtrl', function($scope, $state, Campaign) {
     latitude: '',
     longitude: ''
   };
+  $scope.campaign = Campaign.newCampaign;
 
   $scope.test = function(){
-    console.log('hi');
+    console.log('save campaign');
   };
 
 
@@ -28,4 +29,4 @@ angular.controller('createCampaignCtrl', function($scope, $state, Campaign) {
   };
 
   //createCampaign();
-})
+});

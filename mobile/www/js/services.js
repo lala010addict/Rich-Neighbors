@@ -2,6 +2,12 @@ angular.module('app.services', [])
 
 .factory('Campaign', [function() {
 
+    var newCampaign = {};
+
+    var createCampaign = function(){
+        campaigns.push(newCampaign);
+    };
+
   var campaigns = [{
     "id": {
       "$oid": "5668afd64d6f635648120700"
@@ -307,7 +313,9 @@ angular.module('app.services', [])
   }];
 
   return {
-  	campaigns: campaigns
+  	campaigns: campaigns,
+    newCampaign: newCampaign,
+    createCampaign: createCampaign
   };
 
 }])

@@ -29,7 +29,7 @@
         </form>
         <button class="button button-stable button-block ">Upload Photo</button>
         <div class="button-bar">
-            <button ui-sref="tabsController.campaignSuccessPage({campaign: campaign})" class="button button-stable button-block">Start My Campaign</button>
+            <button ng-click="test()" ui-sref="campaignSuccessPage({campaign: campaign})" class="button button-stable button-block">Start My Campaign</button>
         </div>
         <pre> {{campaign}}</pre>
         <form class="list"></form>

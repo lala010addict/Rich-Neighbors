@@ -80,16 +80,10 @@ angular.module('app.routes', [])
     
       
         
-    .state('tabsController.campaignSuccessPage', {
+    .state('campaignSuccessPage', {
       url: '/success',
       templateUrl: '../app/campaign/campaignSuccessPage.html',
-      //controller: 'campaignSuccessPageCtrl',
-      resolve: {
-        newCampaign: function($stateParams, Campaign) {
-         //console.log($state);
-          return $stateParams.campaign;
-        }
-      }
+      controller: 'campaignSuccessPageCtrl'
     })
         
       
