@@ -1,12 +1,12 @@
 # Project Name
-
-> Pithy project description
+Rich Neighbors
+> A location/neighborhood/community based fundraising app for money, time and supplies.
 
 ## Team
 
   - __Product Owner__: teamMember
-  - __Scrum Master__: teamMember
-  - __Development Team Members__: teamMember, teamMember
+  - __Scrum Master__: Casey Woolley
+  - __Development Team Members__: Omar Sial, Abdul R. Taleb-Agha, JieYing Peng
 
 ## Table of Contents
 
