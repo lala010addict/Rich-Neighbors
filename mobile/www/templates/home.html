@@ -1,17 +1,23 @@
-<ion-view title="Home">
+<ion-view title="Rich Neighbors">
     <ion-content overflow-scroll="true" padding="'true'" class="has-header">
         <h4>Welcome to {{location}}</h4>
         <div class="item range">
-        Location:
+            Location:
             <input type="range" name="volume">
-         <i class="icon ion-ios-location"></i>
+            <i class="icon ion-ios-location"></i>
         </div>
         <ion-list>
-            <ion-item class="item-thumbnail-left" ng-repeat="camp in items">
-                <img ng-src="{{camp.src}}">
-                <h2>{{camp.title}}</h2>
-                <p>{{camp.description}}</p>
-            </ion-item>
+            <a href="/#/tabs/campignid">
+                <ion-item class="item-thumbnail-left" ng-repeat="camp in campaigns">
+                    <img ng-src="{{camp.images}}">
+                    <h2>{{camp.title}}</h2>
+                    <!-- <p>{{camp.description}}</p> -->
+                    <p>{{camp.total}}</p>
+                    <p>{{camp.raised}}</p>
+                    
+                    <i id="like" ng-class="{'icon ion-ios7-heart': liked, 'icon ion-ios7-heart-outline': !liked}" ng-click="liked=!liked" ng-click="like(camp)"></i>
+                </ion-item>
+            </a>
         </ion-list>
     </ion-content>
 </ion-view>
