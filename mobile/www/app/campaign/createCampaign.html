@@ -3,7 +3,7 @@
         <form class="list">
             <label class="item item-input">
                 <span class="input-label">Title</span>
-                <input type="text" ng-model="campaign.title" placeholder="{{campaign.description}}">
+                <input type="text" ng-model="campaign.title" placeholder="">
             </label>
             <label class="item item-input">
                 <span class="input-label">Location</span>
@@ -29,8 +29,10 @@
         </form>
         <button class="button button-stable button-block ">Upload Photo</button>
         <div class="button-bar">
-            <a href="#/success" class="button button-stable button-block ">Start My Campaign</a>
+            <button ui-sref="tabsController.campaignSuccessPage({campaign: campaign})" class="button button-stable button-block">Start My Campaign</button>
         </div>
+        <pre> {{campaign}}</pre>
         <form class="list"></form>
+
     </ion-content>
 </ion-view>

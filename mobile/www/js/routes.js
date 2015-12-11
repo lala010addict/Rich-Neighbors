@@ -80,10 +80,16 @@ angular.module('app.routes', [])
     
       
         
-    .state('campaignSuccessPage', {
+    .state('tabsController.campaignSuccessPage', {
       url: '/success',
-      templateUrl: 'templates/campaignSuccessPage.html',
-      controller: 'campaignSuccessPageCtrl'
+      templateUrl: '../app/campaign/campaignSuccessPage.html',
+      //controller: 'campaignSuccessPageCtrl',
+      resolve: {
+        newCampaign: function($stateParams, Campaign) {
+         //console.log($state);
+          return $stateParams.campaign;
+        }
+      }
     })
         
       
@@ -94,7 +100,7 @@ angular.module('app.routes', [])
       url: '/campignid',
       views: {
         'tab12': {
-          templateUrl: 'templates/campaignProfile.html',
+          templateUrl: '../app/campaign/campaignProfile.html',
           controller: 'campaignProfileCtrl'
         }
       }

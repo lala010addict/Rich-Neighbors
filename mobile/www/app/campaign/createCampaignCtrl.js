@@ -1,4 +1,5 @@
-angular.controller('createCampaignCtrl', function($scope, Campaign) {
+angular.controller('createCampaignCtrl', function($scope, $state, Campaign) {
+  
   $scope.campaign = {
     id: '',
     date:  '',
@@ -14,4 +15,17 @@ angular.controller('createCampaignCtrl', function($scope, Campaign) {
     longitude: ''
   };
 
+  $scope.test = function(){
+    console.log('hi');
+  };
+
+
+  $scope.createCampaign = function(){
+    console.log('click');
+    // $scope.campaign = 'yes';
+    // $location.path('#/success');
+    // $state.go('campaignSuccessPage');
+  };
+
+  //createCampaign();
 })

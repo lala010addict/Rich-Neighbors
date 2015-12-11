@@ -62,10 +62,8 @@ angular.module('app.controllers', [])
 
 })
       
-.controller('campaignSuccessPageCtrl', function($scope) {
-
-})
    
+<<<<<<< 6b3de415f70059ea5ced4cfcb9de1081bf817086
 .controller('campaignProfileCtrl', function($scope) {
     $scope.campaign = {
         title: "Save Thaline's Life",
@@ -74,6 +72,13 @@ angular.module('app.controllers', [])
         total: 115000,
         images: ["https://2dbdd5116ffa30a49aa8-c03f075f8191fb4e60e74b907071aee8.ssl.cf1.rackcdn.com/7343105_1449173858.03_funddescription.jpg", "https://2dbdd5116ffa30a49aa8-c03f075f8191fb4e60e74b907071aee8.ssl.cf1.rackcdn.com/7343105_1449100258.4659_funddescription.jpg", "https://2dbdd5116ffa30a49aa8-c03f075f8191fb4e60e74b907071aee8.ssl.cf1.rackcdn.com/7343105_1449101047.8559_funddescription.jpg"]
     };
+=======
+.controller('campaignProfileCtrl_old', function($scope) {
+  $scope.description = "Save Thaline's Life";
+  $scope.raised = 79417;
+  $scope.total = 115000;
+
+>>>>>>> testing state routing
 })
 
    
