@@ -1,6 +1,6 @@
 angular.module('app').controller('createCampaignCtrl', function($scope, $state, Campaign) {
   
-  Campaign.newCampaign = {
+  $scope.newCampaign = {
     id: '',
     date:  '',
     title: '',
@@ -14,18 +14,10 @@ angular.module('app').controller('createCampaignCtrl', function($scope, $state, 
     latitude: '',
     longitude: ''
   };
-  $scope.campaign = Campaign.newCampaign;
-
-  $scope.test = function(){
-    console.log('save campaign');
-  };
-
 
   $scope.createCampaign = function(){
-    console.log('click');
-    // $scope.campaign = 'yes';
-    // $location.path('#/success');
-    // $state.go('campaignSuccessPage');
+    Campaign.createCampaign(newCampaign);
+    console.log('campaign saved');
   };
 
   //createCampaign();

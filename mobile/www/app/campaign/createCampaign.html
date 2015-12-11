@@ -3,20 +3,20 @@
         <form class="list">
             <label class="item item-input">
                 <span class="input-label">Title</span>
-                <input type="text" ng-model="campaign.title" placeholder="">
+                <input type="text" ng-model="newCampaign.title" placeholder="">
             </label>
             <label class="item item-input">
                 <span class="input-label">Location</span>
                 <input type="text" placeholder="">
             </label>
             <label class="item item-input">
-                <span class="input-label">Description</span><textarea rows="5" ng-model="campaign.description" placeholder=""> </textarea>
+                <span class="input-label">Description</span><textarea rows="5" ng-model="newCampaign.description" placeholder=""> </textarea>
             </label>
         </form>
         <form class="list">
             <label class="item item-input">
                 <span class="input-label">Funding Goal</span>
-                <input type="text" ng-model="campaign.total" placeholder="">
+                <input type="text" ng-model="newCampaign.total" placeholder="">
             </label>
             <label class="item item-input">
                 <span class="input-label">Volunteer Goal</span>
@@ -29,9 +29,9 @@
         </form>
         <button class="button button-stable button-block ">Upload Photo</button>
         <div class="button-bar">
-            <button ng-click="test()" ui-sref="campaignSuccessPage({campaign: campaign})" class="button button-stable button-block">Start My Campaign</button>
+            <button ng-click="createCampaign()" ui-sref="campaignSuccessPage({newCampaign: newCampaign})" class="button button-stable button-block">Start My Campaign</button>
         </div>
-        <pre> {{campaign}}</pre>
+        <pre> {{newCampaign}}</pre>
         <form class="list"></form>
 
     </ion-content>
