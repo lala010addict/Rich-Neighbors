@@ -2,7 +2,7 @@
 
 var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 var Schema = mongoose.Schema;
-var xssFilter = require('xss-filter');
+var xssFilter = require('xss-filters');
 
 var CommentSchema = new Schema({
   campaign: {
