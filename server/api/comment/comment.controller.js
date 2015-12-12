@@ -11,6 +11,7 @@
 
 var _ = require('lodash');
 var Comment = require('./comment.model');
+var auth = require('../../auth/auth.service');
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
@@ -82,21 +83,35 @@ exports.create = function(req, res) {
 };
 
 // Updates an existing Comment in the DB
+// TODO: Must be tested
+// Updates an existing Comment in the DB
 exports.update = function(req, res) {
   if (req.body._id) {
     delete req.body._id;
   }
   Comment.findByIdAsync(req.params.id)
-    .then(handleEntityNotFound(res))
-    .then(saveUpdates(req.body))
-    .then(responseWithResult(res))
-    .catch(handleError(res));
+    .then(function (data) {
+      if (data.isOwner(req.user._id)) {
+        return handleEntityNotFound(res)
+          .then(saveUpdates(req.body))
+          .then(responseWithResult(res))
+          .catch(handleError(res));
+      } else {
+        return res.status(403).end();
+      }
+    })
 };
 
 // Deletes a Comment from the DB
 exports.destroy = function(req, res) {
   Comment.findByIdAsync(req.params.id)
-    .then(handleEntityNotFound(res))
-    .then(removeEntity(res))
-    .catch(handleError(res));
+    .then(function (data) {
+      if (data.isOwner(req.user._id) || auth.hasRole('admin')) {
+        return handleEntityNotFound(res)
+          .then(removeEntity(res))
+          .catch(handleError(res));
+      } else {
+        return res.status(403).end();
+      }
+    });
 };

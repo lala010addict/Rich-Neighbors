@@ -33,7 +33,8 @@
     "passport-twitter": "^1.0.3",
     "sequelize": "^3.5.1",
     "serve-favicon": "^2.3.0",
-    "sqlite3": "~3.1.1"
+    "sqlite3": "~3.1.1",
+    "xss-filters": "^1.2.6"
   },
   "devDependencies": {
     "autoprefixer": "^6.0.0",
