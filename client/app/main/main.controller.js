@@ -35,10 +35,29 @@
 
 
 angular.module('bApp.MainController', [])
-.controller('MainController', ['$scope', '$http', function($scope, $http) {
+.controller('MainController', ['$scope', '$http', 'campaignData', function($scope, $http, campaignData) {
 
-  $scope.data = data;
+  $scope.data = campaignData;
    $scope.Math = window.Math;
+
+
+   $http.get('/api/campaigns')
+		.success(function(data) {
+
+			  $scope.data = data;
+		})
+		.error(function(data) {
+			console.log('Error: ' + data);
+		});
+
+	$scope.limitChar = function  (x, y) {
+		var sp = x.split(' ')
+		return sp.slice(0, y).join(' ')
+	}	
+
+$scope.showCampaignProfile = function(x) {
+  $location.path('#/campaignProfile/' + x._id);
+};
 
 
  $scope.showData = function( ){

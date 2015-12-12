@@ -5,6 +5,7 @@ angular.module('bApp', [
     'bApp.admin',
     'bApp.geolocation',
     'bApp.MainController',
+    'bApp.CampaignProfileController',
     'bApp.constants',
     'ngCookies',
     'ngResource',

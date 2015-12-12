@@ -251,8 +251,7 @@ module.exports = function (grunt) {
         src: [
           '<%= yeoman.dist %>/<%= yeoman.client %>/!(bower_components){,*/}*.{js,css}',
           '<%= yeoman.dist %>/<%= yeoman.client %>/assets/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-          '<%= yeoman.dist %>/<%= yeoman.client %>/assets/fonts/*',
-          '<%= yeoman.dist %>/<%= yeoman.client %>/assets/*'
+          '<%= yeoman.dist %>/<%= yeoman.client %>/assets/fonts/*'
         ]
       }
     },
@@ -411,18 +410,10 @@ module.exports = function (grunt) {
         connectCommits: false,
         message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%'
       },
-      production: {
+      heroku: {
         options: {
-          remote: 'git@heroku.com:richneighbors.git',
-          branch: 'master',
-          remoteBranch: 'master'
-        }
-      },
-      staging: {
-        options: {
-          remote: 'git@heroku.com:richneighbors-dev.git',
-          branch: 'develop',
-          remoteBranch: 'master'
+          remote: 'heroku',
+          branch: 'master'
         }
       },
       openshift: {

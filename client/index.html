@@ -21,7 +21,7 @@
   <!--   build:css({.tmp,client}) app/app.css -->
   <!--   <link rel="stylesheet" href="app/app.css"> -->
   <link rel="stylesheet" href="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
-  <link href='http://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css' rel='stylesheet' type='text/css'>
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <!-- injector:css -->
   <link rel="stylesheet" href="components/carousel/carousel.css">
@@ -74,14 +74,15 @@
   <!-- build:js(.tmp) app/app.js -->
   <script src="app/app.js"></script>
   <!-- injector:js -->
-  <script src="app/admin/admin.module.js"></script>
   <script src="components/auth/auth.module.js"></script>
+  <script src="app/admin/admin.module.js"></script>
   <script src="components/util/util.module.js"></script>
-  <script src="components/auth/auth.service.js"></script>
+  <script src="app/account/signup/signup.controller.js"></script>
   <script src="app/admin/admin.controller.js"></script>
   <script src="app/account/account.js"></script>
   <script src="app/admin/admin.router.js"></script>
   <script src="app/app.constant.js"></script>
+  <script src="app/campaignData/campaignData.service.js"></script>
   <script src="app/campaignProfile/campaignProfile.controller.js"></script>
   <script src="app/campaignProfile/campaignProfile.js"></script>
   <script src="app/main/main.controller.js"></script>
@@ -90,8 +91,8 @@
   <script src="app/startCampaign/startCampaign.js"></script>
   <script src="app/submitCampaignsSuccess/submitCampaignsSuccess.controller.js"></script>
   <script src="app/submitCampaignsSuccess/submitCampaignsSuccess.js"></script>
-  <script src="app/account/settings/settings.controller.js"></script>
   <script src="app/account/login/login.controller.js"></script>
+  <script src="components/auth/auth.service.js"></script>
   <script src="components/auth/interceptor.service.js"></script>
   <script src="components/auth/router.decorator.js"></script>
   <script src="components/auth/user.service.js"></script>
@@ -106,13 +107,13 @@
   <script src="components/navbar/navbar.directive.js"></script>
   <script src="components/oauth-buttons/oauth-buttons.controller.js"></script>
   <script src="components/oauth-buttons/oauth-buttons.directive.js"></script>
-  <script src="app/account/signup/signup.controller.js"></script>
+  <script src="app/account/settings/settings.controller.js"></script>
   <script src="components/util/util.service.js"></script>
   <!-- endinjector -->
   <!-- endbuild -->
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
   <script src="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
-  <link rel='stylesheet' id='style-css' href='components/carousel/carousel.scss' type='text/css' media='all' />
+  <link rel='stylesheet' id='style-css' href='components/carousel/carousel.css' type='text/css' media='all' />
   <!--  <script src="components/geolocation/event.js"></script> -->
   <script src="bower_components/angular-ui-map/ui-map.min.js"></script>
   <script src="http://maps.googleapis.com/maps/api/js?language=en"></script>
