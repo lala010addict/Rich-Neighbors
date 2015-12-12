@@ -1,15 +1,62 @@
 <ion-view title="My Account">
     <ion-content overflow-scroll="true" padding="'true'" class="has-header">
-        <div style="line-height: 250px; border: 1px solid rgb(238, 238, 238); border-radius: 3px; text-align: center; width: 100%; height: auto; background-color: rgb(255, 255, 255);">
-            <i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>
-        </div>
         <form class="list">
-            <ion-toggle toggle-class="toggle-positive">Toggle</ion-toggle>
-            <ion-radio>Radio</ion-radio>
-            <label class="item item-input">
-                <span class="input-label">Input</span>
-                <input type="text" placeholder="">
-            </label>
+            <div class="list">
+                <div class="item item-divider">
+                    Account Settings
+                </div>
+                <ion-toggle toggle-class="toggle-positive">oneClick to Donate</ion-toggle>
+                <ion-toggle toggle-class="toggle-positive">Push Notifications</ion-toggle>
+                <a class="item" href="#">
+                    Change my password
+                </a>
+                <a class="item" href="#">
+                    My payment account
+                </a>
+                <a class="item" href="#" icon="ion-chevron-right">
+                    Edit my info
+                </a>
+                <div class="spacer" style="height: 20px;"></div>
+                <div class="item item-divider">
+                    Connect with us:
+                </div>
+                <div class="button-bar">
+                    <a href="http://www.twitter.com/KingJames" class="button button-calm button-block icon ion-social-twitter"></a>
+                    <a href="http://www.facebook.com/LeBron" class="button button-positive button-block icon ion-social-facebook"></a>
+                    <a href="http://www.instagram.com/kingjames/" class="button button-royal button-block icon ion-social-instagram"></a>
+                </div>
+            </div>
         </form>
     </ion-content>
 </ion-view>
+<!-- 
+Image PlaceHolder:
+        <div style="line-height: 250px; border: 1px solid rgb(238, 238, 238); border-radius: 3px; text-align: center; width: 100%; height: auto; background-color: rgb(255, 255, 255);">
+            <i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>
+        </div>
+
+Card List :
+<div class="list card">
+
+  <a href="#" class="item item-icon-left">
+    <i class="icon ion-home"></i>
+    Enter home address
+  </a>
+
+  <a href="#" class="item item-icon-left">
+    <i class="icon ion-ios-telephone"></i>
+    Enter phone number
+  </a>
+
+  <a href="#" class="item item-icon-left">
+    <i class="icon ion-wifi"></i>
+    Enter wireless password
+  </a>
+
+  <a href="#" class="item item-icon-left">
+    <i class="icon ion-card"></i>
+    Enter card information
+  </a>
+
+</div>
+ -->
