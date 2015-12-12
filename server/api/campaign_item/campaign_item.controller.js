@@ -74,6 +74,13 @@ exports.show = function(req, res) {
     .catch(handleError(res));
 };
 
+exports.showByCampaign = function(req, res) {
+  CampaignItem.findAsync({campaign_id: req.params.campaign})
+    .then(handleEntityNotFound(res))
+    .then(responseWithResult(res))
+    .catch(handleError(res));
+};
+
 // Creates a new CampaignItem in the DB
 exports.create = function(req, res) {
   CampaignItem.createAsync(req.body)

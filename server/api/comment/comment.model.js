@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 var xssFilter = require('xss-filters');
 
 var CommentSchema = new Schema({
-  campaign: {
+  campaign_id: {
     type: Schema.ObjectId,
     ref: 'Campaign',
     required: true

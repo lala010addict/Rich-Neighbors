@@ -75,6 +75,15 @@ exports.show = function(req, res) {
     .catch(handleError(res));
 };
 
+
+// Gets a all Comments for a single Campaign from the DB
+exports.showByCampaign = function(req, res) {
+  Comment.findAsync({campaign_id: req.params.campaign})
+    .then(handleEntityNotFound(res))
+    .then(responseWithResult(res))
+    .catch(handleError(res));
+};
+
 // Creates a new Comment in the DB
 exports.create = function(req, res) {
   Comment.createAsync(req.body)
