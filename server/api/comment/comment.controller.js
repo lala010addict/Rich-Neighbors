@@ -68,17 +68,17 @@ exports.index = function(req, res) {
 };
 
 // Gets a single Comment from the DB
-exports.show = function(req, res) {
-  Comment.findByIdAsync(req.params.id)
-    .then(handleEntityNotFound(res))
-    .then(responseWithResult(res))
-    .catch(handleError(res));
-};
+// exports.show = function(req, res) {
+//   Comment.findByIdAsync(req.params.id)
+//     .then(handleEntityNotFound(res))
+//     .then(responseWithResult(res))
+//     .catch(handleError(res));
+// };
 
 
 // Gets a all Comments for a single Campaign from the DB
 exports.showByCampaign = function(req, res) {
-  Comment.findAsync({campaign_id: req.params.campaign})
+  Comment.findAsync({campaign_id: req.params.id})
     .then(handleEntityNotFound(res))
     .then(responseWithResult(res))
     .catch(handleError(res));
