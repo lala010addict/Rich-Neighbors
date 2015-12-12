@@ -11,21 +11,28 @@ angular.module('app.routes', [])
         
     .state('login', {
       url: '/login',
-      templateUrl: '../app/account/login.html',
+      templateUrl: 'app/account/login.html',
       controller: 'loginCtrl'
     })
           
     .state('signup', {
       url: '/signup',
-      templateUrl: '../app/account/signup.html',
+      templateUrl: 'app/account/signup.html',
       controller: 'signupCtrl'
     })
          
+    // tab controller states
+    .state('tabsController', {
+      url: '/tabs',
+      abstract:true,
+      templateUrl: 'components/tabsController.html'
+    })
+
     .state('tabsController.home', {
       url: '/home',
       views: {
         'tab8': {
-          templateUrl: '../app/main/home.html',
+          templateUrl: 'app/main/home.html',
           controller: 'homeCtrl'
         }
       }
@@ -35,7 +42,7 @@ angular.module('app.routes', [])
       url: '/mycampaign',
       views: {
         'tab9': {
-          templateUrl: '..app/campaign/myCampaigns.html',
+          templateUrl: 'app/campaign/myCampaigns.html',
           controller: 'myCampaignsCtrl'
         }
       }
@@ -45,29 +52,17 @@ angular.module('app.routes', [])
       url: '/startcampaign',
       views: {
         'tab10': {
-          templateUrl: '../app/campaign/createCampaign.html',
+          templateUrl: 'app/campaign/createCampaign.html',
           controller: 'createCampaignCtrl'
         }
       }
     })
-        
-    .state('tabsController', {
-      url: '/tabs',
-      abstract:true,
-      templateUrl: 'components/tabsController.html'
-    })
-       
-    .state('campaignSuccessPage', {
-      url: '/success',
-      templateUrl: '../app/campaign/campaignSuccessPage.html',
-      controller: 'campaignSuccessPageCtrl'
-    })
-         
+
     .state('tabsController.campaignProfile', {
       url: '/campignid',
       views: {
         'tab12': {
-          templateUrl: '../app/campaign/campaignProfile.html',
+          templateUrl: 'app/campaign/campaignProfile.html',
           controller: 'campaignProfileCtrl'
         }
       }
@@ -77,12 +72,18 @@ angular.module('app.routes', [])
       url: '/userAccount',
       views: {
         'tab11': {
-          templateUrl: '../app/account/myAccount.html',
+          templateUrl: 'app/account/myAccount.html',
           controller: 'myAccountCtrl'
         }
       }
     })
          
+    .state('campaignSuccessPage', {
+      url: '/success',
+      templateUrl: 'app/campaign/campaignSuccessPage.html',
+      controller: 'campaignSuccessPageCtrl'
+    })
+              
     .state('supplyList', {
       url: '/supplylist',
       templateUrl: 'components/supplyList.html',
