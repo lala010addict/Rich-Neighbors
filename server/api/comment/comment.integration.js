@@ -7,12 +7,12 @@ var newComment;
 
 describe('Comment API:', function() {
 
-  describe('GET /y', function() {
+  describe('GET /api/comment', function() {
     var comments;
 
     beforeEach(function(done) {
       request(app)
-        .get('/y')
+        .get('/api/comment')
         .expect(200)
         .expect('Content-Type', /json/)
         .end(function(err, res) {
@@ -30,10 +30,10 @@ describe('Comment API:', function() {
 
   });
 
-  describe('POST /y', function() {
+  describe('POST /api/comment', function() {
     beforeEach(function(done) {
       request(app)
-        .post('/y')
+        .post('/api/comment')
         .send({
           name: 'New Comment',
           info: 'This is the brand new comment!!!'
@@ -56,12 +56,12 @@ describe('Comment API:', function() {
 
   });
 
-  describe('GET /y/:id', function() {
+  describe('GET /api/comment/:id', function() {
     var comment;
 
     beforeEach(function(done) {
       request(app)
-        .get('/y/' + newComment._id)
+        .get('/api/comment/' + newComment._id)
         .expect(200)
         .expect('Content-Type', /json/)
         .end(function(err, res) {
@@ -84,12 +84,12 @@ describe('Comment API:', function() {
 
   });
 
-  describe('PUT /y/:id', function() {
+  describe('PUT /api/comment/:id', function() {
     var updatedComment
 
     beforeEach(function(done) {
       request(app)
-        .put('/y/' + newComment._id)
+        .put('/api/comment/' + newComment._id)
         .send({
           name: 'Updated Comment',
           info: 'This is the updated comment!!!'
@@ -116,11 +116,11 @@ describe('Comment API:', function() {
 
   });
 
-  describe('DELETE /y/:id', function() {
+  describe('DELETE /api/comment/:id', function() {
 
     it('should respond with 204 on successful removal', function(done) {
       request(app)
-        .delete('/y/' + newComment._id)
+        .delete('/api/comment/' + newComment._id)
         .expect(204)
         .end(function(err, res) {
           if (err) {
@@ -132,7 +132,7 @@ describe('Comment API:', function() {
 
     it('should respond with 404 when comment does not exist', function(done) {
       request(app)
-        .delete('/y/' + newComment._id)
+        .delete('/api/comment/' + newComment._id)
         .expect(404)
         .end(function(err, res) {
           if (err) {
