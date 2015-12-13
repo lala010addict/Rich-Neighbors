@@ -7,10 +7,10 @@
 
 
 
-angular.module('bApp.CampaignProfileController', [])
-.controller('CampaignProfileController', ['$scope', '$http', 'campaignData', function($scope, $http, campaignData) {
+angular.module('bApp.CampaignProfileController', ['ui.router'])
+  .controller('CampaignProfileController', ['$scope', '$http','$stateParams', function($scope, $http, $stateParams) {
 
-  $scope.data = campaignData;
-  
+    $scope.data = $scope.data[$stateParams.id];
 
-}]);
+
+  }]);
