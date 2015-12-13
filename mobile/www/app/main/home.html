@@ -7,6 +7,7 @@
             <i class="icon ion-ios-location"></i>
         </div>
         <ion-list>
+
             <a href="/#/tabs/campignid">
                 <ion-item class="item-thumbnail-left" ng-repeat="camp in campaigns">
                     <img ng-src="{{camp.images}}">
@@ -18,6 +19,7 @@
                     <i id="like" ng-class="{'icon ion-ios7-heart': liked, 'icon ion-ios7-heart-outline': !liked}" ng-click="liked=!liked" ng-click="like(camp)"></i>
                 </ion-item>
             </a>
+
         </ion-list>
     </ion-content>
 </ion-view>
