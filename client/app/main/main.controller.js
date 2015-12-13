@@ -3,11 +3,11 @@
 angular.module('bApp.MainController', ['ui.router'])
   .controller('MainController', ['$scope', '$http', function($scope, $http) {
 
-    $scope.data = {};
+    $scope.campaigns = {};
     $scope.getData = function() {
       $http.get('/api/campaigns')
         .success(function(data) {
-          $scope.data = data;
+          $scope.campaigns = data;
         })
         .error(function(data) {
           console.log('Error: ' + data);
@@ -21,9 +21,9 @@ angular.module('bApp.MainController', ['ui.router'])
       return sp.slice(0, y).join(' ')
     }
 
-    $scope.showCampaignProfile = function(x) {
-      $location.path('#/campaignProfile/' + x._id);
-    };
+    // $scope.showCampaignProfile = function(x) {
+    //   $location.path('#/campaignProfile/' + x._id);
+    // };
 
 
     $scope.showData = function() {
@@ -32,11 +32,11 @@ angular.module('bApp.MainController', ['ui.router'])
       var pagesShown = 1;
       var pageSize = 6;
 
-      $scope.paginationLimit = function(data) {
+      $scope.paginationLimit = function(campaigns) {
         return pageSize * pagesShown;
       };
       $scope.hasMoreItemsToShow = function() {
-        return pagesShown < ($scope.data.length / pageSize);
+        return pagesShown < ($scope.campaigns.length / pageSize);
       };
       $scope.showMoreItems = function() {
         pagesShown = pagesShown + 1;
