@@ -16,12 +16,13 @@
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
   <!-- build:css(client) app/vendor.css -->
   <!-- bower:css -->
+  <link rel="stylesheet" href="bower_components/foundation-icon-fonts/foundation-icons.css" />
   <!-- endbower -->
   <!-- endbuild -->
   <!--   build:css({.tmp,client}) app/app.css -->
   <!--   <link rel="stylesheet" href="app/app.css"> -->
   <link rel="stylesheet" href="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
-  <link href='http://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css' rel='stylesheet' type='text/css'>
+  <!-- <link href='http://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css' rel='stylesheet' type='text/css'> -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <!-- injector:css -->
   <link rel="stylesheet" href="components/carousel/carousel.css">
@@ -60,7 +61,6 @@
   <!-- bower:js -->
   <script src="bower_components/jquery/dist/jquery.js"></script>
   <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
   <script src="bower_components/angular-resource/angular-resource.js"></script>
   <script src="bower_components/angular-cookies/angular-cookies.js"></script>
   <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
@@ -69,6 +69,8 @@
   <script src="bower_components/angular-validation-match/dist/angular-validation-match.min.js"></script>
   <script src="bower_components/angular-ui-utils/ui-utils.js"></script>
   <script src="bower_components/angular-ui-map/ui-map.js"></script>
+  <script src="bower_components/what-input/what-input.js"></script>
+  <script src="bower_components/foundation-sites/dist/foundation.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
   <!-- build:js(.tmp) app/app.js -->
@@ -110,13 +112,11 @@
   <script src="components/util/util.service.js"></script>
   <!-- endinjector -->
   <!-- endbuild -->
-  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-  <script src="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
-  <link rel='stylesheet' id='style-css' href='components/carousel/carousel.scss' type='text/css' media='all' />
+  <!-- <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script> -->
   <!--  <script src="components/geolocation/event.js"></script> -->
-  <script src="bower_components/angular-ui-map/ui-map.min.js"></script>
-  <script src="http://maps.googleapis.com/maps/api/js?language=en"></script>
-  <script src="assets/fakeData.js"></script>
+  <!-- <script src="bower_components/angular-ui-map/ui-map.min.js"></script> -->
+  <script src="https://maps.googleapis.com/maps/api/js?language=en"></script>
+  <script src="assets/js/fakeData.js"></script>
 </body>
 
 </html>
