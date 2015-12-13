@@ -32,7 +32,7 @@ module.exports = function (grunt) {
       options: {
         mangle: false
       }
-    }
+    },
     pkg: grunt.file.readJSON('package.json'),
     yeoman: {
       // configurable paths
