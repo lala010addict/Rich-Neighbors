@@ -28,6 +28,11 @@ module.exports = function (grunt) {
   grunt.initConfig({
 
     // Project settings
+    uglify: {
+      options: {
+        mangle: false
+      }
+    },
     pkg: grunt.file.readJSON('package.json'),
     yeoman: {
       // configurable paths
@@ -378,6 +383,7 @@ module.exports = function (grunt) {
             'bower_components/**/*',
             'assets/images/{,*/}*.{webp}',
             'assets/fonts/**/*',
+            'assets/js/*',
             'index.html'
           ]
         }, {
@@ -572,7 +578,8 @@ module.exports = function (grunt) {
           compass: false
         },
         files: {
-          '.tmp/app/app.css' : '<%= yeoman.client %>/app/app.scss'
+          '.tmp/app/app.css' : '<%= yeoman.client %>/app/app.scss',
+
         }
       }
     },

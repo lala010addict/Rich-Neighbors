@@ -1,16 +1,17 @@
 /**
  * Using Rails-like standard naming convention for endpoints.
- * GET     /y              ->  index
- * POST    /y              ->  create
- * GET     /y/:id          ->  show
- * PUT     /y/:id          ->  update
- * DELETE  /y/:id          ->  destroy
+ * GET     /api/comments              ->  index
+ * POST    /api/comments              ->  create
+ * GET     /api/comments/:id          ->  show
+ * PUT     /api/comments/:id          ->  update
+ * DELETE  /api/comments/:id          ->  destroy
  */
 
 'use strict';
 
 var _ = require('lodash');
 var Comment = require('./comment.model');
+var auth = require('../../auth/auth.service');
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
@@ -67,8 +68,17 @@ exports.index = function(req, res) {
 };
 
 // Gets a single Comment from the DB
-exports.show = function(req, res) {
-  Comment.findByIdAsync(req.params.id)
+// exports.show = function(req, res) {
+//   Comment.findByIdAsync(req.params.id)
+//     .then(handleEntityNotFound(res))
+//     .then(responseWithResult(res))
+//     .catch(handleError(res));
+// };
+
+
+// Gets a all Comments for a single Campaign from the DB
+exports.showByCampaign = function(req, res) {
+  Comment.findAsync({campaign_id: req.params.id})
     .then(handleEntityNotFound(res))
     .then(responseWithResult(res))
     .catch(handleError(res));
@@ -82,21 +92,35 @@ exports.create = function(req, res) {
 };
 
 // Updates an existing Comment in the DB
+// TODO: Must be tested
+// Updates an existing Comment in the DB
 exports.update = function(req, res) {
   if (req.body._id) {
     delete req.body._id;
   }
   Comment.findByIdAsync(req.params.id)
-    .then(handleEntityNotFound(res))
-    .then(saveUpdates(req.body))
-    .then(responseWithResult(res))
-    .catch(handleError(res));
+    .then(function (data) {
+      if (data.isOwner(req.user._id)) {
+        return handleEntityNotFound(res)
+          .then(saveUpdates(req.body))
+          .then(responseWithResult(res))
+          .catch(handleError(res));
+      } else {
+        return res.status(403).end();
+      }
+    })
 };
 
 // Deletes a Comment from the DB
 exports.destroy = function(req, res) {
   Comment.findByIdAsync(req.params.id)
-    .then(handleEntityNotFound(res))
-    .then(removeEntity(res))
-    .catch(handleError(res));
+    .then(function (data) {
+      if (data.isOwner(req.user._id) || auth.hasRole('admin')) {
+        return handleEntityNotFound(res)
+          .then(removeEntity(res))
+          .catch(handleError(res));
+      } else {
+        return res.status(403).end();
+      }
+    });
 };

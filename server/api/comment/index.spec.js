@@ -34,7 +34,7 @@ describe('Comment API Router:', function() {
     commentIndex.should.equal(routerStub);
   });
 
-  describe('GET /y', function() {
+  describe('GET /api/comments', function() {
 
     it('should route to comment.controller.index', function() {
       routerStub.get
@@ -44,7 +44,7 @@ describe('Comment API Router:', function() {
 
   });
 
-  describe('GET /y/:id', function() {
+  describe('GET /api/comments/:id', function() {
 
     it('should route to comment.controller.show', function() {
       routerStub.get
@@ -54,7 +54,7 @@ describe('Comment API Router:', function() {
 
   });
 
-  describe('POST /y', function() {
+  describe('POST /api/comments', function() {
 
     it('should route to comment.controller.create', function() {
       routerStub.post
@@ -64,7 +64,7 @@ describe('Comment API Router:', function() {
 
   });
 
-  describe('PUT /y/:id', function() {
+  describe('PUT /api/comments/:id', function() {
 
     it('should route to comment.controller.update', function() {
       routerStub.put
@@ -74,7 +74,7 @@ describe('Comment API Router:', function() {
 
   });
 
-  describe('PATCH /y/:id', function() {
+  describe('PATCH /api/comments/:id', function() {
 
     it('should route to comment.controller.update', function() {
       routerStub.patch
@@ -84,7 +84,7 @@ describe('Comment API Router:', function() {
 
   });
 
-  describe('DELETE /y/:id', function() {
+  describe('DELETE /api/comments/:id', function() {
 
     it('should route to comment.controller.destroy', function() {
       routerStub.delete

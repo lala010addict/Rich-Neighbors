@@ -67,8 +67,15 @@ exports.index = function(req, res) {
 };
 
 // Gets a single CampaignItem from the DB
-exports.show = function(req, res) {
-  CampaignItem.findByIdAsync(req.params.id)
+// exports.show = function(req, res) {
+//   CampaignItem.findByIdAsync(req.params.id)
+//     .then(handleEntityNotFound(res))
+//     .then(responseWithResult(res))
+//     .catch(handleError(res));
+// };
+
+exports.showByCampaign = function(req, res) {
+  CampaignItem.findAsync({campaign_id: req.params.id})
     .then(handleEntityNotFound(res))
     .then(responseWithResult(res))
     .catch(handleError(res));
