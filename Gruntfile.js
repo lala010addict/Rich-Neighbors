@@ -28,6 +28,11 @@ module.exports = function (grunt) {
   grunt.initConfig({
 
     // Project settings
+    uglify: {
+      options: {
+        mangle: false
+      }
+    }
     pkg: grunt.file.readJSON('package.json'),
     yeoman: {
       // configurable paths
