@@ -4,17 +4,22 @@ angular.module('bApp.MainController', ['ui.router'])
   .controller('MainController', ['$scope', '$http', function($scope, $http) {
 
     $scope.campaigns = {};
-    $scope.getData = function() {
-      $http.get('/api/campaigns')
-        .success(function(data) {
-          $scope.campaigns = data;
-        })
-        .error(function(data) {
-          console.log('Error: ' + data);
-        });
-    }
 
-    $scope.getData();
+    $http.get('/api/campaigns')
+      .success(function(data) {
+        $scope.campaigns = data;
+      })
+      .error(function(data) {
+        console.log('Error: ' + data);
+      })
+    $scope.calDonatedAmount = function(x) {
+      var amounts = _.pluck(x, 'amount')
+      console.log(amounts)
+
+      return _.reduce(amounts, function(total, n) {
+        return total + n;
+      });
+    }
 
     $scope.limitChar = function(x, y) {
       var sp = x.split(' ')

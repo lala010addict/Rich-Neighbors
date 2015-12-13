@@ -18,15 +18,15 @@
         <div class="cause-info">
           <div class="cause-info-content clearfix">
             <div class="fl cause-info-donated">
-              <span>${{x.goal}}</span> Donated </div>
+              <span>$ {{calDonatedAmount(x.contributors) | number:2}}</span> Donated </div>
             <!-- .cause-info-donated -->
             <div class="fr cause-info-funded">
-              <span> {{( x.goal / x.total * 100)| number:2}}%</span> Funded </div>
+              <span> {{( calDonatedAmount(x.contributors) / x.goal * 100)| number:2}}%</span> Funded </div>
             <!-- .cause-info-funded -->
           </div>
           <!-- .cause-info-content -->
           <div class="cause-info-bar" data-goal="0.8%">
-            <span style="width: {{( x.goal / x.total * 100)| number:2}}%;"></span>
+            <span style="width: {{( calDonatedAmount(x.contributors) / x.goal * 100)| number:2}}%;"></span>
           </div>
           <!-- .cause-info-bar -->
           <div class="cause-info-links">

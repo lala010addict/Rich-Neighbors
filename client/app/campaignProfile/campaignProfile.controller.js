@@ -8,20 +8,22 @@
 angular.module('bApp.CampaignProfileController', [])
   .controller('CampaignProfileController', ['$scope', '$stateParams', '$http', function($scope, $stateParams, $http) {
     $scope.campaign = {};
-    //$scope.campaigns[$stateParams.id];
+    $scope.donated = '';
+    $http.get('/api/campaigns/' + $stateParams.id)
+      .success(function(data) {
+        $scope.campaign = data;
+        console.log(data.contributors);
 
-    $http.get('/api/campaigns/' + $stateParams.id )
-        .success(function(data) {
-          $scope.campaign = data;
-        })
-        .error(function(data) {
-          console.log('Error: ' + data);
+        var amounts = _.pluck(data.contributors, 'amount')
+        console.log(amounts)
+
+        $scope.donated = _.reduce(amounts, function(total, n) {
+          return total + n;
         });
-
-
-    $scope.a = function  () {
-    	console.log($scope.campaigns[$stateParams.id])
-    }
-    $scope.a()
+        console.log($scope.donated)
+      })
+      .error(function(data) {
+        console.log('Error: ' + data);
+      });
 
   }]);
