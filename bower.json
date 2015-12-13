@@ -13,9 +13,7 @@
     "angular-ui-router": "~0.2.15",
     "angular-validation-match": "~1.5.2",
     "angular-ui-map": "~0.5.0",
-    "jquery": "~2.1.4",
-    "foundation-sites": "~6.0.5",
-    "foundation-icon-fonts": "*"
+    "jquery": "~2.1.4"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.0"
