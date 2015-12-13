@@ -14,19 +14,19 @@
       <div class="row">
         <div class="large-12 columns">
           <label>Campaign Title
-            <input type="text" placeholder="Campaign Title" />
+            <input type="text" placeholder="Campaign Title" ng-model="formData.title"/>
           </label>
         </div>
       </div>
       <div class="row">
         <div class="large-4 columns">
           <label>Campaign Goal
-            <input type="text" placeholder="$$$$$$$$$$$" />
+            <input type="text" placeholder="$$$$$$$$$$$" ng-model="formData.goal"/>
           </label>
         </div>
         <div class="large-4 columns">
           <label>ZIP or Postal Code
-            <input type="text" placeholder="ZIP or Postal Code" />
+            <input type="text" placeholder="ZIP or Postal Code" ng-model="formData.address.zip"/>
           </label>
         </div>
       <div class="large-4 columns">
@@ -52,7 +52,7 @@
       <div class="row">
         <div class="large-12 columns">
           <label>About Your Campaign:
-            <textarea placeholder="Tell everyone about your campaign and why you would like to fix that pothole. Make it personal and compelling in case someone actually reads it!"></textarea>
+            <textarea placeholder="Tell everyone about your campaign and why you would like to fix that pothole. Make it personal and compelling in case someone actually reads it!" ng-model="formData.description"></textarea>
           </label>
         </div>
       </div>
@@ -62,6 +62,6 @@
 
 <div class="row">
   <div class="column medium-9 small-centered">
-  <a href="/submitCampaignsSuccess" class="button large expand">Submit Campaign</a>
+  <a ng-click="createCampaign()" type="submit"  class="button large expand">Submit Campaign</a>
   </div>
   </div>

@@ -11,7 +11,8 @@ angular.module('bApp', [
     'ngResource',
     'ngSanitize',
     'ui.router',
-    'validation.match'
+    'validation.match',
+    'bApp.StartCampaignController'
   ])
   .config(function($urlRouterProvider, $locationProvider) {
     $urlRouterProvider
