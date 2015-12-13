@@ -5,12 +5,23 @@
 // angular.module('bApp')
 //   .controller('CampaignProfileController', CampaignProfileController);
 
+angular.module('bApp.CampaignProfileController', [])
+  .controller('CampaignProfileController', ['$scope', '$stateParams', '$http', function($scope, $stateParams, $http) {
+    $scope.campaign = {};
+    //$scope.campaigns[$stateParams.id];
+
+    $http.get('/api/campaigns/' + $stateParams.id )
+        .success(function(data) {
+          $scope.campaign = data;
+        })
+        .error(function(data) {
+          console.log('Error: ' + data);
+        });
 
 
-angular.module('bApp.CampaignProfileController', ['ui.router'])
-  .controller('CampaignProfileController', ['$scope', '$http','$stateParams', function($scope, $http, $stateParams) {
-
-    $scope.campaign = $scope.campaigns[$stateParams.id];
-
+    $scope.a = function  () {
+    	console.log($scope.campaigns[$stateParams.id])
+    }
+    $scope.a()
 
   }]);
