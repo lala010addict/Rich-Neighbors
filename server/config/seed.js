@@ -9,7 +9,7 @@ import path from 'path';
 import jsf from 'json-schema-faker';
 import User from '../api/user/user.model';
 import Campaign from '../api/campaign/campaign.model';
-import campaignJson from './seed.campaign.js'
+//import campaignJson from './seed.campaign.js'
 var campaignSchema = campaignJson.data
 
 

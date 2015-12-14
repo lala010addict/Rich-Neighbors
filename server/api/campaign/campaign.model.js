@@ -18,7 +18,7 @@ var CampaignSchema = new Schema({
   },
   description: {
     type: String,
-    required: true,
+   // required: true,
     validate: [
     function (name) {
       return name.trim().length >= 24
@@ -66,7 +66,7 @@ var CampaignSchema = new Schema({
     },
     zip: {
       type: String,
-      required: true
+     // required: true
     },
     state: String,
     country: {
@@ -82,7 +82,7 @@ var CampaignSchema = new Schema({
   },
   goal: {
     type: String,
-    required: true,
+    //required: true,
     validate: [
     function (goal){
       return goal >= 1;
@@ -101,7 +101,7 @@ var CampaignSchema = new Schema({
   picture_url: {
     type: String,
   //  required: true,
-    default: '/asset/basic.png'  //TODO: Correct to basic png/jpg
+    default: 'https://pbs.twimg.com/media/BwsrTjGIcAAtjdu.png'  //TODO: Correct to basic png/jpg
   }
 });
 
