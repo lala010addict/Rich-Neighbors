@@ -9,8 +9,8 @@ import path from 'path';
 import jsf from 'json-schema-faker';
 import User from '../api/user/user.model';
 import Campaign from '../api/campaign/campaign.model';
-import campaignJson from './seed.campaign.json'
-var campaignSchema;
+import campaignJson from './seed.campaign.js'
+var campaignSchema = campaignJson.data
 
 
 User.find({}).removeAsync()
@@ -31,9 +31,6 @@ User.find({}).removeAsync()
       console.log('finished populating users');
     });
   });
-
-
-campaignSchema = JSON.parse(fs.readFileSync(path.join(__dirname, 'seed.campaign.json')));
 
 
 Campaign.find({}).removeAsync()
