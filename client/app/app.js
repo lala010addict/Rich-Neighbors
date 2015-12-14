@@ -6,6 +6,7 @@ angular.module('bApp', [
     'bApp.geolocation',
     'bApp.MainController',
     'bApp.CampaignProfileController',
+    'bApp.SubmitCampaignsSuccessCtrl',
     'bApp.constants',
     'ngCookies',
     'ngResource',

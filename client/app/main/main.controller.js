@@ -14,7 +14,7 @@ angular.module('bApp.MainController', ['ui.router'])
       })
     $scope.calDonatedAmount = function(x) {
       var amounts = _.pluck(x, 'amount')
-      console.log(amounts)
+     // console.log(amounts)
 
       return _.reduce(amounts, function(total, n) {
         return total + n;

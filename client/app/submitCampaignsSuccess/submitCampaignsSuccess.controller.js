@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bApp')
-  .controller('SubmitCampaignsSuccessCtrl', function ($scope) {
-    $scope.message = 'Hello';
-  });
+angular.module('bApp.SubmitCampaignsSuccessCtrl', [])
+  .controller('SubmitCampaignsSuccessCtrl', ['$scope','startCampaignService', function ($scope, startCampaignService) {
+    $scope.startCampaignService = startCampaignService;
+  }]);
