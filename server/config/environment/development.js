@@ -6,7 +6,7 @@ module.exports = {
 
   // MongoDB connection options
   mongo: {
-    uri: process.env.MONGOLAB_URI || 'mongodb://localhost/richNeighbors-dev'
+    uri: 'mongodb://localhost/richNeighbors-dev'
   },
 
   // Sequelize connecton opions
@@ -22,6 +22,6 @@ module.exports = {
   },
 
   // Seed database on startup
-  seedDB: true
+  seedDB: false
 
 };

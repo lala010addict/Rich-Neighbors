@@ -5,12 +5,15 @@ angular.module('bApp', [
     'bApp.admin',
     'bApp.geolocation',
     'bApp.MainController',
+    'bApp.CampaignProfileController',
+    'bApp.SubmitCampaignsSuccessCtrl',
     'bApp.constants',
     'ngCookies',
     'ngResource',
     'ngSanitize',
     'ui.router',
-    'validation.match'
+    'validation.match',
+    'bApp.StartCampaignController'
   ])
   .config(function($urlRouterProvider, $locationProvider) {
     $urlRouterProvider

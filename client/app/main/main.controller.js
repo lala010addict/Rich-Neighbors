@@ -1,10 +1,69 @@
 'use strict';
 
+angular.module('bApp.MainController', ['ui.router'])
+  .controller('MainController', ['$scope', '$http', function($scope, $http) {
+
+    $scope.campaigns = {};
+
+    $http.get('/api/campaigns')
+      .success(function(data) {
+        $scope.campaigns = data;
+      })
+      .error(function(data) {
+        console.log('Error: ' + data);
+      })
+    $scope.calDonatedAmount = function(x) {
+      var amounts = _.pluck(x, 'amount')
+     // console.log(amounts)
+
+      return _.reduce(amounts, function(total, n) {
+        return total + n;
+      });
+    }
+
+    $scope.limitChar = function(x, y) {
+      var sp = x.split(' ')
+      return sp.slice(0, y).join(' ')
+    }
+
+    // $scope.showCampaignProfile = function(x) {
+    //   $location.path('#/campaignProfile/' + x._id);
+    // };
+
+
+    $scope.showData = function() {
+
+      //show more functionality
+      var pagesShown = 1;
+      var pageSize = 6;
+
+      $scope.paginationLimit = function(campaigns) {
+        return pageSize * pagesShown;
+      };
+      $scope.hasMoreItemsToShow = function() {
+        return pagesShown < ($scope.campaigns.length / pageSize);
+      };
+      $scope.showMoreItems = function() {
+        pagesShown = pagesShown + 1;
+      };
+
+
+    };
+
+
+
+  }]);
+
+
+
+
+
+
 // (function() {
 
 // class MainController {
 
-  
+
 
 //   constructor($http) {
 //     this.$http = $http;
@@ -31,40 +90,3 @@
 //   .controller('MainController', MainController);
 
 // })();
-
-
-
-angular.module('bApp.MainController', [])
-.controller('MainController', ['$scope', '$http', function($scope, $http) {
-
-  $scope.data = data;
-   $scope.Math = window.Math;
-
-
- $scope.showData = function( ){
-     
-     //show more functionality
-			var pagesShown = 1;
-		    var pageSize = 6;
-		    
-		    $scope.paginationLimit = function(data) {
-		        return pageSize * pagesShown;
-		    };
-		    $scope.hasMoreItemsToShow = function() {
-		        return pagesShown < ($scope.data.length / pageSize);
-		    };
-		    $scope.showMoreItems = function() {
-		        pagesShown = pagesShown + 1;       
-		    };	
-     
-         
-}
-
-
-}]);
-
-
-
-
-
-

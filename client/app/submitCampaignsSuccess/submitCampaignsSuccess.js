@@ -6,6 +6,7 @@ angular.module('bApp')
       .state('submitCampaignsSuccess', {
         url: '/submitCampaignsSuccess',
         templateUrl: 'app/submitCampaignsSuccess/submitCampaignsSuccess.html',
-        controller: 'SubmitCampaignsSuccessCtrl'
+        controller: 'SubmitCampaignsSuccessCtrl', 
+        controllerAs: 'SubmitCampaignsSuccessCtrl'
       });
   });

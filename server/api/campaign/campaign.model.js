@@ -27,7 +27,7 @@ var CampaignSchema = new Schema({
   },
   created_at: {
     type: Date,
-    required: true,
+  //  required: true,
     default: Date.now
   },
   // TODO: Remove if comment api works4 null
@@ -62,7 +62,7 @@ var CampaignSchema = new Schema({
     neighborhood: String,
     city: {
       type: String,
-      required: true
+    //  required: true
     },
     zip: {
       type: String,
@@ -91,16 +91,16 @@ var CampaignSchema = new Schema({
   },
   active: {
     type: Boolean,
-    required: true,
+  //  required: true,
     default: true
   },
   url: {
     type: String,
-    required: true,
+  //  required: true,
   },
   picture_url: {
     type: String,
-    required: true,
+  //  required: true,
     default: '/asset/basic.png'  //TODO: Correct to basic png/jpg
   }
 });

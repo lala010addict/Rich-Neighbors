@@ -25,6 +25,7 @@
   <!-- build:css({.tmp,client}) app/app.css -->
   <!-- <link rel="stylesheet" href="app/app.css"> -->
   <!-- injector:css -->
+  <link rel="stylesheet" href="components/carousel/carousel.css">
   <!-- endinjector -->
   <!-- endbuild -->
 </head>
@@ -34,7 +35,7 @@
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
   <!-- Add your site or application content here -->
-  <div ui-view=""></div>
+  <div ui-view="" autoscroll="true"></div>
   <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
   <script>
   (function(i, s, o, g, r, a, m) {
@@ -93,11 +94,11 @@
   <script src="app/admin/admin.router.js"></script>
   <script src="app/app.constant.js"></script>
   <script src="app/campaignProfile/campaignProfile.controller.js"></script>
-  <script src="app/campaignProfile/campaignProfile.js"></script>
   <script src="app/main/main.controller.js"></script>
   <script src="app/main/main.js"></script>
   <script src="app/startCampaign/startCampaign.controller.js"></script>
   <script src="app/startCampaign/startCampaign.js"></script>
+  <script src="app/startCampaignService/startCampaignService.service.js"></script>
   <script src="app/submitCampaignsSuccess/submitCampaignsSuccess.controller.js"></script>
   <script src="app/submitCampaignsSuccess/submitCampaignsSuccess.js"></script>
   <script src="app/account/settings/settings.controller.js"></script>

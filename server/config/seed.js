@@ -39,4 +39,4 @@ Campaign.find({}).removeAsync()
   })
   .then(function() {
     console.log('finished populating campaigns');
-  });
+  });;
