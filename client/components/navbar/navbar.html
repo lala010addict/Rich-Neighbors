@@ -45,7 +45,9 @@
   </div>
   <div class="top-bar-right">
     <ul class="menu">
-     
+          <li>
+        <geolocation></geolocation>
+      </li>
 
       <li ng-hide="nav.isLoggedIn()" ui-sref-active="active"><a class="button small" ui-sref="login"><i class="fa fa-sign-in">   Login</i></a></li>
       <li ng-hide="nav.isLoggedIn()" ui-sref-active="active"><a class="button small" ui-sref="signup"><i class="fa fa-user">    Sign Up</i></a></li>
@@ -65,9 +67,7 @@
           </li>
         </ul>
       </li>
-       <li>
-        <geolocation></geolocation>
-      </li>
+  
      <!--  <li ng-show="nav.isLoggedIn()" ui-sref-active="active"><a ui-sref="settings"><i class="fa fa-cog"></i></a></li>
       <li ng-show="nav.isLoggedIn()"><a ui-sref="logout">Logout</a></li> -->
     </ul>

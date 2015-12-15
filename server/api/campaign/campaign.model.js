@@ -50,6 +50,7 @@ var CampaignSchema = new Schema({
     },
     amount: {
       type: Number,
+       default: 0,
       validate: [
       function (number) {
         return number >=1;
