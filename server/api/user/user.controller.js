@@ -47,10 +47,14 @@ exports.create = function(req, res, next) {
   newUser.role = 'user';
   newUser.saveAsync()
     .spread(function(user) {
-      var token = jwt.sign({ _id: user._id }, config.secrets.session, {
+      var token = jwt.sign({
+        _id: user._id
+      }, config.secrets.session, {
         expiresInMinutes: 60 * 5
       });
-      res.json({ token: token });
+      res.json({
+        token: token
+      });
     })
     .catch(validationError(res));
 };
@@ -108,13 +112,39 @@ exports.changePassword = function(req, res, next) {
     });
 };
 
+
+/**
+ * Upload profile picture
+ */
+exports.changeProfilePic = function(req, res, next) {
+  var userId = req.user._id;
+  //var oldPass = String(req.body.oldPassword);
+  var newProfilePic = String(req.body.newProfilePic);
+  console.log(newProfilePic);
+
+  User.findByIdAsync(userId)
+    .then(function(user) {
+      console.log(user);
+      user.profile_pic = newProfilePic;
+      return user.saveAsync()
+        .then(function() {
+          res.status(204).end();
+        })
+        .catch(validationError(res));
+
+    });
+};
+
+
 /**
  * Get my info
  */
 exports.me = function(req, res, next) {
   var userId = req.user._id;
 
-  User.findOneAsync({ _id: userId }, '-salt -password')
+  User.findOneAsync({
+      _id: userId
+    }, '-salt -password')
     .then(function(user) { // don't ever give out the password or salt
       if (!user) {
         return res.status(401).end();

@@ -12,7 +12,6 @@ class SettingsController {
 
   changePassword(form) {
     this.submitted = true;
-
     if (form.$valid) {
       this.Auth.changePassword(this.user.oldPassword, this.user.newPassword)
         .then(() => {
@@ -24,7 +23,16 @@ class SettingsController {
           this.message = '';
         });
     }
-  }
+  };
+
+  changeProfilePic(form) {
+    this.submitted = true;
+  console.log(this.user)
+   this.Auth.changeProfilePic(this.user.profile_pic);
+this.user.profile_pic = '';
+  };
+
+
 }
 
 angular.module('bApp')

@@ -7,6 +7,11 @@ var authTypes = ['github', 'twitter', 'facebook', 'google'];
 
 var UserSchema = new Schema({
   name: String,
+  profile_pic: {
+    type: String,
+  //  required: true,
+    default: 'https://pbs.twimg.com/media/BwsrTjGIcAAtjdu.png'  //TODO: Correct to basic png/jpg
+  },
   email: {
     type: String,
     lowercase: true
@@ -34,7 +39,8 @@ UserSchema
   .get(function() {
     return {
       'name': this.name,
-      'role': this.role
+      'role': this.role,
+      'profile_pic': this.profile_pic
     };
   });
 
@@ -44,7 +50,8 @@ UserSchema
   .get(function() {
     return {
       '_id': this._id,
-      'role': this.role
+      'role': this.role,
+      'profile_pic': this.profile_pic
     };
   });
 

@@ -11,6 +11,8 @@ import User from '../api/user/user.model';
 import Campaign from '../api/campaign/campaign.model';
 import Comment from '../api/comment/comment.model';
 import campaignJson from './seed.campaign.js'
+
+
 var campaignSchema = campaignJson.data
 
 

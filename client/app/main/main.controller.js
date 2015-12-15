@@ -1,9 +1,18 @@
 'use strict';
 
 angular.module('bApp.MainController', ['ui.router'])
-  .controller('MainController', ['$scope', '$http', function($scope, $http) {
+  .controller('MainController', ['$scope', '$http', "GeoLoc", function($scope, $http, GeoLoc) {
 
     $scope.campaigns = {};
+
+    // https://maps.googleapis.com/maps/api/distancematrix/json?origins=02148&destinations=91801
+
+    $scope.zipcode = GeoLoc.zipcode
+
+
+    $scope.outputBar = {bar : "main"};
+    $scope.outputBar.bar = GeoLoc.getVariable();
+
 
     $http.get('/api/campaigns')
       .success(function(data) {
@@ -14,7 +23,7 @@ angular.module('bApp.MainController', ['ui.router'])
       })
     $scope.calDonatedAmount = function(x) {
       var amounts = _.pluck(x, 'amount')
-     // console.log(amounts)
+        // console.log(amounts)
 
       return _.reduce(amounts, function(total, n) {
         return total + n;

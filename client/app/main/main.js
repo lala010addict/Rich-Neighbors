@@ -17,10 +17,20 @@ angular.module('bApp')
       })
 
   })
-    .run(['$http', '$rootScope', function($http, $rootScope) {
-    $rootScope.campaigns =  {};
-    $http.get('/api/campaigns')
-        .success(function(data) {
-           $rootScope.campaigns = data;
-        })
-}])
+  // .run(['$http', '$rootScope', function($http, $rootScope) {
+  //   $rootScope.campaigns = {};
+  //   $http.get('/api/campaigns')
+  //     .success(function(data) {
+  //       $rootScope.campaigns = data;
+  //     })
+  // }])
+
+// .run(['$http', '$rootScope', function($http, $rootScope) {
+//   $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+//     $rootScope.campaigns = {};
+//     $http.get('/api/campaigns')
+//       .success(function(data) {
+//         $rootScope.campaigns = data;
+//       })
+//   })
+// }])
