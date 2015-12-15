@@ -33,7 +33,7 @@ module.exports = function(app) {
   app.use('/api/campaigns/:campaign_id/items', require('./api/item'));
   app.use('/api/campaigns/:campaign_id/followers', require('./api/follower'));
   app.use('/api/campaigns/:campaign_id/volunteers', require('./api/volunteer'));
-  // app.use('/api/users/me/campaigns', require('./api/user'), require('./api/campaign'));
+  //app.use('/api/users/me/campaigns', require('./auth').isAuthorized, require('./api/user'), require('./api/campaign'));
   // app.use('/api/users/me/comments', require('./api/user'), require('./api/comment'));
   // app.use('/api/users/me/followers', require('./api/user'), require('./api/comment'));
   // app.use('/api/users/me/volunteers', require('./api/user'), require('./api/comment'));
