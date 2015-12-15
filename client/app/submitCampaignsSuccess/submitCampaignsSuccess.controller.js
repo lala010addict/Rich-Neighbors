@@ -9,6 +9,4 @@ angular.module('bApp.SubmitCampaignsSuccessCtrl', [])
       .error(function(data) {
         console.log('Error: ' + data);
       });
-
-
   }]);
