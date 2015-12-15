@@ -149,12 +149,40 @@ exports.me = function(req, res, next) {
       if (!user) {
         return res.status(401).end();
       }
+      console.log('data: ', user)
       res.json(user);
     })
     .catch(function(err) {
       return next(err);
     });
 };
+
+
+
+
+exports.meParams = function(req, res, next) {
+  req.user_id = req.user._id;
+  console.log(req);
+
+  // User.findOneAsync({
+  //     _id: userId
+  //   }, '-salt -password')
+  //   .then(function(user) { // don't ever give out the password or salt
+  //     if (!user) {
+  //       return res.status(401).end();
+  //     }
+  //     console.log('data: ', user)
+  //     req.params.user_id = user._id
+  //     next();
+  //   //  res.json({user_id: user._id});
+  //   })
+  //   .catch(function(err) {
+  //     return next(err);
+  //   });
+  next();
+};
+
+
 
 /**
  * Authentication callback

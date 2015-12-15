@@ -2169,10 +2169,10 @@ html[xmlns] .slides {
 .cause-info-bar {
     border-radius: 6px;
     background-color: #25323e;
-    background-image: -moz-linear-gradient(top, rgba(32, 43, 53, 1) 1%, rgba(44, 59, 71, 1) 99%);
+/*    background-image: -moz-linear-gradient(top, rgba(32, 43, 53, 1) 1%, rgba(44, 59, 71, 1) 99%);
     background-image: -o-linear-gradient(top, rgba(32, 43, 53, 1) 1%, rgba(44, 59, 71, 1) 99%);
     background-image: -webkit-linear-gradient(top, rgba(32, 43, 53, 1)) 1%, rgba(44, 59, 71, 1) 99%);
-    background-image: linear-gradient(top, rgba(32, 43, 53, 1) 1%, rgba(44, 59, 71, 1) 99%);
+    background-image: linear-gradient(top, rgba(32, 43, 53, 1) 1%, rgba(44, 59, 71, 1) 99%);*/
     height: 12px;
     margin-top: 14px;
     position: relative;
@@ -3475,10 +3475,10 @@ body.page-template-template-homepage-php #main .container {
 .cause-info-widget-percentage-bar {
     border-radius: 6px;
     background-color: #25323e;
-    background-image: -moz-linear-gradient(top, rgba(32, 43, 53, 1) 1%, rgba(44, 59, 71, 1) 99%);
+/*    background-image: -moz-linear-gradient(top, rgba(32, 43, 53, 1) 1%, rgba(44, 59, 71, 1) 99%);
     background-image: -o-linear-gradient(top, rgba(32, 43, 53, 1) 1%, rgba(44, 59, 71, 1) 99%);
     background-image: -webkit-linear-gradient(top, rgba(32, 43, 53, 1)) 1%, rgba(44, 59, 71, 1) 99%);
-    background-image: linear-gradient(top, rgba(32, 43, 53, 1) 1%, rgba(44, 59, 71, 1) 99%);
+    background-image: linear-gradient(top, rgba(32, 43, 53, 1) 1%, rgba(44, 59, 71, 1) 99%);*/
     height: 12px;
     margin-top: 15px;
     position: relative;

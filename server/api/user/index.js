@@ -11,7 +11,7 @@ router.param('id', auth.hasRole('admin'), controller.show);
 router.get('/', auth.hasRole('admin'), controller.index);
 router.delete('/:id', auth.hasRole('admin'), controller.destroy);
 router.get('/me', auth.isAuthenticated(), controller.me);
-router.use('/me/campaigns', auth.isAuthenticated(), controller.me, require('../campaign'));
+router.use('/me/campaigns', auth.isAuthenticated(), controller.meParams, require('../campaign'));
 router.use('/me/comments', auth.isAuthenticated(), controller.me, require('../comment'));
 router.use('/me/followers', auth.isAuthenticated(), controller.me, require('../follower'));
 router.use('/me/volunteers', auth.isAuthenticated(), controller.me, require('../volunteer'));

@@ -67,11 +67,26 @@ function removeEntity(res) {
 }
 
 // Gets a list of Campaigns
+// exports.index = function(req, res) {
+//   console.log("This was called", req);
+//   Campaign.findAsync({user_id: req.user_id})
+//     .then(responseWithResult(res))
+//     .catch(handleError(res));
+// };
+
 exports.index = function(req, res) {
-  Campaign.findAsync()
-    .then(responseWithResult(res))
-    .catch(handleError(res));
+  if (req.baseUrl === '/api/users/me/campaigns') {
+    Campaign.findAsync({user_id: req.user_id})
+      .then(responseWithResult(res))
+      .catch(handleError(res));
+  } else {
+    console.log('main: ', req)
+    Campaign.findAsync(req.params)
+      .then(responseWithResult(res))
+      .catch(handleError(res));
+  }
 };
+
 
 // exports.param = function(req, res, next, campaign) {
 //   Campaign.findById(campaign)

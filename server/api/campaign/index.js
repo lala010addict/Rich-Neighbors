@@ -4,7 +4,7 @@ var express = require('express');
 var controller = require('./campaign.controller');
 var auth = require('../../auth/auth.service');
 
-var router = express.Router();
+var router = express.Router({mergeParams: true});
 
 router.param('id', controller.show);
 
