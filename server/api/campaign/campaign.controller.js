@@ -28,6 +28,13 @@ function responseWithResult(res, statusCode) {
   };
 }
 
+function respondParam(res, campaign) {
+  if (campaign) {
+    res.campaign = campaign;
+    return res.campaign;
+  }
+}
+
 function handleEntityNotFound(res) {
   return function(entity) {
     if (!entity) {
@@ -65,6 +72,14 @@ exports.index = function(req, res) {
     .then(responseWithResult(res))
     .catch(handleError(res));
 };
+
+// exports.param = function(req, res, next, campaign) {
+//   Campaign.findById(campaign)
+//     .then(handleEntityNotFound(res))
+//     .then(respondParam(campaign))
+//     .then(next())
+//     .catch(handleError(res))
+//   };
 
 // Gets a single Campaign from the DB
 exports.show = function(req, res) {

@@ -18,15 +18,15 @@ var CommentSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'Comment',
   }],
-  auther: {
+  user_id: {
     type: Schema.ObjectId,
     ref: 'User',
-    required: true
+    //required: true
   },
   created_at: {
     type: Date,
     default: Date.now,
-    required: true
+    //required: true
   },
   text: {
     type: String,
@@ -62,7 +62,7 @@ CommentSchema
 CommentSchema
   .pre('save', function (next) {
     var _this = this;
-    _this.text = _this.filter();
+    _this.text = _this.filter(_this.text);
     next();
   });
 
