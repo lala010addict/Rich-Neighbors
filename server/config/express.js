@@ -51,18 +51,19 @@ module.exports = function(app) {
    * Lusca - express server security
    * https://github.com/krakenjs/lusca
    */
-  if ('test' !== env) {
+  if ('test' !== env || 'development' !== env) {
     app.use(lusca({
-      csrf: {
-        angular: true
-      },
+      csrf: false,
+      // csrf: {
+      //   angular: true
+      // },
       xframe: 'SAMEORIGIN',
       hsts: {
         maxAge: 31536000, //1 year, in seconds
         includeSubDomains: true,
         preload: true
       },
-      xssProtection: true
+      xssProtection: true //TODO: Change to true for p
     }));
   }
 
