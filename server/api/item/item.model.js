@@ -3,24 +3,24 @@
 var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 var Schema = mongoose.Schema;
 
-var CampaignItemSchema = new Schema({
+var ItemSchema = new Schema({
   campaign_id: {
     type: Schema.ObjectId,
     ref: 'Campaign'
   },
   name: {
     type: String,
-    required: true,
-  },
-  type: {
-    type: String,
-    required: true,
+    required: true
   },
   quantity: {
     type: Number,
-    default: 0
+    required: true,
+    default: 1
   },
-
+  created_at: {
+    type: Date,
+    default: Date.now
+  }
 });
 
-module.exports = mongoose.model('CampaignItem', CampaignItemSchema);
+module.exports = mongoose.model('Item', ItemSchema);

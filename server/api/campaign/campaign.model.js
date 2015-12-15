@@ -31,7 +31,7 @@ var CampaignSchema = new Schema({
     default: Date.now
   },
   // TODO: Remove if comment api works4 null
-  owner: {
+  user_id: {
     type: Schema.ObjectId,
     ref: 'User'
   },
