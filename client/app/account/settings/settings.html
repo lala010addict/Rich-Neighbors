@@ -1,7 +1,7 @@
 <navbar></navbar>
-<br>
-<div class="container">
-  <div class="row">
+
+<div >
+  <div class="row" id='settings'>
     <div class="col-sm-12">
       <h1>Change Password</h1>
     </div>
@@ -31,6 +31,7 @@
         <p class="help-block"> {{ vm.message }} </p>
         <button class="button" type="submit">Save changes</button>
       </form>
+      <br>
          <h1>Change Profile Picture</h1>
       <form class="form" name="form" ng-submit="vm.changeProfilePic(form)">
         <div class="form-group">
@@ -42,3 +43,4 @@
     </div>
   </div>
 </div>
+
