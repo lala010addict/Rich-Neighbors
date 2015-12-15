@@ -1,9 +1,14 @@
 'use strict';
 
 angular.module('bApp.MainController', ['ui.router'])
-  .controller('MainController', ['$scope', '$http', function($scope, $http) {
+  .controller('MainController', ['$scope', '$http', "GeoLoc", function($scope, $http, GeoLoc) {
 
     $scope.campaigns = {};
+
+   // https://maps.googleapis.com/maps/api/distancematrix/json?origins=02148&destinations=91801
+
+$scope.zipcode = GeoLoc.zipcode
+ 
 
     $http.get('/api/campaigns')
       .success(function(data) {

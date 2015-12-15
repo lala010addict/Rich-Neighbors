@@ -88,6 +88,22 @@ function AuthService($location, $http, $cookies, $q, appConfig, Util, User) {
       }).$promise;
     },
 
+ /**
+      Change profile pic
+     */
+
+  changeProfilePic: function(newProfilePic, callback) {
+      return User.changeProfilePic({ id: currentUser._id }, {
+        newProfilePic: newProfilePic
+      }, function() {
+        return safeCb(callback)(null);
+      }, function(err) {
+        return safeCb(callback)(err);
+      }).$promise;
+    },
+
+
+
     /**
      * Gets all available info on a user
      *   (synchronous|asynchronous)

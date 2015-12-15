@@ -5,6 +5,7 @@
 angular.module('bApp.geolocation', ["ui.map", "ui.event"])
 
 .factory('GeoLoc', ['$http', function($http) {
+  //var zipcode = ''
   var getAddress = function(lat, lng) {
 
     var apiAddress = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + ',' + lng
@@ -12,7 +13,9 @@ angular.module('bApp.geolocation', ["ui.map", "ui.event"])
     return $http.get(apiAddress, {
       cache: true
     }).success(function(data) {
- //  console.log(data)
+
+      //  zipcode = data.results[0].address_components[6].long_name;
+      //  console.log(zipcode);
       return data
 
     });
@@ -20,6 +23,7 @@ angular.module('bApp.geolocation', ["ui.map", "ui.event"])
   }
 
   return {
+    // zipcode: zipcode,
     getAddress: getAddress
   };
 }])
@@ -32,6 +36,7 @@ angular.module('bApp.geolocation', ["ui.map", "ui.event"])
   $scope.address = "";
   $scope.accuracy = "0";
   $scope.error = "";
+  $scope.zipcode = '';
   $scope.model = {
     myMap: undefined
   };
@@ -48,7 +53,7 @@ angular.module('bApp.geolocation', ["ui.map", "ui.event"])
   };
 
   $scope.showPosition = function(position) {
-   // console.log(position)
+    // console.log(position)
     $scope.lat = position.coords.latitude;
     $scope.lng = position.coords.longitude;
     $scope.accuracy = position.coords.accuracy;
@@ -93,14 +98,14 @@ angular.module('bApp.geolocation', ["ui.map", "ui.event"])
     }
   }
 
-$scope.getCity = function(lat, lng) {
+  $scope.getCity = function(lat, lng) {
 
-   GeoLoc.getAddress(lat, lng)
-    .success(function(data) {
-      console.log(data.results[2].formatted_address)
-      $scope.address = data.results[2].formatted_address
-      
-    })
+    GeoLoc.getAddress(lat, lng)
+      .success(function(data) {
+        console.log(data.results[2].formatted_address)
+        $scope.address = data.results[2].formatted_address
+        $scope.zipcode = data.results[0].address_components[6].long_name;
+      })
   }
 
 

@@ -24,7 +24,7 @@ angular.module('bApp')
       console.log('hi')
       $rootScope.$watch('campaigns')
 
-      console.log($rootScope);
+     // console.log($rootScope);
       //console.log(event)
     })
   })
