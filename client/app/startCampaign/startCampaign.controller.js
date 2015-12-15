@@ -17,7 +17,7 @@ angular.module('bApp.StartCampaignController', [])
 
     $scope.formData = {};
     $scope.id = '';
-    $scope.formData.owner = $scope.getCurrentUser()._id;
+    $scope.formData.user_id = $scope.getCurrentUser()._id;
     $scope.createCampaign = function() {
       $http.post('/api/campaigns', $scope.formData)
         .success(function(data) {
