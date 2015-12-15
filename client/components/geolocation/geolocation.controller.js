@@ -5,7 +5,21 @@
 angular.module('bApp.geolocation', ["ui.map", "ui.event"])
 
 .factory('GeoLoc', ['$http', function($http) {
-  //var zipcode = ''
+
+  var variableA = '';
+
+  var setVariable = function(variableB) {
+    variableA = variableB;
+    console.log("Info saved!");
+    console.log(variableA);
+  };
+  var getVariable = function() {
+    console.log("Info sent!");
+    console.log(variableA);
+    return variableA;
+  };
+
+
   var getAddress = function(lat, lng) {
 
     var apiAddress = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + ',' + lng
@@ -23,8 +37,9 @@ angular.module('bApp.geolocation', ["ui.map", "ui.event"])
   }
 
   return {
-    // zipcode: zipcode,
-    getAddress: getAddress
+    setVariable: setVariable,
+    getVariable: getVariable,
+    getAddress: getAddress,
   };
 }])
 
@@ -105,6 +120,7 @@ angular.module('bApp.geolocation', ["ui.map", "ui.event"])
         console.log(data.results[2].formatted_address)
         $scope.address = data.results[2].formatted_address
         $scope.zipcode = data.results[0].address_components[6].long_name;
+        GeoLoc.setVariable(data.results[0].address_components[6].long_name);
       })
   }
 
