@@ -77,7 +77,6 @@ exports.index = function(req, res) {
 // Gets a single Comment from the DB
 exports.show = function(req, res) {
   Comment.findByIdAsync(req.params.id)
-    .populate('user_id', 'name', 'profile_pic')
     .then(handleEntityNotFound(res))
     .then(responseWithResult(res))
     .catch(handleError(res));
