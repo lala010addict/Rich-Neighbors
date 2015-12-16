@@ -44,6 +44,12 @@ var CommentSchema = new Schema({
 });
 
 
+function linkify (data) {
+  return [{href: '/api/comments/' + data._id, ref: 'self'},
+          {href: '/api/campaigns/' + data.campaign_id, ref: 'campaign'},
+          {href: '/api/user/' + data.user_id, ref: 'author'}]
+}
+
 /*
 * Validations
 */
@@ -63,6 +69,7 @@ CommentSchema
   .pre('save', function (next) {
     var _this = this;
     _this.text = _this.filter(_this.text);
+    _this._links = linkify(_this);
     next();
   });
 

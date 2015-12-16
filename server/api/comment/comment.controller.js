@@ -62,15 +62,22 @@ function removeEntity(res) {
 
 // Gets a list of Comments
 exports.index = function(req, res) {
-  console.log("This was called", req.params);
-  Comment.findAsync(req.params)
-    .then(responseWithResult(res))
-    .catch(handleError(res));
+ if (req.baseUrl = '/api/users/me/comments') {
+    Comment.findAsync({user_id: req.user_id})
+      .populate('user_id', 'name', 'profile_pic')
+      .then(responseWithResult(res))
+      .catch(handleError(res));
+  } else {
+    Comment.findAsync(req.params)
+      .then(responseWithResult(res))
+      .catch(handleError(res));
+  }
 };
 
 // Gets a single Comment from the DB
 exports.show = function(req, res) {
-  Comment.findByIdAsync(req.params.commentId)
+  Comment.findByIdAsync(req.params.id)
+    .populate('user_id', 'name', 'profile_pic')
     .then(handleEntityNotFound(res))
     .then(responseWithResult(res))
     .catch(handleError(res));
@@ -79,7 +86,7 @@ exports.show = function(req, res) {
 
 // Gets a all Comments for a single Campaign from the DB
 exports.showByCampaign = function(req, res) {
-  Comment.findAsync({campaign_id: req.params.commentId})
+  Comment.findAsync({campaign_id: req.params.id})
     .then(handleEntityNotFound(res))
     .then(responseWithResult(res))
     .catch(handleError(res));
@@ -87,7 +94,8 @@ exports.showByCampaign = function(req, res) {
 
 // Creates a new Comment in the DB
 exports.create = function(req, res) {
-  Comment.createAsync(req.body)
+  var data = _.extend(req.body, req.params, {user_id: req.user});
+  Comment.createAsync(data)
     .then(responseWithResult(res, 201))
     .catch(handleError(res));
 };
@@ -99,7 +107,7 @@ exports.update = function(req, res) {
   if (req.body._id) {
     delete req.body._id;
   }
-  Comment.findByIdAsync(req.params.commentId)
+  Comment.findByIdAsync(req.params.id)
     .then(function (data) {
       if (data.isOwner(req.user._id)) {
         return handleEntityNotFound(res)
@@ -114,7 +122,7 @@ exports.update = function(req, res) {
 
 // Deletes a Comment from the DB
 exports.destroy = function(req, res) {
-  Comment.findByIdAsync(req.params.commentId)
+  Comment.findByIdAsync(req.params.id)
     .then(function (data) {
       if (data.isOwner(req.user._id) || auth.hasRole('admin')) {
         return handleEntityNotFound(res)

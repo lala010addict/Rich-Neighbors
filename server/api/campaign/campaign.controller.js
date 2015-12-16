@@ -80,7 +80,6 @@ exports.index = function(req, res) {
       .then(responseWithResult(res))
       .catch(handleError(res));
   } else {
-    console.log('main: ', req)
     Campaign.findAsync(req.params)
       .then(responseWithResult(res))
       .catch(handleError(res));
