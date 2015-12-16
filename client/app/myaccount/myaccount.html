@@ -1,6 +1,11 @@
 <myacc></myacc>
 
-<div class="container">
-	<h1>user is: {{name}} </h1>
-<button ng-click="click()">click</button>
+<ng-view></ng-view>
+<br>
+<div class="row" id='myposts' ng-repeat="x in mycampaigns">
+  <div class="large-2 columns small-3"><img id='postpic' src="{{x.picture_url}}" /></div>
+  <div class="large-10 columns">
+    <p><a href="../campaignProfile/{{x._id}}"> {{x.title}} </a></p>
+    <p> {{x.description}}</p>
+  </div>
 </div>
