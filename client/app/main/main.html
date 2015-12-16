@@ -8,7 +8,7 @@
     </p>
   </div>
   <div class="row small-up-1 medium-up-2 large-up-3">
-    <div class="column" ng-repeat="x in campaigns | orderBy: '-created_at' | limitTo: paginationLimit()  ">
+    <div class="column " height = '600px' ng-repeat="x in campaigns | orderBy: '-created_at' | limitTo: paginationLimit()  ">
       <div class="callout">
         <p class="text-center" id = 'campaignTitle'>{{x.title}}</p>
         <p class="text-center"><img src="{{x.picture_url}}" class="thumbnails" alt="image of a planet called Campaign Image"></p>
