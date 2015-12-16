@@ -97,7 +97,7 @@ var CampaignSchema = new Schema({
   //  required: true,
     default: 'https://pbs.twimg.com/media/BwsrTjGIcAAtjdu.png'  //TODO: Correct to basic png/jpg
   },
-  links: Array
+  _links: Array
 });
 
 
@@ -164,7 +164,7 @@ CampaignSchema
 CampaignSchema
   .pre('save', function (next) {
     var _this = this;
-    _this.links = linkify(_this);
+    _this._links = linkify(_this);
     next();
   });
 
