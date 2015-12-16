@@ -26,4 +26,64 @@ angular.module('bApp.CampaignProfileController', [])
         console.log('Error: ' + data);
       });
 
-  }]);
+
+      // Current comment.
+    this.comment = {};
+
+    // Array where comments will be.
+    this.comments = [];
+
+    // Fires when form is submited.
+    this.addComment = function() {
+      // Fixed img.
+      this.comment.avatarSrc = 'http://lorempixel.com/200/200/people/';
+
+      // Add current date to the comment.
+      this.comment.date = Date.now();
+
+      this.comments.push( this.comment );
+      this.comment = {};
+
+      // Reset clases of the form after submit.
+      $scope.form.$setPristine();
+    }
+
+    // Fires when the comment change the anonymous state.
+    this.anonymousChanged = function(){
+      if(this.comment.anonymous)
+        this.comment.author = "";
+    }
+
+    
+
+  }])
+
+// .controller('CommentsController', ['$scope', function($scope){
+//     // Current comment.
+//     this.comment = {};
+
+//     // Array where comments will be.
+//     this.comments = [];
+
+//     // Fires when form is submited.
+//     this.addComment = function() {
+//       // Fixed img.
+//       this.comment.avatarSrc = 'http://lorempixel.com/200/200/people/';
+
+//       // Add current date to the comment.
+//       this.comment.date = Date.now();
+
+//       this.comments.push( this.comment );
+//       this.comment = {};
+
+//       // Reset clases of the form after submit.
+//       $scope.form.$setPristine();
+//     }
+
+//     // Fires when the comment change the anonymous state.
+//     this.anonymousChanged = function(){
+//       if(this.comment.anonymous)
+//         this.comment.author = "";
+//     }
+
+//   }])
