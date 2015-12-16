@@ -17,6 +17,7 @@ module.exports = function(app) {
   });
 
   // Insert routes below
+  app.use('/api/payments', require('./api/payment'));
   app.use('/api/contributors', require('./api/contributor'));
   app.use('/api/followers', require('./api/follower'));
   app.use('/api/volunteers', require('./api/volunteer'));
