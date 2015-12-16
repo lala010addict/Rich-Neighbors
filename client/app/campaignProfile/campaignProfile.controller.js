@@ -6,7 +6,7 @@
 //   .controller('CampaignProfileController', CampaignProfileController);
 
 angular.module('bApp.CampaignProfileController', [])
-  .controller('CampaignProfileController', ['$scope', '$stateParams', '$http', function($scope, $stateParams, $http) {
+  .controller('CampaignProfileController', ['$scope', 'Auth', '$stateParams', '$http', function($scope, Auth, $stateParams, $http) {
     $scope.campaign = {};
     $scope.donated = '';
     $http.get('/api/campaigns/' + $stateParams.id)
@@ -26,64 +26,54 @@ angular.module('bApp.CampaignProfileController', [])
         console.log('Error: ' + data);
       });
 
-
-      // Current comment.
-    this.comment = {};
+ $scope.isLoggedIn = Auth.isLoggedIn;
+    $scope.formData = {};
+    $scope.getCurrentUser = Auth.getCurrentUser;
+    $scope.name = $scope.getCurrentUser().name;
+    $scope.profile_pic = $scope.getCurrentUser().profile_pic;
+    $scope.formData.user_id = $scope.getCurrentUser()._id;
+    $scope.formData.campaign_id = $stateParams.id;
+    $scope.formData.text = '';
+    // Current comment.
+    $scope.comment = {};
 
     // Array where comments will be.
-    this.comments = [];
+    $scope.comments = [];
 
     // Fires when form is submited.
-    this.addComment = function() {
-      // Fixed img.
-      this.comment.avatarSrc = 'http://lorempixel.com/200/200/people/';
+    $scope.addComment = function() {
+
+      $http.post('/api/comments', $scope.formData)
+        .success(function(data) {
+          console.log(data);
+          // $scope.id = data._id
+          console.log($scope.getCurrentUser()._id)
+
+        })
+        .error(function(data) {
+          console.log($scope.getCurrentUser())
+          console.log('Error: ' + data);
+        });
+
 
       // Add current date to the comment.
-      this.comment.date = Date.now();
-
-      this.comments.push( this.comment );
-      this.comment = {};
+      $scope.comment.date = Date.now();
+      $scope.comment.text = $scope.formData.text
+      $scope.comments.push($scope.comment);
+      console.log($scope.comments)
+      $scope.comment = {};
+      $scope.formData.text = '';
 
       // Reset clases of the form after submit.
       $scope.form.$setPristine();
     }
 
     // Fires when the comment change the anonymous state.
-    this.anonymousChanged = function(){
-      if(this.comment.anonymous)
-        this.comment.author = "";
+    $scope.anonymousChanged = function() {
+      if ($scope.comment.anonymous)
+        $scope.comment.author = "";
     }
 
-    
+
 
   }])
-
-// .controller('CommentsController', ['$scope', function($scope){
-//     // Current comment.
-//     this.comment = {};
-
-//     // Array where comments will be.
-//     this.comments = [];
-
-//     // Fires when form is submited.
-//     this.addComment = function() {
-//       // Fixed img.
-//       this.comment.avatarSrc = 'http://lorempixel.com/200/200/people/';
-
-//       // Add current date to the comment.
-//       this.comment.date = Date.now();
-
-//       this.comments.push( this.comment );
-//       this.comment = {};
-
-//       // Reset clases of the form after submit.
-//       $scope.form.$setPristine();
-//     }
-
-//     // Fires when the comment change the anonymous state.
-//     this.anonymousChanged = function(){
-//       if(this.comment.anonymous)
-//         this.comment.author = "";
-//     }
-
-//   }])
