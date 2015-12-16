@@ -4,9 +4,6 @@
 angular.module('bApp.StartCampaignController', [])
   .controller('StartCampaignController', ['$scope', '$http', 'Auth', '$state', '$rootScope', '$stateParams', function($scope, $http, Auth, $state, $rootScope, $stateParams) {
 
-
-
-
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.getCurrentUser = Auth.getCurrentUser;
 
@@ -18,23 +15,124 @@ angular.module('bApp.StartCampaignController', [])
     $scope.formData = {};
     $scope.id = '';
     $scope.formData.user_id = $scope.getCurrentUser()._id;
+
+    //****************
+    //**supplies & volunteers form
+    //****************
+    $scope.supplies = [{
+      //   'name': 'supply',
+
+    }];
+
+    $scope.volunteers = [{
+      //   'name': 'supply',
+
+    }];
+
+
+    // $scope.supplyForm = {};
+
+    //$scope.supplyForm.name = $scope.supplies.supply.name;
+    // $scope.supplyForm.quantity = $scope.supply.quantity;
+    $scope.supplies.campaign_id = '';
+    // $scope.stateParams = "";
+
+    $scope.addNewChoice = function() {
+      var newItemNo = $scope.supplies.length + 1;
+      $scope.supplies.push({
+        //  'name': 'supply' + newItemNo
+      });
+    };
+
+    $scope.removeChoice = function() {
+      var lastItem = $scope.supplies.length - 1;
+      $scope.supplies.splice(lastItem);
+    };
+
+
+    $scope.addNewVolunteer = function() {
+      var newItemNo = $scope.volunteers.length + 1;
+      $scope.volunteers.push({
+        //  'name': 'supply' + newItemNo
+      });
+    };
+
+    $scope.removeVolunteer = function() {
+      var lastItem = $scope.volunteers.length - 1;
+      $scope.volunteers.splice(lastItem);
+    };
+
+
+
+
+
     $scope.createCampaign = function() {
       $http.post('/api/campaigns', $scope.formData)
         .success(function(data) {
           console.log($scope.getCurrentUser())
           $scope.id = data._id
-          $scope.formData = {}; // clear the form so our user is ready to enter another
-          //  $scope.campaigns = data;
-          console.log(data);
-          // $scope.id = data._id
-          console.log($scope.id)
+          $scope.supplies.campaign_id = $stateParams
+
+
+          _.forEach($scope.supplies, function(item) {
+
+
+            $http.post('/api/items', item)
+              .success(function(data) {
+                //$scope.formData = {}; // clear the form so our user is ready to enter another
+                //  $scope.campaigns = data;
+                console.log(data);
+                // $scope.id = data._id
+                //  console.log($scope.id)
+
+
+              })
+              .error(function(data) {
+                console.log($scope.getCurrentUser())
+                console.log('Error: ' + data);
+              });
+
+          })
+
+          _.forEach($scope.volunteers, function(item) {
+
+
+            $http.post('/api/volunteers', item)
+              .success(function(data) {
+                //$scope.formData = {}; // clear the form so our user is ready to enter another
+                //  $scope.campaigns = data;
+                console.log(data);
+                // $scope.id = data._id
+                //  console.log($scope.id)
+
+
+              })
+              .error(function(data) {
+                console.log($scope.getCurrentUser())
+                console.log('Error: ' + data);
+              });
+
+          })
+
+
+
+
+
+
+
+
           $state.go('submitCampaignsSuccess', $stateParams)
-            // $state.go('campaignProfile')
+
+
+
         })
         .error(function(data) {
           console.log($scope.getCurrentUser())
           console.log('Error: ' + data);
         });
     }
+
+
+
 
   }])
