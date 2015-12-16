@@ -56,14 +56,14 @@ angular.module('bApp.CampaignProfileController', [])
 
       $http.post('/api/comments', $scope.formData)
         .success(function(data) {
-          console.log(data);
+         // console.log(data);
 
 
           $http.get('/api/comments/' + $stateParams.id)
             .success(function(data) {
               $scope.comments = data
               console.log(data)
-              console.log('comments', $scope.comments)
+              //console.log('comments', $scope.comments)
             })
             .error(function(data) {
               console.log('Error: ' + data);
