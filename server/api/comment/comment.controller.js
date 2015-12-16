@@ -63,12 +63,15 @@ function removeEntity(res) {
 // Gets a list of Comments
 exports.index = function(req, res) {
  if (req.baseUrl = '/api/users/me/comments') {
-    Comment.findAsync({user_id: req.user_id})
-      .populate('user_id', 'name', 'profile_pic')
+    Comment.find({user_id: req.user_id})
+      .populate({path: 'user_id', model: 'User', populate: {path: 'name profile_pic'}})
+      .execAsync()
       .then(responseWithResult(res))
       .catch(handleError(res));
   } else {
     Comment.findAsync(req.params)
+      .populate({path: 'user_id', model: 'User', populate: {path: 'name profile_pic'}})
+      .execAsync()
       .then(responseWithResult(res))
       .catch(handleError(res));
   }
