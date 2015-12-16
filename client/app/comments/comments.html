@@ -30,7 +30,7 @@
   <!-- Comments List -->
   <div class="comments">
     <!-- Comment -->
-    <div class="comment" ng-repeat="comment in comments | orderBy: '-date'">
+    <div class="comment" ng-repeat="comment in comments | orderBy: '-created_at'">
       <!-- Comment Avatar -->
       <div class="comment-avatar">
         <img ng-src="{{ profile_pic }}">
@@ -44,7 +44,7 @@
               <em ng-if="comment.anonymous">Anonymous</em>
               <a ng-if="!comment.anonymous" href="{{ comment.author }}">{{ comment.author || name}}</a>
             </span>
-            <span class="comment-date">{{ comment.date | date: 'medium' }}</span>
+            <span class="comment-date">{{ comment.created_at | date: 'medium' }}</span>
           </div>
           <div class="comment-actions">
             <a href="#">Reply</a>

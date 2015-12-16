@@ -26,6 +26,17 @@ angular.module('bApp.CampaignProfileController', [])
         console.log('Error: ' + data);
       });
 
+
+    $http.get('/api/comments/' + $stateParams.id)
+      .success(function(data) {
+        $scope.comments = data
+        console.log(data)
+        console.log('comments', $scope.comments)
+      })
+      .error(function(data) {
+        console.log('Error: ' + data);
+      })
+
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.formData = {};
     $scope.getCurrentUser = Auth.getCurrentUser;
@@ -46,25 +57,30 @@ angular.module('bApp.CampaignProfileController', [])
       $http.post('/api/comments', $scope.formData)
         .success(function(data) {
           console.log(data);
-          // $scope.id = data._id
-          console.log($scope.getCurrentUser()._id);
-          
-      // Add current date to the comment.
-      $scope.comment.date = Date.now();
-      $scope.comment.text = $scope.formData.text
-      $scope.comments.push($scope.comment);
-      console.log($scope.comments)
-      $scope.comment = {};
-      $scope.formData.text = '';
 
-      // Reset clases of the form after submit.
-      $scope.form.$setPristine();
+
+          $http.get('/api/comments/' + $stateParams.id)
+            .success(function(data) {
+              $scope.comments = data
+              console.log(data)
+              console.log('comments', $scope.comments)
+            })
+            .error(function(data) {
+              console.log('Error: ' + data);
+            })
+
+
+          $scope.formData.text = '';
+
+          // Reset clases of the form after submit.
+          $scope.form.$setPristine();
 
         })
-        .error(function(data) {
-          console.log($scope.getCurrentUser())
-          console.log('Error: ' +  $scope.formData);
-        });
+
+      .error(function(data) {
+        console.log($scope.getCurrentUser())
+        console.log('Error: ' + $scope.formData);
+      });
 
 
     }
