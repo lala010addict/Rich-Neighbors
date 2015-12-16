@@ -76,28 +76,25 @@ function removeEntity(res) {
 
 exports.index = function(req, res) {
   if (req.baseUrl === '/api/users/me/campaigns') {
-    Campaign.findAsync({user_id: req.user_id})
+    Campaign.find({user_id: req.user_id})
+      .populate({path: 'user_id', model: 'User', populate: {path: 'name profile_pic'}})
+      .execAsync()
       .then(responseWithResult(res))
       .catch(handleError(res));
   } else {
-    Campaign.findAsync(req.params)
+    Campaign.find(req.params)
+      .populate({path: 'user_id', model: 'User', populate: {path: 'name profile_pic'}})
+      .execAsync()
       .then(responseWithResult(res))
       .catch(handleError(res));
   }
 };
 
-
-// exports.param = function(req, res, next, campaign) {
-//   Campaign.findById(campaign)
-//     .then(handleEntityNotFound(res))
-//     .then(respondParam(campaign))
-//     .then(next())
-//     .catch(handleError(res))
-//   };
-
 // Gets a single Campaign from the DB
 exports.show = function(req, res) {
-  Campaign.findByIdAsync(req.params.id)
+  Campaign.findById(req.params.id)
+    .populate({path: 'user_id', model: 'User', populate: {path: 'name profile_pic'}})
+    .execAsync()
     .then(handleEntityNotFound(res))
     .then(responseWithResult(res))
     .catch(handleError(res));
