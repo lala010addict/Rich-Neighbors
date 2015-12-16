@@ -26,7 +26,7 @@ angular.module('bApp.CampaignProfileController', [])
         console.log('Error: ' + data);
       });
 
- $scope.isLoggedIn = Auth.isLoggedIn;
+    $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.formData = {};
     $scope.getCurrentUser = Auth.getCurrentUser;
     $scope.name = $scope.getCurrentUser().name;
@@ -47,15 +47,8 @@ angular.module('bApp.CampaignProfileController', [])
         .success(function(data) {
           console.log(data);
           // $scope.id = data._id
-          console.log($scope.getCurrentUser()._id)
-
-        })
-        .error(function(data) {
-          console.log($scope.getCurrentUser())
-          console.log('Error: ' + data);
-        });
-
-
+          console.log($scope.getCurrentUser()._id);
+          
       // Add current date to the comment.
       $scope.comment.date = Date.now();
       $scope.comment.text = $scope.formData.text
@@ -66,6 +59,14 @@ angular.module('bApp.CampaignProfileController', [])
 
       // Reset clases of the form after submit.
       $scope.form.$setPristine();
+
+        })
+        .error(function(data) {
+          console.log($scope.getCurrentUser())
+          console.log('Error: ' +  $scope.formData);
+        });
+
+
     }
 
     // Fires when the comment change the anonymous state.
