@@ -4,8 +4,8 @@
   <img id="profilepic" src="{{profile_pic}}">
   <h1 class="main-header">{{name}}</h1>
   <ul class="header-subnav">
-    <li ng-repeat="filter in filters" ng-click="select($index)" ng-class="{isactive: $index == selected}">
-      <a href="{{filter.url}}">   {{filter.time}}</a>
+    <li ng-repeat="filter in filters">
+      <a href="{{filter.url}}" ng-click="select($index)" ng-class="{isactive: $index == selected}">   {{filter.time}}</a>
     </li>
   </ul>
   <!--  <ul class="header-subnav">
