@@ -157,13 +157,6 @@ small {
     font-size: 80%;
 }
 
-body {
-    background: #f2f5f8 !important;
-  
-    -webkit-font-smoothing: antialiased;
-    /* Fix for webkit rendering */
-    -webkit-text-size-adjust: 100%;
-}
 
 
 /**
@@ -175,7 +168,6 @@ body {
 
 
 /*.top-bar{background-color: transparent;}*/
-
 
 
 
@@ -1566,7 +1558,7 @@ html[xmlns] .slides {
 }
 
 #slider {
-    background: #f2f5f8;
+
     position: relative;
     display: none;
 }
@@ -4696,7 +4688,7 @@ input[type="button"] {
 
 input[type="submit"],
 .dd-button.green {
-    background: #93b631;
+    background: rgba(58, 219, 118, 0.62);
 }
 
 .dd-button.orange {
@@ -4818,8 +4810,7 @@ input[type="submit"],
 .dd-button.big:hover,
 .lb-overlay-form-submit a:hover,
 .dd-button.green:hover {
-    background: #a0c43c;
-}
+    background: rgba(58, 219, 118, 0.93);}
 
 .dd-button.orange-light:hover {
     background: #ea673f;
