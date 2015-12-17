@@ -23,6 +23,17 @@ var CommentSchema = new Schema({
     ref: 'User',
     //required: true
   },
+   username: {
+    type: String,
+    ref: 'User',
+    //required: true
+  },
+   profile_pic: {
+    type: String,
+    ref: 'User',
+    //required: true
+  },
+
   created_at: {
     type: Date,
     default: Date.now,

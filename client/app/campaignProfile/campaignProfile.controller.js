@@ -56,6 +56,8 @@ angular.module('bApp.CampaignProfileController', [])
   $scope.name = $scope.getCurrentUser().name;
   $scope.profile_pic = $scope.getCurrentUser().profile_pic;
   $scope.formData.user_id = $scope.getCurrentUser()._id;
+  $scope.formData.profile_pic = $scope.getCurrentUser().profile_pic
+  $scope.formData.username = $scope.getCurrentUser().name
   $scope.formData.campaign_id = $stateParams.id;
   $scope.formData.text = '';
   // Current comment.
