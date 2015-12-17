@@ -115,7 +115,6 @@ function linkify (data) {
           {href: '/api/campaigns/' + data._id + '/contributors', ref: 'contributors'},
           {href: '/api/campaigns/' + data._id + '/items', ref: 'items'},
           {href: '/api/campaigns/' + data._id + '/volunteers', ref: 'volunteers'}]
-          // {href: '/api/user/' + _this.user_id, ref: 'owner'}
 }
 
 /**
