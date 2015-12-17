@@ -12,6 +12,7 @@
 var _ = require('lodash');
 var Comment = require('./comment.model');
 var auth = require('../../auth/auth.service');
+var Campaign = require('../campaign/campaign.model');
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
@@ -64,13 +65,13 @@ function removeEntity(res) {
 exports.index = function(req, res) {
  if (req.baseUrl = '/api/users/me/comments') {
     Comment.find({user_id: req.user_id})
-      .populate({path: 'user_id', model: 'User', populate: {path: 'name profile_pic'}})
+      .populate( 'campaign_id', 'title')
       .execAsync()
       .then(responseWithResult(res))
       .catch(handleError(res));
   } else {
-    Comment.findAsync(req.params)
-      .populate({path: 'user_id', model: 'User', populate: {path: 'name profile_pic'}})
+    Comment.find(req.params)
+      .populate('campaign_id', 'title')
       .execAsync()
       .then(responseWithResult(res))
       .catch(handleError(res));
@@ -79,7 +80,9 @@ exports.index = function(req, res) {
 
 // Gets a single Comment from the DB
 exports.show = function(req, res) {
-  Comment.findByIdAsync(req.params.id)
+  Comment.findById(req.params.id)
+    .populate('campaign_id', 'title')
+    .execAsync()
     .then(handleEntityNotFound(res))
     .then(responseWithResult(res))
     .catch(handleError(res));

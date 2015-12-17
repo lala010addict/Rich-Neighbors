@@ -63,7 +63,7 @@ module.exports = function(app) {
         includeSubDomains: true,
         preload: true
       },
-      xssProtection: true //TODO: Change to true for p
+      xssProtection: false //TODO: Change to true for p
     }));
   }
 

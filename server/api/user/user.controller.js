@@ -120,11 +120,9 @@ exports.changeProfilePic = function(req, res, next) {
   var userId = req.user._id;
   //var oldPass = String(req.body.oldPassword);
   var newProfilePic = String(req.body.newProfilePic);
-  console.log(newProfilePic);
 
   User.findByIdAsync(userId)
     .then(function(user) {
-      console.log(user);
       user.profile_pic = newProfilePic;
       return user.saveAsync()
         .then(function() {
@@ -149,7 +147,6 @@ exports.me = function(req, res, next) {
       if (!user) {
         return res.status(401).end();
       }
-      console.log('data: ', user)
       res.json(user);
     })
     .catch(function(err) {
@@ -162,23 +159,6 @@ exports.me = function(req, res, next) {
 
 exports.meParams = function(req, res, next) {
   req.user_id = req.user._id;
-  console.log(req);
-
-  // User.findOneAsync({
-  //     _id: userId
-  //   }, '-salt -password')
-  //   .then(function(user) { // don't ever give out the password or salt
-  //     if (!user) {
-  //       return res.status(401).end();
-  //     }
-  //     console.log('data: ', user)
-  //     req.params.user_id = user._id
-  //     next();
-  //   //  res.json({user_id: user._id});
-  //   })
-  //   .catch(function(err) {
-  //     return next(err);
-  //   });
   next();
 };
 
