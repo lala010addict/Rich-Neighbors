@@ -11,6 +11,7 @@
 
 var _ = require('lodash');
 var Campaign = require('./campaign.model');
+var User = require('../user/user.model')
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
@@ -77,13 +78,13 @@ function removeEntity(res) {
 exports.index = function(req, res) {
   if (req.baseUrl === '/api/users/me/campaigns') {
     Campaign.find({user_id: req.user_id})
-      .populate({path: 'user_id', model: 'User', populate: {path: 'name profile_pic'}})
+      .populate('user_id', 'name')
       .execAsync()
       .then(responseWithResult(res))
       .catch(handleError(res));
   } else {
     Campaign.find(req.params)
-      .populate({path: 'user_id', model: 'User', populate: {path: 'name profile_pic'}})
+      .populate('user_id', 'name')
       .execAsync()
       .then(responseWithResult(res))
       .catch(handleError(res));
@@ -93,7 +94,7 @@ exports.index = function(req, res) {
 // Gets a single Campaign from the DB
 exports.show = function(req, res) {
   Campaign.findById(req.params.id)
-    .populate({path: 'user_id', model: 'User', populate: {path: 'name profile_pic'}})
+    .populate('user_id', 'name')
     .execAsync()
     .then(handleEntityNotFound(res))
     .then(responseWithResult(res))
@@ -102,7 +103,8 @@ exports.show = function(req, res) {
 
 // Creates a new Campaign in the DB
 exports.create = function(req, res) {
-  Campaign.createAsync(req.body)
+  var data = _.extend(req.body, req.params, {user_id: req.user});
+  Campaign.createAsync(data)
     .then(responseWithResult(res, 201))
     .catch(handleError(res));
 };
