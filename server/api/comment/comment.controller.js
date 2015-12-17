@@ -65,13 +65,13 @@ function removeEntity(res) {
 exports.index = function(req, res) {
  if (req.baseUrl = '/api/users/me/comments') {
     Comment.find({user_id: req.user_id})
-      .populate( 'campaign_id', 'title')
+      .populate( 'user_id', 'name')
       .execAsync()
       .then(responseWithResult(res))
       .catch(handleError(res));
   } else {
     Comment.find(req.params)
-      .populate('campaign_id', 'title')
+      .populate('user_id', 'name')
       .execAsync()
       .then(responseWithResult(res))
       .catch(handleError(res));
@@ -81,7 +81,7 @@ exports.index = function(req, res) {
 // Gets a single Comment from the DB
 exports.show = function(req, res) {
   Comment.findById(req.params.id)
-    .populate('campaign_id', 'title')
+    .populate('user_id', 'name')
     .execAsync()
     .then(handleEntityNotFound(res))
     .then(responseWithResult(res))
