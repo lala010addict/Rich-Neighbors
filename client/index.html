@@ -20,6 +20,7 @@
   <!-- build:css(client) app/vendor.css -->
   <!-- bower:css -->
   <link rel="stylesheet" href="bower_components/animate.css/animate.css" />
+  <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
   <!-- endbower -->
   <!-- endbuild -->
   <!-- build:css({.tmp,client}) app/app.css -->
@@ -79,6 +80,9 @@
   <script src="bower_components/foundation/js/foundation.js"></script>
   <script src="bower_components/malarkey/dist/malarkey.min.js"></script>
   <script src="bower_components/moment/moment.js"></script>
+  <script src="bower_components/braintree-angular/dist/braintree-angular.js"></script>
+  <script src="bower_components/braintree-web/dist/braintree.js"></script>
+  <script src="bower_components/angular-material/angular-material.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
   <!-- build:js(.tmp) app/app.js -->
@@ -87,7 +91,7 @@
   <script src="app/admin/admin.module.js"></script>
   <script src="components/auth/auth.module.js"></script>
   <script src="components/util/util.module.js"></script>
-  <script src="app/submitCampaignsSuccess/submitCampaignsSuccess.controller.js"></script>
+  <script src="app/startCampaignService/startCampaignService.service.js"></script>
   <script src="app/admin/admin.controller.js"></script>
   <script src="app/account/account.js"></script>
   <script src="app/admin/admin.router.js"></script>
@@ -96,6 +100,8 @@
   <script src="app/comments/comments.directive.js"></script>
   <script src="app/contributed/contributed.controller.js"></script>
   <script src="app/contributed/contributed.js"></script>
+  <script src="app/donate/donate.controller.js"></script>
+  <script src="app/donate/donate.js"></script>
   <script src="app/following/following.controller.js"></script>
   <script src="app/following/following.js"></script>
   <script src="app/main/main.controller.js"></script>
@@ -104,8 +110,8 @@
   <script src="app/myaccount/myaccount.js"></script>
   <script src="app/startCampaign/startCampaign.controller.js"></script>
   <script src="app/startCampaign/startCampaign.js"></script>
-  <script src="app/startCampaignService/startCampaignService.service.js"></script>
   <script src="app/account/login/login.controller.js"></script>
+  <script src="app/submitCampaignsSuccess/submitCampaignsSuccess.controller.js"></script>
   <script src="app/submitCampaignsSuccess/submitCampaignsSuccess.js"></script>
   <script src="app/account/settings/settings.controller.js"></script>
   <script src="components/auth/auth.service.js"></script>

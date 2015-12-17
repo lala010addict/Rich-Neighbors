@@ -6,7 +6,7 @@
 //   .controller('CampaignProfileController', CampaignProfileController);
 
 angular.module('bApp.CampaignProfileController', [])
-  .controller('CampaignProfileController', ['$scope', 'Auth', '$stateParams', '$http', function($scope, Auth, $stateParams, $http) {
+  .controller('CampaignProfileController', ['$scope', '$stateParams', '$http', function ($scope, $stateParams, $http) {
     $scope.campaign = {};
     $scope.donated = '';
     $http.get('/api/campaigns/' + $stateParams.id)
