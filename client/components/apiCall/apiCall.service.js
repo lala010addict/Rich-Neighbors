@@ -4,14 +4,16 @@ angular.module('bApp')
   .service('apiCall', ["$http", function($http) {
     // AngularJS will instantiate a singleton by calling "new" on this function
 
-var campaign = {};
-
-    var call = function(url) {
-    		console.log('call')
-      $http.get(url)
+    //  var campaign = {};
+    var obj = {};
+    var call = function(url, ref) {
+      $http.get(url, ref)
         .success(function(data) {
-        	console.log(data)
-          return data
+          console.log(ref)
+            // obj.push({
+            //   ref: data
+            // });
+          obj[ref] = data
         })
         .error(function(data) {
           console.log('Error: ' + data);
@@ -19,24 +21,25 @@ var campaign = {};
 
     };
 
-    var obj = {};
-
     var linkApiCalls = function(data) {
-    	console.log('linkApiCalls', data)
+      // console.log('linkApiCalls', data)
       _.forEach(data, function(val) {
-      	   console.log(val.href);
-    //   obj[val.ref] = 
- //call(val.href);
-      });
 
-      return _.merge(campaign, obj)
+        call(val.href, val.ref)
+
+      });
+      // var merged = _.merge(campaign, obj)
+
+      return obj
+
     };
 
 
 
 
     return {
-    	campaign: campaign,
+      //  campaign: campaign,
+      obj: obj,
       call: call,
       linkApiCalls: linkApiCalls
     }

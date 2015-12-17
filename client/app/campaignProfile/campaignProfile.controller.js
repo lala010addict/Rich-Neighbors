@@ -14,6 +14,8 @@ angular.module('bApp.CampaignProfileController', [])
   $scope.donated = '';
   $scope.apiCall = apiCall.call
   $scope.linkApiCalls = apiCall.linkApiCalls
+  $scope.obj = apiCall.obj
+
 
   $http.get('/api/campaigns/' + $stateParams.id)
     .success(function(data) {
