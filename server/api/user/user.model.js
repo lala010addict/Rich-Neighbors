@@ -30,8 +30,40 @@ var UserSchema = new Schema({
   campaigns: [{
     type: Schema.ObjectId,
     ref: 'Campaign'
+  }],
+  followers: [{
+    type:  Schema.ObjectId,
+    ref: 'Follower',
+  }],
+  contributors: [{
+    type: Schema.ObjectId,
+    ref: 'Contributor'
+  }],
+  items: [{
+    type: Schema.ObjectId,
+    ref: 'Item'
+  }],
+  volunteers: [{
+    type: Schema.ObjectId,
+    ref: 'Volunteer'
+  }],
+  comments: [{
+    type: Schema.ObjectId,
+    ref: 'Comment'
   }]
 });
+
+
+function linkify (data) {
+  return [{href: '/api/users/' + data._id, ref: 'self'},
+          {href: '/api/users/' + data._id + '/comments', ref: 'comments'},
+          {href: '/api/users/' + data._id + '/campaigns', ref: 'campaigns'},
+          {href: '/api/users/' + data._id + '/followers', ref: 'followings'},
+          {href: '/api/users/' + data._id + '/contributors', ref: 'contributions'},
+          {href: '/api/users/' + data._id + '/items', ref: 'items'},
+          {href: '/api/users/' + data._id + '/volunteers', ref: 'volunteering'}]
+}
+
 
 /**
  * Virtuals
@@ -130,6 +162,7 @@ UserSchema
             next(encryptErr);
           }
           _this.password = hashedPassword;
+          _this._links = linkify(_this);
           next();
         });
       });

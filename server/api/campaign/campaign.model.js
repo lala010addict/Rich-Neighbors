@@ -107,14 +107,8 @@ var CampaignSchema = new Schema({
 
 
 
-var linksArray = [];
-// CampaignSchema.path('_id').set(function () {
-//   this.links = linkify(this);
-// })
 
 function linkify (data) {
-
-//var _this = this;
   return [{href: '/api/campaigns/' + data._id, ref: 'self'},
           {href: '/api/campaigns/' + data._id + '/comments', ref: 'comments'},
           {href: '/api/campaigns/' + data._id + '/followers', ref: 'followers'},
