@@ -77,7 +77,9 @@ function removeEntity(res) {
 
 exports.index = function(req, res) {
   if (req.baseUrl === '/api/users/me/campaigns') {
-    Campaign.find({user_id: req.user_id})
+    Campaign.find({
+        user_id: req.user_id
+      })
       .populate('user_id', 'name')
       .execAsync()
       .then(responseWithResult(res))
@@ -103,7 +105,9 @@ exports.show = function(req, res) {
 
 // Creates a new Campaign in the DB
 exports.create = function(req, res) {
-  var data = _.extend(req.body, req.params, {user_id: req.user});
+  var data = _.extend(req.body, req.params, {
+    user_id: req.user
+  });
   Campaign.createAsync(data)
     .then(responseWithResult(res, 201))
     .catch(handleError(res));
@@ -116,7 +120,7 @@ exports.update = function(req, res) {
     delete req.body._id;
   }
   Campaign.findByIdAsync(req.params.id)
-    .then(function (data) {
+    .then(function(data) {
       if (data.isOwner(req.user._id)) {
         return handleEntityNotFound(res)
           .then(saveUpdates(req.body))
@@ -131,7 +135,7 @@ exports.update = function(req, res) {
 // Deletes a Campaign from the DB
 exports.destroy = function(req, res) {
   Campaign.findByIdAsync(req.params.id)
-    .then(function (data) {
+    .then(function(data) {
       if (data.isOwner(req.user._id)) {
         return handleEntityNotFound(res)
           .then(removeEntity(res))
