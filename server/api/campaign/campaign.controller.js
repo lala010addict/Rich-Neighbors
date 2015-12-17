@@ -11,6 +11,7 @@
 
 var _ = require('lodash');
 var Campaign = require('./campaign.model');
+var User = require('../user/user.model')
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
@@ -76,29 +77,25 @@ function removeEntity(res) {
 
 exports.index = function(req, res) {
   if (req.baseUrl === '/api/users/me/campaigns') {
-    Campaign.findAsync({user_id: req.user_id})
+    Campaign.find({user_id: req.user_id})
+      .populate('user_id', 'name')
+      .execAsync()
       .then(responseWithResult(res))
       .catch(handleError(res));
   } else {
-    console.log('main: ', req)
-    Campaign.findAsync(req.params)
+    Campaign.find(req.params)
+      .populate('user_id', 'name')
+      .execAsync()
       .then(responseWithResult(res))
       .catch(handleError(res));
   }
 };
 
-
-// exports.param = function(req, res, next, campaign) {
-//   Campaign.findById(campaign)
-//     .then(handleEntityNotFound(res))
-//     .then(respondParam(campaign))
-//     .then(next())
-//     .catch(handleError(res))
-//   };
-
 // Gets a single Campaign from the DB
 exports.show = function(req, res) {
-  Campaign.findByIdAsync(req.params.id)
+  Campaign.findById(req.params.id)
+    .populate('user_id', 'name')
+    .execAsync()
     .then(handleEntityNotFound(res))
     .then(responseWithResult(res))
     .catch(handleError(res));
@@ -106,7 +103,8 @@ exports.show = function(req, res) {
 
 // Creates a new Campaign in the DB
 exports.create = function(req, res) {
-  Campaign.createAsync(req.body)
+  var data = _.extend(req.body, req.params, {user_id: req.user});
+  Campaign.createAsync(data)
     .then(responseWithResult(res, 201))
     .catch(handleError(res));
 };

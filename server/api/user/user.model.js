@@ -26,7 +26,11 @@ var UserSchema = new Schema({
   facebook: {},
   twitter: {},
   google: {},
-  github: {}
+  github: {},
+  campaigns: [{
+    type: Schema.ObjectId,
+    ref: 'Campaign'
+  }]
 });
 
 /**

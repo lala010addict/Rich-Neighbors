@@ -37,26 +37,19 @@ var CampaignSchema = new Schema({
   },
   followers: [{
     type:  Schema.ObjectId,
-    ref: 'User',
+    ref: 'Follower',
   }],
   contributors: [{
-    _id: {
-      type:  Schema.ObjectId,
-      ref: 'User'
-    },
-    private: {
-      type: Boolean,
-      default: false
-    },
-    amount: {
-      type: Number,
-       default: 0,
-      validate: [
-      function (number) {
-        return number >=1;
-      },
-      'Amount must be $1 or more']
-    }
+    type: Schema.ObjectId,
+    ref: 'Contributor'
+  }],
+  items: [{
+    type: Schema.ObjectId,
+    ref: 'Item'
+  }],
+  volunteers: [{
+    type: Schema.ObjectId,
+    ref: 'Volunteer'
   }],
   address: {
     street: String,
@@ -103,8 +96,26 @@ var CampaignSchema = new Schema({
     type: String,
   //  required: true,
     default: 'https://pbs.twimg.com/media/BwsrTjGIcAAtjdu.png'  //TODO: Correct to basic png/jpg
-  }
+  },
+  _links: Array
 });
+
+
+
+var linksArray = [];
+// CampaignSchema.path('_id').set(function () {
+//   this.links = linkify(this);
+// })
+
+function linkify (data) {
+  return [{href: '/api/campaigns/' + data._id, ref: 'self'},
+          {href: '/api/campaigns/' + data._id + '/comments', ref: 'comments'},
+          {href: '/api/campaigns/' + data._id + '/followers', ref: 'followers'},
+          {href: '/api/campaigns/' + data._id + '/contributors', ref: 'contributors'},
+          {href: '/api/campaigns/' + data._id + '/items', ref: 'items'},
+          {href: '/api/campaigns/' + data._id + '/volunteers', ref: 'volunteers'},
+          {href: '/api/user/' + data.user_id, ref: 'owner'}]
+}
 
 /**
  * Virtuals for non persistant data
@@ -150,6 +161,12 @@ CampaignSchema
 //     return zip === 5;
 //   })
 
+CampaignSchema
+  .pre('save', function (next) {
+    var _this = this;
+    _this._links = linkify(_this);
+    next();
+  });
 
 /*
 * Methods
