@@ -85,9 +85,7 @@ exports.index = function(req, res) {
       .then(responseWithResult(res))
       .catch(handleError(res));
   } else {
-    Campaign.find(req.params)
-      .populate('user_id', 'name')
-      .execAsync()
+    Campaign.findAsync(req.params)
       .then(responseWithResult(res))
       .catch(handleError(res));
   }

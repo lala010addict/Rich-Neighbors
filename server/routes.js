@@ -24,7 +24,6 @@ module.exports = function(app) {
   app.use('/api/volunteers', require('./api/volunteer'));
   app.use('/api/items', require('./api/item'));
   app.use('/api/comments', require('./api/comment'));
-  app.use('/api/campaign_items', require('./api/campaign_item'));
   app.use('/api/campaigns', require('./api/campaign'));
   app.use('/api/users', require('./api/user'));
   app.use('/auth', require('./auth'));
