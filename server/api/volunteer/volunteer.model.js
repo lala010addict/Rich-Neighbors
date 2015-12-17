@@ -21,6 +21,15 @@ var VolunteerSchema = new Schema({
     type: Number,
     default: 0
   },
+   name: {
+    type: String,
+    required: true
+  },
+  quantity: {
+    type: Number,
+    required: true,
+    default: 1
+  },
   created_at: {
     type: Date,
     default: Date.now
