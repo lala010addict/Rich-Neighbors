@@ -10,14 +10,12 @@ import path from 'path';
 module.exports = function(app) {
 
   // cors
-
-  app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods","GET,POST,PUT,PATCH,DELETE")
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, XSRF-Token, X-XSRF-Token, access_token");
-    next();
-  });
-
+  // app.use(function(req, res, next) {
+  //   res.header("Access-Control-Allow-Origin", "*");
+  //   res.header("Access-Control-Allow-Methods","GET,POST,PUT,PATCH,DELETE")
+  //   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, X-XSRF-Token, Token, access_token");
+  //   next();
+  // });
 
   // Insert routes below
   app.use('/api/payments', require('./api/payment'));
