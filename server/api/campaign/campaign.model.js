@@ -108,13 +108,15 @@ var linksArray = [];
 // })
 
 function linkify (data) {
+
+//var _this = this;
   return [{href: '/api/campaigns/' + data._id, ref: 'self'},
           {href: '/api/campaigns/' + data._id + '/comments', ref: 'comments'},
           {href: '/api/campaigns/' + data._id + '/followers', ref: 'followers'},
           {href: '/api/campaigns/' + data._id + '/contributors', ref: 'contributors'},
           {href: '/api/campaigns/' + data._id + '/items', ref: 'items'},
-          {href: '/api/campaigns/' + data._id + '/volunteers', ref: 'volunteers'},
-          {href: '/api/user/' + data.user_id, ref: 'owner'}]
+          {href: '/api/campaigns/' + data._id + '/volunteers', ref: 'volunteers'}]
+          // {href: '/api/user/' + _this.user_id, ref: 'owner'}
 }
 
 /**
