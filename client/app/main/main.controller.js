@@ -32,7 +32,7 @@ angular.module('bApp.MainController', ['ui.router'])
 
     $scope.limitChar = function(x, y) {
       var sp = x.split('')
-      return sp.slice(0, y).join(' ')
+      return sp.slice(0, y).join('')
     }
 
     // $scope.showCampaignProfile = function(x) {

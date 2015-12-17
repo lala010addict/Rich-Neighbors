@@ -34,7 +34,7 @@ angular.module('bApp.StartCampaignController', [])
 
     //$scope.supplyForm.name = $scope.supplies.supply.name;
     // $scope.supplyForm.quantity = $scope.supply.quantity;
-    $scope.supplies.campaign_id = '';
+    $scope.campaign_id = '';
     // $scope.stateParams = "";
 
     $scope.addNewChoice = function() {
@@ -53,7 +53,7 @@ angular.module('bApp.StartCampaignController', [])
     $scope.addNewVolunteer = function() {
       var newItemNo = $scope.volunteers.length + 1;
       $scope.volunteers.push({
-        //  'name': 'supply' + newItemNo
+        //  'campaign_id': 'supply' + newItemNo
       });
     };
 
@@ -69,18 +69,23 @@ angular.module('bApp.StartCampaignController', [])
     $scope.createCampaign = function() {
       $http.post('/api/campaigns', $scope.formData)
         .success(function(data) {
-          console.log($scope.getCurrentUser())
+          console.log(data)
           $scope.id = data._id
-          $scope.supplies.campaign_id = $stateParams
+          $scope.campaign_id = $scope.id
 
 
           _.forEach($scope.supplies, function(item) {
+            var newItem = _.merge(item, {
+              'campaign_id': $scope.campaign_id
+            });
+            console.log('new item', newItem);
 
-
-            $http.post('/api/items', item)
+            $http.post('/api/items', newItem)
               .success(function(data) {
                 //$scope.formData = {}; // clear the form so our user is ready to enter another
                 //  $scope.campaigns = data;
+
+                // console.log($scope.campaign_id)
                 console.log(data);
                 // $scope.id = data._id
                 //  console.log($scope.id)
@@ -95,12 +100,16 @@ angular.module('bApp.StartCampaignController', [])
           })
 
           _.forEach($scope.volunteers, function(item) {
+            var newItem = _.merge(item, {
+              'campaign_id': $scope.campaign_id
+            });
 
+            $http.post('/api/volunteers', newItem)
 
-            $http.post('/api/volunteers', item)
-              .success(function(data) {
+            .success(function(data) {
                 //$scope.formData = {}; // clear the form so our user is ready to enter another
                 //  $scope.campaigns = data;
+                console.log($scope.campaign_id)
                 console.log(data);
                 // $scope.id = data._id
                 //  console.log($scope.id)
@@ -113,10 +122,6 @@ angular.module('bApp.StartCampaignController', [])
               });
 
           })
-
-
-
-
 
 
 
