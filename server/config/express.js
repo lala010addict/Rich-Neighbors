@@ -57,6 +57,7 @@ module.exports = function(app) {
       // csrf: {
       //   angular: true
       // },
+      csp: { policy: "*"},
       xframe: 'SAMEORIGIN',
       hsts: {
         maxAge: 31536000, //1 year, in seconds

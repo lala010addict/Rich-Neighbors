@@ -11,8 +11,9 @@
 
 var _ = require('lodash');
 var Payment = require('./payment.model');
-var request = require('superagent');
+var util = require('util');
 var braintree = require('braintree');
+
 // braintree code:
 var gateway = braintree.connect({
   environment: braintree.Environment.Sandbox,
@@ -69,21 +70,27 @@ function removeEntity(res) {
   };
 }
 
-exports.getClientToken = function (req, res) {
-  gateway.clientToken.generate({}, function (err, response) {
-    res.send(response.clientToken);
+exports.getClientToken = function (request, response) {
+  gateway.clientToken.generate({}, function (err, res) {
+    if (err) throw err;
+    response.json({
+      "client_token": res.clientToken
+    });
   });
 }
 
-exports.makePayment = function(req, res) {
-    gateway.transaction.sale({
-        amount: '10.00',
-        paymentMethodNonce: 'fake-valid-nonce',
-    }, function(err, result) {
-      res.send(result);
-    });
+exports.makePayment = function (request, response) {
+  var transaction = request.body;
+  console.log(request.body);
+  gateway.transaction.sale({
+    amount: transaction.amount,
+    paymentMethodNonce: transaction.payment_method_nonce
+  }, function (err, result) {
+    if (err) throw err;
+    console.log(util.inspect(result));
+    response.json(result);
+  });
 }
-
 // Gets a list of Payments
 exports.index = function(req, res) {
   Payment.findAsync()
@@ -91,11 +98,6 @@ exports.index = function(req, res) {
     .catch(handleError(res));
 };
 
-// exports.generateToken = function(req, res) {
-//   getClientToken()
-//     .then(responseWithResult(res))
-//     .catch(handleError(res));
-// };
 // Gets a single Payment from the DB
 exports.show = function(req, res) {
   Payment.findByIdAsync(req.params.id)

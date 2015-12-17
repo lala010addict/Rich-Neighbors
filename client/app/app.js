@@ -3,6 +3,7 @@
 angular.module('bApp', [
     'bApp.auth',
     'bApp.admin',
+    'bApp.donate',
     'bApp.geolocation',
     'bApp.MainController',
     'bApp.CampaignProfileController',
@@ -11,7 +12,9 @@ angular.module('bApp', [
     'ngCookies',
     'ngResource',
     'ngSanitize',
+    'ngMaterial',
     'ui.router',
+    'braintree-angular',
     'validation.match',
     'bApp.StartCampaignController'
   ])
