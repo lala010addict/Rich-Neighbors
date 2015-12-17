@@ -33,7 +33,7 @@
     <div class="comment" ng-repeat="comment in obj.comments | orderBy: '-created_at'">
       <!-- Comment Avatar -->
       <div class="comment-avatar">
-        <img ng-src="{{ profile_pic }}">
+        <img ng-src="{{ comment.profile_pic }}">
       </div>
       <!-- Comment Box -->
       <div class="comment-box">
@@ -42,7 +42,7 @@
           <div class="comment-info">
             <span class="comment-author">
               <em ng-if="comment.anonymous">Anonymous</em>
-              <a ng-if="!comment.anonymous" href="{{ comment.author }}">{{ comment.author || name}}</a>
+              <a ng-if="!comment.anonymous" href="{{ comment.author }}">{{ comment.author || comment.username}}</a>
             </span>
             <span class="comment-date">{{ comment.created_at | date: 'medium' }}</span>
           </div>

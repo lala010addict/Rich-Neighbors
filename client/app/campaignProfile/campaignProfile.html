@@ -2,82 +2,65 @@
 <br>
 <!-- {{obj}} -->
 <div class="row">
-  <div class="medium-6 large-7 columns">
+  <div class="medium-6 large-9 columns">
     <h1>{{campaign.title}}</h1>
     <p><img src="{{campaign.picture_url}}" alt="image of a planet called Campaign Image"></p>
     <p>{{campaign.address.city}}, {{campaign.address.state}}</p>
     <p>{{campaign.address.country}}</p>
     <p>{{campaign.description}}</p>
     <br>
-
     <comments></comments>
   </div>
-  <div class="medium-6 large-5 columns">
-    <div id="sidebar" class="one-third column last">
-      <div id="sidebar-inner" >
-        <div class="widget">
-          <div class="widget-wrap">
-            <div class="cause-info-widget">
-              <color-bar></color-bar>
-              <!-- #header-colors -->
-              <div class="cause-info-widget-donated">
-                <span>{{donated | number:2}}</span>
-                <em>Donated</em>
-              </div>
-              <div class="cause-info-widget-percentage">
-                <span>{{( donated / campaign.goal* 100)| number:2}}%</span> raised of <span>{{campaign.goal}}</span> goal
-                <div class="cause-info-widget-percentage-bar" data-raised="5.15%">
-                  <span style="width: {{( donated / campaign.goal* 100)| number:2}}%;"></span>
-                </div>
-                <!-- .cause-info-widget-percentage-bar -->
-              </div>
-              <div class="cause-info-widget-donate">
-                <a href="/donate" class="dd-button big green has-icon">MAKE A DONATION<span class="dd-button-icon"><i class="fa fa-dollar"></i></span></a>
-              </div>
-            </div>
-            <!-- .cause-info-widget -->
-          </div>
-          <!-- .widget-wrap -->
-        </div>
-        <div class="widget">
-          <div class="widget-wrap">
-            <div class="cause-info-widget">
-              <color-bar></color-bar>
-              <div class="cause-info-widget-donated">
-                <span>Supplies</span>
-                <div ng-repeat="x in obj.items">
-                  <h2><li>{{x.name}}: {{x.quantity}}</li></h2>
-
-                </div>
-              </div>
-            </div>
-            <!-- .cause-info-widget -->
-          </div>
-          <!-- .widget-wrap -->
-        </div>
-        <!-- .widget -->
-        <div class="widget">
-          <div class="widget-wrap">
-            <div class="cause-info-widget">
-              <color-bar></color-bar>
-              <div class="cause-info-widget-donated">
-                <span>Volunteers</span>
-                <div ng-repeat="x in obj.volunteers">
-                  <h2><li>{{x.name}}: {{x.quantity}}</li></h2>
-
-                </div>
-              </div>
-            </div>
-            <!-- .cause-info-widget -->
-          </div>
-          <!-- .widget-wrap -->
+  <div class="medium-6 large-3 columns">
+    <div class="callout-card info">
+      <div class="card-label">
+        <div class="label-text">
+          <i class="fa fa-heart"></i>
         </div>
       </div>
-      <!-- #sidebar-inner -->
+      <div class="callout-card-content">
+        <h3 class="lead"> $0 {{donated | number:2}} Donated</h3>
+        <!--   <div class="cause-info-widget-percentage"> -->
+        <span>{{( donated / campaign.goal* 100)| number:2}}0%</span> raised of <span>${{campaign.goal}}</span> goal
+        <div class="cause-info-widget-percentage-bar-campaign" data-raised="{{( donated / campaign.goal* 100)| number:2}}%">
+          <span style="width: {{( donated / campaign.goal* 100)| number:2}}%;"></span>
+        </div>
+        <!-- .cause-info-widget-percentage-bar -->
+        <!--   </div> -->
+        <div class="cause-info-widget-donate">
+          <a href="/donate" class="dd-button big green has-icon">MAKE A DONATION<span class="dd-button-icon"><i class="fa fa-dollar"></i></span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="medium-6 large-3 columns">
+    <div class="callout-card info">
+      <div class="card-label">
+        <div class="label-text">
+          <i class="fa fa-gift"></i>
+        </div>
+      </div>
+      <div class="callout-card-content">
+        <h3 class="lead"> Supplies</h3>
+        <div ng-repeat="x in obj.items">
+          <li>{{x.name}}: {{x.quantity}}</li>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="medium-6 large-3 columns">
+    <div class="callout-card info">
+      <div class="card-label">
+        <div class="label-text">
+          <i class="fa fa-smile-o"></i>
+        </div>
+      </div>
+      <div class="callout-card-content">
+        <h3 class="lead">Volunteers</h3>
+        <div ng-repeat="x in obj.volunteers">
+          <li>{{x.name}}: {{x.quantity}}</li>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-
-
-
-
