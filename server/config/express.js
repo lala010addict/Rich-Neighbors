@@ -53,10 +53,11 @@ module.exports = function(app) {
    */
   if ('test' !== env) {
     app.use(lusca({
-      // csrf: false,
-      csrf: {
-        angular: true
-      },
+      csrf: false,
+      // csrf: {
+      //   angular: true
+      // },
+      csp: { policy: "*"},
       xframe: 'SAMEORIGIN',
       hsts: {
         maxAge: 31536000, //1 year, in seconds

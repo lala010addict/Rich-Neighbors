@@ -10,6 +10,7 @@ import path from 'path';
 module.exports = function(app) {
 
   // cors
+
   app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods","GET,POST,PUT,PATCH,DELETE")
@@ -17,7 +18,9 @@ module.exports = function(app) {
     next();
   });
 
+
   // Insert routes below
+  app.use('/api/payments', require('./api/payment'));
   app.use('/api/contributors', require('./api/contributor'));
   app.use('/api/followers', require('./api/follower'));
   app.use('/api/volunteers', require('./api/volunteer'));
