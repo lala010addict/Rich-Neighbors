@@ -71,16 +71,20 @@ angular.module('bApp.CampaignProfileController', [])
       .success(function(data) {
         // console.log(data);
 
-
-        $http.get('/api/comments/' + $stateParams.id)
+        $http.get('/api/campaigns/' + $stateParams.id)
           .success(function(data) {
-            $scope.comments = data
-            console.log(data)
-              //console.log('comments', $scope.comments)
+            $scope.linkApiCalls(data._links);
           })
-          .error(function(data) {
-            console.log('Error: ' + data);
-          })
+
+        // $http.get('/api/campaigns/' + $stateParams.id + '/comments')
+        //   .success(function(data) {
+        //     $scope.comments = data
+        //     console.log(data)
+        //       //console.log('comments', $scope.comments)
+        //   })
+        .error(function(data) {
+          console.log('Error: ' + data);
+        })
 
 
         $scope.formData.text = '';

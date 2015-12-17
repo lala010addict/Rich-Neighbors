@@ -51,6 +51,11 @@ var CampaignSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'Volunteer'
   }],
+  comments: [{
+    type: Schema.ObjectId,
+    ref: 'Comment'
+  }],
+
   address: {
     street: String,
     neighborhood: String,
