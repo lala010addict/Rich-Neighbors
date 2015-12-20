@@ -1,9 +1,11 @@
 
 
 $icon-font-path: "../bower_components/foundation-icon-fonts/";
+@import '../../node_modules/foundation-sites/scss/foundation.scss';
+@include foundation-everything;
 $fa-font-path: "../bower_components/font-awesome/fonts";
 @import '../bower_components/font-awesome/scss/font-awesome';
-@import 'foundation';
+
 
 
 
@@ -37,7 +39,7 @@ $fa-font-path: "../bower_components/font-awesome/fonts";
  * #1 Reset
  */
 
-/*
+
 html,
 body,
 div,
@@ -178,7 +180,7 @@ small {
     font-size: 80%;
 }
 
-*/
+
 
 /**
  * #2 Typography & Elements

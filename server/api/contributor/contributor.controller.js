@@ -76,7 +76,8 @@ exports.show = function(req, res) {
 
 // Creates a new Contributor in the DB
 exports.create = function(req, res) {
-  Contributor.createAsync(req.body)
+  var data = _.extend(req.body, req.params, {user_id: req.user});
+  Contributor.createAsync(data)
     .then(responseWithResult(res, 201))
     .catch(handleError(res));
 };

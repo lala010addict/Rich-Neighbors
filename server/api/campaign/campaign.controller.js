@@ -67,6 +67,7 @@ function removeEntity(res) {
   };
 }
 
+
 // Gets a list of Campaigns
 // exports.index = function(req, res) {
 //   console.log("This was called", req);
@@ -85,7 +86,24 @@ exports.index = function(req, res) {
       .then(responseWithResult(res))
       .catch(handleError(res));
   } else {
-    Campaign.findAsync(req.params)
+      var limit = req.query.limit || 20;
+      // get the max distance or set it to 8 kilometers
+      var maxDistance = req.q
+      // we need to convert the distance to radians
+      // the raduis of Earth is approximately 6371 kilometers
+      maxDistance /= 6371;
+      // get coordinates [ <longitude> , <latitude> ]
+      var coords = [];
+      coords[0] = req.query.longitude || 0;
+      coords[1] = req.query.latitude || 0;
+      var data = req.params || {
+        loc: {
+          $near: coords,
+          $maxDistance: maxDistance
+        }
+      };
+      Campaign.find(data).limit(limit)
+      .execAsync()
       .then(responseWithResult(res))
       .catch(handleError(res));
   }

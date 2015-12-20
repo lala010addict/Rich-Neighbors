@@ -73,7 +73,6 @@ module.exports = function (grunt) {
       injectJS: {
         files: [
           '<%= yeoman.client %>/{app,components}/**/!(*.spec|*.mock).js',
-          'node_modules/foundation-sites/js/*.js',
           '!<%= yeoman.client %>/app/app.js'
         ],
         tasks: ['injector:scripts']
@@ -238,11 +237,7 @@ module.exports = function (grunt) {
           /font-awesome\.css/,
           /bootstrap\.css/,
           /bootstrap-sass-official/,
-          /bootstrap-social\.css/,
-          /foundation-sites/,
-          /foundation/,
-          /foundation-icon-fonts/,
-          /foundation\.css/
+          /bootstrap-social\.css/
         ]
       },
       client: {
@@ -347,9 +342,9 @@ module.exports = function (grunt) {
         htmlmin: {
           collapseBooleanAttributes: true,
           collapseWhitespace: true,
-          removeAttributeQuotes: true,
+          removeAttributeQuotes: false,
           removeEmptyAttributes: true,
-          removeRedundantAttributes: true,
+          removeRedundantAttributes: false,
           removeScriptTypeAttributes: true,
           removeStyleLinkTypeAttributes: true
         },
@@ -589,8 +584,7 @@ module.exports = function (grunt) {
     sass: {
       server: {
         options: {
-          compass: false,
-          loadPath: ['node_modules/foundation-sites/scss']
+          loadPath: ['node_modules/foundation-sites']
         },
         files: {
           '.tmp/app/app.css' : '<%= yeoman.client %>/app/app.scss',
@@ -626,7 +620,6 @@ module.exports = function (grunt) {
           '<%= yeoman.client %>/index.html': [
                [
                  '.tmp/{app,components}/**/!(*.spec|*.mock).js',
-                 'node_modules/foundation-sites/js/*.js',
                  '!{.tmp,<%= yeoman.client %>}/app/app.js'
                ]
             ]

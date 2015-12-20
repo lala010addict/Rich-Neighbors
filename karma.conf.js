@@ -36,7 +36,6 @@ module.exports = function(config) {
       'client/bower_components/moment/moment.js',
       'client/bower_components/braintree-angular/dist/braintree-angular.js',
       'client/bower_components/braintree-web/dist/braintree.js',
-      'client/bower_components/what-input/what-input.js',
       'client/bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'client/app/app.js',

@@ -72,12 +72,10 @@ var CampaignSchema = new Schema({
       type: String,
       default: 'United States'
     },
-    longitude: {
-      type: String
-    },
-    latitude: {
-      type: String
-    }
+  },
+  loc: {
+    type: [Number],
+    index: '2d'
   },
   goal: {
     type: String,

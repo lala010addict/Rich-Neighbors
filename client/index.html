@@ -14,16 +14,15 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width">
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-  <link rel="stylesheet" href="bower_components/foundation-sites/dist/foundation.min.css" />
   <!-- build:css(client) app/vendor.css -->
   <!-- bower:css -->
   <link rel="stylesheet" href="bower_components/animate.css/animate.css" />
   <!-- endbower -->
-  <!-- endbuild -->
+    <!-- endbuild -->
   <!-- build:css({.tmp,client}) app/app.css -->
   <link rel="stylesheet" href="app/app.css">
-  <!-- injector:css -->
-  <!-- endinjector -->
+    <!-- injector:css -->
+    <!-- endinjector -->
   <!-- endbuild -->
 </head>
 
@@ -74,7 +73,6 @@
   <script src="bower_components/moment/moment.js"></script>
   <script src="bower_components/braintree-angular/dist/braintree-angular.js"></script>
   <script src="bower_components/braintree-web/dist/braintree.js"></script>
-  <script src="bower_components/what-input/what-input.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
   <!-- build:js(.tmp) app/app.js -->
@@ -83,7 +81,7 @@
   <script src="app/admin/admin.module.js"></script>
   <script src="components/auth/auth.module.js"></script>
   <script src="components/util/util.module.js"></script>
-  <script src="components/mongoose-error/mongoose-error.directive.js"></script>
+  <script src="app/startCampaignService/startCampaignService.service.js"></script>
   <script src="app/admin/admin.controller.js"></script>
   <script src="app/account/account.js"></script>
   <script src="app/admin/admin.router.js"></script>
@@ -102,7 +100,7 @@
   <script src="app/myaccount/myaccount.js"></script>
   <script src="app/startCampaign/startCampaign.controller.js"></script>
   <script src="app/startCampaign/startCampaign.js"></script>
-  <script src="app/startCampaignService/startCampaignService.service.js"></script>
+  <script src="app/account/login/login.controller.js"></script>
   <script src="app/submitCampaignsSuccess/submitCampaignsSuccess.controller.js"></script>
   <script src="app/submitCampaignsSuccess/submitCampaignsSuccess.js"></script>
   <script src="components/apiCall/apiCall.service.js"></script>
@@ -116,7 +114,7 @@
   <script src="components/geolocation/event.js"></script>
   <script src="components/geolocation/geolocation.controller.js"></script>
   <script src="components/geolocation/geolocation.directive.js"></script>
-  <script src="app/account/login/login.controller.js"></script>
+  <script src="components/mongoose-error/mongoose-error.directive.js"></script>
   <script src="components/myacc/myacc.directive.js"></script>
   <script src="components/navbar/navbar.controller.js"></script>
   <script src="components/navbar/navbar.directive.js"></script>
@@ -124,37 +122,9 @@
   <script src="components/oauth-buttons/oauth-buttons.directive.js"></script>
   <script src="app/account/signup/signup.controller.js"></script>
   <script src="components/util/util.service.js"></script>
-  <script src="/node_modules/foundation-sites/js/foundation.abide.js"></script>
-  <script src="/node_modules/foundation-sites/js/foundation.accordion.js"></script>
-  <script src="/node_modules/foundation-sites/js/foundation.accordionMenu.js"></script>
-  <script src="/node_modules/foundation-sites/js/foundation.core.js"></script>
-  <script src="/node_modules/foundation-sites/js/foundation.drilldown.js"></script>
-  <script src="/node_modules/foundation-sites/js/foundation.dropdown.js"></script>
-  <script src="/node_modules/foundation-sites/js/foundation.dropdownMenu.js"></script>
-  <script src="/node_modules/foundation-sites/js/foundation.equalizer.js"></script>
-  <script src="/node_modules/foundation-sites/js/foundation.interchange.js"></script>
-  <script src="/node_modules/foundation-sites/js/foundation.magellan.js"></script>
-  <script src="/node_modules/foundation-sites/js/foundation.offcanvas.js"></script>
-  <script src="/node_modules/foundation-sites/js/foundation.orbit.js"></script>
-  <script src="/node_modules/foundation-sites/js/foundation.responsiveMenu.js"></script>
-  <script src="/node_modules/foundation-sites/js/foundation.responsiveToggle.js"></script>
-  <script src="/node_modules/foundation-sites/js/foundation.reveal.js"></script>
-  <script src="/node_modules/foundation-sites/js/foundation.slider.js"></script>
-  <script src="/node_modules/foundation-sites/js/foundation.sticky.js"></script>
-  <script src="/node_modules/foundation-sites/js/foundation.tabs.js"></script>
-  <script src="/node_modules/foundation-sites/js/foundation.toggler.js"></script>
-  <script src="/node_modules/foundation-sites/js/foundation.tooltip.js"></script>
-  <script src="/node_modules/foundation-sites/js/foundation.util.box.js"></script>
-  <script src="/node_modules/foundation-sites/js/foundation.util.keyboard.js"></script>
-  <script src="/node_modules/foundation-sites/js/foundation.util.mediaQuery.js"></script>
-  <script src="/node_modules/foundation-sites/js/foundation.util.motion.js"></script>
-  <script src="/node_modules/foundation-sites/js/foundation.util.nest.js"></script>
-  <script src="/node_modules/foundation-sites/js/foundation.util.timerAndImageLoader.js"></script>
-  <script src="/node_modules/foundation-sites/js/foundation.util.touch.js"></script>
-  <script src="/node_modules/foundation-sites/js/foundation.util.triggers.js"></script>
   <!-- endinjector -->
   <!-- endbuild -->
-  <script src="bower_components/foundation-sites/dist/foundation.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/foundation/6.0.5/foundation.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?language=en"></script>
 </body>
 

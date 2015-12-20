@@ -12,6 +12,10 @@ var ContributorSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'User'
   },
+  payment_id: {
+    type: Schema.ObjectId,
+    ref: 'Payment'
+  },
   created_at: {
     type: Date,
     default: Date.now
