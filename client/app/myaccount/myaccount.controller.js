@@ -43,7 +43,38 @@ angular.module('bApp')
        $scope.selected = index; 
     };
 
+//********************** my follows *********************
+$scope.myfollows = {};
+ // $http.get('/api/users/me/campaigns')
+ //      .success(function(data) {
+ //        $scope.mycampaigns = data
+ //        console.log(data)
+ //      })
+ //      .error(function(data) {
+ //        console.log('Error: ' + data);
+ //      })
 
+//********************** delete campaigns ******************
+
+$scope.deletecampaign = function  (id) {
+
+
+  console.log(id)
+
+  // DOES NOT WORK
+ $http.delete('/api/campaigns/' + id)
+        .success(function(data) {
+
+          console.log('deleted')
+       
+
+        })
+        .error(function(data) {
+
+          console.log('Error: ' + data);
+        });
+
+}
 
 
   }]);

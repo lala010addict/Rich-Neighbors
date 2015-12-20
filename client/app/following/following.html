@@ -1,6 +1,12 @@
 
 
 <myacc></myacc>
-<div class="container">
-<div>This is the following view. {{name}}</div>
+<br>
+<div class="row" id='myposts' ng-repeat="x in myfollows">
+  <div class="large-2 columns small-3"><img id='postpic' src="{{x.picture_url}}" /></div>
+  <div class="large-10 columns">
+  <div>{{a}}</div>
+    <p><a href="../campaignProfile/{{x._id}}"> {{x.title}} </a></p>
+    <p> {{x.description}}</p>
+  </div>
 </div>
