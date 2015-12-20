@@ -72,12 +72,10 @@ var CampaignSchema = new Schema({
       type: String,
       default: 'United States'
     },
-    longitude: {
-      type: String
-    },
-    latitude: {
-      type: String
-    }
+  },
+  loc: {
+    type: [Number],
+    index: '2d'
   },
   goal: {
     type: String,
@@ -107,21 +105,14 @@ var CampaignSchema = new Schema({
 
 
 
-var linksArray = [];
-// CampaignSchema.path('_id').set(function () {
-//   this.links = linkify(this);
-// })
 
 function linkify (data) {
-
-//var _this = this;
   return [{href: '/api/campaigns/' + data._id, ref: 'self'},
           {href: '/api/campaigns/' + data._id + '/comments', ref: 'comments'},
           {href: '/api/campaigns/' + data._id + '/followers', ref: 'followers'},
           {href: '/api/campaigns/' + data._id + '/contributors', ref: 'contributors'},
           {href: '/api/campaigns/' + data._id + '/items', ref: 'items'},
           {href: '/api/campaigns/' + data._id + '/volunteers', ref: 'volunteers'}]
-          // {href: '/api/user/' + _this.user_id, ref: 'owner'}
 }
 
 /**

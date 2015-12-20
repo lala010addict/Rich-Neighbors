@@ -12,23 +12,16 @@ var VolunteerSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'User'
   },
-  hours_pledged: {
-    type: Number,
-    //TODO: make required
-    // required: true
+  job: {
+    type: String
   },
-  hours_volunteered: {
+  quantity: {
     type: Number,
-    default: 0
+    default: 1
   },
    name: {
     type: String,
     required: true
-  },
-  quantity: {
-    type: Number,
-    required: true,
-    default: 1
   },
   created_at: {
     type: Date,
