@@ -76,7 +76,8 @@ exports.show = function(req, res) {
 
 // Creates a new Follower in the DB
 exports.create = function(req, res) {
-  Follower.createAsync(req.body)
+  var data = _.extend(req.body, req.params, {user_id: req.user});
+  Follower.createAsync(data)
     .then(responseWithResult(res, 201))
     .catch(handleError(res));
 };

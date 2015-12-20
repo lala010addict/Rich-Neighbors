@@ -28,11 +28,11 @@ module.exports = function (grunt) {
   grunt.initConfig({
 
     // Project settings
-    uglify: {
-      options: {
-        mangle: false
-      }
-    },
+    //uglify: {
+    //  options: {
+    //    mangle: false
+    //  }
+    //},
     pkg: grunt.file.readJSON('package.json'),
     yeoman: {
       // configurable paths
@@ -342,9 +342,9 @@ module.exports = function (grunt) {
         htmlmin: {
           collapseBooleanAttributes: true,
           collapseWhitespace: true,
-          removeAttributeQuotes: true,
+          removeAttributeQuotes: false,
           removeEmptyAttributes: true,
-          removeRedundantAttributes: true,
+          removeRedundantAttributes: false,
           removeScriptTypeAttributes: true,
           removeStyleLinkTypeAttributes: true
         },
@@ -584,7 +584,7 @@ module.exports = function (grunt) {
     sass: {
       server: {
         options: {
-          compass: false
+          loadPath: ['node_modules/foundation-sites']
         },
         files: {
           '.tmp/app/app.css' : '<%= yeoman.client %>/app/app.scss',
