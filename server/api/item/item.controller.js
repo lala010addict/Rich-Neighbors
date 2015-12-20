@@ -74,6 +74,17 @@ exports.show = function(req, res) {
     .catch(handleError(res));
 };
 
+// pass a single campaign as a param
+exports.showParam = function(req, res, next) {
+  Item.findByIdAsync(req.params.id)
+    .then(handleEntityNotFound(res))
+    .then(function () {
+      next()
+    })
+    .catch(handleError(res));
+};
+
+
 // Creates a new Item in the DB
 exports.create = function(req, res) {
   var data = _.extend(req.body, req.params, {user_id: req.user});

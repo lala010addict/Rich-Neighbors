@@ -74,6 +74,15 @@ exports.show = function(req, res) {
     .catch(handleError(res));
 };
 
+exports.showParam = function(req, res, next) {
+  Contributor.findByIdAsync(req.params.id)
+    .then(handleEntityNotFound(res))
+    .then(function () {
+      next()
+    })
+    .catch(handleError(res));
+};
+
 // Creates a new Contributor in the DB
 exports.create = function(req, res) {
   var data = _.extend(req.body, req.params, {user_id: req.user});

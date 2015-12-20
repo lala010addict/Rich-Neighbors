@@ -74,9 +74,20 @@ exports.show = function(req, res) {
     .catch(handleError(res));
 };
 
+// pass a single campaign as a param
+exports.showParam = function(req, res, next) {
+  Volunteer.findByIdAsync(req.params.id)
+    .then(handleEntityNotFound(res))
+    .then(function () {
+      next()
+    })
+    .catch(handleError(res));
+};
+
 // Creates a new Volunteer in the DB
 exports.create = function(req, res) {
-  Volunteer.createAsync(req.body)
+  var data = _.extend(req.body, req.params, {user_id: req.user});
+  Volunteer.createAsync(data)
     .then(responseWithResult(res, 201))
     .catch(handleError(res));
 };

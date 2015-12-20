@@ -14,6 +14,7 @@ var Campaign = require('./campaign.model');
 var User = require('../user/user.model')
 
 function handleError(res, statusCode) {
+  console.log('handle error called');
   statusCode = statusCode || 500;
   return function(err) {
     res.status(statusCode).send(err);
@@ -42,6 +43,7 @@ function handleEntityNotFound(res) {
       res.status(404).end();
       return null;
     }
+    console.log('entity found');
     return entity;
   };
 }
@@ -58,10 +60,11 @@ function saveUpdates(updates) {
 
 function removeEntity(res) {
   return function(entity) {
+    console.log('remove entity called');
     if (entity) {
-      return entity.removeAsync()
-        .then(function() {
-          res.status(204).end();
+      return entity.remove( function() {
+          console.log('entity removed');
+          res.status(204).end()
         });
     }
   };
@@ -117,7 +120,20 @@ exports.show = function(req, res) {
     .then(handleEntityNotFound(res))
     .then(responseWithResult(res))
     .catch(handleError(res));
+
 };
+
+// pass a single campaign as a param
+exports.showParam = function(req, res, next) {
+  Campaign.findByIdAsync(req.params.id)
+    .then(handleEntityNotFound(res))
+    .then(function () {
+      next()
+    })
+    .catch(handleError(res));
+};
+
+
 
 // Creates a new Campaign in the DB
 exports.create = function(req, res) {
@@ -161,3 +177,5 @@ exports.destroy = function(req, res) {
       }
     });
 };
+
+
