@@ -88,6 +88,14 @@ exports.show = function(req, res) {
     .catch(handleError(res));
 };
 
+exports.showParam = function(req, res, next) {
+  Comment.findByIdAsync(req.params.id)
+    .then(handleEntityNotFound(res))
+    .then(function () {
+      next()
+    })
+    .catch(handleError(res));
+};
 
 // Gets a all Comments for a single Campaign from the DB
 exports.showByCampaign = function(req, res) {

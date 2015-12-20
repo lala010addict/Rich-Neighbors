@@ -7,11 +7,8 @@ import auth from '../../auth/auth.service';
 var router = express.Router();
 
 
-
-// router.param('id', auth.hasRole('admin'), controller.show);
-
-
-//router.param('id', controller.show);
+// router.param('id', auth.hasRole('admin'), controller.showParams);
+// router.param('id', controller.showParams);
 
 
 router.get('/', auth.hasRole('admin'), controller.index);
