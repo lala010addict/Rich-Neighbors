@@ -1,11 +1,17 @@
 'use strict';
 
 angular.module('bApp.donate', ['ngMaterial'])
-  .controller('DonateCtrl', ['$scope', '$http', function ($scope, $http) {
+  .controller('DonateCtrl', ['$scope', '$http', '$stateParams', function ($scope, $http, $stateParams) {
     $scope.message = 'Please use the form below to pay:';
     $scope.showDropinContainer = true;
     $scope.isError = false;
     $scope.isPaid = false;
+    // $scope.updateDonation = function(amount) {
+    //   $http({
+    //     method: 'PATCH', 
+    //     url: 'api/campaigns' + $stateParams.id + '/contributors'
+    //   });
+    // };
     $scope.getToken = function () {
       $http({
         method: 'POST',

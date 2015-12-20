@@ -5,8 +5,9 @@
   <div class="medium-6 large-9 columns">
     <h1>{{campaign.title}}</h1>
     <p><img src="{{campaign.picture_url}}" alt="image of a planet called Campaign Image"></p>
-    <p>{{campaign.address.city}}, {{campaign.address.state}}</p>
+    <p>{{campaign.address.zip}}, {{campaign.address.state}}</p>
     <p>{{campaign.address.country}}</p>
+    <p>{{cityState}}</p>
     <p>{{campaign.description}}</p>
     <br>
     <comments></comments>
@@ -28,6 +29,7 @@
         <!-- .cause-info-widget-percentage-bar -->
         <!--   </div> -->
         <div class="cause-info-widget-donate">
+        <button ng-click="getAddressDetails()">get deets</button>
           <a href="/donate" class="dd-button big green has-icon">MAKE A DONATION<span class="dd-button-icon"><i class="fa fa-dollar"></i></span></a>
         </div>
       </div>

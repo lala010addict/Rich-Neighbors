@@ -84,7 +84,7 @@ var CampaignSchema = new Schema({
     //required: true,
     validate: [
     function (goal){
-      return goal >= 1;
+      return goal >= 0;
     },
     'Must be greater than 0']
   },

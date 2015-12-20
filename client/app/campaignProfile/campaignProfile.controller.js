@@ -7,27 +7,35 @@
 
 angular.module('bApp.CampaignProfileController', [])
 
-.controller('CampaignProfileController', ['$scope', 'Auth', '$stateParams', '$http', 'apiCall', function($scope, Auth, $stateParams, $http, apiCall) {
+.controller('CampaignProfileController', ['$scope', 'Auth', '$stateParams', '$http', 'apiCall', 'geolocationFactory', function($scope, Auth, $stateParams, $http, apiCall, geolocationFactory) {
   $scope.campaign = apiCall.campaign;
 
-
+  
   $scope.donated = '';
-  $scope.apiCall = apiCall.call
-  $scope.linkApiCalls = apiCall.linkApiCalls
-  $scope.obj = apiCall.obj
+  $scope.apiCall = apiCall.call;
+  $scope.linkApiCalls = apiCall.linkApiCalls;
+  $scope.obj = apiCall.obj;
+  $scope.addressDetails = 'jamma';
+  $scope.getAddressDetails = function () {
+    $scope.addressDetails = geolocationFactory.getLoc();
+    $scope.cityState = geolocationFactory.getCityandState();
+  };
+  $scope.zip = '';
+  $scope.getDonationTotal = function() {
 
-
+  };
   $http.get('/api/campaigns/' + $stateParams.id)
     .success(function(data) {
       //   console.log($scope.linkApiCalls)
       $scope.campaign = data;
-      console.log(data);
-      var amounts = _.pluck(data.contributors, 'amount')
+      $scope.getAddressDetails();
+      console.log('scope.zip = ' , $scope.zip);
+      var amounts = _.pluck(data.contributors, 'amount');
       $scope.donated = _.reduce(amounts, function(total, n) {
         return total + n;
       });
 
-      var links = data._links.slice(1, 5)
+      var links = data._links.slice(1, 5);
       $scope.linkApiCalls(data._links);
     })
     .error(function(data) {
@@ -56,8 +64,8 @@ angular.module('bApp.CampaignProfileController', [])
   $scope.name = $scope.getCurrentUser().name;
   $scope.profile_pic = $scope.getCurrentUser().profile_pic;
   $scope.formData.user_id = $scope.getCurrentUser()._id;
-  $scope.formData.profile_pic = $scope.getCurrentUser().profile_pic
-  $scope.formData.username = $scope.getCurrentUser().name
+  $scope.formData.profile_pic = $scope.getCurrentUser().profile_pic;
+  $scope.formData.username = $scope.getCurrentUser().name;
   $scope.formData.campaign_id = $stateParams.id;
   $scope.formData.text = '';
   // Current comment.
@@ -86,7 +94,7 @@ angular.module('bApp.CampaignProfileController', [])
         //   })
         .error(function(data) {
           console.log('Error: ' + data);
-        })
+        });
 
 
         $scope.formData.text = '';
@@ -97,19 +105,19 @@ angular.module('bApp.CampaignProfileController', [])
       })
 
     .error(function(data) {
-      console.log($scope.getCurrentUser())
+      console.log($scope.getCurrentUser());
       console.log('Error: ' + $scope.formData);
     });
 
 
-  }
+  };
 
   // Fires when the comment change the anonymous state.
   $scope.anonymousChanged = function() {
     if ($scope.comment.anonymous)
       $scope.comment.author = "";
-  }
+  };
 
 
 
-}])
+}]);

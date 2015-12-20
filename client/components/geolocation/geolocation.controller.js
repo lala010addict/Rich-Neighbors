@@ -45,7 +45,7 @@ angular.module('bApp.geolocation', ["ui.map", "ui.event"])
 
 
 
-.controller('GeolocationController', function($scope, $http, GeoLoc) {
+.controller('GeolocationController', function($scope, $http, GeoLoc,geolocationFactory ) {
   $scope.lat = "0";
   $scope.lng = "0";
   $scope.address = "";
@@ -60,6 +60,9 @@ angular.module('bApp.geolocation', ["ui.map", "ui.event"])
   $scope.showResult = function() {
     return $scope.error == "";
   }
+  $scope.updateAddressOmar = function() {
+    $scope.address = geolocationFactory.getCityandState();
+  };
 
   $scope.mapOptions = {
     center: new google.maps.LatLng($scope.lat, $scope.lng),
@@ -125,9 +128,9 @@ angular.module('bApp.geolocation', ["ui.map", "ui.event"])
   }
 
 
-
+$scope.updateAddressOmar()
 
   //https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452
 
-  $scope.getLocation();
+  // $scope.getLocation();
 });
