@@ -1,27 +1,19 @@
 'use strict';
 
 angular.module('bApp.donate', ['ngMaterial'])
-<<<<<<< HEAD
-  .controller('DonateCtrl', ['$scope', '$http', '$stateParams', function ($scope, $http, $stateParams) {
-=======
+
   .controller('DonateCtrl', ['$scope', '$http', '$location', '$state', '$timeout', function($scope, $http, $location, $state, $timeout) {
->>>>>>> decfeeebffa3fc40ad74186f77b4609620dd1ef9
     $scope.message = 'Please use the form below to pay:';
     $scope.showDropinContainer = true;
     $scope.isError = false;
     $scope.isPaid = false;
-<<<<<<< HEAD
     // $scope.updateDonation = function(amount) {
     //   $http({
     //     method: 'PATCH', 
     //     url: 'api/campaigns' + $stateParams.id + '/contributors'
     //   });
     // };
-    $scope.getToken = function () {
-=======
-
     $scope.getToken = function() {
->>>>>>> decfeeebffa3fc40ad74186f77b4609620dd1ef9
       $http({
         method: 'POST',
         url: 'api/payments/client_token'
