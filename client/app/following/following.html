@@ -2,7 +2,9 @@
 </myacc>
 <br>
 <div class="row" id='myposts' ng-repeat="x in myfollows">
-  <div class="large-12 columns">
+  <div class="large-2 columns small-3"><img id='postpic' src="{{x.campaign_id.picture_url}}" /></div>
+  <div class="large-10 columns">
     <p><a href="../campaignProfile/{{x.campaign_id._id}}"> {{x.campaign_id.title}} </a></p>
+    <p> {{x.campaign_id.description}}</p>
   </div>
 </div>
