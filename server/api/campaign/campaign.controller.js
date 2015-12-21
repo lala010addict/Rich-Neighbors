@@ -11,7 +11,7 @@
 
 var _ = require('lodash');
 var Campaign = require('./campaign.model');
-var User = require('../user/user.model')
+var config = require('../../config/environment');
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
@@ -21,17 +21,18 @@ function handleError(res, statusCode) {
   };
 }
 
-function checkUserId(res, userid) {
-      return function (entity) {
-        if (userid.equals(entity.user_id)) {
-          console.log('equal');
-          return entity
-        } else {
-          res.status(403).end();
-          return null;
-        }
-      }
+function checkUserId(req, res) {
+  var userid = req.user._id
+  return function (entity) {
+    if (userid.equals(entity.user_id) ||
+      config.userRoles.indexOf(req.user.role) >=
+      config.userRoles.indexOf('admin')) {
+      return entity;
     }
+    res.status(403).end();
+    return null;
+  }
+}
 
 function responseWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -152,30 +153,24 @@ exports.create = function(req, res) {
     .catch(handleError(res));
 };
 
-// TODO: Must be tested
 // Updates an existing Campaign in the DB
 exports.update = function(req, res) {
   if (req.body._id) {
     delete req.body._id;
   }
   Campaign.findByIdAsync(req.params.id)
-    .then(function(data) {
-      if (data.isOwner(req.user._id)) {
-        return handleEntityNotFound(res)
-          .then(saveUpdates(req.body))
-          .then(responseWithResult(res))
-          .catch(handleError(res));
-      } else {
-        return res.status(403).end();
-      }
-    })
+    .then(handleEntityNotFound(res))
+    .then(checkUserId(req, res))
+    .then(saveUpdates(req.body))
+    .then(responseWithResult(res))
+    .catch(handleError(res));
 };
 
 // Deletes a Campaign from the DB
 exports.destroy = function(req, res) {
   Campaign.findByIdAsync(req.params.id)
     .then(handleEntityNotFound(res))
-    .then(checkUserId(res, req.user._id))
+    .then(checkUserId(req, res))
     .then(removeEntity(res))
     .catch(handleError(res));
 };
