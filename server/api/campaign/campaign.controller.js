@@ -14,12 +14,24 @@ var Campaign = require('./campaign.model');
 var User = require('../user/user.model')
 
 function handleError(res, statusCode) {
-  console.log('handle error called');
   statusCode = statusCode || 500;
   return function(err) {
+    console.log(err);
     res.status(statusCode).send(err);
   };
 }
+
+function checkUserId(res, userid) {
+      return function (entity) {
+        if (userid.equals(entity.user_id)) {
+          console.log('equal');
+          return entity
+        } else {
+          res.status(403).end();
+          return null;
+        }
+      }
+    }
 
 function responseWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -43,7 +55,6 @@ function handleEntityNotFound(res) {
       res.status(404).end();
       return null;
     }
-    console.log('entity found');
     return entity;
   };
 }
@@ -60,10 +71,8 @@ function saveUpdates(updates) {
 
 function removeEntity(res) {
   return function(entity) {
-    console.log('remove entity called');
     if (entity) {
-      return entity.remove( function() {
-          console.log('entity removed');
+      return entity.removeAsync( function() {
           res.status(204).end()
         });
     }
@@ -165,15 +174,8 @@ exports.update = function(req, res) {
 // Deletes a Campaign from the DB
 exports.destroy = function(req, res) {
   Campaign.findByIdAsync(req.params.id)
-    .then(function(data) {
-      if (data.isOwner(req.user._id)) {
-        return handleEntityNotFound(res)
-          .then(removeEntity(res))
-          .catch(handleError(res));
-      } else {
-        return res.status(403).end();
-      }
-    });
+    .then(handleEntityNotFound(res))
+    .then(checkUserId(res, req.user._id))
+    .then(removeEntity(res))
+    .catch(handleError(res));
 };
-
-
