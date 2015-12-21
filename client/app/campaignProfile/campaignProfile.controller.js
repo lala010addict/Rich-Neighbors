@@ -117,8 +117,32 @@ angular.module('bApp.CampaignProfileController', [])
   $scope.followers.campaign_id = $scope.formData.campaign_id;
   $scope.follow = 'Follow';
   $scope.check = 'plus'
-  $scope.followid = ''
+  $scope.followid = '';
 
+  $scope.checkiffollowed = function() {
+    $http.get('/api/campaigns/' + $scope.followers.campaign_id + '/followers')
+      .success(function(data) {
+        console.log('checkiffollowed', data)
+        _.forEach(data, function(item) {
+          if (item.user_id === $scope.followers.user_id) {
+            console.log('yes!!!!')
+            $scope.followid = item._id;
+            $scope.follow = 'Followed'
+            $scope.check = 'check';
+
+          }
+        })
+
+      })
+      .error(function(data) {
+
+        console.log('Error: ' + data);
+      });
+
+
+  }
+
+  $scope.checkiffollowed();
 
   $scope.clicktofollow = function() {
 
