@@ -63,13 +63,13 @@ function removeEntity(res) {
 exports.index = function(req, res) {
   if (req.baseUrl === '/api/users/me/volunteers') {
     Volunteer.find({user_id: req.user_id})
-      .populate('campaign_id', 'title', 'description')
+      .populate('campaign_id', 'title')
       .execAsync()
       .then(responseWithResult(res))
       .catch(handleError(res));
   } else {
     Volunteer.find(req.params)
-      .populate('campaign_id', 'title', 'description')
+      .populate('campaign_id', 'title')
       .execAsync()
       .then(responseWithResult(res))
       .catch(handleError(res));
