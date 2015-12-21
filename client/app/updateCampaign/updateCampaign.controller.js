@@ -17,6 +17,25 @@ $scope.formData = {};
       });
 
 
+    $http.get('/api/campaigns/' + $state.params.id + '/items')
+      .success(function(data) {
+        console.log('items',data)
+        $scope.supplies  = data;
+      })
+      .error(function(data) {
+        console.log('Error: ' + data);
+      });
+
+
+    $http.get('/api/campaigns/' + $state.params.id + '/volunteers')
+      .success(function(data) {
+        console.log('volunteers', data)
+      $scope.volunteers  = data;
+      })
+      .error(function(data) {
+        console.log('Error: ' + data);
+      });
+
 
 
 
@@ -152,12 +171,6 @@ $scope.formData = {};
           console.log('Error: ' + data);
         });
     }
-
-
-
-
-
-
 
 
   }]);
