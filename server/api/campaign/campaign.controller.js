@@ -136,7 +136,7 @@ exports.showParam = function(req, res, next) {
 // Creates a new Campaign in the DB
 exports.create = function(req, res) {
   var data = _.extend(req.body, req.params, {
-    user_id: req.user
+    user_id: req.user._id
   });
   Campaign.createAsync(data)
     .then(responseWithResult(res, 201))

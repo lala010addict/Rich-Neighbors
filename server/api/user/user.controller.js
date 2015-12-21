@@ -172,10 +172,9 @@ exports.me = function(req, res, next) {
 
 
 exports.meParams = function(req, res, next) {
-  req.user_id = req.user._id;
+  req.user_id = req.user._id;  //TODO: get rid of 'USERID'
   next();
 };
-
 
 
 /**
