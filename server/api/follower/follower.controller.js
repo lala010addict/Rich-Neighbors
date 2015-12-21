@@ -11,6 +11,7 @@
 
 var _ = require('lodash');
 var Follower = require('./follower.model');
+var Campaign = require('../campaign/campaign.model');
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
@@ -64,13 +65,13 @@ exports.index = function(req, res) {
   console.log(req);
   if (req.baseUrl === '/api/users/me/followers') {
     Follower.find({user_id: req.user_id})
-      .populate('campaign_id', 'title')
+      .populate({path: 'campaign_id', model: Campaign})
       .execAsync()
       .then(responseWithResult(res))
       .catch(handleError(res));
   } else {
     Follower.find(req.params)
-      .populate('campaign_id', 'title')
+      .populate({path: 'campaign_id', model: Campaign})
       .execAsync()
       .then(responseWithResult(res))
       .catch(handleError(res));
