@@ -61,9 +61,19 @@ function removeEntity(res) {
 
 // Gets a list of Volunteers
 exports.index = function(req, res) {
-  Volunteer.findAsync(req.params)
-    .then(responseWithResult(res))
-    .catch(handleError(res));
+  if (req.baseUrl === '/api/users/me/volunteers') {
+    Volunteer.find({user_id: req.user_id})
+      .populate('campaign_id', 'title', 'description')
+      .execAsync()
+      .then(responseWithResult(res))
+      .catch(handleError(res));
+  } else {
+    Volunteer.find(req.params)
+      .populate('campaign_id', 'title', 'description')
+      .execAsync()
+      .then(responseWithResult(res))
+      .catch(handleError(res));
+  }
 };
 
 // Gets a single Volunteer from the DB

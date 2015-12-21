@@ -61,9 +61,19 @@ function removeEntity(res) {
 
 // Gets a list of Items
 exports.index = function(req, res) {
-  Item.findAsync(req.params)
-    .then(responseWithResult(res))
-    .catch(handleError(res));
+  if (req.baseUrl === '/api/users/me/items') {
+    Item.find({user_id: req.user_id})
+      .populate('campaign_id', 'title', 'description')
+      .execAsync()
+      .then(responseWithResult(res))
+      .catch(handleError(res));
+  } else {
+    Item.find(req.params)
+      .populate('campaign_id', 'title', 'description')
+      .execAsync()
+      .then(responseWithResult(res))
+      .catch(handleError(res));
+  }
 };
 
 // Gets a single Item from the DB

@@ -61,9 +61,19 @@ function removeEntity(res) {
 
 // Gets a list of Contributors
 exports.index = function(req, res) {
-  Contributor.findAsync(req.params)
-    .then(responseWithResult(res))
-    .catch(handleError(res));
+  if (req.baseUrl === '/api/users/me/contributors') {
+    Contributor.find({user_id: req.user_id})
+      .populate('user_id', 'name')
+      .execAsync()
+      .then(responseWithResult(res))
+      .catch(handleError(res));
+  } else {
+    Contributor.find(req.params)
+      .populate('user_id', 'name')
+      .execAsync()
+      .then(responseWithResult(res))
+      .catch(handleError(res));
+  }
 };
 
 // Gets a single Contributor from the DB

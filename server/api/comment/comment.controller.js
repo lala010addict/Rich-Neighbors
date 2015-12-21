@@ -65,7 +65,7 @@ function removeEntity(res) {
 exports.index = function(req, res) {
  if (req.baseUrl === '/api/users/me/comments') {
     Comment.find({user_id: req.user_id})
-      .populate( 'user_id', 'name')
+      .populate( 'campaign_id', 'title', 'description')
       .execAsync()
       .then(responseWithResult(res))
       .catch(handleError(res));
