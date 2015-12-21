@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bApp')
-  .controller('MyaccountCtrl', ['$scope', 'Auth', '$http', '$state',  function($scope, Auth, $http, $state) {
+  .controller('MyaccountCtrl', ['$scope', 'Auth', '$http', '$state', function($scope, Auth, $http, $state) {
     $scope.getCurrentUser = Auth.getCurrentUser;
     $scope.name = $scope.getCurrentUser().name;
     $scope.profile_pic = $scope.getCurrentUser().profile_pic;
@@ -26,10 +26,10 @@ angular.module('bApp')
     $scope.refresh();
 
 
-  $scope.isactive = false;
-  $scope.activeButton = function() {
-    $scope.isactive = !$scope.isactive;
-  }  
+    $scope.isactive = false;
+    $scope.activeButton = function() {
+      $scope.isactive = !$scope.isactive;
+    }
 
 
     $scope.filters = [{
@@ -56,47 +56,50 @@ angular.module('bApp')
 
     //********************** my follows *********************
     $scope.myfollows = {};
-    $scope.getFollowers = function  () {
-        $http.get('/api/users/me/followers')
-         .success(function(data) {
+    $scope.getFollowers = function() {
+      $http.get('/api/users/me/followers')
+        .success(function(data) {
           $scope.myfollows = data
-           console.log('follows',data)
-         })
-         .error(function(data) {
-           console.log('Error: ' + data);
-         })
+          console.log('follows', data)
+        })
+        .error(function(data) {
+          console.log('Error: ' + data);
+        })
 
     }
- 
-  $scope.getFollowers();
+
+    $scope.getFollowers();
 
     //********************** delete campaigns ******************
 
     $scope.deletecampaign = function(id) {
 
+      var r = confirm("Are you sure to delete??");
+      if (r == true) {
+        $http.delete('/api/campaigns/' + id)
+          .success(function(data) {
+            $scope.refresh();
+            console.log('deleted')
 
-      console.log(id)
+          })
+          .error(function(data) {
 
-      // DOES NOT WORK
-      $http.delete('/api/campaigns/' + id)
-        .success(function(data) {
-          $scope.refresh();
-          console.log('deleted')
-
-        })
-        .error(function(data) {
-
-          console.log('Error: ' + data);
-        });
-
+            console.log('Error: ' + data);
+          });
+      } else {
+        console.log('they changed their mind')
+      }
     }
 
-//********************** update campaigns ******************
+    //********************** update campaigns ******************
 
- $scope.updatecampaign = function  (id) {
-   $state.go('updateCampaign',  $stateParams);
+    $scope.updatecampaign = function(id) {
+      console.log(id)
+      $state.go('updateCampaign', {
+        'id': id
+      });
 
- }
+    }
 
 
 
