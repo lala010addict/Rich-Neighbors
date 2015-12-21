@@ -57,7 +57,7 @@ angular.module('bApp')
     //********************** my follows *********************
     $scope.myfollows = {};
     $scope.getFollowers = function  () {
-        $http.get('/api/users/me/followers')
+        $http.get('/api/users/me/campaigns')
          .success(function(data) {
           $scope.myfollows = data
            console.log('follows',data)
