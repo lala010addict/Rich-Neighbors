@@ -6,14 +6,13 @@
     <div class="comment-avatar">
       <img src="{{profile_pic}}">
     </div>
-    <form class="form" name="form" ng-submit="addComment()" novalidate>
+    <form class="form" name="form" ng-submit="addComment()" novalidate ng-show="nav.isLoggedIn()">
       <!-- form.$valid &&-->
       <div class="form-row">
         <textarea class="input" ng-model="formData.text" placeholder="Add comment..." required></textarea>
       </div>
       <div class="form-row" ng-show="nav.isLoggedIn()">
-       {{name}}
- 
+        {{name}}
       </div>
       <div class="form-row" ng-hide="nav.isLoggedIn()">
         <input class="input" ng-class="{ disabled: comment.anonymous }" ng-disabled="comment.anonymous" ng-model="comment.author" ng-required="!comment.anonymous" placeholder="Email" type="email">
