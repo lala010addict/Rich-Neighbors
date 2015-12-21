@@ -1,6 +1,6 @@
 // 'use strict';
 
 // angular.module('bApp')
-//   .controller('FollowingCtrl', function ($scope) {
-//     $scope.message = 'Hello';
-//   });
+//   .controller('FollowingCtrl', ['$scope','$http', function ($scope,  $http) {
+
+//   }]);
