@@ -177,7 +177,6 @@ exports.meParams = function(req, res, next) {
 };
 
 
-
 /**
  * Authentication callback
  */

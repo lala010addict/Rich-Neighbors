@@ -63,13 +63,13 @@ function removeEntity(res) {
 exports.index = function(req, res) {
   if (req.baseUrl === '/api/users/me/items') {
     Item.find({user_id: req.user_id})
-      .populate('campaign_id', 'title', 'description')
+      .populate('campaign_id', 'title')
       .execAsync()
       .then(responseWithResult(res))
       .catch(handleError(res));
   } else {
     Item.find(req.params)
-      .populate('campaign_id', 'title', 'description')
+      .populate('campaign_id', 'title')
       .execAsync()
       .then(responseWithResult(res))
       .catch(handleError(res));
@@ -97,7 +97,7 @@ exports.showParam = function(req, res, next) {
 
 // Creates a new Item in the DB
 exports.create = function(req, res) {
-  var data = _.extend(req.body, req.params, {user_id: req.user});
+  var data = _.extend(req.body, req.params, {user_id: req.user._id});
   Item.createAsync(data)
     .then(responseWithResult(res, 201))
     .catch(handleError(res));

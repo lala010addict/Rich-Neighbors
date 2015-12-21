@@ -61,15 +61,16 @@ function removeEntity(res) {
 
 // Gets a list of Followers
 exports.index = function(req, res) {
+  console.log(req);
   if (req.baseUrl === '/api/users/me/followers') {
     Follower.find({user_id: req.user_id})
-      .populate('campaign_id', 'title', 'description')
+      .populate('campaign_id', 'title')
       .execAsync()
       .then(responseWithResult(res))
       .catch(handleError(res));
   } else {
     Follower.find(req.params)
-      .populate('campaign_id', 'title', 'description')
+      .populate('campaign_id', 'title')
       .execAsync()
       .then(responseWithResult(res))
       .catch(handleError(res));
@@ -95,7 +96,7 @@ exports.showParam = function(req, res, next) {
 
 // Creates a new Follower in the DB
 exports.create = function(req, res) {
-  var data = _.extend(req.body, req.params, {user_id: req.user});
+  var data = _.extend(req.body, req.params, {user_id: req.user._id});
   Follower.createAsync(data)
     .then(responseWithResult(res, 201))
     .catch(handleError(res));

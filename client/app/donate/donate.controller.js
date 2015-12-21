@@ -29,7 +29,7 @@ angular.module('bApp.donate', ['ngMaterial'])
             }).success(function(data) {
               console.log(data.success);
               if (data.success) {
-                $scope.message = 'Payment authorized, thanks.';
+                $scope.message = 'Payment authorized, thanks! You will be redirected to the home page in 3 seconds.';
                 $scope.showDropinContainer = false;
                 $scope.isError = false;
                 $scope.isPaid = true;
