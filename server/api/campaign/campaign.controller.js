@@ -14,6 +14,7 @@ var Campaign = require('./campaign.model');
 var User = require('../user/user.model')
 
 function handleError(res, statusCode) {
+  console.log('handle error called');
   statusCode = statusCode || 500;
   return function(err) {
     res.status(statusCode).send(err);
@@ -42,6 +43,7 @@ function handleEntityNotFound(res) {
       res.status(404).end();
       return null;
     }
+    console.log('entity found');
     return entity;
   };
 }
@@ -58,14 +60,16 @@ function saveUpdates(updates) {
 
 function removeEntity(res) {
   return function(entity) {
+    console.log('remove entity called');
     if (entity) {
-      return entity.removeAsync()
-        .then(function() {
-          res.status(204).end();
+      return entity.remove( function() {
+          console.log('entity removed');
+          res.status(204).end()
         });
     }
   };
 }
+
 
 // Gets a list of Campaigns
 // exports.index = function(req, res) {
@@ -85,8 +89,23 @@ exports.index = function(req, res) {
       .then(responseWithResult(res))
       .catch(handleError(res));
   } else {
-    Campaign.find(req.params)
-      .populate('user_id', 'name')
+      var limit = req.query.limit || 20;
+      // get the max distance or set it to 8 kilometers
+      var maxDistance = req.q
+      // we need to convert the distance to radians
+      // the raduis of Earth is approximately 6371 kilometers
+      maxDistance /= 6371;
+      // get coordinates [ <longitude> , <latitude> ]
+      var coords = [];
+      coords[0] = req.query.longitude || 0;
+      coords[1] = req.query.latitude || 0;
+      var data = req.params || {
+        loc: {
+          $near: coords,
+          $maxDistance: maxDistance
+        }
+      };
+      Campaign.find(data).limit(limit)
       .execAsync()
       .then(responseWithResult(res))
       .catch(handleError(res));
@@ -101,7 +120,20 @@ exports.show = function(req, res) {
     .then(handleEntityNotFound(res))
     .then(responseWithResult(res))
     .catch(handleError(res));
+
 };
+
+// pass a single campaign as a param
+exports.showParam = function(req, res, next) {
+  Campaign.findByIdAsync(req.params.id)
+    .then(handleEntityNotFound(res))
+    .then(function () {
+      next()
+    })
+    .catch(handleError(res));
+};
+
+
 
 // Creates a new Campaign in the DB
 exports.create = function(req, res) {
@@ -145,3 +177,5 @@ exports.destroy = function(req, res) {
       }
     });
 };
+
+

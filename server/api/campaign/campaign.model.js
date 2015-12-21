@@ -72,12 +72,10 @@ var CampaignSchema = new Schema({
       type: String,
       default: 'United States'
     },
-    longitude: {
-      type: String
-    },
-    latitude: {
-      type: String
-    }
+  },
+  loc: {
+    type: [Number],
+    index: '2d'
   },
   goal: {
     type: String,
@@ -102,26 +100,20 @@ var CampaignSchema = new Schema({
   //  required: true,
     default: 'https://pbs.twimg.com/media/BwsrTjGIcAAtjdu.png'  //TODO: Correct to basic png/jpg
   },
+  archived: Boolean,
   _links: Array
 });
 
 
 
-var linksArray = [];
-// CampaignSchema.path('_id').set(function () {
-//   this.links = linkify(this);
-// })
 
 function linkify (data) {
-
-//var _this = this;
   return [{href: '/api/campaigns/' + data._id, ref: 'self'},
           {href: '/api/campaigns/' + data._id + '/comments', ref: 'comments'},
           {href: '/api/campaigns/' + data._id + '/followers', ref: 'followers'},
           {href: '/api/campaigns/' + data._id + '/contributors', ref: 'contributors'},
           {href: '/api/campaigns/' + data._id + '/items', ref: 'items'},
           {href: '/api/campaigns/' + data._id + '/volunteers', ref: 'volunteers'}]
-          // {href: '/api/user/' + _this.user_id, ref: 'owner'}
 }
 
 /**
@@ -162,11 +154,11 @@ CampaignSchema
 /**
  * Validations
  */
-// CampaignSchema
-//   .path('address.zip')
-//   .validate(function (zip) {
-//     return zip === 5;
-//   })
+
+
+/*
+* Pre-functions
+*/
 
 CampaignSchema
   .pre('save', function (next) {
@@ -174,6 +166,45 @@ CampaignSchema
     _this._links = linkify(_this);
     next();
   });
+
+CampaignSchema.pre('remove', function(next){
+  this.model('Follower').update(
+    {followers: this._id},
+    {$pull: {followers: this._id}},
+    {multi: true},
+    next
+  );
+  this.model('Volunteer').update(
+    {volunteers: this._id},
+    {$pull: {volunteers: this._id}},
+    {multi: true},
+    next
+  );
+  this.model('Contributor').update(
+    {contributors: this._id},
+    {$pull: {contributors: this._id}},
+    {multi: true},
+    next
+  );
+  this.model('Follower').update(
+    {followers: this._id},
+    {$pull: {followers: this._id}},
+    {multi: true},
+    next
+  );
+  this.model('Item').update(
+    {items: this._id},
+    {$pull: {items: this._id}},
+    {multi: true},
+    next
+  );
+  this.model('Comment').update(
+    {comment: this._id},
+    {$pull: {comment: this._id}},
+    {multi: true},
+    next
+  );
+});
 
 /*
 * Methods

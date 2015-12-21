@@ -57,14 +57,14 @@ module.exports = function(app) {
       // csrf: {
       //   angular: true
       // },
-      csp: { policy: "*"},
+      csp: { policy: "*" },
       xframe: 'SAMEORIGIN',
       hsts: {
         maxAge: 31536000, //1 year, in seconds
         includeSubDomains: true,
         preload: true
       },
-      xssProtection: true //TODO: Change to true for p
+      xssProtection: true
     }));
   }
 

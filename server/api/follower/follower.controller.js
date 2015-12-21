@@ -74,9 +74,19 @@ exports.show = function(req, res) {
     .catch(handleError(res));
 };
 
+exports.showParam = function(req, res, next) {
+  Follower.findByIdAsync(req.params.id)
+    .then(handleEntityNotFound(res))
+    .then(function () {
+      next()
+    })
+    .catch(handleError(res));
+};
+
 // Creates a new Follower in the DB
 exports.create = function(req, res) {
-  Follower.createAsync(req.body)
+  var data = _.extend(req.body, req.params, {user_id: req.user});
+  Follower.createAsync(data)
     .then(responseWithResult(res, 201))
     .catch(handleError(res));
 };

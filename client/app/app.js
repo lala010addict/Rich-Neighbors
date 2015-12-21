@@ -12,7 +12,6 @@ angular.module('bApp', [
     'ngCookies',
     'ngResource',
     'ngSanitize',
-    'ngMaterial',
     'ui.router',
     'braintree-angular',
     'validation.match',

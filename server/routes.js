@@ -10,14 +10,12 @@ import path from 'path';
 module.exports = function(app) {
 
   // cors
-
-  app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods","GET,POST,PUT,PATCH,DELETE")
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, XSRF-Token, X-XSRF-Token, access_token");
-    next();
-  });
-
+  // app.use(function(req, res, next) {
+  //   res.header("Access-Control-Allow-Origin", "*");
+  //   res.header("Access-Control-Allow-Methods","GET,POST,PUT,PATCH,DELETE")
+  //   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, X-XSRF-Token, Token, access_token");
+  //   next();
+  // });
 
   // Insert routes below
   app.use('/api/payments', require('./api/payment'));
@@ -26,7 +24,6 @@ module.exports = function(app) {
   app.use('/api/volunteers', require('./api/volunteer'));
   app.use('/api/items', require('./api/item'));
   app.use('/api/comments', require('./api/comment'));
-  app.use('/api/campaign_items', require('./api/campaign_item'));
   app.use('/api/campaigns', require('./api/campaign'));
   app.use('/api/users', require('./api/user'));
   app.use('/auth', require('./auth'));

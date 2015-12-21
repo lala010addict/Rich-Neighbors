@@ -1,4 +1,4 @@
-<!-- 
+<!--
 
 <div class="navbar navbar-default navbar-static-top" ng-controller="NavbarController">
   <div class="container">
@@ -35,7 +35,7 @@
 <div class="top-bar" ng-controller="NavbarController">
   <div class="top-bar-left">
     <ul class="menu" data-responsive-menu="accordion">
-      <li class="menu-text">Rich Neighbors</li>
+      <li class="menu-text"><a href="/">Rich Neighbors</a></li>
       <li ng-repeat="item in nav.menu" ui-sref-active="active">
         <a ui-sref="{{item.state}}">{{item.title}}</a>
       </li>
@@ -67,7 +67,7 @@
           </li>
         </ul>
       </li>
-  
+
      <!--  <li ng-show="nav.isLoggedIn()" ui-sref-active="active"><a ui-sref="settings"><i class="fa fa-cog"></i></a></li>
       <li ng-show="nav.isLoggedIn()"><a ui-sref="logout">Logout</a></li> -->
     </ul>
