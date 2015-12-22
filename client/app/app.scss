@@ -190,6 +190,21 @@ small {
 /* General */
 
 
+ .top-bar-left {
+     width: auto !important;
+ }
+ 
+ .top-bar-right {
+     width: auto !important;
+ }
+
+
+.top-bar a {
+    color: #FDFDFD !important;
+}
+
+
+
 /*.top-bar{background-color: transparent;}*/
 
 
@@ -6820,6 +6835,8 @@ img {
 @import 'myaccount/myaccount.scss';
 @import 'startCampaign/startCampaign.scss';
 @import 'submitCampaignsSuccess/submitCampaignsSuccess.scss';
+@import 'updateCampaign/updateCampaign.scss';
+@import 'updateCampaignsSuccess/updateCampaignsSuccess.scss';
 @import '../components/colorBar/colorBar.scss';
 @import '../components/footer/footer.scss';
 @import '../components/myacc/myacc.scss';

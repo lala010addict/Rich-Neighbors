@@ -118,6 +118,81 @@ angular.module('bApp.CampaignProfileController', [])
       $scope.comment.author = "";
   };
 
+  //********************follow campagins************************
+
+  $scope.followers = {};
+  $scope.followers.user_id = $scope.formData.user_id;
+  $scope.followers.campaign_id = $scope.formData.campaign_id;
+  $scope.follow = 'Follow';
+  $scope.check = 'plus'
+  $scope.followid = '';
+
+  $scope.checkiffollowed = function() {
+    $http.get('/api/campaigns/' + $scope.followers.campaign_id + '/followers')
+      .success(function(data) {
+        console.log('checkiffollowed', data)
+        _.forEach(data, function(item) {
+          if (item.user_id === $scope.followers.user_id) {
+            console.log('yes!!!!')
+            $scope.followid = item._id;
+            $scope.follow = 'Followed'
+            $scope.check = 'check';
+
+          }
+        })
+
+      })
+      .error(function(data) {
+
+        console.log('Error: ' + data);
+      });
+
+
+  }
+
+  $scope.checkiffollowed();
+
+  $scope.clicktofollow = function() {
+
+    if ($scope.follow == 'Follow') {
+      $http.post('/api/followers', $scope.followers)
+        .success(function(data) {
+          $scope.follow = 'Followed'
+          $scope.check = 'check'
+
+          $scope.followid = data._id
+          console.log(data)
+          console.log($scope.followid)
+        })
+        .error(function(data) {
+
+          console.log('Error: ' + data);
+        });
+    } else {
+      console.log('delete')
+
+      $http.delete('/api/followers/' + $scope.followid)
+        .success(function(data) {
+          $scope.follow = 'Follow'
+          $scope.check = 'plus'
+
+          console.log('deleted')
+          console.log(data)
+
+        })
+        .error(function(data) {
+
+          console.log('Error: ' + data);
+        });
+
+    }
+
+  }
+
+
+
+
+
 
 
 }]);

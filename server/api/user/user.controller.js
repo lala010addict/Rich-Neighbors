@@ -77,6 +77,20 @@ exports.show = function(req, res, next) {
     });
 };
 
+// pass a single campaign as a param
+exports.showParam = function(req, res, next) {
+  User.findByIdAsync(req.params.id)
+    .then(function(user) {
+      if (!user) {
+        return res.status(404).end();
+      }})
+    .then(function () {
+      next()
+    })
+    .catch(handleError(res));
+};
+
+
 /**
  * Deletes a user
  * restriction: 'admin'
@@ -161,7 +175,6 @@ exports.meParams = function(req, res, next) {
   req.user_id = req.user._id;
   next();
 };
-
 
 
 /**

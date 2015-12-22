@@ -65,7 +65,7 @@ function removeEntity(res) {
 exports.index = function(req, res) {
  if (req.baseUrl === '/api/users/me/comments') {
     Comment.find({user_id: req.user_id})
-      .populate( 'user_id', 'name')
+      .populate( 'campaign_id', 'title', 'description')
       .execAsync()
       .then(responseWithResult(res))
       .catch(handleError(res));
@@ -88,6 +88,14 @@ exports.show = function(req, res) {
     .catch(handleError(res));
 };
 
+exports.showParam = function(req, res, next) {
+  Comment.findByIdAsync(req.params.id)
+    .then(handleEntityNotFound(res))
+    .then(function () {
+      next()
+    })
+    .catch(handleError(res));
+};
 
 // Gets a all Comments for a single Campaign from the DB
 exports.showByCampaign = function(req, res) {
@@ -99,7 +107,7 @@ exports.showByCampaign = function(req, res) {
 
 // Creates a new Comment in the DB
 exports.create = function(req, res) {
-  var data = _.extend(req.body, req.params, {user_id: req.user});
+  var data = _.extend(req.body, req.params, {user_id: req.user._id});
   Comment.createAsync(data)
     .then(responseWithResult(res, 201))
     .catch(handleError(res));

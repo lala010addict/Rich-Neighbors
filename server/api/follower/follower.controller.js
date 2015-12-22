@@ -11,6 +11,7 @@
 
 var _ = require('lodash');
 var Follower = require('./follower.model');
+var Campaign = require('../campaign/campaign.model');
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
@@ -61,9 +62,20 @@ function removeEntity(res) {
 
 // Gets a list of Followers
 exports.index = function(req, res) {
-  Follower.findAsync(req.params)
-    .then(responseWithResult(res))
-    .catch(handleError(res));
+  console.log(req);
+  if (req.baseUrl === '/api/users/me/followers') {
+    Follower.find({user_id: req.user_id})
+      .populate({path: 'campaign_id', model: Campaign})
+      .execAsync()
+      .then(responseWithResult(res))
+      .catch(handleError(res));
+  } else {
+    Follower.find(req.params)
+      .populate({path: 'campaign_id', model: Campaign})
+      .execAsync()
+      .then(responseWithResult(res))
+      .catch(handleError(res));
+  }
 };
 
 // Gets a single Follower from the DB
@@ -74,9 +86,18 @@ exports.show = function(req, res) {
     .catch(handleError(res));
 };
 
+exports.showParam = function(req, res, next) {
+  Follower.findByIdAsync(req.params.id)
+    .then(handleEntityNotFound(res))
+    .then(function () {
+      next()
+    })
+    .catch(handleError(res));
+};
+
 // Creates a new Follower in the DB
 exports.create = function(req, res) {
-  var data = _.extend(req.body, req.params, {user_id: req.user});
+  var data = _.extend(req.body, req.params, {user_id: req.user._id});
   Follower.createAsync(data)
     .then(responseWithResult(res, 201))
     .catch(handleError(res));

@@ -12,13 +12,17 @@
     <br>
     <comments></comments>
   </div>
+
   <div class="medium-6 large-3 columns">
+   <div><a class="dd-button big green has-icon" ng-click="clicktofollow()">{{follow}}<span class="dd-button-icon"><i class="fa fa-{{check}}"></i></span></a></div>
     <div class="callout-card info">
       <div class="card-label">
         <div class="label-text">
           <i class="fa fa-heart"></i>
         </div>
       </div>
+
+
       <div class="callout-card-content">
         <h3 class="lead"> $0 {{donated | number:2}} Donated</h3>
         <!--   <div class="cause-info-widget-percentage"> -->

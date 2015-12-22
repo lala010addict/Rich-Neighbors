@@ -9,8 +9,8 @@ module.exports = {
   DOMAIN:           'http://localhost:9000',
   SESSION_SECRET:   'b-secret',
 
-  FACEBOOK_ID:      'app-id',
-  FACEBOOK_SECRET:  'secret',
+  FACEBOOK_ID:      '441658839352569',
+  FACEBOOK_SECRET:  '662cc73d62b77e0491c1d46fa9016511',
 
   TWITTER_ID:       'app-id',
   TWITTER_SECRET:   'secret',

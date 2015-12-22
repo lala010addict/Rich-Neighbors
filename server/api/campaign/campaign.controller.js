@@ -11,13 +11,27 @@
 
 var _ = require('lodash');
 var Campaign = require('./campaign.model');
-var User = require('../user/user.model')
+var config = require('../../config/environment');
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
   return function(err) {
+    console.log(err);
     res.status(statusCode).send(err);
   };
+}
+
+function checkUserId(req, res) {
+  var userid = req.user._id
+  return function (entity) {
+    if (userid.equals(entity.user_id) ||
+      config.userRoles.indexOf(req.user.role) >=
+      config.userRoles.indexOf('admin')) {
+      return entity;
+    }
+    res.status(403).end();
+    return null;
+  }
 }
 
 function responseWithResult(res, statusCode) {
@@ -59,9 +73,8 @@ function saveUpdates(updates) {
 function removeEntity(res) {
   return function(entity) {
     if (entity) {
-      return entity.removeAsync()
-        .then(function() {
-          res.status(204).end();
+      return entity.removeAsync( function() {
+          res.status(204).end()
         });
     }
   };
@@ -78,11 +91,9 @@ function removeEntity(res) {
 
 exports.index = function(req, res) {
   if (req.baseUrl === '/api/users/me/campaigns') {
-    Campaign.find({
+    Campaign.findAsync({
         user_id: req.user_id
       })
-      .populate('user_id', 'name')
-      .execAsync()
       .then(responseWithResult(res))
       .catch(handleError(res));
   } else {
@@ -117,47 +128,49 @@ exports.show = function(req, res) {
     .then(handleEntityNotFound(res))
     .then(responseWithResult(res))
     .catch(handleError(res));
+
 };
+
+// pass a single campaign as a param
+exports.showParam = function(req, res, next) {
+  Campaign.findByIdAsync(req.params.id)
+    .then(handleEntityNotFound(res))
+    .then(function () {
+      next()
+    })
+    .catch(handleError(res));
+};
+
+
 
 // Creates a new Campaign in the DB
 exports.create = function(req, res) {
   var data = _.extend(req.body, req.params, {
-    user_id: req.user
+    user_id: req.user._id
   });
   Campaign.createAsync(data)
     .then(responseWithResult(res, 201))
     .catch(handleError(res));
 };
 
-// TODO: Must be tested
 // Updates an existing Campaign in the DB
 exports.update = function(req, res) {
   if (req.body._id) {
     delete req.body._id;
   }
   Campaign.findByIdAsync(req.params.id)
-    .then(function(data) {
-      if (data.isOwner(req.user._id)) {
-        return handleEntityNotFound(res)
-          .then(saveUpdates(req.body))
-          .then(responseWithResult(res))
-          .catch(handleError(res));
-      } else {
-        return res.status(403).end();
-      }
-    })
+    .then(handleEntityNotFound(res))
+    .then(checkUserId(req, res))
+    .then(saveUpdates(req.body))
+    .then(responseWithResult(res))
+    .catch(handleError(res));
 };
 
 // Deletes a Campaign from the DB
 exports.destroy = function(req, res) {
   Campaign.findByIdAsync(req.params.id)
-    .then(function(data) {
-      if (data.isOwner(req.user._id)) {
-        return handleEntityNotFound(res)
-          .then(removeEntity(res))
-          .catch(handleError(res));
-      } else {
-        return res.status(403).end();
-      }
-    });
+    .then(handleEntityNotFound(res))
+    .then(checkUserId(req, res))
+    .then(removeEntity(res))
+    .catch(handleError(res));
 };

@@ -61,9 +61,19 @@ function removeEntity(res) {
 
 // Gets a list of Items
 exports.index = function(req, res) {
-  Item.findAsync(req.params)
-    .then(responseWithResult(res))
-    .catch(handleError(res));
+  if (req.baseUrl === '/api/users/me/items') {
+    Item.find({user_id: req.user_id})
+      .populate('campaign_id', 'title')
+      .execAsync()
+      .then(responseWithResult(res))
+      .catch(handleError(res));
+  } else {
+    Item.find(req.params)
+      .populate('campaign_id', 'title')
+      .execAsync()
+      .then(responseWithResult(res))
+      .catch(handleError(res));
+  }
 };
 
 // Gets a single Item from the DB
@@ -74,9 +84,20 @@ exports.show = function(req, res) {
     .catch(handleError(res));
 };
 
+// pass a single campaign as a param
+exports.showParam = function(req, res, next) {
+  Item.findByIdAsync(req.params.id)
+    .then(handleEntityNotFound(res))
+    .then(function () {
+      next()
+    })
+    .catch(handleError(res));
+};
+
+
 // Creates a new Item in the DB
 exports.create = function(req, res) {
-  var data = _.extend(req.body, req.params, {user_id: req.user});
+  var data = _.extend(req.body, req.params, {user_id: req.user._id});
   Item.createAsync(data)
     .then(responseWithResult(res, 201))
     .catch(handleError(res));

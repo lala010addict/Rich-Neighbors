@@ -58,13 +58,13 @@ module.exports = function(app) {
       //   angular: true
       // },
       csp: { policy: "*" },
-      xframe: 'SAMEORIGIN',
+      xframe: 'ALLOW FROM *',
       hsts: {
         maxAge: 31536000, //1 year, in seconds
         includeSubDomains: true,
         preload: true
       },
-      xssProtection: true //TODO: Change to true for p
+      xssProtection: false
     }));
   }
 

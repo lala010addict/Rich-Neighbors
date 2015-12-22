@@ -61,9 +61,19 @@ function removeEntity(res) {
 
 // Gets a list of Contributors
 exports.index = function(req, res) {
-  Contributor.findAsync(req.params)
-    .then(responseWithResult(res))
-    .catch(handleError(res));
+  if (req.baseUrl === '/api/users/me/contributors') {
+    Contributor.find({user_id: req.user_id})
+      .populate('user_id', 'name')
+      .execAsync()
+      .then(responseWithResult(res))
+      .catch(handleError(res));
+  } else {
+    Contributor.find(req.params)
+      .populate('user_id', 'name')
+      .execAsync()
+      .then(responseWithResult(res))
+      .catch(handleError(res));
+  }
 };
 
 // Gets a single Contributor from the DB
@@ -74,9 +84,18 @@ exports.show = function(req, res) {
     .catch(handleError(res));
 };
 
+exports.showParam = function(req, res, next) {
+  Contributor.findByIdAsync(req.params.id)
+    .then(handleEntityNotFound(res))
+    .then(function () {
+      next()
+    })
+    .catch(handleError(res));
+};
+
 // Creates a new Contributor in the DB
 exports.create = function(req, res) {
-  var data = _.extend(req.body, req.params, {user_id: req.user});
+  var data = _.extend(req.body, req.params, {user_id: req.user._id});
   Contributor.createAsync(data)
     .then(responseWithResult(res, 201))
     .catch(handleError(res));

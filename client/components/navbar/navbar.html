@@ -32,6 +32,7 @@
 
 
 <color-bar></color-bar>
+
 <div class="top-bar" ng-controller="NavbarController">
   <div class="top-bar-left">
     <ul class="menu" data-responsive-menu="accordion">
@@ -45,30 +46,28 @@
   </div>
   <div class="top-bar-right">
     <ul class="menu">
-          <li>
+      <li>
         <geolocation></geolocation>
       </li>
-
       <li ng-hide="nav.isLoggedIn()" ui-sref-active="active"><a class="button small" ui-sref="login"><i class="fa fa-sign-in">   Login</i></a></li>
       <li ng-hide="nav.isLoggedIn()" ui-sref-active="active"><a class="button small" ui-sref="signup"><i class="fa fa-user">    Sign Up</i></a></li>
       <li ng-show="nav.isLoggedIn()">
-      <!--       <li ng-show="nav.isLoggedIn()" ui-sref-active="active"><a href="/myaccount">My Account</a></li>
+        <!--       <li ng-show="nav.isLoggedIn()" ui-sref-active="active"><a href="/myaccount">My Account</a></li>
         <p class="navbar-text">Hello {{ nav.getCurrentUser().name }}</p>
       </li> -->
-      <li class = 'dropdown' id="primary_nav_wrap" ng-show="nav.isLoggedIn()">
-        <ul>
-          <li>
-            <a class="button" href="#">Hello, {{ nav.getCurrentUser().name }}!</a>
-            <ul>
-              <li ui-sref-active="active"><a href="/myaccount">My Account</a></li>
-              <li ui-sref-active="active"><a ui-sref="settings">Settings</a></li>
-              <li><a ui-sref="logout">Logout</a></li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-
-     <!--  <li ng-show="nav.isLoggedIn()" ui-sref-active="active"><a ui-sref="settings"><i class="fa fa-cog"></i></a></li>
+        <li class='dropdown' id="primary_nav_wrap" ng-show="nav.isLoggedIn()">
+          <ul>
+            <li>
+              <a class="button" href="#">Hello, {{ nav.getCurrentUser().name }}!</a>
+              <ul>
+                <li ui-sref-active="active"><a href="/myaccount">My Account</a></li>
+                <li ui-sref-active="active"><a ui-sref="settings">Settings</a></li>
+                <li><a ui-sref="logout">Logout</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <!--  <li ng-show="nav.isLoggedIn()" ui-sref-active="active"><a ui-sref="settings"><i class="fa fa-cog"></i></a></li>
       <li ng-show="nav.isLoggedIn()"><a ui-sref="logout">Logout</a></li> -->
     </ul>
   </div>
