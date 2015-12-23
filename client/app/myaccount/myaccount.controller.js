@@ -59,6 +59,20 @@ angular.module('bApp')
     $scope.getFollowers = function() {
       $http.get('/api/users/me/followers')
         .success(function(data) {
+
+          _.forEach(data, function(item) {
+            if (item.campaign_id === null) {
+              $http.delete('/api/followers/' + item._id)
+                .success(function(data) {
+                  $scope.getFollowers();
+
+                })
+                .error(function(data) {
+                  console.log('Error: ' + data);
+                });
+            }
+          })
+
           $scope.myfollows = data
           console.log('follows', data)
         })
@@ -90,6 +104,32 @@ angular.module('bApp')
         console.log('they changed their mind')
       }
     }
+
+
+    //********************** unfollow campaigns ******************
+
+    $scope.unfollowcampaign = function(id) {
+
+      console.log(id);
+
+      var r = confirm("Are you sure to unfollow?");
+      if (r == true) {
+        $http.delete('/api/followers/' + id)
+          .success(function(data) {
+            $scope.getFollowers();
+
+            console.log('unfollow')
+
+
+          })
+          .error(function(data) {
+
+            console.log('Error: ' + data);
+          });
+      }
+    }
+
+
 
     //********************** update campaigns ******************
 
