@@ -55,7 +55,10 @@ var CampaignSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'Comment'
   }],
-
+  feeds: [{
+    type: Schema.ObjectId,
+    ref: 'Feed'
+  }],
   address: {
     street: String,
     neighborhood: String,

@@ -12,6 +12,7 @@
 var _ = require('lodash');
 var Campaign = require('./campaign.model');
 var config = require('../../config/environment');
+var AWS = require('aws-sdk');
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;

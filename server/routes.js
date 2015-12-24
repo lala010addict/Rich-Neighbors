@@ -18,6 +18,7 @@ module.exports = function(app) {
   // });
 
   // Insert routes below
+  app.use('/api/feeds', require('./api/feed'));
   app.use('/api/payments', require('./api/payment'));
   app.use('/api/contributors', require('./api/contributor'));
   app.use('/api/followers', require('./api/follower'));
