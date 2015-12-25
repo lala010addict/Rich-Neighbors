@@ -8,10 +8,10 @@ var VolunteerSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'Campaign'
   },
-  user_id: {
+  users: [{
     type: Schema.ObjectId,
     ref: 'User'
-  },
+  }],
   job: {
     type: String
   },
