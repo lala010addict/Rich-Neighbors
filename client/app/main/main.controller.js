@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('bApp.MainController', ['ui.router'])
-  .controller('MainController', ['$scope', '$http', "geolocationFactory", function($scope, $http, geolocationFactory) {
+  .controller('MainController', ['$scope', '$http', function ($scope, $http, geolocationFactory, Reddit) {
 
     $scope.campaigns = {};
- 
+ // $scope.reddit = new Reddit();
     // https://maps.googleapis.com/maps/api/distancematrix/json?origins=02148&destinations=91801
 
     $scope.getCurrentLoc = function() {

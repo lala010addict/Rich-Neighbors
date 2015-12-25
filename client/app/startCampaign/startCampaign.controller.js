@@ -19,7 +19,7 @@ angular.module('bApp.StartCampaignController', [])
       .then(function(result) {
         $scope.formData.loc = result.data.loc.split(',').map(function(loc) {
           return Number(loc);
-        })
+        });
       });
 
     //****************

@@ -39,7 +39,7 @@ angular.module('bApp.CampaignProfileController', [])
     .success(function(data) {
       $scope.updateDonatedAmount();
       $scope.campaign = data;
-console.log(data)
+      console.log(data)
       generalFactory.setCampaignId(data._id);
 
       var amounts = _.pluck(data.contributors, 'amount');

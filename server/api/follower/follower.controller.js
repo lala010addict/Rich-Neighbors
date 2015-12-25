@@ -58,7 +58,7 @@ function removeEntity(res) {
         });
     }
   };
-}
+} 
 
 // Gets a list of Followers
 exports.index = function(req, res) {
