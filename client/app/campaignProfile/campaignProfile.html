@@ -12,17 +12,14 @@
     <br>
     <comments></comments>
   </div>
-
   <div class="medium-6 large-3 columns">
-   <div><a class="dd-button big green has-icon" ng-click="clicktofollow()">{{follow}}<span class="dd-button-icon"><i class="fa fa-{{check}}"></i></span></a></div>
+    <div><a class="dd-button big green has-icon" ng-click="clicktofollow()">{{follow}}<span class="dd-button-icon"><i class="fa fa-{{check}}"></i></span></a></div>
     <div class="callout-card info">
       <div class="card-label">
         <div class="label-text">
           <i class="fa fa-heart"></i>
         </div>
       </div>
-
-
       <div class="callout-card-content">
         <h3 class="lead"> $0 {{donated | number:2}} Donated</h3>
         <!--   <div class="cause-info-widget-percentage"> -->
@@ -49,7 +46,16 @@
       <div class="callout-card-content">
         <h3 class="lead"> Supplies</h3>
         <div ng-repeat="x in obj.items">
-          <li>{{x.name}}: {{x.quantity}}</li>
+          <li><a href="#" ng-click="showDetails = ! showDetails">{{x.name}}: {{x.quantity}} </a>
+            <div ng-show="showDetails">
+              <p>
+                <label>Select Quantity
+                  <select>
+                    <option ng-repeat="n in range(x.quantity)" value="{{$index + 1 }}">{{$index + 1}}</option>
+                  </select>
+                </label><a class="dd-button small green" ng-click=""> Donate</a></p>
+            </div>
+          </li>
         </div>
       </div>
     </div>
@@ -64,7 +70,11 @@
       <div class="callout-card-content">
         <h3 class="lead">Volunteers</h3>
         <div ng-repeat="x in obj.volunteers">
-          <li>{{x.name}}: {{x.quantity}}</li>
+          <li><a href="#" ng-click="showDetails = ! showDetails">{{x.name}}: {{x.quantity}} </a>
+            <div ng-show="showDetails">
+              <a class="dd-button small green" ng-click=""> Sign Up</a>
+            </div>
+          </li>
         </div>
       </div>
     </div>
