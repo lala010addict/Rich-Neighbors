@@ -181,10 +181,17 @@ angular.module('bApp.CampaignProfileController', [])
 
   }
 
+//**************************sign up for supplies and volunteers**********************
 
+$scope.range = function(count){
 
+  var quantity = []; 
 
+  for (var i = 1; i < count +1; i++) { 
+    quantity.push(i) 
+  } 
 
-
+  return quantity;
+}
 
 }])
