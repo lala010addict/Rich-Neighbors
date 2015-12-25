@@ -98,7 +98,7 @@ exports.index = function(req, res) {
       .then(responseWithResult(res))
       .catch(handleError(res));
   } else {
-      var limit = req.query.limit || 20;
+      var limit = req.query.limit || 20;  // TODO: add pagination
       // get the max distance or set it to 8 kilometers
       var maxDistance = req.q
       // we need to convert the distance to radians

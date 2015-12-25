@@ -57,6 +57,10 @@ var all = {
     clientID:     process.env.GOOGLE_ID || 'id',
     clientSecret: process.env.GOOGLE_SECRET || 'secret',
     callbackURL:  (process.env.DOMAIN || '') + '/auth/google/callback'
+  },
+  amazon: {
+    accessKeyId: process.env.AMAZON_KEY_ID || 'ID',
+    accessSecretKey: process.env.AMAZON_SECRET_KEY || 'KEY'
   }
 };
 
