@@ -8,6 +8,10 @@ var ItemSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'Campaign'
   },
+  users: [{
+    type: Schema.ObjectId,
+    ref: 'User'
+  }],
   name: {
     type: String,
     required: true
