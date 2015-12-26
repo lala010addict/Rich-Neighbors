@@ -164,6 +164,18 @@ angular.module('bApp.CampaignProfileController', [])
 
 
   }
+  //**************************sign up for supplies and volunteers**********************
+
+$scope.range = function(count){
+
+  var quantity = []; 
+
+  for (var i = 1; i < count +1; i++) { 
+    quantity.push(i);
+  } 
+
+  return quantity;
+}
 
   $scope.checkiffollowed();
 
@@ -172,50 +184,36 @@ angular.module('bApp.CampaignProfileController', [])
     if ($scope.follow == 'Follow') {
       $http.post('/api/followers', $scope.followers)
         .success(function(data) {
-          $scope.follow = 'Followed'
-          $scope.check = 'check'
+          $scope.follow = 'Followed';
+          $scope.check = 'check';
 
-          $scope.followid = data._id
-          console.log(data)
-          console.log($scope.followid)
+          $scope.followid = data._id;
+          console.log(data);
+          console.log($scope.followid);
         })
         .error(function(data) {
 
           console.log('Error: ' + data);
         });
     } else {
-      console.log('delete')
+      console.log('delete');
 
       $http.delete('/api/followers/' + $scope.followid)
         .success(function(data) {
-          $scope.follow = 'Follow'
-          $scope.check = 'plus'
-          console.log('deleted')
-          console.log(data)
+          $scope.follow = 'Follow';
+          $scope.check = 'plus';
+          console.log('deleted');
+          console.log(data);
         })
         .error(function(data) {
           console.log('Error: ' + data);
         });
     }
-  }
+  };
 }])
 .factory('campaignFactory', function ($stateParams) {
   var campaignId = $stateParams.id;
   return {
     campaignId: campaignId
-  }
-
-//**************************sign up for supplies and volunteers**********************
-
-$scope.range = function(count){
-
-  var quantity = []; 
-
-  for (var i = 1; i < count +1; i++) { 
-    quantity.push(i) 
-  } 
-
-  return quantity;
-}
-
-}]);
+  };
+});
