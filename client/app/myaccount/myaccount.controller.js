@@ -6,22 +6,23 @@ angular.module('bApp')
     $scope.name = $scope.getCurrentUser().name;
     $scope.profile_pic = $scope.getCurrentUser().profile_pic;
     $scope.click = function() {
-      console.log($scope.getCurrentUser()._id);
+      $scope.userID = $scope.getCurrentUser()._id;
     };
 
 
     $scope.mycampaigns = '';
 
     $scope.refresh = function() {
+      $scope.click();
       $http.get('/api/users/me/campaigns')
         .success(function(data) {
-          $scope.mycampaigns = data
-          console.log(data)
+          $scope.mycampaigns = data;
+          console.log(data);
         })
         .error(function(data) {
           console.log('Error: ' + data);
-        })
-    }
+        });
+    };
 
     $scope.refresh();
 
@@ -56,7 +57,7 @@ angular.module('bApp')
     //********************** my contributions *********************
     $scope.myContributions = {};
     $scope.getMyContributions = function() {
-      $http.get('/api/users/me/contributors')
+      $http.get('/api/users/' + $scope.userID + '/contributors')
       .success(function (data) {
         console.log('contrib data ', data);
         $scope.myContributions = data;

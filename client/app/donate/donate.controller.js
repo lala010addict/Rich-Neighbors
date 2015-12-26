@@ -1,26 +1,21 @@
 'use strict';
 
 angular.module('bApp.donate', ['ngMaterial'])
-
-  .controller('DonateCtrl', ['$scope', '$http', '$stateParams', 'generalFactory', 'donationFactory', 'campaignFactory', function ($scope, $http, $stateParams, generalFactory, donationFactory, campaignFactory) {
-
+  .controller('DonateCtrl', ['$scope', '$http', '$stateParams','Auth', 'generalFactory', 'donationFactory', 'campaignFactory',  function ($scope, $http, $stateParams, Auth, generalFactory, donationFactory, campaignFactory) {
     $scope.message = 'Please use the form below to pay:';
     $scope.showDropinContainer = true;
     $scope.isError = false;
     $scope.isPaid = false;
-    // $scope.updateDonation = function(amount) {
-    //   $http({
-    //     method: 'PATCH', 
-    //     url: 'api/campaigns' + $stateParams.id + '/contributors'
-    //   });
-    // };
-    $scope.jamma = campaignFactory.campaignId;
-    console.log('jamma here:::', $scope.jamma)
-    $scope.getCampaignId = function() {
-      generalFactory.getCampaignId();
-    };
+
+    $scope.getCurrentUser = Auth.getCurrentUser; 
+    $scope.userID = $scope.getCurrentUser()._id;
+
     $scope.campaignId = generalFactory.getCampaignId();
-    console.log('scope.capID::', $scope.campaignId)
+
+    console.log('scope.capID::', $scope.campaignId);
+    
+    console.log('scope.userID::', $scope.userID);
+    
     $scope.getToken = function () {
       $http({
         method: 'POST',
@@ -41,11 +36,12 @@ angular.module('bApp.donate', ['ngMaterial'])
                 payment_method_nonce: "fake-valid-nonce"
               }
             }).success(function(data) {
-              console.log(data);
               if (data.success) {
-                donationFactory.saveDonation(data.amount);
+                donationFactory.saveDonation(data.transaction.amount, $scope.campaignId, $scope.userID)
+                .success(function(data) {
+                  console.log(data);
+                })
               }
-              console.log('states here::', $stateParams);
               if (data.success) {
                 $scope.message = 'Payment authorized, thanks! You will be redirected to the home page in 3 seconds.';
                 $scope.showDropinContainer = false;
@@ -104,6 +100,7 @@ angular.module('bApp.donate', ['ngMaterial'])
     };
     return $http.post(contributionURL, donationData)
       .success(function (data) {
+        console.log('donation sved for this user')
       })
       .error(function (data) {
         console.log('donation backend error ', data);

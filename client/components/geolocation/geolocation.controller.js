@@ -60,9 +60,7 @@ return 1;
   $scope.showResult = function() {
     return $scope.error == "";
   }
-  $scope.updateAddressOmar = function() {
-    $scope.address = geolocationFactory.getCityandState();
-  };
+
 
   $scope.mapOptions = {
     center: new google.maps.LatLng($scope.lat, $scope.lng),
@@ -128,7 +126,7 @@ return 1;
   }
 
 
-$scope.updateAddressOmar();
+
 
   //https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452
 

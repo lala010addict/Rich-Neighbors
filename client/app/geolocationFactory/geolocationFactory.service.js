@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bApp')
+angular.module('bApp') 
   .factory('geolocationFactory', function ($http) {
     var getIpInfo = function() {
     var url = 'http://ipinfo.io/json';
@@ -10,10 +10,10 @@ angular.module('bApp')
         return addressDetails;
       });
     };
-    var getCityandState = function() {
+    var getLatandLong = function() {
       getIpInfo()
       .success(function(data) {
-        var result = data.city + ' ' + data.region + ', ' + data.postal;
+        var result = data.loc.split(',');
         console.log(result);
         return result;
       });
@@ -22,8 +22,8 @@ angular.module('bApp')
       getLoc: function () {
         return getIpInfo();
       },
-      getCityandState: function() {
-        return getCityandState();
+      getLatandLong: function() {
+        return getLatandLong();
       }
     };
   })

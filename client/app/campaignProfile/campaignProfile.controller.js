@@ -16,10 +16,7 @@ angular.module('bApp.CampaignProfileController', [])
   $scope.linkApiCalls = apiCall.linkApiCalls;
   $scope.obj = apiCall.obj;
   $scope.addressDetails = 'jamma';
-  $scope.getAddressDetails = function () {
-    $scope.addressDetails = geolocationFactory.getLoc();
-    $scope.cityState = geolocationFactory.getCityandState();
-  };
+
 
   $scope.updateDonatedAmount = function() {
     // donationFactory.updateDonatedAmount()
@@ -40,18 +37,13 @@ angular.module('bApp.CampaignProfileController', [])
   };
   $http.get('/api/campaigns/' + $stateParams.id)
     .success(function(data) {
-
+      $scope.updateDonatedAmount();
       $scope.campaign = data;
-      console.log(data.contributors);
-
-      $scope.getAddressDetails();
+console.log(data)
       generalFactory.setCampaignId(data._id);
 
-      console.log('userID here ', $stateParams._userId);
-
-
       var amounts = _.pluck(data.contributors, 'amount');
-      console.log(amounts);
+
       $scope.donated = _.reduce(amounts, function(total, n) {
         return total + n;
       });
@@ -83,7 +75,7 @@ angular.module('bApp.CampaignProfileController', [])
 
   $scope.isLoggedIn = Auth.isLoggedIn;
   $scope.formData = {};
-  $scope.getCurrentUser = Auth.getCurrentUser;
+  $scope.getCurrentUser = Auth.getCurrentUser; 
   $scope.name = $scope.getCurrentUser().name;
   $scope.profile_pic = $scope.getCurrentUser().profile_pic;
   $scope.formData.user_id = $stateParams._userId = $scope.getCurrentUser()._id;

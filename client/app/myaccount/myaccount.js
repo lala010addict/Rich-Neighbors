@@ -17,5 +17,5 @@ angular.module('bApp')
         url: '/contributed',
         templateUrl: 'app/myaccount/contributed.html',
         controller: 'MyaccountCtrl'
-      })
+      });
   });
