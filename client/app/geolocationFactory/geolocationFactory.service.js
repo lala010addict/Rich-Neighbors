@@ -2,19 +2,14 @@
 
 angular.module('bApp')
   .factory('geolocationFactory', function ($http) {
-    // Service logic
-    // ...
-
     var getIpInfo = function() {
     var url = 'http://ipinfo.io/json';
       return $http.get(url)
       .success(function(data) {
         var addressDetails = data;
-        console.log(data);
         return addressDetails;
       });
     };
-
     var getCityandState = function() {
       getIpInfo()
       .success(function(data) {
@@ -23,7 +18,6 @@ angular.module('bApp')
         return result;
       });
     };
-    // Public API here
     return {
       getLoc: function () {
         return getIpInfo();
@@ -31,5 +25,21 @@ angular.module('bApp')
       getCityandState: function() {
         return getCityandState();
       }
+    };
+  })
+  .factory('generalFactory', function () {
+    var campaignId = '';
+    var setCampaignId = function(id) {
+      console.log('currentCampId = ', campaignId);
+      campaignId = id;
+      console.log('it has now been changed to = ', campaignId);
+    };
+    var getCampaignId = function() {
+      console.log('from the get: ', campaignId);
+      return campaignId;
+    };
+    return {
+      getCampaignId: getCampaignId,
+      setCampaignId: setCampaignId
     };
   });

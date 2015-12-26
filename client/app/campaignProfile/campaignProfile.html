@@ -21,7 +21,7 @@
         </div>
       </div>
       <div class="callout-card-content">
-        <h3 class="lead"> $0 {{donated | number:2}} Donated</h3>
+        <h3 class="lead">{{donated | currency}} Donated</h3>
         <!--   <div class="cause-info-widget-percentage"> -->
         <span>{{( donated / campaign.goal* 100)| number:2}}0%</span> raised of <span>${{campaign.goal}}</span> goal
         <div class="cause-info-widget-percentage-bar-campaign" data-raised="{{( donated / campaign.goal* 100)| number:2}}%">
@@ -30,7 +30,9 @@
         <!-- .cause-info-widget-percentage-bar -->
         <!--   </div> -->
         <div class="cause-info-widget-donate">
-        <button ng-click="getAddressDetails()">get deets</button>
+        <button ng-click="saveDonation(100)">Donate $100</button>
+        <br>
+        <button ng-click="updateDonatedAmount()">donation updates</button>
           <a href="/donate" class="dd-button big green has-icon">MAKE A DONATION<span class="dd-button-icon"><i class="fa fa-dollar"></i></span></a>
         </div>
       </div>

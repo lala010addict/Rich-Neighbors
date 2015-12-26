@@ -1,13 +1,11 @@
 'use strict';
 
 angular.module('bApp.MainController', ['ui.router'])
-  .controller('MainController', ['$scope', '$http', "GeoLoc", "geolocationFactory", function($scope, $http, GeoLoc, geolocationFactory) {
+  .controller('MainController', ['$scope', '$http', "geolocationFactory", function($scope, $http, geolocationFactory) {
 
     $scope.campaigns = {};
  
     // https://maps.googleapis.com/maps/api/distancematrix/json?origins=02148&destinations=91801
-
-    $scope.zipcode = GeoLoc.zipcode;
 
     $scope.getCurrentLoc = function() {
     var url = 'http://ipinfo.io/json';
@@ -18,9 +16,9 @@ angular.module('bApp.MainController', ['ui.router'])
       });
 
     };
-    $scope.currentLoc = 'here';
+    $scope.currentLoc = 'Me';
     $scope.outputBar = {bar : "main"};
-    $scope.outputBar.bar = GeoLoc.getVariable();
+    
     $scope.getCurrentLoc();
 
     $http.get('/api/campaigns')

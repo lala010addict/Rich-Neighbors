@@ -53,6 +53,16 @@ angular.module('bApp')
     $scope.select = function(index) {
       $scope.selected = index;
     };
+    //********************** my contributions *********************
+    $scope.myContributions = {};
+    $scope.getMyContributions = function() {
+      $http.get('/api/users/me/contributors')
+      .success(function (data) {
+        console.log('contrib data ', data);
+        $scope.myContributions = data;
+      });
+    };
+    $scope.getMyContributions();
 
     //********************** my follows *********************
     $scope.myfollows = {};
@@ -71,16 +81,16 @@ angular.module('bApp')
                   console.log('Error: ' + data);
                 });
             }
-          })
+          });
 
           $scope.myfollows = data
           console.log('follows', data)
         })
         .error(function(data) {
           console.log('Error: ' + data);
-        })
+        });
 
-    }
+    };
 
     $scope.getFollowers();
 

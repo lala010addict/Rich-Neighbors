@@ -10,12 +10,12 @@ angular.module('bApp')
       })
       .state('following', {
         url: '/following',
-        templateUrl: 'app/following/following.html',
+        templateUrl: 'app/myaccount/following.html',
         controller: 'MyaccountCtrl'
       })
        .state('contributed', {
         url: '/contributed',
-        templateUrl: 'app/contributed/contributed.html',
+        templateUrl: 'app/myaccount/contributed.html',
         controller: 'MyaccountCtrl'
       })
   });

@@ -41,6 +41,8 @@ module.exports = function(app) {
   app.use('/api/users/:user_id/comments', require('./api/comment'));
   app.use('/api/users/:user_id/followers', require('./api/comment'));
   app.use('/api/users/:user_id/volunteers', require('./api/comment'));
+  
+  app.use('/api/users/:user_id/contributors', require('./api/contributor'));
 
 
 
