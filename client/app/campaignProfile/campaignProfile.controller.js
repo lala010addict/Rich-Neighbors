@@ -209,7 +209,26 @@ $scope.range = function(count){
           console.log('Error: ' + data);
         });
     }
+<<<<<<< HEAD
   };
+=======
+
+  }
+
+//**************************sign up for supplies and volunteers**********************
+
+$scope.range = function(count){
+
+  var quantity = []; 
+
+  for (var i = 1; i < count +1; i++) { 
+    quantity.push(i) 
+  } 
+
+  return quantity;
+}
+
+>>>>>>> upstream/develop
 }])
 .factory('campaignFactory', function ($stateParams) {
   var campaignId = $stateParams.id;

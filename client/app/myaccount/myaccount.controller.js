@@ -82,7 +82,11 @@ angular.module('bApp')
                   console.log('Error: ' + data);
                 });
             }
+<<<<<<< HEAD
           });
+=======
+          })
+>>>>>>> upstream/develop
 
           $scope.myfollows = data
           console.log('follows', data)
