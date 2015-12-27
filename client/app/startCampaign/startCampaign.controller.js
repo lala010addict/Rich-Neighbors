@@ -1,8 +1,8 @@
 'use strict';
 
 
-angular.module('bApp.StartCampaignController', [])
-  .controller('StartCampaignController', ['$scope', '$http', 'Auth', '$state', '$rootScope', '$stateParams', function($scope, $http, Auth, $state, $rootScope, $stateParams) {
+angular.module('bApp.StartCampaignController', ['ngFileUpload'])
+  .controller('StartCampaignController', ['$scope', '$http', 'Auth', '$state', '$rootScope', '$stateParams' , 'Upload', function($scope, $http, Auth, $state, $rootScope, $stateParams, Upload) {
 
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.getCurrentUser = Auth.getCurrentUser;
@@ -29,6 +29,7 @@ angular.module('bApp.StartCampaignController', [])
 
     }];
 
+    $scope.pictures = [{}];
 
     // $scope.supplyForm = {};
 
@@ -64,7 +65,21 @@ angular.module('bApp.StartCampaignController', [])
 
 
 
-
+   $scope.upload = function (file) {
+        console.log("upload called");
+        Upload.upload({
+            url: 'http://localhost:9000/api/images',
+            data: {file: file, 'username': $scope.username}
+        }).then(function (resp) {
+            console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+        }, function (resp) {
+            console.log('Error status: ' + resp.status);
+        }, function (evt) {
+            console.log(evt);
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+        });
+    };
 
     $scope.createCampaign = function() {
       $http.post('/api/campaigns', $scope.formData)
@@ -72,6 +87,33 @@ angular.module('bApp.StartCampaignController', [])
           console.log(data)
           $scope.id = data._id
           $scope.campaign_id = $scope.id
+
+
+
+           // _.forEach($scope.pictures, function(picture) {
+           //  var newPicture = _.merge(picture, {
+           //    'campaign_id': $scope.campaign_id
+           //  });
+           //  console.log('new picture', newPicture);
+
+           //  $http.post('/api/images', newPicture)
+           //    .success(function(data) {
+           //      //$scope.formData = {}; // clear the form so our user is ready to enter another
+           //      //  $scope.campaigns = data;
+
+           //      // console.log($scope.campaign_id)
+           //      console.log(data);
+           //      // $scope.id = data._id
+           //      //  console.log($scope.id)
+
+
+           //    })
+           //    .error(function(data) {
+           //      console.log($scope.getCurrentUser());
+           //      console.log('Error Pics: ' + data);
+           //    });
+
+
 
 
           _.forEach($scope.supplies, function(item) {
@@ -140,4 +182,4 @@ angular.module('bApp.StartCampaignController', [])
 
 
 
-  }])
+  }]);

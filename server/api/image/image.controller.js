@@ -72,30 +72,12 @@ function removeEntity(res) {
   };
 }
 
-export function awzUpload() {
-  multer({ // https://github.com/expressjs/multer
-    dest: './public/uploads/',
-    limits : { fileSize:100000 },
-    rename: function (fieldname, filename) {
-      return filename.replace(/\W+/g, '-').toLowerCase();
-    },
-    onFileUploadData: function (file, data, req, res) {
-      // file : { fieldname, originalname, name, encoding, mimetype, path, extension, size, truncated, buffer }
-      var params = {
-        Bucket: 'Campaigns',
-        Key: req.params.campaign_id,
-        Body: data
-      };
-
-      s3.putObject(params, function (perr, pres) {
-        if (perr) {
-          console.log("Error uploading data: ", perr);
-        } else {
-          console.log("Successfully uploaded data to Campaigns/" + req.params.campaign_id);
-        }
-      });
+export function awzUpload(req, res) {
+    if(req.files.image !== undefined){ // `image` is the field name from your form
+        res.redirect("/uploads"); // success
+    }else{
+        res.send("error, no file chosen");
     }
-  });
 }
 // Gets a list of Images
 export function index(req, res) {
