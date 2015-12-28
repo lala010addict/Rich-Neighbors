@@ -23,7 +23,8 @@
     "animate.css": "~3.4.0",
     "braintree-angular": "~1.3.1",
     "braintree-web": "~2.17.5",
-    "angular-material": "~1.0.0"
+    "angular-material": "~1.0.0",
+    "ng-file-upload": "~11.0.0"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.2"

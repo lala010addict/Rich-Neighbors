@@ -37,6 +37,7 @@ module.exports = function(config) {
       'client/bower_components/braintree-angular/dist/braintree-angular.js',
       'client/bower_components/braintree-web/dist/braintree.js',
       'client/bower_components/angular-material/angular-material.js',
+      'client/bower_components/ng-file-upload/ng-file-upload.js',
       'client/bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'client/app/app.js',
