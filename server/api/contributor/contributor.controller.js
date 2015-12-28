@@ -11,6 +11,8 @@
 
 var _ = require('lodash');
 var Contributor = require('./contributor.model');
+var Campaign = require('../campaign/campaign.model');
+
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
@@ -64,14 +66,14 @@ exports.index = function(req, res) {
   if (req.baseUrl === '/api/users/me/contributors') {
     Contributor.find({user_id: req.user_id})
       .populate('user_id', 'name')
-      .populate('campaign_id', 'title')
+      .populate({path: 'campaign_id', model: Campaign})
       .execAsync()
       .then(responseWithResult(res))
       .catch(handleError(res));
   } else {
     Contributor.find(req.params)
       .populate('user_id', 'name')
-      .populate('campaign_id', 'title')
+      .populate({path: 'campaign_id', model: Campaign})
       .execAsync()
       .then(responseWithResult(res))
       .catch(handleError(res));

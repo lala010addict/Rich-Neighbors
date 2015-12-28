@@ -2,10 +2,13 @@
 </myacc>
 <br>
 <div class="row" id='myposts' ng-repeat="x in myContributions">
-  <div class="large-2 columns small-3"><img id='postpic' src="{{x.campaign_id}}" /></div>
-  <div class="large-8 columns">
-    <p><a href="../campaignProfile/{{x.campaign_id._id}}"> {{x.campaign_id.title}} </a></p>
-    <p> {{x.amount}}</p>
-  </div>
-   <div class="large-2 columns small-3"><div><a class="dd-button small blue" ng-click="unfollowcampaign(x._id)">Unfollow </a></div></div>
+    <div class="large-2 columns small-3"><img id='postpic' src="{{x.campaign_id.picture_url}}" /></div>
+    <div class="large-8 columns">
+        <p><a href="../campaignProfile/{{x.campaign_id._id}}"> {{x.campaign_id.title}} </a></p>
+        <p> {{x.amount}}</p>
+        <p> {{x.campaign_id.description}}</p>
+    </div>
+    <div class="large-2 columns small-3">
+        <div><a class="dd-button small blue" ng-click="unfollowcampaign(x._id)">Unfollow </a></div>
+    </div>
 </div>
