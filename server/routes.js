@@ -18,8 +18,6 @@ module.exports = function(app) {
   // });
 
   // Insert routes below
-  app.use('/api/images', require('./api/image'));
-  app.use('/api/feeds', require('./api/feed'));
   app.use('/api/payments', require('./api/payment'));
   app.use('/api/contributors', require('./api/contributor'));
   app.use('/api/followers', require('./api/follower'));
@@ -36,8 +34,6 @@ module.exports = function(app) {
   app.use('/api/campaigns/:campaign_id/items', require('./api/item'));
   app.use('/api/campaigns/:campaign_id/followers', require('./api/follower'));
   app.use('/api/campaigns/:campaign_id/volunteers', require('./api/volunteer'));
-  app.use('/api/campaigns/:campaign_id/feeds', require('./api/feed'));
-  app.use('/api/campaigns/:campaign_id/images', require('./api/image'));
   app.use('/api/comments/:replies/comments', require('./api/comment'));
 
   // routes for admins only
@@ -45,7 +41,8 @@ module.exports = function(app) {
   app.use('/api/users/:user_id/comments', require('./api/comment'));
   app.use('/api/users/:user_id/followers', require('./api/comment'));
   app.use('/api/users/:user_id/volunteers', require('./api/comment'));
-  app.use('/api/users/:user_id/images', require('./api/image'));
+  
+  app.use('/api/users/:user_id/contributors', require('./api/contributor'));
 
 
 

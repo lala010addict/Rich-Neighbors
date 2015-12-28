@@ -12,7 +12,6 @@
 var _ = require('lodash');
 var Campaign = require('./campaign.model');
 var config = require('../../config/environment');
-var AWS = require('aws-sdk');
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
@@ -98,7 +97,7 @@ exports.index = function(req, res) {
       .then(responseWithResult(res))
       .catch(handleError(res));
   } else {
-      var limit = req.query.limit || 20;  // TODO: add pagination
+      var limit = req.query.limit || 20;
       // get the max distance or set it to 8 kilometers
       var maxDistance = req.q
       // we need to convert the distance to radians

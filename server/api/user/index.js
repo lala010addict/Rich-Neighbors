@@ -18,6 +18,7 @@ router.use('/me/campaigns', auth.isAuthenticated(), controller.meParams, require
 router.use('/me/comments', auth.isAuthenticated(), controller.meParams, require('../comment'));
 router.use('/me/followers', auth.isAuthenticated(), controller.meParams, require('../follower'));
 router.use('/me/volunteers', auth.isAuthenticated(), controller.meParams, require('../volunteer'));
+router.use('/me/contributors', auth.isAuthenticated(), controller.meParams, require('../contributor'));
 router.get('/:id', auth.isAuthenticated(), controller.show);
 router.put('/:id/profile_pic', auth.isAuthenticated(), controller.changeProfilePic);
 router.put('/:id/password', auth.isAuthenticated(), controller.changePassword);

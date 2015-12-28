@@ -64,12 +64,14 @@ exports.index = function(req, res) {
   if (req.baseUrl === '/api/users/me/contributors') {
     Contributor.find({user_id: req.user_id})
       .populate('user_id', 'name')
+      .populate('campaign_id', 'title')
       .execAsync()
       .then(responseWithResult(res))
       .catch(handleError(res));
   } else {
     Contributor.find(req.params)
       .populate('user_id', 'name')
+      .populate('campaign_id', 'title')
       .execAsync()
       .then(responseWithResult(res))
       .catch(handleError(res));
