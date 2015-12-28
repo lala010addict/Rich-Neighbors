@@ -122,12 +122,13 @@ export function create(req, res) {
 
 export function createImage (req, res, next) {
   upload(req, res, function (err) {
+    console.log(res);
     var data = {
       file:  res.req.file.originalname,
       link: 'https://s3-us-west-1.amazonaws.com/richneighbors-dev/' + res.req.file.key,
-      campaign_id: res.req.body.campaign_id
+      campaign_id: req.body.campaign_id
     };
-    Image.createAsync(req.body)
+    Image.createAsync(data)
     .then(responseWithResult(res, 201))
     .catch(handleError(res));
   })

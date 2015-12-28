@@ -8,9 +8,9 @@ var ItemSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'Campaign'
   },
-  users: [{
+  contributors: [{
     type: Schema.ObjectId,
-    ref: 'User',
+    ref: 'Contributor',
   }],
   name: {
     type: String,
@@ -31,8 +31,8 @@ var Item = mongoose.model('Item', ItemSchema);
 
 /* Validations  */
 
-Item.schema.path('users').validate(function (val) {
-  return val <= Item.quantity
-}, 'Must not exceed quantity');
+// Item.schema.path('users').validate(function (val) {
+//   return val <= Item.quantity
+// }, 'Must not exceed quantity');
 
 module.exports = Item;

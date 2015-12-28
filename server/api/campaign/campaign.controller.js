@@ -94,6 +94,7 @@ exports.index = function(req, res) {
     Campaign.findAsync({
         user_id: req.user_id
       })
+      .populate('images','link')
       .then(responseWithResult(res))
       .catch(handleError(res));
   } else {
@@ -113,7 +114,9 @@ exports.index = function(req, res) {
           $maxDistance: maxDistance
         }
       };
-      Campaign.find(data).limit(limit)
+      Campaign.find(data)
+      .populate('images','link')
+      .limit(limit)
       .execAsync()
       .then(responseWithResult(res))
       .catch(handleError(res));
@@ -124,6 +127,7 @@ exports.index = function(req, res) {
 exports.show = function(req, res) {
   Campaign.findById(req.params.id)
     .populate('user_id', 'name')
+    .populate('images','link')
     .execAsync()
     .then(handleEntityNotFound(res))
     .then(responseWithResult(res))
