@@ -16,12 +16,14 @@ exports.setup = function(User, config) {
       'facebook.id': profile.id
     })
       .then(function(user) {
+        console.log(profile)
         if (!user) {
           user = new User({
             name: profile.displayName,
             email: profile.emails[0].value,
             role: 'user',
             provider: 'facebook',
+
             facebook: profile._json
           });
           user.saveAsync()
