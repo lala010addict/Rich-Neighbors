@@ -10,7 +10,7 @@ var ItemSchema = new Schema({
   },
   users: [{
     type: Schema.ObjectId,
-    ref: 'User'
+    ref: 'User',
   }],
   name: {
     type: String,
@@ -27,4 +27,12 @@ var ItemSchema = new Schema({
   }
 });
 
-module.exports = mongoose.model('Item', ItemSchema);
+var Item = mongoose.model('Item', ItemSchema);
+
+/* Validations  */
+
+Item.schema.path('users').validate(function (val) {
+  return val <= Item.quantity
+}, 'Must not exceed quantity');
+
+module.exports = Item;

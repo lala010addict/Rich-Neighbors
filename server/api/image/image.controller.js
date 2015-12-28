@@ -10,7 +10,27 @@
 'use strict';
 
 import _ from 'lodash';
+import multer from 'multer';
+import AWS from 'aws-sdk';
+import s3 from 'multer-s3';
 var Image = require('./image.model');
+var config = require('../../config/environment');
+
+var accessKeyId = config.amazon.accessKeyId;
+var secretAccessKey = config.amazon.accessSecretKey;
+
+var upload = multer({
+  storage: s3({
+    dirname: 'Campaigns',
+    bucket: 'richneighbors-dev',
+    secretAccessKey: secretAccessKey,
+    accessKeyId: accessKeyId,
+    region: 'us-east-1',
+    filename: function (req, file, cb) {
+      cb(null, Date.now())
+    }
+  })
+}).single('file');
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
@@ -59,6 +79,13 @@ function removeEntity(res) {
   };
 }
 
+export function awzUpload(req, res) {
+    if(req.files.image !== undefined){ // `image` is the field name from your form
+        res.redirect("/uploads"); // success
+    }else{
+        res.send("error, no file chosen");
+    }
+}
 // Gets a list of Images
 export function index(req, res) {
   Image.findAsync()
@@ -74,11 +101,36 @@ export function show(req, res) {
     .catch(handleError(res));
 }
 
+// pass a single campaign as a param
+exports.showParam = function(req, res, next) {
+  Image.findByIdAsync(req.params.id)
+    .then(handleEntityNotFound(res))
+    .then(function () {
+      next()
+    })
+    .catch(handleError(res));
+};
+
 // Creates a new Image in the DB
 export function create(req, res) {
   Image.createAsync(req.body)
     .then(responseWithResult(res, 201))
     .catch(handleError(res));
+}
+
+// Creates a new image link
+
+export function createImage (req, res, next) {
+  upload(req, res, function (err) {
+    var data = {
+      file:  res.req.file.originalname,
+      link: 'https://s3-us-west-1.amazonaws.com/richneighbors-dev/' + res.req.file.key,
+      campaign_id: res.req.body.campaign_id
+    };
+    Image.createAsync(req.body)
+    .then(responseWithResult(res, 201))
+    .catch(handleError(res));
+  })
 }
 
 // Updates an existing Image in the DB
