@@ -6,22 +6,23 @@ angular.module('bApp')
     $scope.name = $scope.getCurrentUser().name;
     $scope.profile_pic = $scope.getCurrentUser().profile_pic;
     $scope.click = function() {
-      console.log($scope.getCurrentUser()._id);
+      $scope.userID = $scope.getCurrentUser()._id;
     };
 
 
     $scope.mycampaigns = '';
 
     $scope.refresh = function() {
+      $scope.click();
       $http.get('/api/users/me/campaigns')
         .success(function(data) {
-          $scope.mycampaigns = data
-          console.log(data)
+          $scope.mycampaigns = data;
+          console.log(data);
         })
         .error(function(data) {
           console.log('Error: ' + data);
-        })
-    }
+        });
+    };
 
     $scope.refresh();
 
@@ -53,6 +54,16 @@ angular.module('bApp')
     $scope.select = function(index) {
       $scope.selected = index;
     };
+    //********************** my contributions *********************
+    $scope.myContributions = {};
+    $scope.getMyContributions = function() {
+      $http.get('/api/users/' + $scope.userID + '/contributors')
+      .success(function (data) {
+        console.log('contrib data ', data);
+        $scope.myContributions = data;
+      });
+    };
+    $scope.getMyContributions();
 
     //********************** my follows *********************
     $scope.myfollows = {};
@@ -71,16 +82,17 @@ angular.module('bApp')
                   console.log('Error: ' + data);
                 });
             }
-          })
+          });
+
 
           $scope.myfollows = data
           console.log('follows', data)
         })
         .error(function(data) {
           console.log('Error: ' + data);
-        })
+        });
 
-    }
+    };
 
     $scope.getFollowers();
 

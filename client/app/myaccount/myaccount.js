@@ -5,7 +5,7 @@ angular.module('bApp')
     $stateProvider
       .state('myaccount', {
         url: '/myaccount',
-        templateUrl: 'app/myaccount/myaccount.html',
+        templateUrl: 'app/myaccount/myaccount.html', // change to
         controller: 'MyaccountCtrl'
       })
       .state('following', {
@@ -17,5 +17,5 @@ angular.module('bApp')
         url: '/contributed',
         templateUrl: 'app/contributed/contributed.html',
         controller: 'MyaccountCtrl'
-      })
+      });
   });

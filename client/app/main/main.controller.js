@@ -1,18 +1,25 @@
 'use strict';
 
 angular.module('bApp.MainController', ['ui.router'])
-  .controller('MainController', ['$scope', '$http', "GeoLoc", function($scope, $http, GeoLoc) {
+  .controller('MainController', ['$scope', '$http', function ($scope, $http, geolocationFactory, Reddit) {
 
     $scope.campaigns = {};
 
     // https://maps.googleapis.com/maps/api/distancematrix/json?origins=02148&destinations=91801
 
-    $scope.zipcode = GeoLoc.zipcode
+    $scope.getCurrentLoc = function() {
+    var url = 'http://ipinfo.io/json';
+      return $http.get(url)
+      .success(function(data) {
+        var result = data.city + ' ' + data.region + ', ' + data.postal;
+        $scope.currentLoc = result;
+      });
 
-
+    };
+    $scope.currentLoc = 'Me';
     $scope.outputBar = {bar : "main"};
-    $scope.outputBar.bar = GeoLoc.getVariable();
-
+    
+    $scope.getCurrentLoc();
 
     $http.get('/api/campaigns')
       .success(function(data) {
@@ -20,20 +27,20 @@ angular.module('bApp.MainController', ['ui.router'])
       })
       .error(function(data) {
         console.log('Error: ' + data);
-      })
+      });
     $scope.calDonatedAmount = function(x) {
-      var amounts = _.pluck(x, 'amount')
+      var amounts = _.pluck(x, 'amount');
         // console.log(amounts)
 
       return _.reduce(amounts, function(total, n) {
         return total + n;
       });
-    }
+    };
 
     $scope.limitChar = function(x, y) {
-      var sp = x.split('')
-      return sp.slice(0, y).join('')
-    }
+      var sp = x.split('');
+      return sp.slice(0, y).join('');
+    };
 
     // $scope.showCampaignProfile = function(x) {
     //   $location.path('#/campaignProfile/' + x._id);
@@ -46,7 +53,7 @@ angular.module('bApp.MainController', ['ui.router'])
       var pagesShown = 1;
       var pageSize = 6;
 
-      $scope.paginationLimit = function(campaigns) {
+      $scope.paginationLimit = function() {
         return pageSize * pagesShown;
       };
       $scope.hasMoreItemsToShow = function() {
@@ -62,6 +69,18 @@ angular.module('bApp.MainController', ['ui.router'])
 
 
   }]);
+// .filter('zipCodeFilter', function(){
+//   return function(input){
+//     var out = [];
+//     angular.forEach(input, function(campaign){
+//       var zip = campaign.address.zip;
+//       if(zip[0] === $scope.zipcode[0]){
+//         out.push(campaign);
+//       }
+//     });
+//     return out;
+//   };
+// });
 
 
 

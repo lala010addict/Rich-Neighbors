@@ -5,8 +5,15 @@
   <div class="medium-6 large-9 columns">
     <h1>{{campaign.title}}</h1>
     <p><img src="{{campaign.picture_url}}" alt="image of a planet called Campaign Image"></p>
-    <p>{{campaign.address.city}}, {{campaign.address.state}}</p>
+    <p>{{campaign.address.city}}, {{campaign.address.state | uppercase}} - {{campaign.address.country}}</p>
+<a href="#" data-reveal-id="myModal">Click Me For A Modal</a>
+
+<!-- <div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+  <h2 id="modalTitle">Awesome. I have it.</h2>
     <p>{{campaign.address.country}}</p>
+  <p>I'm a cool paragraph that lives inside of an even cooler modal. Wins!</p>
+  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+</div> -->
     <p>{{campaign.description}}</p>
     <br>
     <comments></comments>
@@ -20,15 +27,18 @@
         </div>
       </div>
       <div class="callout-card-content">
-        <h3 class="lead"> $0 {{donated | number:2}} Donated</h3>
+        <h3 class="lead">{{donated | currency:undefined:0 }} Donated</h3>
         <!--   <div class="cause-info-widget-percentage"> -->
-        <span>{{( donated / campaign.goal* 100)| number:2}}0%</span> raised of <span>${{campaign.goal}}</span> goal
+        <span>{{( donated / campaign.goal* 100) | number:0}}%</span> raised of <span>${{campaign.goal}}</span> goal
         <div class="cause-info-widget-percentage-bar-campaign" data-raised="{{( donated / campaign.goal* 100)| number:2}}%">
           <span style="width: {{( donated / campaign.goal* 100)| number:2}}%;"></span>
         </div>
         <!-- .cause-info-widget-percentage-bar -->
         <!--   </div> -->
         <div class="cause-info-widget-donate">
+        <a href="#" class="button tiny success" ng-click="saveDonation(100)">Donate $100</a>
+        <br>
+        <a href="#" class="button tiny success" ng-click="updateDonatedAmount()">Update</a>
           <a href="/donate" class="dd-button big green has-icon">MAKE A DONATION<span class="dd-button-icon"><i class="fa fa-dollar"></i></span></a>
         </div>
       </div>

@@ -7,27 +7,50 @@
 
 angular.module('bApp.CampaignProfileController', [])
 
-.controller('CampaignProfileController', ['$scope', 'Auth', '$stateParams', '$http', 'apiCall', function($scope, Auth, $stateParams, $http, apiCall) {
+.controller('CampaignProfileController', ['$scope', 'Auth', '$stateParams', '$http', 'apiCall', 'geolocationFactory', 'generalFactory', 'donationFactory', function ($scope, Auth, $stateParams, $http, apiCall, geolocationFactory, generalFactory, donationFactory) {
   $scope.campaign = apiCall.campaign;
 
+  // $scope.updateDonatedAmount = donationFactory.updateDonatedAmount();
+  $scope.donated = 'blah';
+  $scope.apiCall = apiCall.call;
+  $scope.linkApiCalls = apiCall.linkApiCalls;
+  $scope.obj = apiCall.obj;
+  $scope.addressDetails = 'jamma';
 
-  $scope.donated = '';
-  $scope.apiCall = apiCall.call
-  $scope.linkApiCalls = apiCall.linkApiCalls
-  $scope.obj = apiCall.obj
 
-
+  $scope.updateDonatedAmount = function() {
+    // donationFactory.updateDonatedAmount()
+    return $http.get('/api/campaigns/' + $stateParams.id + '/contributors')
+      .success(function (contributions) {
+        var total = 0;
+        _.each(contributions, function(contribution) {
+          total += Number(contribution.amount);
+        });
+        $scope.donated = total;
+      });
+  }; 
+  $scope.saveDonation = function (amount) {
+    donationFactory.saveDonation(amount, $stateParams.id, $stateParams._userId)
+      .success(function(data) {
+        console.log(data);
+      });
+  };
   $http.get('/api/campaigns/' + $stateParams.id)
     .success(function(data) {
-      //   console.log($scope.linkApiCalls)
+      $scope.updateDonatedAmount();
       $scope.campaign = data;
-      console.log(data);
-      var amounts = _.pluck(data.contributors, 'amount')
+      console.log(data)
+      generalFactory.setCampaignId(data._id);
+
+      var amounts = _.pluck(data.contributors, 'amount');
+
       $scope.donated = _.reduce(amounts, function(total, n) {
         return total + n;
       });
-
-      var links = data._links.slice(1, 5)
+      console.log('donated:', _.reduce(amounts, function(total, n) {
+        return total + n;
+      }) );
+      var links = data._links.slice(1, 5);
       $scope.linkApiCalls(data._links);
     })
     .error(function(data) {
@@ -52,12 +75,12 @@ angular.module('bApp.CampaignProfileController', [])
 
   $scope.isLoggedIn = Auth.isLoggedIn;
   $scope.formData = {};
-  $scope.getCurrentUser = Auth.getCurrentUser;
+  $scope.getCurrentUser = Auth.getCurrentUser; 
   $scope.name = $scope.getCurrentUser().name;
   $scope.profile_pic = $scope.getCurrentUser().profile_pic;
-  $scope.formData.user_id = $scope.getCurrentUser()._id;
-  $scope.formData.profile_pic = $scope.getCurrentUser().profile_pic
-  $scope.formData.username = $scope.getCurrentUser().name
+  $scope.formData.user_id = $stateParams._userId = $scope.getCurrentUser()._id;
+  $scope.formData.profile_pic = $scope.getCurrentUser().profile_pic;
+  $scope.formData.username = $scope.getCurrentUser().name;
   $scope.formData.campaign_id = $stateParams.id;
   $scope.formData.text = '';
   // Current comment.
@@ -86,7 +109,7 @@ angular.module('bApp.CampaignProfileController', [])
         //   })
         .error(function(data) {
           console.log('Error: ' + data);
-        })
+        });
 
 
         $scope.formData.text = '';
@@ -97,18 +120,18 @@ angular.module('bApp.CampaignProfileController', [])
       })
 
     .error(function(data) {
-      console.log($scope.getCurrentUser())
+      console.log($scope.getCurrentUser());
       console.log('Error: ' + $scope.formData);
     });
 
 
-  }
+  };
 
   // Fires when the comment change the anonymous state.
   $scope.anonymousChanged = function() {
     if ($scope.comment.anonymous)
       $scope.comment.author = "";
-  }
+  };
 
   //********************follow campagins************************
 
@@ -141,6 +164,18 @@ angular.module('bApp.CampaignProfileController', [])
 
 
   }
+  //**************************sign up for supplies and volunteers**********************
+
+$scope.range = function(count){
+
+  var quantity = []; 
+
+  for (var i = 1; i < count +1; i++) { 
+    quantity.push(i);
+  } 
+
+  return quantity;
+}
 
   $scope.checkiffollowed();
 
@@ -149,37 +184,33 @@ angular.module('bApp.CampaignProfileController', [])
     if ($scope.follow == 'Follow') {
       $http.post('/api/followers', $scope.followers)
         .success(function(data) {
-          $scope.follow = 'Followed'
-          $scope.check = 'check'
+          $scope.follow = 'Followed';
+          $scope.check = 'check';
 
-          $scope.followid = data._id
-          console.log(data)
-          console.log($scope.followid)
+          $scope.followid = data._id;
+          console.log(data);
+          console.log($scope.followid);
         })
         .error(function(data) {
 
           console.log('Error: ' + data);
         });
     } else {
-      console.log('delete')
+      console.log('delete');
 
       $http.delete('/api/followers/' + $scope.followid)
         .success(function(data) {
-          $scope.follow = 'Follow'
-          $scope.check = 'plus'
-
-          console.log('deleted')
-          console.log(data)
-
+          $scope.follow = 'Follow';
+          $scope.check = 'plus';
+          console.log('deleted');
+          console.log(data);
         })
         .error(function(data) {
-
           console.log('Error: ' + data);
         });
-
     }
+  };
 
-  }
 
 //**************************sign up for supplies and volunteers**********************
 
@@ -195,3 +226,10 @@ $scope.range = function(count){
 }
 
 }])
+.factory('campaignFactory', function ($stateParams) {
+  var campaignId = $stateParams.id;
+  return {
+    campaignId: campaignId
+  };
+});
+

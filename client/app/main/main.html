@@ -3,12 +3,12 @@
   <carousel></carousel>
   <br>
   <div class="row column text-center">
-    <p class="lead">Campaigns Near Me {{outputBar.bar}}
+    <p class="lead">Campaigns Near {{currentLoc}} 
    <!--    <geolocation></geolocation> -->
     </p>
   </div>
   <div class="row small-up-1 medium-up-2 large-up-3">
-    <div class="column " height = '600px' ng-repeat="x in campaigns | orderBy: '-created_at' | limitTo: paginationLimit()  ">
+    <div class="column " height = '600px' ng-repeat="x in campaigns | orderBy: '+address.zip' | limitTo: paginationLimit()  ">
       <div class="callout">
         <p class="text-center" id = 'campaignTitle'>{{limitChar(x.title, 40)}}...</p>
         <p class="text-center"><img src="{{x.picture_url}}" class="thumbnails" alt="image of a planet called Campaign Image"></p>

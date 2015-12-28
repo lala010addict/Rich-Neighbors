@@ -2,7 +2,7 @@
 
 
 angular.module('bApp.StartCampaignController', [])
-  .controller('StartCampaignController', ['$scope', '$http', 'Auth', '$state', '$rootScope', '$stateParams', function($scope, $http, Auth, $state, $rootScope, $stateParams) {
+  .controller('StartCampaignController', ['$scope', '$http', 'Auth', '$state', '$rootScope', '$stateParams', 'geolocationFactory', function ($scope, $http, Auth, $state, $rootScope, $stateParams, geolocationFactory) {
 
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.getCurrentUser = Auth.getCurrentUser;
@@ -15,6 +15,12 @@ angular.module('bApp.StartCampaignController', [])
     $scope.formData = {};
     $scope.id = '';
     $scope.formData.user_id = $scope.getCurrentUser()._id;
+    geolocationFactory.getLoc()
+      .then(function(result) {
+        $scope.formData.loc = result.data.loc.split(',').map(function(loc) {
+          return Number(loc);
+        });
+      });
 
     //****************
     //**supplies & volunteers form
@@ -67,6 +73,7 @@ angular.module('bApp.StartCampaignController', [])
 
 
     $scope.createCampaign = function() {
+      console.log('scope.loc:: ', $scope.formData.loc);
       $http.post('/api/campaigns', $scope.formData)
         .success(function(data) {
           console.log(data)
