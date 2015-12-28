@@ -1,8 +1,8 @@
 'use strict';
 
 
-angular.module('bApp.StartCampaignController', [])
-  .controller('StartCampaignController', ['$scope', '$http', 'Auth', '$state', '$rootScope', '$stateParams', 'geolocationFactory', function ($scope, $http, Auth, $state, $rootScope, $stateParams, geolocationFactory) {
+angular.module('bApp.StartCampaignController', ['ngFileUpload'])
+  .controller('StartCampaignController', ['$scope', '$http', 'Auth', '$state', '$rootScope', '$stateParams', 'geolocationFactory','Upload', function ($scope, $http, Auth, $state, $rootScope, $stateParams, geolocationFactory, Upload) {
 
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.getCurrentUser = Auth.getCurrentUser;
@@ -35,6 +35,7 @@ angular.module('bApp.StartCampaignController', [])
 
     }];
 
+    $scope.picture = {};
 
     // $scope.supplyForm = {};
 
@@ -69,7 +70,21 @@ angular.module('bApp.StartCampaignController', [])
     };
 
 
-
+    $scope.upload = function (file, campaign) {
+      console.log("data: " + file);
+      Upload.upload({
+          url: '/api/images',
+          data: {file: file, campaign_id: campaign}
+      }).then(function (resp) {
+          console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+      }, function (resp) {
+          console.log('Error status: ' + resp.status);
+      }, function (evt) {
+          console.log(evt);
+          var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+          console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+      });
+    };
 
 
     $scope.createCampaign = function() {
@@ -80,6 +95,7 @@ angular.module('bApp.StartCampaignController', [])
           $scope.id = data._id
           $scope.campaign_id = $scope.id
 
+          $scope.upload($scope.picture, $scope.campaign_id);
 
           _.forEach($scope.supplies, function(item) {
             var newItem = _.merge(item, {

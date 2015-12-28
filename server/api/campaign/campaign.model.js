@@ -27,10 +27,8 @@ var CampaignSchema = new Schema({
   },
   created_at: {
     type: Date,
-  //  required: true,
     default: Date.now
   },
-  // TODO: Remove if comment api works4 null
   user_id: {
     type: Schema.ObjectId,
     ref: 'User'
@@ -55,7 +53,6 @@ var CampaignSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'Comment'
   }],
-
   address: {
     street: String,
     neighborhood: String,
@@ -100,7 +97,18 @@ var CampaignSchema = new Schema({
   //  required: true,
     default: 'https://pbs.twimg.com/media/BwsrTjGIcAAtjdu.png'  //TODO: Correct to basic png/jpg
   },
+  images: [{
+    type: Schema.ObjectId,
+    ref: 'Image'
+  }],
   archived: Boolean,
+  days: {
+    type: Number,
+    default: 30
+  },
+  expires: {
+    type: Date
+  },
   _links: Array
 });
 
@@ -113,6 +121,7 @@ function linkify (data) {
           {href: '/api/campaigns/' + data._id + '/followers', ref: 'followers'},
           {href: '/api/campaigns/' + data._id + '/contributors', ref: 'contributors'},
           {href: '/api/campaigns/' + data._id + '/items', ref: 'items'},
+          {href: '/api/campaigns/' + data._id + '/images', ref: 'images'},
           {href: '/api/campaigns/' + data._id + '/volunteers', ref: 'volunteers'}]
 }
 

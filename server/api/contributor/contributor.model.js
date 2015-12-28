@@ -16,6 +16,17 @@ var ContributorSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'Payment'
   },
+  type: {
+    type: String
+  },
+  item_id: {
+    type: Schema.ObjectId,
+    ref: 'Item'
+  },
+  volunteer_id: {
+    type: Schema.ObjectId,
+    ref: 'Volunteer'
+  },
   created_at: {
     type: Date,
     default: Date.now
@@ -23,9 +34,6 @@ var ContributorSchema = new Schema({
   amount: {
     type: Number,
     default: 0
-  },
-  type: {
-    type: String
   },
 });
 

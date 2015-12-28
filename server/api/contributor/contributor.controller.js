@@ -11,6 +11,8 @@
 
 var _ = require('lodash');
 var Contributor = require('./contributor.model');
+var Volunteer = require('../volunteer/volunteer.model')
+var Item = require('../item/item.model')
 var Campaign = require('../campaign/campaign.model');
 
 
@@ -67,6 +69,8 @@ exports.index = function(req, res) {
     Contributor.find({user_id: req.user_id})
       .populate('user_id', 'name')
       .populate({path: 'campaign_id', model: Campaign})
+      .populate({path: 'item_id', model: Item})
+      .populate({path: 'volunteer_id', model: Volunteer})
       .execAsync()
       .then(responseWithResult(res))
       .catch(handleError(res));
@@ -74,6 +78,8 @@ exports.index = function(req, res) {
     Contributor.find(req.params)
       .populate('user_id', 'name')
       .populate({path: 'campaign_id', model: Campaign})
+      .populate({path: 'item_id', model: Item})
+      .populate({path: 'volunteer_id', model: Volunteer})
       .execAsync()
       .then(responseWithResult(res))
       .catch(handleError(res));
