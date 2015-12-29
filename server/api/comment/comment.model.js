@@ -33,7 +33,10 @@ var CommentSchema = new Schema({
     ref: 'User',
     //required: true
   },
-
+  level: {
+    type: Number,
+    default: 1
+  },
   created_at: {
     type: Date,
     default: Date.now,
