@@ -48,14 +48,14 @@ var all = {
   },
 
   twitter: {
-    clientID:     process.env.TWITTER_ID || 'id',
-    clientSecret: process.env.TWITTER_SECRET || 'secret',
+    clientID:     process.env.TWITTER_ID || '7wzMlXeBZCXWAkeTLTCP8Hsze',
+    clientSecret: process.env.TWITTER_SECRET || 'v4Oqs9YzY0HzGH4VvlzDuVSqXR4jJ7rZEkk1PbLvWkGzPucUj8',
     callbackURL:  (process.env.DOMAIN || '') + '/auth/twitter/callback'
   },
 
   google: {
-    clientID:     process.env.GOOGLE_ID || 'id',
-    clientSecret: process.env.GOOGLE_SECRET || 'secret',
+    clientID:     process.env.GOOGLE_ID || '36266310-54oi2hbe6hq08vsd2apm436feddghjn0.apps.googleusercontent.com',
+    clientSecret: process.env.GOOGLE_SECRET || 'RTqAG_A7P8cWKKxcbZ1MccBZ',
     callbackURL:  (process.env.DOMAIN || '') + '/auth/google/callback'
   },
   amazon: {

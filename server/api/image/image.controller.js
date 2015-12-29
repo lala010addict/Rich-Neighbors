@@ -11,7 +11,6 @@
 
 import _ from 'lodash';
 import multer from 'multer';
-import AWS from 'aws-sdk';
 import s3 from 'multer-s3';
 var Image = require('./image.model');
 var config = require('../../config/environment');
