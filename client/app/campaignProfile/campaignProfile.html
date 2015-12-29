@@ -54,14 +54,15 @@
       <div class="callout-card-content">
         <h3 class="lead"> Supplies</h3>
         <div ng-repeat="x in obj.items">
+
           <li><a href="#" ng-click="showDetails = ! showDetails">{{x.name}}: {{x.quantity}} </a>
             <div ng-show="showDetails">
               <p>
-                <label>Select Quantity
-                  <select>
-                    <option ng-repeat="n in range(x.quantity)" value="{{$index + 1 }}">{{$index + 1}}</option>
+                <label  >Select Quantity
+                  <select ng-model="selectedItem">
+                    <option  ng-repeat="n in range(x.quantity)" value="{{$index +1 }}">{{$index + 1}}</option>
                   </select>
-                </label><a class="dd-button small green" ng-click=""> Donate</a></p>
+              <a class="dd-button small green" ng-click="contributeSupply(selectedItem, x._id)"> Donate</a>  </label></p>
             </div>
           </li>
         </div>
@@ -80,7 +81,7 @@
         <div ng-repeat="x in obj.volunteers">
           <li><a href="#" ng-click="showDetails = ! showDetails">{{x.name}}: {{x.quantity}} </a>
             <div ng-show="showDetails">
-              <a class="dd-button small green" ng-click=""> Sign Up</a>
+              <a class="dd-button small green" ng-click="contributeVolunteer(x._id)"> Sign Up</a>
             </div>
           </li>
         </div>
