@@ -12,6 +12,7 @@ exports.setup = function(User, config) {
       'google.id': profile.id
     })
       .then(function(user) {
+        console.log('goooooooglllllleeee', profile)
         if (!user) {
           user = new User({
             name: profile.displayName,
@@ -19,6 +20,7 @@ exports.setup = function(User, config) {
             role: 'user',
             username: profile.emails[0].value.split('@')[0],
             provider: 'google',
+            profile_pic: profile._json.image.url,
             google: profile._json
           });
           user.saveAsync()

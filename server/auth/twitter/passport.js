@@ -12,12 +12,14 @@ exports.setup = function(User, config) {
       'twitter.id_str': profile.id
     })
       .then(function(user) {
+            console.log('hihihihihihihihihihi',profile);
         if (!user) {
           user = new User({
             name: profile.displayName,
             username: profile.username,
             role: 'user',
             provider: 'twitter',
+            profile_pic: profile._json.profile_image_url_https,
             twitter: profile._json
           });
           user.saveAsync()
