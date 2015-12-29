@@ -14,13 +14,13 @@
       <div class="form-row" ng-show="nav.isLoggedIn()">
         {{name}}
       </div>
-      <div class="form-row" ng-hide="nav.isLoggedIn()">
+      <!-- <div class="form-row" ng-hide="nav.isLoggedIn()">
         <input class="input" ng-class="{ disabled: comment.anonymous }" ng-disabled="comment.anonymous" ng-model="comment.author" ng-required="!comment.anonymous" placeholder="Email" type="email">
       </div>
       <div class="form-row text-right" ng-hide="nav.isLoggedIn()">
         <input id="comment-anonymous" ng-change="anonymousChanged()" ng-model="comment.anonymous" type="checkbox">
         <label for="comment-anonymous">Anonymous</label>
-      </div>
+      </div> -->
       <div class="form-row">
         <input type="submit" value="Add Comment">
       </div>
@@ -29,49 +29,8 @@
   <!-- Comments List -->
   <div class="comments">
     <!-- Comment -->
-    <div class="comment" ng-repeat="comment in obj.comments | orderBy: '-created_at'">
-      <!-- Comment Avatar -->
-      <div class="comment-avatar">
-        <img ng-src="{{ comment.profile_pic }}">
-      </div>
-      <!-- Comment Box -->
-      <div class="comment-box">
-        <div class="comment-text">{{ comment.text }}</div>
-        <div class="comment-footer">
-          <div class="comment-info">
-            <span class="comment-author">
-              <em ng-if="comment.anonymous">Anonymous</em>
-              <a ng-if="!comment.anonymous" href="{{ comment.author }}">{{ comment.author || comment.username}}</a>
-            </span>
-            <span class="comment-date">{{ comment.created_at | date: 'medium' }}</span>
-          </div>
-          <div class="comment-actions">
-            <a href="#">Reply</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Comment - Dummy -->
-    <div class="comment">
-      <!-- Comment Avatar -->
-      <div class="comment-avatar">
-        <img src="http://gravatar.com/avatar/412c0b0ec99008245d902e6ed0b264ee?s=80">
-      </div>
-      <!-- Comment Box -->
-      <div class="comment-box">
-        <div class="comment-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto temporibus iste nostrum dolorem natus recusandae incidunt voluptatum.</div>
-        <div class="comment-footer">
-          <div class="comment-info">
-            <span class="comment-author">
-              <a href="mailto:sexar@pagelab.io">Sexar</a>
-            </span>
-            <span class="comment-date">Feb 2, 2013 11:32:04 PM</span>
-          </div>
-          <div class="comment-actions">
-            <a href="#">Reply</a>
-          </div>
-        </div>
-      </div>
+    <!-- <div class="comment" ng-repeat="comment in obj.comments | orderBy: '-created_at'"> -->
+    <div class="comment" ng-repeat="comment in obj.comments | orderBy: 'created_at': true" ng-include src="'comment.html'">
     </div>
   </div>
 </div>
