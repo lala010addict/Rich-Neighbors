@@ -91,10 +91,11 @@ function removeEntity(res) {
 
 exports.index = function(req, res) {
   if (req.baseUrl === '/api/users/me/campaigns') {
-    Campaign.findAsync({
+    Campaign.find({
         user_id: req.user_id
       })
       .populate('images','link')
+      .execAsync()
       .then(responseWithResult(res))
       .catch(handleError(res));
   } else {

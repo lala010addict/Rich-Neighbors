@@ -266,9 +266,7 @@ angular.module('bApp.CampaignProfileController', [])
       $scope.supplyVolunteer.volunteer_id = id;
       $http.post('/api/contributors', $scope.supplyVolunteer)
         .success(function(data) {
-
           alert("Thanks for Signing Up!")
-          console.log(data);
 
         })
         .error(function(data) {
@@ -277,6 +275,80 @@ angular.module('bApp.CampaignProfileController', [])
         });
 
     }
+
+    //**************************filtering out supply contributions **********************
+
+    $scope.filterSupply = function(x, id) {
+
+      // console.log('obj.contributors', x);
+      // console.log('id', id)
+      // console.log('filtered', _.pluck(_.filter(_.pluck(_.filter(x, {
+      //   'type': "Supply"
+      // }), "item_id"), {
+      //   '_id': "5679bbd0e134af5d22bdb9e8"
+      // }), 'quantity'));
+
+
+      console.log('filteredid', _.pluck(_.filter(x, {
+        'type': "Supply",
+        'item_id': {
+          '_id': "5679bbd0e134af5d22bdb9e8"
+        }
+      }), 'amount'))
+
+
+      var numbers = _.pluck(_.filter(x, {
+        'type': "Supply",
+        'item_id': {
+          '_id': id
+        }
+      }), 'amount')
+
+
+
+      var reducednumber = _.reduce(numbers, function(total, n) {
+        return total + n;
+      })
+
+      // console.log('reducednumber', reducednumber)
+
+      return reducednumber
+    }
+
+
+    //**************************filtering out supply contributions **********************
+    $scope.filterVolunteer = function(x, id) {
+
+
+      // console.log('filteredid', _.pluck(_.filter(x, {
+      //   'type': "Supply",
+      //   'item_id': {
+      //     '_id': "5679bbd0e134af5d22bdb9e8"
+      //   }
+      // }), 'amount'))
+
+
+      var numbers = _.pluck(_.filter(x, {
+        'type': "Volunteer",
+        'volunteer_id': {
+          '_id': id
+        }
+      }), 'amount')
+
+
+
+      var reducednumber = _.reduce(numbers, function(total, n) {
+        return total + n;
+      })
+
+      // console.log('reducednumber', reducednumber)
+
+      return reducednumber
+    }
+
+
+
+
 
   }])
   .factory('campaignFactory', function($stateParams) {
