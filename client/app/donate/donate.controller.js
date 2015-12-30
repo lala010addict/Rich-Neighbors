@@ -2,22 +2,22 @@
 
 angular.module('bApp.donate', ['ngMaterial'])
 
-  .controller('DonateCtrl', ['$scope', '$http', '$stateParams', '$timeout', 'Auth', 'generalFactory', 'donationFactory', 'campaignFactory',  function ($scope, $http, $stateParams, $timeout, Auth, generalFactory, donationFactory, campaignFactory) {
+  .controller('DonateCtrl', ['$scope', '$http', '$stateParams', '$state','$timeout', 'Auth', 'generalFactory', 'donationFactory', 'campaignFactory',  function ($scope, $http, $stateParams, $state, $timeout, Auth, generalFactory, donationFactory, campaignFactory) {
     $scope.message = 'Please use the form below to pay:';
     $scope.showDropinContainer = true;
     $scope.isError = false;
     $scope.isPaid = false;
 
 
-    $scope.getCurrentUser = Auth.getCurrentUser; 
+    $scope.getCurrentUser = Auth.getCurrentUser;
     $scope.userID = $scope.getCurrentUser()._id;
 
     $scope.campaignId = generalFactory.getCampaignId();
 
     console.log('scope.capID::', $scope.campaignId);
-    
+
     console.log('scope.userID::', $scope.userID);
-    
+
     $scope.getToken = function () {
       $http({
         method: 'POST',

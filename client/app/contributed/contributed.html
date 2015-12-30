@@ -2,7 +2,7 @@
 </myacc>
 <br>
 <div class="row" id='myposts' ng-repeat="x in myContributions">
-    <div class="large-4 columns small-3"><img id='postpic' src="{{x.campaign_id.picture_url}}" /></div>
+    <div class="large-4 columns small-3"><img id='postpic' src="{{x.campaign_id.images[0].link}}" /></div>
     <div class="large-8 columns">
         <p><a href="../campaignProfile/{{x.campaign_id._id}}"> {{x.campaign_id.title}} </a></p>
         <p> Donated: {{x.amount}} {{x.item_id.name}} {{x.volunteer_id.name}}</p>
