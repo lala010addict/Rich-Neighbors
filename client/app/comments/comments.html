@@ -30,7 +30,7 @@
   <div class="comments">
     <!-- Comment -->
     <!-- <div class="comment" ng-repeat="comment in obj.comments | orderBy: '-created_at'"> -->
-    <div class="comment" ng-repeat="comment in comments | orderBy: 'created_at': true">
+    <div class="comment" ng-repeat="comment in obj.comments | orderBy: 'created_at': true">
            <!-- Comment Avatar -->
       <div class="comment-avatar">
         <img ng-src="{{ comment.profile_pic }}">
