@@ -1,8 +1,8 @@
 'use strict';
 
 
-angular.module('bApp.StartCampaignController', ['ngFileUpload','angularFileUpload'])
-  .controller('StartCampaignController', ['$scope', '$http', 'Auth', '$state', '$rootScope', '$stateParams', '$cookies', 'geolocationFactory','Upload', 'FileUploader', function ($scope, $http, Auth, $state, $rootScope, $stateParams, $cookies, geolocationFactory, Upload, FileUploader) {
+angular.module('bApp.StartCampaignController', ['ngFileUpload'])
+  .controller('StartCampaignController', ['$scope', '$http', 'Auth', '$state', '$rootScope', '$stateParams', '$cookies', 'geolocationFactory','Upload', function ($scope, $http, Auth, $state, $rootScope, $stateParams, $cookies, geolocationFactory, Upload) {
 
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.getCurrentUser = Auth.getCurrentUser;
