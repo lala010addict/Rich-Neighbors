@@ -320,38 +320,34 @@ angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
     $scope.filterVolunteer = function(x, id) {
 
 
-        // console.log('filteredid', _.pluck(_.filter(x, {
-        //   'type': "Supply",
-        //   'item_id': {
-        //     '_id': "5679bbd0e134af5d22bdb9e8"
-        //   }
-        // }), 'amount'))
+      // console.log('filteredid', _.pluck(_.filter(x, {
+      //   'type': "Supply",
+      //   'item_id': {
+      //     '_id': "5679bbd0e134af5d22bdb9e8"
+      //   }
+      // }), 'amount'))
 
 
-        var numbers = _.pluck(_.filter(x, {
-          'type': "Volunteer",
-          'volunteer_id': {
-            '_id': id
-          }
-        }), 'amount')
+      var numbers = _.pluck(_.filter(x, {
+        'type': "Volunteer",
+        'volunteer_id': {
+          '_id': id
+        }
+      }), 'amount')
 
 
 
-        var reducednumber = _.reduce(numbers, function(total, n) {
-          return total + n;
-        })
+      var reducednumber = _.reduce(numbers, function(total, n) {
+        return total + n;
+      })
 
-        // console.log('reducednumber', reducednumber)
+      // console.log('reducednumber', reducednumber)
 
-        return reducednumber
-      }
-      //**************************social share **********************
-
-    $scope.myModel = {
-      Url: 'http://jasonwatmore.com/post/2014/08/01/AngularJS-directives-for-social-sharing-buttons-Facebook-Like-GooglePlus-Twitter-and-Pinterest.aspx',
-      Name: "AngularJS directives for social sharing buttons - Facebook, Google+, Twitter and Pinterest | Jason Watmore's Blog",
-      ImageUrl: 'http://www.jasonwatmore.com/pics/jason.jpg'
+      return reducednumber
     }
+
+    //**************************social share **********************
+
 
 
 
