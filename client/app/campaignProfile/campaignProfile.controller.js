@@ -5,7 +5,7 @@
 // angular.module('bApp')
 //   .controller('CampaignProfileController', CampaignProfileController);
 
-angular.module('bApp.CampaignProfileController', [])
+angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
 
 .controller('CampaignProfileController', ['$scope', 'Auth', '$stateParams', '$http', 'apiCall', 'geolocationFactory', 'generalFactory', 'donationFactory', function($scope, Auth, $stateParams, $http, apiCall, geolocationFactory, generalFactory, donationFactory) {
     $scope.campaign = apiCall.campaign;
@@ -345,6 +345,10 @@ angular.module('bApp.CampaignProfileController', [])
 
       return reducednumber
     }
+
+    //**************************social share **********************
+
+
 
 
 
