@@ -120,15 +120,16 @@ export function createImage (req, res, next) {
       if (err) {
         console.log(err);
         handleError(res);
-      }
-      req.tempImage = {
-        campaign: res.req.body.campaign_id,
-        image: {
-          file:  res.req.file.originalname,
-          link: 'https://s3-us-west-1.amazonaws.com/richneighbors-dev/' + res.req.file.key
+      } else {
+        req.tempImage = {
+          campaign: res.req.body.campaign_id,
+          image: {
+            file:  res.req.file.originalname,
+            link: 'https://s3-us-west-1.amazonaws.com/richneighbors-dev/' + res.req.file.key
+          }
         }
+        next();
       }
-      next();
     })
 
 }
