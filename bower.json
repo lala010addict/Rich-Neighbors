@@ -25,11 +25,8 @@
     "braintree-web": "~2.17.5",
     "angular-material": "~1.0.0",
     "ng-file-upload": "~11.0.0",
-<<<<<<< 843c848fe8d4d6f687ebf1ea922f35238a6751e3
-    "foundation-sites": "~6.1.1"
-=======
+    "foundation-sites": "~6.1.1",
     "angular-easy-social-share": "*"
->>>>>>> added social share buttons
   },
   "devDependencies": {
     "angular-mocks": "~1.4.2"
