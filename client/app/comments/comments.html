@@ -3,7 +3,7 @@
   <!-- From -->
   <div class="comment-form">
     <!-- Comment Avatar -->
-    <div class="comment-avatar">
+    <div class="comment-avatar" ng-show="nav.isLoggedIn()">
       <img src="{{profile_pic}}">
     </div>
     <form class="form" name="form" ng-submit="addComment()" novalidate ng-show="nav.isLoggedIn()">
@@ -29,6 +29,9 @@
   <!-- Comments List -->
   <div class="comments">
     <!-- Comment -->
+    <div ng-show="obj.comments.length === 0">
+      <h5> There are no comments for this campaign </h5>
+    </div>
     <!-- <div class="comment" ng-repeat="comment in obj.comments | orderBy: '-created_at'"> -->
     <div class="comment" ng-repeat="comment in obj.comments | orderBy: 'created_at': true">
            <!-- Comment Avatar -->

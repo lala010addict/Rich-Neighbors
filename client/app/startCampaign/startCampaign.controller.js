@@ -99,6 +99,7 @@ angular.module('bApp.StartCampaignController', ['ngFileUpload'])
       console.log('upload called');
       if (files && files.length) {
         for (var i = 0; i < files.length; i++) {
+          console.log(files[i]);
           Upload.upload({url: '/api/images' , data: {file: files[i], campaign_id: campaign}});
         }
       }
@@ -106,21 +107,25 @@ angular.module('bApp.StartCampaignController', ['ngFileUpload'])
 
     $scope.createCampaign = function() {
       //console.log('scope.loc:: ', $scope.formData.loc);
-      $http.post('/api/campaigns', $scope.formData)
-        .then(function(data) {
-          console.log(data);
-          $scope.campaign_id = data.data._id;
-          console.log(data.data._id);
-          $scope.uploadFiles($scope.picture, data.data._id);
-        })
-        .then($scope.addRelated($scope.supplies, '/api/items'))
-        .then($scope.addRelated($scope.volunteers, '/api/volunteers'))
-        .then(function () {
-          $state.go('submitCampaignsSuccess', $stateParams)
-        })
-        .catch(function(err) {
-          console.error('Error: ' + err);
-        });
+      if ($scope.picture.length >= 1) {
+        $http.post('/api/campaigns', $scope.formData)
+          .then(function(data) {
+            console.log(data);
+            $scope.campaign_id = data.data._id;
+            console.log(data.data._id);
+            $scope.uploadFiles($scope.picture, data.data._id);
+          })
+          .then($scope.addRelated($scope.supplies, '/api/items'))
+          .then($scope.addRelated($scope.volunteers, '/api/volunteers'))
+          .then(function () {
+            $state.go('submitCampaignsSuccess', $stateParams)
+          })
+          .catch(function(err) {
+            console.error('Error: ' + err);
+          });
+      } else {
+        alert('Please add at least 1 picture')
+      }
     }
 
   }])

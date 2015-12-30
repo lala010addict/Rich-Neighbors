@@ -17,7 +17,6 @@ angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
     $scope.obj = apiCall.obj;
     $scope.addressDetails = 'jamma';
 
-
     $scope.updateDonatedAmount = function() {
       // donationFactory.updateDonatedAmount()
       return $http.get('/api/campaigns/' + $stateParams.id + '/contributors')

@@ -3,10 +3,10 @@
 <ng-view></ng-view>
 <br>
 <div class="card" id='myposts' ng-repeat="x in mycampaigns">
-  <div class="large-2 columns small-3"><img id='postpic' src="{{x.picture_url}}" /></div>
+  <div class="large-2 columns small-3"><img id='postpic' src="{{x.images[0].link}}" /></div>
   <div class="large-8 columns">
     <p><a href="../campaignProfile/{{x._id}}"> {{x.title}} </a></p>
-    
+
     <p> {{x.description}}</p>
   </div>
   <div class="large-2 columns small-3"> <div><a class="dd-button small green " ng-click="updatecampaign(x._id)">Update</a></div></div>
