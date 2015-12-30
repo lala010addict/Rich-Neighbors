@@ -25,8 +25,8 @@ angular.module('bApp.StartCampaignController', ['ngFileUpload'])
     //****************
     //**supplies & volunteers form
     //****************
-    $scope.supplies = [];
-    $scope.volunteers = [];
+    $scope.supplies = [{}];
+    $scope.volunteers = [{}];
     $scope.picture = [];
 
     // uploader.onBeforeUploadItem = function (item) {

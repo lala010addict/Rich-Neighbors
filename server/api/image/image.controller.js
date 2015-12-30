@@ -117,15 +117,16 @@ export function showParam(req, res, next) {
 // TODO: Add image to campaign
 export function createImage (req, res, next) {
   upload(req, res, function (err) {
+      if (err) {
+        console.log(err);
+        handleError(res);
+      }
       req.tempImage = {
         campaign: res.req.body.campaign_id,
         image: {
           file:  res.req.file.originalname,
           link: 'https://s3-us-west-1.amazonaws.com/richneighbors-dev/' + res.req.file.key
         }
-      }
-      if (err) {
-        console.log(err);
       }
       next();
     })
