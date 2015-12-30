@@ -31,8 +31,6 @@
 </div> -->
 
 
-<color-bar></color-bar>
-
 <div class="top-bar" ng-controller="NavbarController">
   <div class="top-bar-left">
     <ul class="menu" data-responsive-menu="accordion">
@@ -47,7 +45,6 @@
   <div class="top-bar-right">
     <ul class="menu">
       <li>
-        <geolocation></geolocation>
       </li>
       <li ng-hide="nav.isLoggedIn()" ui-sref-active="active"><a class="button small" ui-sref="login"><i class="fa fa-sign-in">   Login</i></a></li>
       <li ng-hide="nav.isLoggedIn()" ui-sref-active="active"><a class="button small" ui-sref="signup"><i class="fa fa-user">    Sign Up</i></a></li>

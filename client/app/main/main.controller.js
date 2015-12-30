@@ -68,7 +68,39 @@ angular.module('bApp.MainController', ['ui.router'])
 
 
 
-  }]);
+  }])
+  .directive('heroCard', function () {
+    return {
+      templateUrl: 'app/main/herocard.html',
+      restrict: 'EA',
+      link: function (scope, element, attrs) {
+      }
+    };
+  })
+  .directive('campaignCard', function () {
+    return {
+      templateUrl: 'app/main/temp.html',
+      restrict: 'EA',
+      link: function (scope, element, attrs) {
+      }
+    };
+  })
+  .directive('howCard', function () {
+    return {
+      templateUrl: 'app/main/howitworks.html',
+      restrict: 'EA',
+      link: function (scope, element, attrs) {
+      }
+    };
+  })
+  .directive('androidDemo', function () {
+    return {
+      templateUrl: 'app/main/androiddemo.html',
+      restrict: 'EA',
+      link: function (scope, element, attrs) {
+      }
+    };
+  })
 // .filter('zipCodeFilter', function(){
 //   return function(input){
 //     var out = [];

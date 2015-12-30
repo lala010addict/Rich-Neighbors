@@ -1,4 +1,4 @@
-<div class="column " height='600px' ng-repeat="x in campaigns | orderBy: '+address.zip' | limitTo: paginationLimit()  ">
+<div class="large-4 columns" height='600px' ng-repeat="x in campaigns | orderBy: '+address.zip' | limitTo: paginationLimit()  ">
 <div class="callout">
     <p class="text-center" id='campaignTitle'>{{limitChar(x.title, 40)}}...</p>
     <p class="text-center"><img src="{{x.images[0].link}}" class="thumbnails" alt="image of a planet called Campaign Image"></p>
@@ -11,6 +11,11 @@
                 <span>$ {{calDonatedAmount(x.contributors) | number:2}}</span> Donated </div>
             <!-- .cause-info-donated -->
             <div class="fr cause-info-funded">
+            <!-- PROGRESS BAR: omar -->
+                <div class="progress" role="progressbar" tabindex="0" aria-valuenow="50" aria-valuemin="0" aria-valuetext="50 percent" aria-valuemax="100">
+                    <div class="progress-meter" style="width: 50%"></div>
+                </div>
+
                 <span> {{( calDonatedAmount(x.contributors) / x.goal * 100)| number:2}}%</span> Funded </div>
             <!-- .cause-info-funded -->
         </div>
