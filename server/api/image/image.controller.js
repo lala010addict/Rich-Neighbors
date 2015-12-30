@@ -14,6 +14,7 @@ import multer from 'multer';
 import s3 from 'multer-s3';
 var Image = require('./image.model');
 var config = require('../../config/environment');
+var Campaign = require('../campaign/campaign.model');
 
 var accessKeyId = config.amazon.accessKeyId;
 var secretAccessKey = config.amazon.accessSecretKey;
@@ -87,7 +88,7 @@ export function awzUpload(req, res) {
 }
 // Gets a list of Images
 export function index(req, res) {
-  Image.findAsync()
+  Image.findAsync(req.params)
     .then(responseWithResult(res))
     .catch(handleError(res));
 }
@@ -101,14 +102,14 @@ export function show(req, res) {
 }
 
 // pass a single campaign as a param
-exports.showParam = function(req, res, next) {
+export function showParam(req, res, next) {
   Image.findByIdAsync(req.params.id)
     .then(handleEntityNotFound(res))
     .then(function () {
       next()
     })
     .catch(handleError(res));
-};
+}
 
 // Creates a new Image in the DB
 export function create(req, res) {
@@ -119,18 +120,24 @@ export function create(req, res) {
 
 // Creates a new image link
 
+// TODO: Add image to campaign
 export function createImage (req, res, next) {
-  upload(req, res, function (err) {
-    console.log(res);
-    var data = {
-      file:  res.req.file.originalname,
-      link: 'https://s3-us-west-1.amazonaws.com/richneighbors-dev/' + res.req.file.key,
-      campaign_id: req.body.campaign_id
-    };
-    Image.createAsync(data)
-    .then(responseWithResult(res, 201))
-    .catch(handleError(res));
-  })
+  // upload(req, res, function (err) {
+  //   if (!err) {
+  //     var data = {
+  //       file:  res.req.file.originalname,
+  //       link: 'https://s3-us-west-1.amazonaws.com/richneighbors-dev/' + res.req.file.key,
+  //       campaign_id: req.body.campaign_id
+  //     };
+  //     Image.createAsync(data)
+  //     .then(responseWithResult(res, 201))
+  //     .catch(handleError(res));
+  //   }
+  //   if (err) {
+  //     console.log(err);
+  //   }
+  // })
+  console.log('hurray');
 }
 
 // Updates an existing Image in the DB

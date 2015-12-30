@@ -8,12 +8,12 @@ angular.module('bApp.StartCampaignController', ['ngFileUpload'])
     $scope.getCurrentUser = Auth.getCurrentUser;
 
     if (Auth.isLoggedIn() === false) {
-      console.log("not logged in!");
+      console.error("not logged in!");
       $state.go('login');
     }
 
-    $scope.formData = {};
-    $scope.id = '';
+    $scope.formData = {    };
+    $scope.campaign_id = '';
     $scope.formData.user_id = $scope.getCurrentUser()._id;
     geolocationFactory.getLoc()
       .then(function(result) {
@@ -25,16 +25,8 @@ angular.module('bApp.StartCampaignController', ['ngFileUpload'])
     //****************
     //**supplies & volunteers form
     //****************
-    $scope.supplies = [{
-      //   'name': 'supply',
-
-    }];
-
-    $scope.volunteers = [{
-      //   'name': 'supply',
-
-    }];
-
+    $scope.supplies = [{}];
+    $scope.volunteers = [{}];
     $scope.picture = {};
 
     // $scope.supplyForm = {};
@@ -44,10 +36,11 @@ angular.module('bApp.StartCampaignController', ['ngFileUpload'])
     $scope.campaign_id = '';
     // $scope.stateParams = "";
 
-    $scope.addNewChoice = function() {
+    $scope.addNewChoice = function(item, qty) {
       var newItemNo = $scope.supplies.length + 1;
       $scope.supplies.push({
-        //  'name': 'supply' + newItemNo
+        // 'name': item,
+        // 'quantity' : qty
       });
     };
 
@@ -69,6 +62,19 @@ angular.module('bApp.StartCampaignController', ['ngFileUpload'])
       $scope.volunteers.splice(lastItem);
     };
 
+    $scope.addRelated = function (data, api) {
+      _.forEach(data, function(item) {
+        var newItem = _.merge(item, {
+          'campaign_id': $scope.campaign_id
+        });
+        console.log('item: ', newItem);
+        $http.post(api, newItem);
+          // .success(function(data) {
+          // })
+          // .error(function(data) {
+          // });
+      });
+    };
 
     $scope.upload = function (file, campaign) {
       console.log("data: " + file);
@@ -88,73 +94,55 @@ angular.module('bApp.StartCampaignController', ['ngFileUpload'])
 
 
     $scope.createCampaign = function() {
-      console.log('scope.loc:: ', $scope.formData.loc);
+      //console.log('scope.loc:: ', $scope.formData.loc);
       $http.post('/api/campaigns', $scope.formData)
         .success(function(data) {
-          console.log(data)
-          $scope.id = data._id
-          $scope.campaign_id = $scope.id
+          $scope.campaign_id = data._id;
+          if ($scope.picture !== false) {
+            console.log('image called');
+            $scope.upload($scope.picture, $scope.campaign_id);
+          }
+          $scope.addRelated($scope.supplies, '/api/items');
+          $scope.addRelated($scope.volunteers, '/api/volunteers');
 
-          $scope.upload($scope.picture, $scope.campaign_id);
+          // _.forEach($scope.supplies, function(item) {
+          //   var newItem = _.merge(item, {
+          //     'campaign_id': $scope.campaign_id
+          //   });
+          //   $http.post('/api/items', newItem)
+          //     .success(function(data) {
+          //     })
+          //     .error(function(data) {
+          //     });
+          // });
 
-          _.forEach($scope.supplies, function(item) {
-            var newItem = _.merge(item, {
-              'campaign_id': $scope.campaign_id
-            });
-            console.log('new item', newItem);
+          // // _.forEach($scope.volunteers, function(item) {
+          // //   var newItem = _.merge(item, {
+          // //     'campaign_id': $scope.campaign_id
+          // //   });
 
-            $http.post('/api/items', newItem)
-              .success(function(data) {
-                //$scope.formData = {}; // clear the form so our user is ready to enter another
-                //  $scope.campaigns = data;
+          // //   $http.post('/api/volunteers', newItem)
 
-                // console.log($scope.campaign_id)
-                console.log(data);
-                // $scope.id = data._id
-                //  console.log($scope.id)
-
-
-              })
-              .error(function(data) {
-                console.log($scope.getCurrentUser())
-                console.log('Error: ' + data);
-              });
-
-          })
-
-          _.forEach($scope.volunteers, function(item) {
-            var newItem = _.merge(item, {
-              'campaign_id': $scope.campaign_id
-            });
-
-            $http.post('/api/volunteers', newItem)
-
-            .success(function(data) {
-                //$scope.formData = {}; // clear the form so our user is ready to enter another
-                //  $scope.campaigns = data;
-                console.log($scope.campaign_id)
-                console.log(data);
-                // $scope.id = data._id
-                //  console.log($scope.id)
+          // //   .success(function(data) {
+          // //       //$scope.formData = {}; // clear the form so our user is ready to enter another
+          // //       //  $scope.campaigns = data;
+          // //       console.log($scope.campaign_id)
+          // //       console.log(data);
+          // //       // $scope.id = data._id
+          // //       //  console.log($scope.id)
 
 
-              })
-              .error(function(data) {
-                console.log($scope.getCurrentUser())
-                console.log('Error: ' + data);
-              });
-
-          })
-
-
-
-
-          $state.go('submitCampaignsSuccess', $stateParams)
-
-
+          // //     })
+          // //     .error(function(data) {
+          // //       console.log($scope.getCurrentUser())
+          // //       console.log('Error: ' + data);
+          // //     });
 
         })
-        .error(function(data) {
+        .then(function () {
+          $state.go('submitCampaignsSuccess', $stateParams)
+        })
+        .catch(function(data) {
           console.log($scope.getCurrentUser())
           console.log('Error: ' + data);
         });

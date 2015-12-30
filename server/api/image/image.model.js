@@ -8,8 +8,8 @@ var ImageSchema = new mongoose.Schema({
   link: String,
   campaign_id: {
     type: Schema.ObjectId,
-    ref: "Campaign"
+    ref: 'Campaign'
   }
 });
 
-export default mongoose.model('Image', ImageSchema);
+module.exports = mongoose.model('Image', ImageSchema);

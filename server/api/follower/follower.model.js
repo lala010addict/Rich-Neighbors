@@ -5,11 +5,11 @@ var Schema = mongoose.Schema;
 
 var FollowerSchema = new Schema({
   campaign_id: {
-    type: Schema.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Campaign'
   },
   user_id: {
-    type: Schema.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'User'
   },
   created_at: {

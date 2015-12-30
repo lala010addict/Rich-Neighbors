@@ -16,7 +16,6 @@ var config = require('../../config/environment');
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
   return function(err) {
-    console.log(err);
     res.status(statusCode).send(err);
   };
 }
@@ -127,8 +126,9 @@ exports.index = function(req, res) {
 // Gets a single Campaign from the DB
 exports.show = function(req, res) {
   Campaign.findById(req.params.id)
-    .populate('user_id', 'name')
-    .populate('images','link')
+    // .populate('user_id', 'name')
+    // .populate('images','link')
+    .populate('volunteers','name')
     .execAsync()
     .then(handleEntityNotFound(res))
     .then(responseWithResult(res))

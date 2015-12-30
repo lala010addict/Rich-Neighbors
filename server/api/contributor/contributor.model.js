@@ -5,26 +5,26 @@ var Schema = mongoose.Schema;
 
 var ContributorSchema = new Schema({
   campaign_id: {
-    type: Schema.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Campaign'
   },
   user_id: {
-    type: Schema.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'User'
   },
   payment_id: {
-    type: Schema.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Payment'
   },
   type: {
     type: String
   },
   item_id: {
-    type: Schema.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Item'
   },
   volunteer_id: {
-    type: Schema.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Volunteer'
   },
   created_at: {

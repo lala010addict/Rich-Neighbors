@@ -30,27 +30,27 @@ var CampaignSchema = new Schema({
     default: Date.now
   },
   user_id: {
-    type: Schema.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'User'
   },
   followers: [{
-    type:  Schema.ObjectId,
+    type:  Schema.Types.ObjectId,
     ref: 'Follower',
   }],
   contributors: [{
-    type: Schema.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Contributor'
   }],
   items: [{
-    type: Schema.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Item'
   }],
   volunteers: [{
-    type: Schema.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Volunteer'
   }],
   comments: [{
-    type: Schema.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Comment'
   }],
   address: {
@@ -98,7 +98,7 @@ var CampaignSchema = new Schema({
     default: 'https://pbs.twimg.com/media/BwsrTjGIcAAtjdu.png'  //TODO: Correct to basic png/jpg
   },
   images: [{
-    type: Schema.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Image'
   }],
   archived: Boolean,
