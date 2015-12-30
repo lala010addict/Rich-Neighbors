@@ -1,5 +1,9 @@
 <navbar></navbar>
 <br>
+
+
+
+
 <div class="row">
   <div class="medium-6 large-9 columns">
     <h1>{{campaign.title}}</h1>
@@ -17,6 +21,8 @@
     <comments></comments>
   </div>
   <div class="medium-6 large-3 columns">
+  <div share-square="true" share-links="Facebook, Twitter, LinkedIn, Google-Plus" share-title="{{campaign.title}}"></div>
+
     <div><a class="dd-button big green has-icon" ng-click="clicktofollow()">{{follow}}<span class="dd-button-icon"><i class="fa fa-{{check}}"></i></span></a></div>
     <div class="callout-card info">
       <div class="card-label">
