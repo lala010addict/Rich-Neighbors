@@ -11,6 +11,7 @@
 
 var _ = require('lodash');
 var Volunteer = require('./volunteer.model');
+var Campaign = require('../campaign/campaign.model');
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
@@ -59,6 +60,20 @@ function removeEntity(res) {
   };
 }
 
+function pushToCampaign (data) {
+  Campaign.findByIdAsync(data.campaign_id)
+    .then(function (entity) {
+      entity.volunteers.push(data._id)
+      return function() {
+        var updated = entity;
+        return updated.saveAsync()
+          .spread(function(updated) {
+            return updated;
+        });
+      };
+    });
+}
+
 // Gets a list of Volunteers
 exports.index = function(req, res) {
   if (req.baseUrl === '/api/users/me/volunteers') {
@@ -96,7 +111,7 @@ exports.showParam = function(req, res, next) {
 
 // Creates a new Volunteer in the DB
 exports.create = function(req, res) {
-  var data = _.extend(req.body, req.params, {user_id: req.user._id});
+  var data = _.extend(req.body, req.params);
   Volunteer.createAsync(data)
     .then(responseWithResult(res, 201))
     .catch(handleError(res));

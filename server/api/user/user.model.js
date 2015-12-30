@@ -28,27 +28,27 @@ var UserSchema = new Schema({
   google: {},
   github: {},
   campaigns: [{
-    type: Schema.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Campaign'
   }],
   followers: [{
-    type:  Schema.ObjectId,
+    type:  Schema.Types.ObjectId,
     ref: 'Follower',
   }],
   contributors: [{
-    type: Schema.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Contributor'
   }],
   items: [{
-    type: Schema.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Item'
   }],
   volunteers: [{
-    type: Schema.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Volunteer'
   }],
   comments: [{
-    type: Schema.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Comment'
   }]
 });

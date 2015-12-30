@@ -7,9 +7,13 @@ var ImageSchema = new mongoose.Schema({
   file: String,
   link: String,
   campaign_id: {
-    type: Schema.ObjectId,
-    ref: "Campaign"
+    type: Schema.Types.ObjectId,
+    ref: 'Campaign'
+  },
+  created_at: {
+    type: Date,
+    default: Date.now
   }
 });
 
-export default mongoose.model('Image', ImageSchema);
+module.exports = mongoose.model('Image', ImageSchema);

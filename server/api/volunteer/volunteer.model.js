@@ -5,11 +5,11 @@ var Schema = mongoose.Schema;
 
 var VolunteerSchema = new Schema({
   campaign_id: {
-    type: Schema.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Campaign'
   },
   contributors: [{
-    type: Schema.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Contributor'
   }],
   job: {

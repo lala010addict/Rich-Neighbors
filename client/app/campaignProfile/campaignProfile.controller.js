@@ -39,6 +39,7 @@ angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
       .success(function(data) {
         $scope.updateDonatedAmount();
         $scope.campaign = data;
+        $scope.comments = data.comments;
         console.log(data)
         generalFactory.setCampaignId(data._id);
 
@@ -87,7 +88,7 @@ angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
     $scope.comment = {};
 
     // Array where comments will be.
-    $scope.comments = [];
+    //$scope.comments = [];
 
     // Fires when form is submited.
     $scope.addComment = function() {
@@ -96,17 +97,17 @@ angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
         .success(function(data) {
           // console.log(data);
 
-          $http.get('/api/campaigns/' + $stateParams.id)
-            .success(function(data) {
-              $scope.linkApiCalls(data._links);
-            })
-
-          // $http.get('/api/campaigns/' + $stateParams.id + '/comments')
+          // $http.get('/api/campaign/' + $stateParams.id + '/comments')
           //   .success(function(data) {
-          //     $scope.comments = data
-          //     console.log(data)
-          //       //console.log('comments', $scope.comments)
+          //     console.log(data);
           //   })
+
+          $http.get('/api/campaigns/' + $stateParams.id + '/comments')
+            .success(function(data) {
+              $scope.comments = data;
+              console.log(data);
+                //console.log('comments', $scope.comments)
+            })
           .error(function(data) {
             console.log('Error: ' + data);
           });

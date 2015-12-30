@@ -6,20 +6,20 @@ var xssFilter = require('xss-filters');
 
 var CommentSchema = new Schema({
   campaign_id: {
-    type: Schema.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Campaign',
     required: true
   },
   parent: {
-    type: Schema.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Comment'
   },
   replies: [{
-    type: Schema.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Comment',
   }],
   user_id: {
-    type: Schema.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'User',
     //required: true
   },
