@@ -35,12 +35,13 @@ angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
           console.log(data);
         });
     };
+
     $http.get('/api/campaigns/' + $stateParams.id)
       .success(function(data) {
         $scope.updateDonatedAmount();
         $scope.campaign = data;
-        $scope.comments = data.comments;
-        console.log(data)
+        //$scope.comments = data.comments;
+        console.log(data);
         generalFactory.setCampaignId(data._id);
 
         var amounts = _.pluck(data.contributors, 'amount');
@@ -102,21 +103,25 @@ angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
           //     console.log(data);
           //   })
 
-          $http.get('/api/campaigns/' + $stateParams.id + '/comments')
-            .success(function(data) {
-              $scope.comments = data;
-              console.log(data);
-                //console.log('comments', $scope.comments)
-            })
-          .error(function(data) {
-            console.log('Error: ' + data);
-          });
-
+          // $http.get('/api/campaigns/' + $stateParams.id + '/comments')
+          //   .success(function(data) {
+          //     $scope.comments = data;
+          //     console.log(data);
+          //       //console.log('comments', $scope.comments)
+          //   })
+          // .error(function(data) {
+          //   console.log('Error: ' + data);
+          // });
+          var commentApi = {
+              'href': '/api/campaigns/' + $stateParams.id + '/comments',
+              'ref': 'comments'
+            }
+          $scope.linkApiCalls([commentApi]);
 
           $scope.formData.text = '';
+          $scope.form.$setPristine();
 
           // Reset clases of the form after submit.
-          $scope.form.$setPristine();
 
         })
 
