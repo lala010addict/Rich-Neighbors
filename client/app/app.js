@@ -16,7 +16,8 @@ angular.module('bApp', [
     'braintree-angular',
     'validation.match',
     'bApp.StartCampaignController',
-    'ngFileUpload'
+    'ngFileUpload',
+    'angularFileUpload'
   ])
   .config(function($urlRouterProvider, $locationProvider) {
     $urlRouterProvider

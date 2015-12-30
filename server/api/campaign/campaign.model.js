@@ -97,9 +97,14 @@ var CampaignSchema = new Schema({
   //  required: true,
     default: 'https://pbs.twimg.com/media/BwsrTjGIcAAtjdu.png'  //TODO: Correct to basic png/jpg
   },
+  // images: [{
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'Image'
+  // }],
   images: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Image'
+    link: String,
+    file: String,
+    created_at: { type: Date, default: Date.now }
   }],
   archived: Boolean,
   days: {

@@ -7,8 +7,12 @@ var ImageSchema = new mongoose.Schema({
   file: String,
   link: String,
   campaign_id: {
-    type: Schema.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Campaign'
+  },
+  created_at: {
+    type: Date,
+    default: Date.now
   }
 });
 

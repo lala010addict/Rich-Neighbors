@@ -1,8 +1,8 @@
 'use strict';
 
 
-angular.module('bApp.StartCampaignController', ['ngFileUpload'])
-  .controller('StartCampaignController', ['$scope', '$http', 'Auth', '$state', '$rootScope', '$stateParams', 'geolocationFactory','Upload', function ($scope, $http, Auth, $state, $rootScope, $stateParams, geolocationFactory, Upload) {
+angular.module('bApp.StartCampaignController', ['ngFileUpload','angularFileUpload'])
+  .controller('StartCampaignController', ['$scope', '$http', 'Auth', '$state', '$rootScope', '$stateParams', '$cookies', 'geolocationFactory','Upload', 'FileUploader', function ($scope, $http, Auth, $state, $rootScope, $stateParams, $cookies, geolocationFactory, Upload, FileUploader) {
 
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.getCurrentUser = Auth.getCurrentUser;
@@ -12,8 +12,8 @@ angular.module('bApp.StartCampaignController', ['ngFileUpload'])
       $state.go('login');
     }
 
-    $scope.formData = {    };
-    $scope.campaign_id = '';
+    $scope.formData = {};
+    //$scope.campaign_id = '';
     $scope.formData.user_id = $scope.getCurrentUser()._id;
     geolocationFactory.getLoc()
       .then(function(result) {
@@ -25,15 +25,20 @@ angular.module('bApp.StartCampaignController', ['ngFileUpload'])
     //****************
     //**supplies & volunteers form
     //****************
-    $scope.supplies = [{}];
-    $scope.volunteers = [{}];
-    $scope.picture = {};
+    $scope.supplies = [];
+    $scope.volunteers = [];
+    $scope.picture = [];
 
-    // $scope.supplyForm = {};
+    // uploader.onBeforeUploadItem = function (item) {
+    //   item.headers = {
+    //     Authorization: 'Bearer ' + $cookies.get('token')
+    //   };
+    //   item.url = '/api/campaigns/' + $scope.campaign_id + '/images';
+    // };
 
     //$scope.supplyForm.name = $scope.supplies.supply.name;
     // $scope.supplyForm.quantity = $scope.supply.quantity;
-    $scope.campaign_id = '';
+    //$scope.campaign_id = '';
     // $scope.stateParams = "";
 
     $scope.addNewChoice = function(item, qty) {
@@ -63,92 +68,59 @@ angular.module('bApp.StartCampaignController', ['ngFileUpload'])
     };
 
     $scope.addRelated = function (data, api) {
-      _.forEach(data, function(item) {
-        var newItem = _.merge(item, {
-          'campaign_id': $scope.campaign_id
+      return function () {
+        _.forEach(data, function(item) {
+          var newItem = _.merge(item, {
+            'campaign_id': $scope.campaign_id
+          });
+          $http.post(api, newItem);
         });
-        console.log('item: ', newItem);
-        $http.post(api, newItem);
-          // .success(function(data) {
-          // })
-          // .error(function(data) {
-          // });
-      });
+      };
     };
 
-    $scope.upload = function (file, campaign) {
-      console.log("data: " + file);
-      Upload.upload({
-          url: '/api/images',
-          data: {file: file, campaign_id: campaign}
-      }).then(function (resp) {
-          console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
-      }, function (resp) {
-          console.log('Error status: ' + resp.status);
-      }, function (evt) {
-          console.log(evt);
-          var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-          console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-      });
-    };
+    // $scope.upload = function (file, campaign) {
+    //     console.log('upload called');
+    //     Upload.upload({
+    //         url: '/api/images',
+    //         data: {file: file, campaign_id: campaign}
+    //     }).then(function (resp) {
+    //         console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+    //     }, function (resp) {
+    //         console.log('Error status: ' + resp.status);
+    //     }, function (evt) {
+    //         console.log(evt);
+    //         var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+    //         console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+    //     });
+    // };
 
+    // for multiple files:
+    $scope.uploadFiles = function (files, campaign) {
+      console.log('upload called');
+      if (files && files.length) {
+        for (var i = 0; i < files.length; i++) {
+          Upload.upload({url: '/api/images' , data: {file: files[i], campaign_id: campaign}});
+        }
+      }
+    }
 
     $scope.createCampaign = function() {
       //console.log('scope.loc:: ', $scope.formData.loc);
       $http.post('/api/campaigns', $scope.formData)
-        .success(function(data) {
-          $scope.campaign_id = data._id;
-          if ($scope.picture !== false) {
-            console.log('image called');
-            $scope.upload($scope.picture, $scope.campaign_id);
-          }
-          $scope.addRelated($scope.supplies, '/api/items');
-          $scope.addRelated($scope.volunteers, '/api/volunteers');
-
-          // _.forEach($scope.supplies, function(item) {
-          //   var newItem = _.merge(item, {
-          //     'campaign_id': $scope.campaign_id
-          //   });
-          //   $http.post('/api/items', newItem)
-          //     .success(function(data) {
-          //     })
-          //     .error(function(data) {
-          //     });
-          // });
-
-          // // _.forEach($scope.volunteers, function(item) {
-          // //   var newItem = _.merge(item, {
-          // //     'campaign_id': $scope.campaign_id
-          // //   });
-
-          // //   $http.post('/api/volunteers', newItem)
-
-          // //   .success(function(data) {
-          // //       //$scope.formData = {}; // clear the form so our user is ready to enter another
-          // //       //  $scope.campaigns = data;
-          // //       console.log($scope.campaign_id)
-          // //       console.log(data);
-          // //       // $scope.id = data._id
-          // //       //  console.log($scope.id)
-
-
-          // //     })
-          // //     .error(function(data) {
-          // //       console.log($scope.getCurrentUser())
-          // //       console.log('Error: ' + data);
-          // //     });
-
+        .then(function(data) {
+          console.log(data);
+          $scope.campaign_id = data.data._id;
+          console.log(data.data._id);
+          $scope.uploadFiles($scope.picture, data.data._id);
         })
+        .then($scope.addRelated($scope.supplies, '/api/items'))
+        .then($scope.addRelated($scope.volunteers, '/api/volunteers'))
         .then(function () {
           $state.go('submitCampaignsSuccess', $stateParams)
         })
-        .catch(function(data) {
-          console.log($scope.getCurrentUser())
-          console.log('Error: ' + data);
+        .catch(function(err) {
+          console.error('Error: ' + err);
         });
     }
-
-
-
 
   }])

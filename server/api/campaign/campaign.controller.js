@@ -126,8 +126,8 @@ exports.index = function(req, res) {
 // Gets a single Campaign from the DB
 exports.show = function(req, res) {
   Campaign.findById(req.params.id)
-    // .populate('user_id', 'name')
-    // .populate('images','link')
+    .populate('user_id', 'name')
+    .populate('images','link')
     .populate('volunteers','name')
     .execAsync()
     .then(handleEntityNotFound(res))
@@ -153,6 +153,7 @@ exports.create = function(req, res) {
   var data = _.extend(req.body, req.params, {
     user_id: req.user._id
   });
+  console.log(data);
   Campaign.createAsync(data)
     .then(responseWithResult(res, 201))
     .catch(handleError(res));

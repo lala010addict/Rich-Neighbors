@@ -111,33 +111,36 @@ export function showParam(req, res, next) {
     .catch(handleError(res));
 }
 
-// Creates a new Image in the DB
-export function create(req, res) {
-  Image.createAsync(req.body)
-    .then(responseWithResult(res, 201))
-    .catch(handleError(res));
-}
 
 // Creates a new image link
 
 // TODO: Add image to campaign
 export function createImage (req, res, next) {
-  // upload(req, res, function (err) {
-  //   if (!err) {
-  //     var data = {
-  //       file:  res.req.file.originalname,
-  //       link: 'https://s3-us-west-1.amazonaws.com/richneighbors-dev/' + res.req.file.key,
-  //       campaign_id: req.body.campaign_id
-  //     };
-  //     Image.createAsync(data)
-  //     .then(responseWithResult(res, 201))
-  //     .catch(handleError(res));
-  //   }
-  //   if (err) {
-  //     console.log(err);
-  //   }
-  // })
-  console.log('hurray');
+  upload(req, res, function (err) {
+      req.tempImage = {
+        campaign: res.req.body.campaign_id,
+        image: {
+          file:  res.req.file.originalname,
+          link: 'https://s3-us-west-1.amazonaws.com/richneighbors-dev/' + res.req.file.key
+        }
+      }
+      if (err) {
+        console.log(err);
+      }
+      next();
+    })
+
+}
+
+// Creates a new Image in the DB
+
+export function create(req, res) {
+  Campaign.findByIdAndUpdate(req.tempImage.campaign,
+    {$push: {'images': req.tempImage.image}},
+    {safe: true, upsert: true, new: true})
+    .then(handleEntityNotFound(res))
+    .then(responseWithResult(res))
+    //.catch(handleError(res));  //TODO: Strangely giving type error not a function.
 }
 
 // Updates an existing Image in the DB

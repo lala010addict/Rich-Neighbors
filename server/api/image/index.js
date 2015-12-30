@@ -10,7 +10,7 @@ router.param('id', controller.showParam)
 
 router.get('/', controller.index);
 router.get('/:id', controller.show);
-router.post('/', auth.isAuthenticated(), controller.createImage);
+router.post('/', auth.isAuthenticated(), controller.createImage, controller.create);
 router.put('/:id', auth.isAuthenticated(), controller.update);
 router.patch('/:id', auth.isAuthenticated(), controller.update);
 router.delete('/:id', auth.isAuthenticated(), controller.destroy);
