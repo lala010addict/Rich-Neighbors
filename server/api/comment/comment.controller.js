@@ -115,9 +115,13 @@ exports.create = function(req, res) {
   }
   Comment.createAsync(data)
     .then(function (data) {
-      return Comment.findByIdAndUpdate(data.parent,
-      {$push: {'replies': data._id}},
-      {safe: true, upsert: true, new: true})
+      if (data.parent) {
+        return Comment.findByIdAndUpdate(data.parent,
+        {$push: {'replies': data._id}},
+        {safe: true, upsert: true, new: true})
+      } else {
+        return data;
+      }
     })
     .then(responseWithResult(res, 201))
     .catch(handleError(res));

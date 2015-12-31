@@ -23,39 +23,30 @@ angular.module('bApp.MainController', ['ui.router'])
     };
     $scope.currentLoc = 'Me';
     $scope.outputBar = {bar : "main"};
-    $scope.offsetLevel = 0;
+    $scope.offsetLevel = 1;
 
-    $scope.getCurrentLoc()
-      .then(function () {
-        $http({
-          method: 'GET',
-          url: '/api/campaigns',
-          params: { longitude: $scope.loc[0] , latitude: $scope.loc[1] , limit: 40, distance: 5000}
-        })
-        .success(function(data) {
-          $scope.campaigns = data;
-          console.log(data);
-        })
-        .error(function(data) {
-          console.log('Error: ' + data);
-        });
-      });
-
-    $scope.addMoreResults = function () {
-      var offset = $scope.offsetLevel * 9;
+    $scope.addMoreResults = function (dist) {
+      var distance = dist || 500;
+      var limit = 18 + ($scope.ofsetLevel * 9);
       $http({
         method: 'GET',
         url: '/api/campaigns',
-        params: { longitude: $scope.loc[1] , latitude: $scope.loc[0] , limit: 40, distance: 5000, offset: offset}
+        params: { longitude: $scope.loc[0] , latitude: $scope.loc[1] , limit: limit, distance: distance}
       })
       .success(function(data) {
-        $scope.campaigns = _.extend($scope.campaigns, data);
+        $scope.campaigns = data //_.extend($scope.campaigns, data);
         console.log(data);
       })
       .error(function(data) {
         console.log('Error: ' + data);
       });
     }
+
+    $scope.getCurrentLoc()
+      .then(function () {
+        $scope.addMoreResults(500);
+      });
+
 
 
 
@@ -91,9 +82,9 @@ angular.module('bApp.MainController', ['ui.router'])
         return pagesShown < ($scope.campaigns.length / pageSize);
       };
       $scope.showMoreItems = function() {
-        $scope.offset += 1;
-        $scope.addMoreResults();
+        $scope.offsetLevel += 1;
         pagesShown = pagesShown + 1;
+        $scope.addMoreResults();
       };
 
 
