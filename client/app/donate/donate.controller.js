@@ -102,7 +102,7 @@ angular.module('bApp.donate', ['ngMaterial'])
     };
     return $http.post(contributionURL, donationData)
       .success(function (data) {
-        console.log('donation sved for this user')
+        console.log('donation saved for this user')
       })
       .error(function (data) {
         console.log('donation backend error ', data);

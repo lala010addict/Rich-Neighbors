@@ -5,6 +5,7 @@ var request = require('supertest');
 
 var newPayment;
 
+
 describe('Payment API:', function() {
 
   describe('GET /api/payments', function() {

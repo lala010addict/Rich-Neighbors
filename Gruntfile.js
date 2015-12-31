@@ -104,7 +104,7 @@ module.exports = function (grunt) {
         files: [
           '{.tmp,<%= yeoman.client %>}/{app,components}/**/*.{css,html}',
           '{.tmp,<%= yeoman.client %>}/{app,components}/**/!(*.spec|*.mock).js',
-          '<%= yeoman.client %>/assets/images/{,*//*}*.{png,jpg,jpeg,gif,webp,svg}'
+          '<%= yeoman.client %>/assets/images/{,*//*}*.{png,jpg,jpeg,gif,webp,svg,mp4,mov}'
         ],
         options: {
           livereload: true
@@ -284,7 +284,7 @@ module.exports = function (grunt) {
         // This is so we update image references in our ng-templates
         patterns: {
           js: [
-            [/(assets\/images\/.*?\.(?:gif|jpeg|jpg|png|webp|svg))/gm, 'Update the JS to reference our revved images']
+            [/(assets\/images\/.*?\.(?:gif|jpeg|jpg|png|webp|svg|mp4|mov))/gm, 'Update the JS to reference our revved images']
           ]
         }
       }
@@ -381,7 +381,7 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',
             '.htaccess',
             'bower_components/**/*',
-            'assets/images/{,*/}*.{webp}',
+            'assets/images/{,*/}*.{webp,mp4,mov}',
             'assets/fonts/**/*',
             'assets/js/*',
             'index.html'
@@ -413,6 +413,7 @@ module.exports = function (grunt) {
         dir: '<%= yeoman.dist %>',
         commit: true,
         push: true,
+        force: true,
         connectCommits: false,
         message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%'
       },
@@ -427,7 +428,8 @@ module.exports = function (grunt) {
         options: {
           remote: 'git@heroku.com:richneighbors-dev.git',
           branch: 'develop',
-          remoteBranch: 'master'
+          remoteBranch: 'master',
+          connectCommits: false,
         }
 
       },

@@ -1,0 +1,99 @@
+<style>
+@import url(//fonts.googleapis.com/css?family=Roboto:400,500,300,100,700,900);
+html,
+body {
+
+}
+
+.card {
+    font-family: 'Roboto', sans-serif;
+    overflow: hidden;
+    margin: 10px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    color: #272727;
+    border-radius: 2px;
+}
+
+.card .title {
+    line-height: 3rem;
+    font-size: 1.5rem;
+    font-weight: 300;
+    text-align: center;
+}
+
+.card .content {
+    padding: 1.3rem;
+    font-weight: 300;
+    border-radius: 0 0 2px 2px;
+    word-wrap: break-word;
+}
+
+.card p {
+    margin: 0;
+}
+
+.card .action {
+    border-top: 1px solid rgba(160, 160, 160, 0.2);
+    padding: 1.3rem;
+}
+
+.card a {
+    color: #ffab40;
+    margin-right: 1.3rem;
+    transition: color 0.3s ease;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.card .image {
+    position: relative;
+}
+
+.card .image .title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 1.3rem;
+    color: #fff;
+}
+
+.card .image img {
+    border-radius: 2px 2px 0 0;
+}
+</style>
+<div class="row">
+    <div class="medium-4 columns" ng-repeat="x in campaigns | orderBy: '+address.zip' | limitTo: paginationLimit()">
+        <div class="card">
+        <span class="title" style="text-center">{{x.title | limitTo: 50}}</span>
+            <div class="image">
+                <img class="thumbnails"src="{{x.images[0].link}}">
+                
+            </div>
+            <div class="content">
+                <p>{{x.description | limitTo: 75}}...</p>
+            </div>
+            <div class="content">
+                <p>{{calDonatedAmount(x.contributors) | number:2}}</span> Donated</p>
+                <p>{{( calDonatedAmount(x.contributors) / x.goal * 100)| number:2}}%</p>
+                <div class="progress" role="progressbar" tabindex="0" aria-valuenow="50" aria-valuemin="0" aria-valuetext="50 percent" aria-valuemax="100">
+                    <div class="progress-meter" style="width: {{( calDonatedAmount(x.contributors) / x.goal * 100)| number:2}}%;"></div>
+                </div>
+            </div>
+            <div class="action">
+                <a ng-href="/campaignProfile/{{x._id}}">Where this leads</a>
+            </div>
+        </div>
+    </div>
+    <!--   <div class="medium-6 columns end">
+    <div class="card">
+      <div class="content">
+        <span class="title">Robert Frost</span>
+        <p>Two roads diverged in a yellow wood,  And sorry I could not travel both   And be one traveler, long I stood   And looked down one as far as I could  . To where it bent in the undergrowth;</p>
+      </div>
+      <div class="action">
+        <a href='#'>This is a link</a>
+        <a href='#'>This is a link</a>
+      </div>
+    </div>
+  </div> -->
+</div>

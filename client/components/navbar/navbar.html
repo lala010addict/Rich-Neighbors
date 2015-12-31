@@ -29,14 +29,18 @@
     </div>
   </div>
 </div> -->
+<style>
+  .main-logo{
+    width: 35%;
+    height: 35%;
+  }
 
-
-<color-bar></color-bar>
+</style>
 
 <div class="top-bar" ng-controller="NavbarController">
   <div class="top-bar-left">
     <ul class="menu" data-responsive-menu="accordion">
-      <li class="menu-text"><a href="/">Rich Neighbors</a></li>
+      <li class="menu-text menu-text-logo"><a href="/"><img class="main-logo" src="assets/images/richNeighborsLogo.png" alt=""></a></li>
       <li ng-repeat="item in nav.menu" ui-sref-active="active">
         <a ui-sref="{{item.state}}">{{item.title}}</a>
       </li>
@@ -47,7 +51,6 @@
   <div class="top-bar-right">
     <ul class="menu">
       <li>
-        <geolocation></geolocation>
       </li>
       <li ng-hide="nav.isLoggedIn()" ui-sref-active="active"><a class="button small" ui-sref="login"><i class="fa fa-sign-in">   Login</i></a></li>
       <li ng-hide="nav.isLoggedIn()" ui-sref-active="active"><a class="button small" ui-sref="signup"><i class="fa fa-user">    Sign Up</i></a></li>

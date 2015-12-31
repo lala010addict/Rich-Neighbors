@@ -108,6 +108,7 @@ exports.showByCampaign = function(req, res) {
 // Creates a new Comment in the DB
 exports.create = function(req, res) {
   var data = _.extend(req.body, req.params, {user_id: req.user._id});
+  console.log(data);
   Comment.createAsync(data)
     .then(responseWithResult(res, 201))
     .catch(handleError(res));

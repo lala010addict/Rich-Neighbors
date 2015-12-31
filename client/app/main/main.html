@@ -1,41 +1,25 @@
-<div ng-controller="MainController" ng-init="showData()">
-  <navbar></navbar>
-  <carousel></carousel>
+<div ng-init="showData()">
+<!--   <navbar></navbar> -->
   <br>
+  <hero-card></hero-card>
+
+
+  <br>
+  <div class="row">
+  <how-card></how-card>
+  </div>
+  
+  <android-demo></android-demo>
+  <hr>
   <div class="row column text-center">
-    <p class="lead">Campaigns Near {{currentLoc}}
-   <!--    <geolocation></geolocation> -->
+    <p class="lead">Campaigns Near {{currentLoc}} 
+
     </p>
   </div>
-  <div class="row small-up-1 medium-up-2 large-up-3">
-    <div class="column " height = '600px' ng-repeat="x in campaigns | orderBy: '+address.zip' | limitTo: paginationLimit()  ">
-      <div class="callout">
-        <p class="text-center" id = 'campaignTitle'>{{limitChar(x.title, 40)}}...</p>
-        <p class="text-center"><img src="{{x.images[0].link}}" class="thumbnails" alt="image of a planet called Campaign Image"></p>
-     <!--    <p class="lead">{{limitChar(x.description, 30)}}...</p> -->
-        <p class="subheader">{{limitChar(x.description, 100)}}...</p>
-        <!-- .slide-info-inner -->
-        <div class="cause-info">
-          <div class="cause-info-content clearfix">
-            <div class="fl cause-info-donated">
-              <span>$ {{calDonatedAmount(x.contributors) | number:2}}</span> Donated </div>
-            <!-- .cause-info-donated -->
-            <div class="fr cause-info-funded">
-              <span> {{( calDonatedAmount(x.contributors) / x.goal * 100)| number:2}}%</span> Funded </div>
-            <!-- .cause-info-funded -->
-          </div>
-          <!-- .cause-info-content -->
-          <div class="cause-info-bar" data-goal="0.8%">
-            <span style="width: {{( calDonatedAmount(x.contributors) / x.goal * 100)| number:2}}%;"></span>
-          </div>
-          <!-- .cause-info-bar -->
-          <div class="cause-info-links">
-            <a ng-href="/campaignProfile/{{x._id}}" class="dd-button orange-light small">MORE DETAILS</a>
-          </div>
-          <!-- .cause-info-links -->
-        </div>
-      </div>
-    </div>
+  <div class="row columns">
+  <div class="small-up-1 medium-up-2 large-up-4">
+        <campaign-card></campaign-card>
+  </div>
   </div>
   <div class="row column">
     <a class="button hollow expanded" ng-show="hasMoreItemsToShow()" ng-click="showMoreItems()">Load More</a>
