@@ -31,8 +31,9 @@
 </div> -->
 <style>
   .main-logo{
-    width: 35%;
-    height: 35%;
+    width: 25%;
+    height: 25%;
+    margin-right: -300px;
   }
 
 </style>
@@ -40,12 +41,14 @@
 <div class="top-bar" ng-controller="NavbarController">
   <div class="top-bar-left">
     <ul class="menu" data-responsive-menu="accordion">
-      <li class="menu-text menu-text-logo"><a href="/"><img class="main-logo" src="assets/images/richNeighborsLogo.png" alt=""></a></li>
-      <li ng-repeat="item in nav.menu" ui-sref-active="active">
+      <li class="menu-text"><a href="/"><img class="main-logo" src="assets/images/richNeighborsLogo.png" alt=""></a></li>
+      <!-- <li ng-repeat="item in nav.menu" ui-sref-active="active">
         <a ui-sref="{{item.state}}">{{item.title}}</a>
-      </li>
-      <li ng-show="nav.isAdmin()" ui-sref-active="active"><a ui-sref="admin">Admin</a></li>
-      <li><a href="/startCampaign" class="button success">Start a Campaign</a></li>
+      </li> -->
+      <li class="menu-text" ui-sref-active="active"><a ui-sref="admin">How it Works</a></li>
+      <li class="menu-text" ui-sref-active="active"><a ui-sref="admin">About Us</a></li>
+      <li class="menu-text" ng-show="nav.isAdmin()" ui-sref-active="active"><a ui-sref="admin">Admin</a></li>
+<!--       <li><a href="/startCampaign" class="button success">Start a Campaign</a></li> -->
     </ul>
   </div>
   <div class="top-bar-right">

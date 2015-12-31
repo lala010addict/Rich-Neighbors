@@ -105,15 +105,21 @@ exports.index = function(req, res) {
       // the raduis of Earth is approximately 6371 kilometers
       maxDistance /= 6371;
       // get coordinates [ <longitude> , <latitude> ]
+      var data;
       var coords = [];
       coords[0] = req.query.longitude || 0;
       coords[1] = req.query.latitude || 0;
-      var data = req.params === {} ? req.params : {
-        loc: {
-          $near: coords,
-          $maxDistance: maxDistance
-        }
-      };
+      if (coords[0] === 0 && coords[1] === 0) {
+        data = {};
+      } else {
+        data = req.params === {} ? req.params : {
+          loc: {
+            $near: coords,
+            $maxDistance: maxDistance
+          }
+        };
+
+      }
       console.log(data);
       Campaign.find(data)
       .limit(limit)

@@ -36,6 +36,7 @@ angular.module('bApp.MainController', ['ui.router'])
       .success(function(data) {
         $scope.campaigns = data //_.extend($scope.campaigns, data);
         console.log(data);
+        $scope.offsetLevel += 1;
       })
       .error(function(data) {
         console.log('Error: ' + data);
@@ -82,7 +83,6 @@ angular.module('bApp.MainController', ['ui.router'])
         return pagesShown < ($scope.campaigns.length / pageSize);
       };
       $scope.showMoreItems = function() {
-        $scope.offsetLevel += 1;
         pagesShown = pagesShown + 1;
         $scope.addMoreResults();
       };
