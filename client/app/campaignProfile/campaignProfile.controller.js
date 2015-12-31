@@ -32,37 +32,32 @@ angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
       donationFactory.saveDonation(amount, $stateParams.id, $stateParams._userId)
         .success(function(data) {
           console.log(data);
-          $scope.updateDonatedAmount();
+            $scope.updateDonatedAmount();
         });
     };
 
-    $scope.getCampaigns = function() {
-      $http.get('/api/campaigns/' + $stateParams.id)
-        .success(function(data) {
-          $scope.updateDonatedAmount();
-          $scope.campaign = data;
-          //$scope.comments = data.comments;
-          console.log(data);
-          generalFactory.setCampaignId(data._id);
+     $http.get('/api/campaigns/' + $stateParams.id)
+      .success(function(data) {
+        $scope.updateDonatedAmount();
+        $scope.campaign = data;
+        //$scope.comments = data.comments;
+        console.log(data);
+        generalFactory.setCampaignId(data._id);
 
-          var amounts = _.pluck(data.contributors, 'amount');
+        var amounts = _.pluck(data.contributors, 'amount');
 
-          $scope.donated = _.reduce(amounts, function(total, n) {
-            return total + n;
-          });
-          console.log('donated:', _.reduce(amounts, function(total, n) {
-            return total + n;
-          }));
-          var links = data._links.slice(1, 5);
-          $scope.linkApiCalls(links);
-        })
-        .error(function(data) {
-          console.log('Error: ' + data);
+        $scope.donated = _.reduce(amounts, function(total, n) {
+          return total + n;
         });
-    }
-
-
-    $scope.getCampaigns();
+        console.log('donated:', _.reduce(amounts, function(total, n) {
+          return total + n;
+        }));
+        var links = data._links.slice(1, 5);
+        $scope.linkApiCalls(links);
+      })
+      .error(function(data) {
+        console.log('Error: ' + data);
+      });
 
 
     // $http.get('/api/comments/' + $stateParams.id)
@@ -107,9 +102,9 @@ angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
       $http.post('/api/comments', $scope.formData)
         .success(function(data) {
           var commentApi = {
-            'href': '/api/campaigns/' + $stateParams.id + '/comments',
-            'ref': 'comments'
-          }
+              'href': '/api/campaigns/' + $stateParams.id + '/comments',
+              'ref': 'comments'
+            }
           $scope.linkApiCalls([commentApi]);
           $scope.formData.text = '';
           $scope.form.$setPristine();
@@ -124,9 +119,9 @@ angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
       $http.post('/api/comments/' + parent + '/comments', $scope.replyData)
         .success(function(data) {
           var commentApi = {
-            'href': '/api/campaigns/' + $stateParams.id + '/comments',
-            'ref': 'comments'
-          }
+              'href': '/api/campaigns/' + $stateParams.id + '/comments',
+              'ref': 'comments'
+            }
           $scope.linkApiCalls([commentApi]);
           console.log($scope.obj.comments);
           $scope.replyData.text = '';
@@ -254,8 +249,7 @@ angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
         .success(function(data) {
 
           alert("Thanks for Donating!")
-
-          $scope.getCampaigns();
+          console.log(data);
 
         })
         .error(function(data) {
@@ -280,7 +274,6 @@ angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
       $http.post('/api/contributors', $scope.supplyVolunteer)
         .success(function(data) {
           alert("Thanks for Signing Up!")
-          $scope.getCampaigns();
 
         })
         .error(function(data) {
@@ -293,6 +286,24 @@ angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
     //**************************filtering out supply contributions **********************
 
     $scope.filterSupply = function(x, id) {
+
+      // console.log('obj.contributors', x);
+      // console.log('id', id)
+      // console.log('filtered', _.pluck(_.filter(_.pluck(_.filter(x, {
+      //   'type': "Supply"
+      // }), "item_id"), {
+      //   '_id': "5679bbd0e134af5d22bdb9e8"
+      // }), 'quantity'));
+
+
+      console.log('filteredid', _.pluck(_.filter(x, {
+        'type': "Supply",
+        'item_id': {
+          '_id': "5679bbd0e134af5d22bdb9e8"
+        }
+      }), 'amount'))
+
+
       var numbers = _.pluck(_.filter(x, {
         'type': "Supply",
         'item_id': {
@@ -306,12 +317,23 @@ angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
         return total + n;
       })
 
+      // console.log('reducednumber', reducednumber)
+
       return reducednumber
     }
 
 
     //**************************filtering out supply contributions **********************
     $scope.filterVolunteer = function(x, id) {
+
+
+      // console.log('filteredid', _.pluck(_.filter(x, {
+      //   'type': "Supply",
+      //   'item_id': {
+      //     '_id': "5679bbd0e134af5d22bdb9e8"
+      //   }
+      // }), 'amount'))
+
 
       var numbers = _.pluck(_.filter(x, {
         'type': "Volunteer",
@@ -321,9 +343,12 @@ angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
       }), 'amount')
 
 
+
       var reducednumber = _.reduce(numbers, function(total, n) {
         return total + n;
       })
+
+      // console.log('reducednumber', reducednumber)
 
       return reducednumber
     }

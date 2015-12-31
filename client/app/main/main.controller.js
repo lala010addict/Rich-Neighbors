@@ -25,9 +25,30 @@ angular.module('bApp.MainController', ['ui.router'])
     $scope.outputBar = {bar : "main"};
     $scope.offsetLevel = 1;
 
+<<<<<<< HEAD
     $scope.addMoreResults = function (dist) {
       var distance = dist || 500;
       var limit = 18 + ($scope.ofsetLevel * 9);
+=======
+    $scope.getCurrentLoc()
+      .then(function () {
+        $http({
+          method: 'GET',
+          url: '/api/campaigns',
+          params: { longitude: $scope.loc[1] , latitude: $scope.loc[0] , limit: 40, distance: 5000}
+        })
+        .success(function(data) {
+          $scope.campaigns = data;
+          console.log(data);
+        })
+        .error(function(data) {
+          console.log('Error: ' + data);
+        });
+      });
+
+    $scope.addMoreResults = function () {
+      var offset = $scope.offsetLevel * 9;
+>>>>>>> parent of e777f90... Merge pull request #163 from lala010addict/develop
       $http({
         method: 'GET',
         url: '/api/campaigns',
