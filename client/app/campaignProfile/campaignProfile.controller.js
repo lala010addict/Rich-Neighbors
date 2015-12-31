@@ -36,7 +36,7 @@ angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
         });
     };
 
-    $http.get('/api/campaigns/' + $stateParams.id)
+     $http.get('/api/campaigns/' + $stateParams.id)
       .success(function(data) {
         $scope.updateDonatedAmount();
         $scope.campaign = data;
@@ -53,7 +53,7 @@ angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
           return total + n;
         }));
         var links = data._links.slice(1, 5);
-        $scope.linkApiCalls(data._links);
+        $scope.linkApiCalls(links);
       })
       .error(function(data) {
         console.log('Error: ' + data);

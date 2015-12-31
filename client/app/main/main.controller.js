@@ -1,11 +1,12 @@
 'use strict';
 
 angular.module('bApp.MainController', ['ui.router'])
-  .controller('MainController', ['$scope', '$http', function ($scope, $http, geolocationFactory, Reddit) {
+  .controller('MainController', ['$scope', '$http', 'geolocationFactory', function ($scope, $http, geolocationFactory) {
 
     $scope.campaigns = {};
 
     // https://maps.googleapis.com/maps/api/distancematrix/json?origins=02148&destinations=91801
+    $scope.location = geolocationFactory.getLatandLong();
 
     $scope.getCurrentLoc = function() {
     var url = 'http://ipinfo.io/json';
@@ -13,21 +14,51 @@ angular.module('bApp.MainController', ['ui.router'])
       .success(function(data) {
         var result = data.city + ' ' + data.region + ', ' + data.postal;
         $scope.currentLoc = result;
+        $scope.loc = data.loc.split(',').map(function(loc) {
+          console.log(loc);
+          return Number(loc);
+        });
       });
 
     };
     $scope.currentLoc = 'Me';
     $scope.outputBar = {bar : "main"};
-    
-    $scope.getCurrentLoc();
+    $scope.offsetLevel = 0;
 
-    $http.get('/api/campaigns')
+    $scope.getCurrentLoc()
+      .then(function () {
+        $http({
+          method: 'GET',
+          url: '/api/campaigns',
+          params: { longitude: $scope.loc[1] , latitude: $scope.loc[0] , limit: 40, distance: 5000}
+        })
+        .success(function(data) {
+          $scope.campaigns = data;
+          console.log(data);
+        })
+        .error(function(data) {
+          console.log('Error: ' + data);
+        });
+      });
+
+    $scope.addMoreResults = function () {
+      var offset = $scope.offsetLevel * 9;
+      $http({
+        method: 'GET',
+        url: '/api/campaigns',
+        params: { longitude: $scope.loc[1] , latitude: $scope.loc[0] , limit: 40, distance: 5000, offset: offset}
+      })
       .success(function(data) {
-        $scope.campaigns = data;
+        $scope.campaigns = _.extend($scope.campaigns, data);
+        console.log(data);
       })
       .error(function(data) {
         console.log('Error: ' + data);
       });
+    }
+
+
+
     $scope.calDonatedAmount = function(x) {
       var amounts = _.pluck(x, 'amount');
         // console.log(amounts)
@@ -51,7 +82,7 @@ angular.module('bApp.MainController', ['ui.router'])
 
       //show more functionality
       var pagesShown = 1;
-      var pageSize = 6;
+      var pageSize = 9;
 
       $scope.paginationLimit = function() {
         return pageSize * pagesShown;
@@ -60,6 +91,8 @@ angular.module('bApp.MainController', ['ui.router'])
         return pagesShown < ($scope.campaigns.length / pageSize);
       };
       $scope.showMoreItems = function() {
+        $scope.offset += 1;
+        $scope.addMoreResults();
         pagesShown = pagesShown + 1;
       };
 

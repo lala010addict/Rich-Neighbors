@@ -61,6 +61,7 @@ function removeEntity(res) {
   };
 }
 
+
 // Gets a list of Comments
 exports.index = function(req, res) {
  if (req.baseUrl === '/api/users/me/comments') {
@@ -109,11 +110,22 @@ exports.showByCampaign = function(req, res) {
 exports.create = function(req, res) {
   var data = _.extend(req.body, req.params, {user_id: req.user._id});
   console.log(data);
+  if (data.parent) {
+    delete data.campaign_id;
+  }
   Comment.createAsync(data)
+    .then(function (data) {
+      return Comment.findByIdAndUpdate(data.parent,
+      {$push: {'replies': data._id}},
+      {safe: true, upsert: true, new: true})
+    })
     .then(responseWithResult(res, 201))
     .catch(handleError(res));
 };
 
+exports.pushToParent = function (req, res) {
+
+}
 // Updates an existing Comment in the DB
 // TODO: Must be tested
 // Updates an existing Comment in the DB
