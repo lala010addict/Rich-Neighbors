@@ -413,6 +413,7 @@ module.exports = function (grunt) {
         dir: '<%= yeoman.dist %>',
         commit: true,
         push: true,
+        force: true,
         connectCommits: false,
         message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%'
       },
@@ -427,7 +428,8 @@ module.exports = function (grunt) {
         options: {
           remote: 'git@heroku.com:richneighbors-dev.git',
           branch: 'develop',
-          remoteBranch: 'master'
+          remoteBranch: 'master',
+          connectCommits: false,
         }
 
       },
