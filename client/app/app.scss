@@ -60,106 +60,6 @@ $fa-font-path: "../bower_components/font-awesome/fonts";
     border: 0 !important;
 }
 
-.dropdown {
-    position: relative !important;
-    z-index: 500 !important;
-
-    right: 10px;
-     font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
-}
-
-.top-bar,
-.top-bar ul {
-    background-color: #172129;
-}
-.top-bar-left {
-     width: auto !important;
- }
-
- .top-bar-right {
-     width: auto !important;
- }
-
-
-.top-bar a {
-    color: #FDFDFD !important;
-}
-
-#primary_nav_wrap {
-    margin-top: 15px
-}
-
-#primary_nav_wrap ul {
-    list-style: none;
-    position: relative;
-    float: left;
-    margin: 0;
-    padding: 0;
-}
-
-#primary_nav_wrap ul a {
-    display: block;
-    color: white;
-    text-decoration: none;
-    font-weight: 700;
-    /*    font-size: 12px;*/
-    line-height: 32px;
-    padding: 0 15px;
-    font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    background-color: #2199E8;
-}
-
-#primary_nav_wrap ul li {
-    position: relative;
-    float: left;
-    margin: 0;
-    padding: 0;
-    z-index: 20;
- /*   background-color: #2199E8;*/
-}
-
-#primary_nav_wrap ul li.current-menu-item {
-    /* background: #ddd;*/
-}
-
-/*#primary_nav_wrap:hover {
- background: pink !important;
- z-index: 600 !important;
-}*/
-
-#primary_nav_wrap ul ul {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    /*background: #fff;*/
-    padding: 0;
-    z-index: 20;
-}
-
-#primary_nav_wrap ul ul li {
-    float: none;
-    width: 200px;
-    z-index: 20;
-}
-
-#primary_nav_wrap ul ul a {
-    line-height: 120%;
-    padding: 10px 15px;
-    z-index: 20;
-}
-
-#primary_nav_wrap ul ul ul {
-    top: 0;
-    left: 100%;
-    z-index: 20;
-}
-
-#primary_nav_wrap ul li:hover > ul {
-    display: block;
-    z-index: 20;
-}
-
 
 
 .header .main-header {
@@ -231,11 +131,11 @@ textarea {
     height: 200px !important;
 }
 
-.top-bar,
+/* .top-bar,
 .top-bar ul {
     background-color: #172129;
 }
-
+ */
 body {
     background: #f2f5f8;
     color: #84898c;
