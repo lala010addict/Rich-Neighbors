@@ -114,6 +114,10 @@ var CampaignSchema = new Schema({
   expires: {
     type: Date
   },
+  donated: {
+    type: Number,
+    default: 0
+  },
   _links: Array
 });
 
