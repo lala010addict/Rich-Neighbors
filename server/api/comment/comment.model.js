@@ -76,7 +76,7 @@ CommentSchema
 
 
 /*
-* Pre-save hooks
+* hooks
 */
 
 CommentSchema
@@ -87,6 +87,14 @@ CommentSchema
     next();
   });
 
+var autoPopulateReplies = function(next) {
+    this.populate('replies');
+    next();
+};
+
+CommentSchema
+.pre('findOne', autoPopulateReplies)
+.pre('find', autoPopulateReplies)
 
 /*
 * Schema Methods

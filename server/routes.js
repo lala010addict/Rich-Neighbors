@@ -36,7 +36,7 @@ module.exports = function(app) {
   app.use('/api/campaigns/:campaign_id/followers', require('./api/follower'));
   app.use('/api/campaigns/:campaign_id/volunteers', require('./api/volunteer'));
   app.use('/api/campaigns/:campaign_id/images', require('./api/image'));
-  app.use('/api/comments/:replies/comments', require('./api/comment'));
+  app.use('/api/comments/:parent/comments', require('./api/comment'));
 
   // routes for admins only
   app.use('/api/users/:user_id/campaigns', require('./api/campaign'));

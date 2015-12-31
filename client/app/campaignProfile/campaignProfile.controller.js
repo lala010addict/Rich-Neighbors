@@ -76,6 +76,7 @@ angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
 
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.formData = {};
+    $scope.replyData = {};
     $scope.getCurrentUser = Auth.getCurrentUser;
     $scope.name = $scope.getCurrentUser().name;
     $scope.profile_pic = $scope.getCurrentUser().profile_pic;
@@ -84,6 +85,11 @@ angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
     $scope.formData.username = $scope.getCurrentUser().name;
     $scope.formData.campaign_id = $stateParams.id;
     $scope.formData.text = '';
+    $scope.replyData.user_id = $stateParams._userId = $scope.getCurrentUser()._id;
+    $scope.replyData.profile_pic = $scope.getCurrentUser().profile_pic;
+    $scope.replyData.username = $scope.getCurrentUser().name;
+    $scope.replyData.campaign_id = $stateParams.id;
+    $scope.replyData.text = '';
     // Current comment.
     $scope.comment = {};
 
@@ -92,44 +98,39 @@ angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
 
     // Fires when form is submited.
     $scope.addComment = function() {
-
       $http.post('/api/comments', $scope.formData)
         .success(function(data) {
-          // console.log(data);
-
-          // $http.get('/api/campaign/' + $stateParams.id + '/comments')
-          //   .success(function(data) {
-          //     console.log(data);
-          //   })
-
-          // $http.get('/api/campaigns/' + $stateParams.id + '/comments')
-          //   .success(function(data) {
-          //     $scope.comments = data;
-          //     console.log(data);
-          //       //console.log('comments', $scope.comments)
-          //   })
-          // .error(function(data) {
-          //   console.log('Error: ' + data);
-          // });
           var commentApi = {
               'href': '/api/campaigns/' + $stateParams.id + '/comments',
               'ref': 'comments'
             }
           $scope.linkApiCalls([commentApi]);
-
           $scope.formData.text = '';
           $scope.form.$setPristine();
-
-          // Reset clases of the form after submit.
-
         })
+        .error(function(data) {
+          console.log($scope.getCurrentUser());
+          console.log('Error: ' + $scope.formData);
+        });
+    };
 
-      .error(function(data) {
-        console.log($scope.getCurrentUser());
-        console.log('Error: ' + $scope.formData);
-      });
-
-
+    $scope.addReply = function(parent) {
+      $http.post('/api/comments/' + parent + '/comments', $scope.replyData)
+        .success(function(data) {
+          var commentApi = {
+              'href': '/api/campaigns/' + $stateParams.id + '/comments',
+              'ref': 'comments'
+            }
+          $scope.linkApiCalls([commentApi]);
+          console.log($scope.obj.comments);
+          $scope.replyData.text = '';
+          $scope.replyData.parent = null;
+          $scope.form.$setPristine();
+        })
+        .error(function(data) {
+          console.log($scope.getCurrentUser());
+          console.log('Error: ' + $scope.formData);
+        });
     };
 
     // Fires when the comment change the anonymous state.

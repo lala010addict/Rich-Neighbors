@@ -33,7 +33,7 @@
       <h5> There are no comments for this campaign </h5>
     </div>
     <!-- <div class="comment" ng-repeat="comment in obj.comments | orderBy: '-created_at'"> -->
-    <div class="comment" ng-repeat="comment in obj.comments | orderBy: 'created_at': true">
+    <div class="comment" ng-repeat="comment in obj.comments | orderBy: 'created_at': true" ng-init="replies=[]">
            <!-- Comment Avatar -->
       <div class="comment-avatar">
         <img ng-src="{{ comment.profile_pic }}">
@@ -50,10 +50,23 @@
             <span class="comment-date">{{ comment.created_at | date: 'medium' }}</span>
           </div>
           <div class="comment-actions">
-            <a ng-hide="level > 5" href="#">Reply</a>
+            <a ng-hide="level > 5 || rep[$index]" ng-click="rep[$index]=true">Reply</a>
+            <a ng-show="rep[$index]" ng-click="rep[$index]=false">Hide</a>
+          </div>
+          <div class="row" ng-show="rep[$index]">
+            <form class="comment-form form reply" name="reply" ng-submit="addReply(comment._id)" novalidate ng-show="nav.isLoggedIn()">
+              <div class="comment-actions">
+              </div>
+              <div class="form-row">
+                <textarea class="input" ng-model='replyData.text'></textarea>
+              </div>
+              <div class="form-row">
+                <input type="submit" value="Add Reply">
+              </div>
+            </form>
           </div>
         </div>
-        <div ng-repeat="comment in replies = comment.replies | orderBy: 'created_at': true" ng-include="'comment.html'" ng-init="level = level + 1"></div>
+        <div ng-repeat="comment in replies = comment.replies | orderBy: 'created_at': true" ng-include="'comment.html'" ng-init="level = level + 1" ng-init="rep=[]"></div>
       </div>
     </div>
     </div>

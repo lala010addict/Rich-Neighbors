@@ -8,7 +8,7 @@
 }
 
 body{
- 
+
   font-family: "Roboto", "Tahoma", "Arial", sans-serif;
 }
 
@@ -193,6 +193,7 @@ body{
 .comment .comment-info{
   float: left;
   width: 85%;
+  margin-bottom: 15px;
 }
 
 .comment .comment-author{ }
@@ -207,4 +208,9 @@ body{
   float: left;
   text-align: right;
   width: 15%;
+}
+
+.reply {
+  margin-left: 5px;
+  margin-right: 5px;
 }

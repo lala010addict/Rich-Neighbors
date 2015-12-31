@@ -24,16 +24,25 @@ angular.module('bApp')
     var linkApiCalls = function(data) {
       // console.log('linkApiCalls', data)
       _.forEach(data, function(val) {
-
         call(val.href, val.ref)
-
       });
       // var merged = _.merge(campaign, obj)
-
       return obj
-
     };
 
+    var linkApiCallsRecursive = function(data) {
+      var cmts = {};
+      if (Array.isArray(data)) {
+        _.forEach(data, function(val) {
+          $http.get('/api/comments/' + val._id + '/comments', ref)
+            .success(function(data) {
+            })
+            .error(function(data) {
+              console.log('Error: ' + data);
+            });
+        })
+      };
+    };
 
 
 
