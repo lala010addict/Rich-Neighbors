@@ -30,7 +30,7 @@ angular.module('bApp.MainController', ['ui.router'])
         $http({
           method: 'GET',
           url: '/api/campaigns',
-          params: { longitude: $scope.loc[1] , latitude: $scope.loc[0] , limit: 40, distance: 5000}
+          params: { longitude: $scope.loc[0] , latitude: $scope.loc[1] , limit: 40, distance: 5000}
         })
         .success(function(data) {
           $scope.campaigns = data;
