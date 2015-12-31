@@ -93,15 +93,14 @@ exports.index = function(req, res) {
     Campaign.find({
         user_id: req.user_id
       })
-      .populate('images','link')
       .execAsync()
       .then(responseWithResult(res))
       .catch(handleError(res));
   } else {
-      var limit = req.query.limit || 20;
+      var limit = req.query.limit || 9;
       var offset = req.query.offset || 0;
       // get the max distance or set it to 8 kilometers
-      var maxDistance = req.query.distance || 150;
+      var maxDistance = req.query.distance || 500;
       // we need to convert the distance to radians
       // the raduis of Earth is approximately 6371 kilometers
       maxDistance /= 6371;
@@ -109,14 +108,14 @@ exports.index = function(req, res) {
       var coords = [];
       coords[0] = req.query.longitude || 0;
       coords[1] = req.query.latitude || 0;
-      var data = req.params || {
+      var data = req.params === {} ? req.params : {
         loc: {
           $near: coords,
           $maxDistance: maxDistance
         }
       };
+      console.log(data);
       Campaign.find(data)
-      .populate('images','link')
       .limit(limit)
       .skip(offset)
       .execAsync()
@@ -129,7 +128,6 @@ exports.index = function(req, res) {
 exports.show = function(req, res) {
   Campaign.findById(req.params.id)
     .populate('user_id', 'name')
-    .populate('images','link')
     .populate('volunteers','name')
     .execAsync()
     .then(handleEntityNotFound(res))
