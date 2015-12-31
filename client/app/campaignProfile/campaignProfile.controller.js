@@ -32,6 +32,7 @@ angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
       donationFactory.saveDonation(amount, $stateParams.id, $stateParams._userId)
         .success(function(data) {
           console.log(data);
+            $scope.updateDonatedAmount();
         });
     };
 
