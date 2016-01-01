@@ -3,7 +3,7 @@
 angular.module('bApp')
   .factory('geolocationFactory', function ($http) {
     var getIpInfo = function() {
-    var url = 'http://ipinfo.io/json';
+    var url = 'https://ipinfo.io/json';
       return $http.get(url)
       .success(function(data) {
         var addressDetails = data;
