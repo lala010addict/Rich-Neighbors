@@ -9,7 +9,7 @@ angular.module('bApp.MainController', ['ui.router'])
     $scope.location = geolocationFactory.getLatandLong();
 
     $scope.getCurrentLoc = function() {
-    var url = 'http://ipinfo.io/json';
+    var url = 'https://ipinfo.io/json';
       return $http.get(url)
       .success(function(data) {
         var result = data.city + ' ' + data.region + ', ' + data.postal;
