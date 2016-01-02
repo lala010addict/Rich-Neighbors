@@ -6,4 +6,4 @@ angular.module('bApp')
     restrict: 'E',
     controller: 'NavbarController',
     controllerAs: 'nav'
-  }));
+});

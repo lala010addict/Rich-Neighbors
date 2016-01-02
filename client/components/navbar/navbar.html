@@ -1,80 +1,35 @@
-<!--
 
-<div class="navbar navbar-default navbar-static-top" ng-controller="NavbarController">
-  <div class="container">
-    <div class="navbar-header">
-      <button class="navbar-toggle" type="button" ng-click="nav.isCollapsed = !nav.isCollapsed">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a href="/" class="navbar-brand">b</a>
-    </div>
-    <div collapse="nav.isCollapsed" class="navbar-collapse collapse" id="navbar-main">
-      <ul class="nav navbar-nav">
-        <li ng-repeat="item in nav.menu" ui-sref-active="active">
-            <a ui-sref="{{item.state}}">{{item.title}}</a>
-        </li>
-        <li ng-show="nav.isAdmin()" ui-sref-active="active"><a ui-sref="admin">Admin</a></li>
-      </ul>
-
-      <ul class="nav navbar-nav navbar-right">
-        <li ng-hide="nav.isLoggedIn()" ui-sref-active="active"><a ui-sref="signup">Sign up</a></li>
-        <li ng-hide="nav.isLoggedIn()" ui-sref-active="active"><a ui-sref="login">Login</a></li>
-        <li ng-show="nav.isLoggedIn()"><p class="navbar-text">Hello {{ nav.getCurrentUser().name }}</p> </li>
-        <li ng-show="nav.isLoggedIn()" ui-sref-active="active"><a ui-sref="settings"><span class="glyphicon glyphicon-cog"></span></a></li>
-        <li ng-show="nav.isLoggedIn()"><a ui-sref="logout">Logout</a></li>
-      </ul>
-    </div>
-  </div>
-</div> -->
-<style>
-  .main-logo{
-    width: 25%;
-    height: 25%;
-    margin-right: -300px;
-  }
-
-</style>
-
-<div class="top-bar" ng-controller="NavbarController">
-  <div class="top-bar-left">
-    <ul class="menu" data-responsive-menu="accordion">
-      <li class="menu-text"><a href="/"><img class="main-logo" src="assets/images/richNeighborsLogo.png" alt=""></a></li>
-      <li class="menu-text" ui-sref-active="active"><a ui-sref="howitworks">How it Works</a></li>
-      <li class="menu-text" ui-sref-active="active"><a ui-sref="about">About Us</a></li>
-      <li class="menu-text" ng-show="nav.isAdmin()" ui-sref-active="active"><a ui-sref="admin">Admin</a></li>
-      <!-- <li ng-repeat="item in nav.menu" ui-sref-active="active">
-        <a ui-sref="{{item.state}}">{{item.title}}</a>
-      </li> -->
-<!--       <li><a href="/startCampaign" class="button success">Start a Campaign</a></li> -->
-    </ul>
-  </div>
-  <div class="top-bar-right">
-    <ul class="menu">
-      <li>
-      </li>
-      <li ng-hide="nav.isLoggedIn()" ui-sref-active="active"><a class="button small" ui-sref="login"><i class="fa fa-sign-in">   Login</i></a></li>
-      <li ng-hide="nav.isLoggedIn()" ui-sref-active="active"><a class="button small" ui-sref="signup"><i class="fa fa-user">    Sign Up</i></a></li>
-      <li ng-show="nav.isLoggedIn()">
-        <!--       <li ng-show="nav.isLoggedIn()" ui-sref-active="active"><a href="/myaccount">My Account</a></li>
-        <p class="navbar-text">Hello {{ nav.getCurrentUser().name }}</p>
-      </li> -->
-        <li class='dropdown' id="primary_nav_wrap" ng-show="nav.isLoggedIn()">
-          <ul>
-            <li>
-              <a class="button" href="#">Hello, {{ nav.getCurrentUser().name }}!</a>
-              <ul>
-                <li ui-sref-active="active"><a href="/myaccount">My Account</a></li>
-                <li ui-sref-active="active"><a ui-sref="settings">Settings</a></li>
-                <li><a ui-sref="logout">Logout</a></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <!--  <li ng-show="nav.isLoggedIn()" ui-sref-active="active"><a ui-sref="settings"><i class="fa fa-cog"></i></a></li>
-      <li ng-show="nav.isLoggedIn()"><a ui-sref="logout">Logout</a></li> -->
-    </ul>
-  </div>
+<div class="title-bar" data-responsive-toggle="rn-menu" data-hide-for="large">
+    <button class="menu-icon" type="button" data-toggle></button>
+    <div class="title-bar-title">Menu</div>
 </div>
+<div class="top-bar" id="rn-menu" ng-controller="NavbarController">
+    <div class="top-bar-left">
+        <ul class="vertical medium-horizontal dropdown menu" data-dropdown-menu>
+            <li class="menu-text">
+                <a href="/"><img src="assets/images/richNeighborsLogo.png" alt="Rich Neighbors"></a>
+            </li>
+            <li class="menu-text" ui-sref-active="active"><a href="#">How it Works</a></li>
+            <li class="menu-text" ui-sref-active="active"><a href="#">About Us</a></li>
+            <li class="menu-text" ng-show="nav.isAdmin()" ui-sref-active="active"><a ui-sref="admin">Admin</a></li>
+        </ul>
+    </div>
+    <div class="top-bar-right">
+        <ul class="vertical medium-horizontal dropdown menu" data-dropdown-menu>
+            <li class="menu-text" ng-hide="nav.isLoggedIn()" ui-sref-active="active"><button type="button" class="button" ui-sref="login"><i class="fa fa-sign-in"></i>  Login</button></li>
+            <li class="menu-text" ng-hide="nav.isLoggedIn()" ui-sref-active="active"><button type="button" class="button" ui-sref="signup"><i class="fa fa-user"></i>  Sign Up</button></li>
+            <li class="menu-text dropdown menu" data-dropdown-menu>
+                <button type="button large" class="button dropdown" ng-show="nav.isLoggedIn()" data-toggle="myaccount-dropdown" href="#">Hello, {{ nav.getCurrentUser().name }}!</button>
+                <ul class="menu bottom" id="myaccount-dropdown" ng-show="nav.isLoggedIn()" data-dropdown>
+                <!-- TODO:  Dropdown still has some issues that need to be fixed -->
+                    <li><a href="/myaccount">My Account</a></li>
+                    <li><a ui-sref="settings">Settings</a></li>
+                    <li><a ui-sref="logout">Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<script>
+  $(document).foundation();
+</script>
