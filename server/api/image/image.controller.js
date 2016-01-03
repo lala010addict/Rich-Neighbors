@@ -142,7 +142,7 @@ export function create(req, res) {
     {safe: true, upsert: true, new: true})
     .then(handleEntityNotFound(res))
     .then(responseWithResult(res))
-    //.catch(handleError(res));  //TODO: Strangely giving type error not a function.
+    .catch(handleError(res));  //TODO: Strangely giving type error not a function.
 }
 
 // Updates an existing Image in the DB
