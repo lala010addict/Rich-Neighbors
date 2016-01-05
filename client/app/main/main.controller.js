@@ -5,7 +5,6 @@
 class MainController {
   constructor($http, geolocationFactory) {
     var _this = this;
-    //this.scope = $scope;
     this.http = $http;
     this.campaigns = {};
     this.outputBar = {
@@ -16,7 +15,7 @@ class MainController {
       .then(() => {
         _this.addMoreResults(500);
       });
-  };
+  }
 
   getCurrentLoc() {
     var _this = this;
@@ -24,11 +23,11 @@ class MainController {
     return _this.http.get(url)
       .success(data => {
         _this.currentLoc = `${data.city}, ${data.region} ${data.postal}`;
-        _this.loc = data.loc.split(',').map(function(loc) {
+        _this.loc = data.loc.split(',').map(loc => {
           return Number(loc);
         });
       });
-  };
+  }
   addMoreResults(dist) {
     var _this = this;
     var distance = dist || 500;
@@ -50,17 +49,17 @@ class MainController {
       .error(err => {
         console.error('Error: ' + err);
       });
-  };
+  }
   calDonatedAmount(x) {
     var amounts = _.pluck(x, 'amount');
-    return _.reduce(amounts, function(total, n) {
+    return _.reduce(amounts, (total, n) => {
       return total + n;
     });
-  };
+  }
   limitChar(x, y) {
     var sp = x.split('');
     return sp.slice(0, y).join('');
-  };
+  }
   showData() {
     var self = this;
     var pagesShown = 1;
@@ -74,11 +73,9 @@ class MainController {
     this.showMoreItems = function() {
       pagesShown = pagesShown + 1;
       self.addMoreResults();
-    };
+    }
   }
 }
-
-//MainController.$inject = ['$scope', '$http', 'geolocationFactory'];
 
 angular.module('bApp.MainController', ['ui.router'])
   .controller('MainController', MainController);
