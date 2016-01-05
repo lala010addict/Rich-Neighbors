@@ -24,7 +24,6 @@ class MainController {
     return _this.http.get(url)
       .success(data => {
         _this.currentLoc = `${data.city}, ${data.region} ${data.postal}`;
-        console.log(_this.currentLoc);
         _this.loc = data.loc.split(',').map(function(loc) {
           return Number(loc);
         });
