@@ -100,7 +100,7 @@ exports.index = function(req, res) {
       var limit = req.query.limit || 9;
       var offset = req.query.offset || 0;
       // get the max distance or set it to 8 kilometers
-      var maxDistance = 30;
+      var maxDistance = req.query.distance || 500;
       // we need to convert the distance to radians
       // the raduis of Earth is approximately 6371 kilometers
       maxDistance /= 6371;

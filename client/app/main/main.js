@@ -7,7 +7,7 @@ angular.module('bApp')
         url: '/',
         templateUrl: 'app/main/main.html',
         controller: 'MainController',
-        controllerAs: 'MainController'
+        controllerAs: 'main'
       })
       .state('campaignProfile', {
         url: '/campaignProfile/:id',
