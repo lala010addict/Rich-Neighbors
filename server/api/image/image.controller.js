@@ -137,12 +137,12 @@ export function createImage (req, res, next) {
 // Creates a new Image in the DB
 
 export function create(req, res) {
-  Campaign.findByIdAndUpdate(req.tempImage.campaign,
+  Campaign.findByIdAndUpdateAsync(req.tempImage.campaign,
     {$push: {'images': req.tempImage.image}},
     {safe: true, upsert: true, new: true})
     .then(handleEntityNotFound(res))
     .then(responseWithResult(res))
-    //.catch(handleError(res));  //TODO: Strangely giving type error not a function.
+    .catch(handleError(res));  //TODO: Strangely giving type error not a function.
 }
 
 // Updates an existing Image in the DB

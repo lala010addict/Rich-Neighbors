@@ -54,12 +54,13 @@ angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
             return total + n;
           }));
           var links = data._links.slice(1, 5);
-          $scope.linkApiCalls(data._links);
+          $scope.linkApiCalls(links);
         })
         .error(function(data) {
           console.log('Error: ' + data);
         });
     }
+
 
     $scope.getCampaigns();
 
@@ -253,7 +254,9 @@ angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
         .success(function(data) {
 
           alert("Thanks for Donating!")
+
           $scope.getCampaigns();
+
         })
         .error(function(data) {
 
@@ -278,6 +281,7 @@ angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
         .success(function(data) {
           alert("Thanks for Signing Up!")
           $scope.getCampaigns();
+
         })
         .error(function(data) {
 
@@ -289,24 +293,6 @@ angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
     //**************************filtering out supply contributions **********************
 
     $scope.filterSupply = function(x, id) {
-
-      // console.log('obj.contributors', x);
-      // console.log('id', id)
-      // console.log('filtered', _.pluck(_.filter(_.pluck(_.filter(x, {
-      //   'type': "Supply"
-      // }), "item_id"), {
-      //   '_id': "5679bbd0e134af5d22bdb9e8"
-      // }), 'quantity'));
-
-
-      console.log('filteredid', _.pluck(_.filter(x, {
-        'type': "Supply",
-        'item_id': {
-          '_id': "5679bbd0e134af5d22bdb9e8"
-        }
-      }), 'amount'))
-
-
       var numbers = _.pluck(_.filter(x, {
         'type': "Supply",
         'item_id': {
@@ -320,23 +306,12 @@ angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
         return total + n;
       })
 
-      // console.log('reducednumber', reducednumber)
-
       return reducednumber
     }
 
 
     //**************************filtering out supply contributions **********************
     $scope.filterVolunteer = function(x, id) {
-
-
-      // console.log('filteredid', _.pluck(_.filter(x, {
-      //   'type': "Supply",
-      //   'item_id': {
-      //     '_id': "5679bbd0e134af5d22bdb9e8"
-      //   }
-      // }), 'amount'))
-
 
       var numbers = _.pluck(_.filter(x, {
         'type': "Volunteer",
@@ -346,12 +321,9 @@ angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
       }), 'amount')
 
 
-
       var reducednumber = _.reduce(numbers, function(total, n) {
         return total + n;
       })
-
-      // console.log('reducednumber', reducednumber)
 
       return reducednumber
     }

@@ -37,4 +37,20 @@ var ContributorSchema = new Schema({
   },
 });
 
+// ContributorSchema.post('save', function(doc) {
+//   // if (doc.type === 'donation') {
+//     this.model('Campaign').findById(doc.campaign_id)
+//       .then(function (data) {
+//         data.donated += doc.amount;
+//         return data;
+//       })
+//       .then(function (data) {
+//         this.model('Campaign').findByIdAndUpdate(
+//         data._id,
+//         {$set: {donated: data.donated}})
+//         console.log(data);
+//       })
+//   // }
+// });
+
 module.exports = mongoose.model('Contributor', ContributorSchema);
