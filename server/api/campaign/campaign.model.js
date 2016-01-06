@@ -18,7 +18,7 @@ var CampaignSchema = new Schema({
   },
   description: {
     type: String,
-    required: true,
+   // required: true,
     validate: [
     function (name) {
       return name.trim().length >= 24
@@ -27,62 +27,56 @@ var CampaignSchema = new Schema({
   },
   created_at: {
     type: Date,
-    required: true,
     default: Date.now
   },
-  // TODO: Remove if comment api works4 null
-  owner: {
-    type: Schema.ObjectId,
+  user_id: {
+    type: Schema.Types.ObjectId,
     ref: 'User'
   },
   followers: [{
-    type:  Schema.ObjectId,
-    ref: 'User',
+    type:  Schema.Types.ObjectId,
+    ref: 'Follower',
   }],
   contributors: [{
-    _id: {
-      type:  Schema.ObjectId,
-      ref: 'User'
-    },
-    private: {
-      type: Boolean,
-      default: false
-    },
-    amount: {
-      type: Number,
-      validate: [
-      function (number) {
-        return number >=1;
-      },
-      'Amount must be $1 or more']
-    }
+    type: Schema.Types.ObjectId,
+    ref: 'Contributor'
+  }],
+  items: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Item'
+  }],
+  volunteers: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Volunteer'
+  }],
+  comments: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Comment'
   }],
   address: {
     street: String,
     neighborhood: String,
     city: {
       type: String,
-      required: true
+    //  required: true
     },
     zip: {
       type: String,
-      required: true
+     // required: true
     },
     state: String,
     country: {
       type: String,
       default: 'United States'
     },
-    longitude: {
-      type: String
-    },
-    latitude: {
-      type: String
-    }
+  },
+  loc: {
+    type: [Number],
+    index: '2d'
   },
   goal: {
     type: String,
-    required: true,
+    //required: true,
     validate: [
     function (goal){
       return goal >= 1;
@@ -91,19 +85,53 @@ var CampaignSchema = new Schema({
   },
   active: {
     type: Boolean,
-    required: true,
+  //  required: true,
     default: true
   },
   url: {
     type: String,
-    required: true,
+  //  required: true,
   },
   picture_url: {
     type: String,
-    required: true,
-    default: '/asset/basic.png'  //TODO: Correct to basic png/jpg
-  }
+  //  required: true,
+    default: 'https://pbs.twimg.com/media/BwsrTjGIcAAtjdu.png'  //TODO: Correct to basic png/jpg
+  },
+  // images: [{
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'Image'
+  // }],
+  images: [{
+    link: String,
+    file: String,
+    created_at: { type: Date, default: Date.now }
+  }],
+  archived: Boolean,
+  days: {
+    type: Number,
+    default: 30
+  },
+  expires: {
+    type: Date
+  },
+  donated: {
+    type: Number,
+    default: 0
+  },
+  _links: Array
 });
+
+
+
+
+function linkify (data) {
+  return [{href: '/api/campaigns/' + data._id, ref: 'self'},
+          {href: '/api/campaigns/' + data._id + '/comments', ref: 'comments'},
+          {href: '/api/campaigns/' + data._id + '/followers', ref: 'followers'},
+          {href: '/api/campaigns/' + data._id + '/contributors', ref: 'contributors'},
+          {href: '/api/campaigns/' + data._id + '/items', ref: 'items'},
+          {href: '/api/campaigns/' + data._id + '/volunteers', ref: 'volunteers'}]
+}
 
 /**
  * Virtuals for non persistant data
@@ -143,12 +171,57 @@ CampaignSchema
 /**
  * Validations
  */
-// CampaignSchema
-//   .path('address.zip')
-//   .validate(function (zip) {
-//     return zip === 5;
-//   })
 
+
+/*
+* Pre-functions
+*/
+
+CampaignSchema
+  .pre('save', function (next) {
+    var _this = this;
+    _this._links = linkify(_this);
+    next();
+  });
+
+CampaignSchema.pre('remove', function(next){
+  this.model('Follower').update(
+    {followers: this._id},
+    {$pull: {followers: this._id}},
+    {multi: true},
+    next
+  );
+  this.model('Volunteer').update(
+    {volunteers: this._id},
+    {$pull: {volunteers: this._id}},
+    {multi: true},
+    next
+  );
+  this.model('Contributor').update(
+    {contributors: this._id},
+    {$pull: {contributors: this._id}},
+    {multi: true},
+    next
+  );
+  this.model('Follower').update(
+    {followers: this._id},
+    {$pull: {followers: this._id}},
+    {multi: true},
+    next
+  );
+  this.model('Item').update(
+    {items: this._id},
+    {$pull: {items: this._id}},
+    {multi: true},
+    next
+  );
+  this.model('Comment').update(
+    {comment: this._id},
+    {$pull: {comment: this._id}},
+    {multi: true},
+    next
+  );
+});
 
 /*
 * Methods

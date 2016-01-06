@@ -1,0 +1,17 @@
+<navbar>
+</navbar>
+<header class="header">
+  <img id="profilepic" src="{{profile_pic}}">
+  <h1 class="main-header">{{name}}</h1>
+  <ul class="header-subnav">
+    <li ng-repeat="filter in filters">
+      <a href="{{filter.url}}" ng-click="select($index)" ng-class="{isactive: $index == selected}">   {{filter.time}}</a>
+    </li>
+  </ul>
+  <!--  <ul class="header-subnav">
+    <li><a href="/following"   class="{{class}}" ng-click="changeClass()">Followed</a></li>
+    <li><a href="/myaccount" class="{{class}}" ng-click="changeClass()">Started</a></li>
+    <li><a href="/contributed"    class="{{class}}" ng-click="changeClass()"> Contributed</a></li>
+  </ul> -->
+</header>
+<script>$(document).foundation();</script>

@@ -7,6 +7,11 @@ var authTypes = ['github', 'twitter', 'facebook', 'google'];
 
 var UserSchema = new Schema({
   name: String,
+  profile_pic: {
+    type: String,
+  //  required: true,
+    default: 'https://pbs.twimg.com/media/BwsrTjGIcAAtjdu.png'  //TODO: Correct to basic png/jpg
+  },
   email: {
     type: String,
     lowercase: true
@@ -21,8 +26,44 @@ var UserSchema = new Schema({
   facebook: {},
   twitter: {},
   google: {},
-  github: {}
+  github: {},
+  campaigns: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Campaign'
+  }],
+  followers: [{
+    type:  Schema.Types.ObjectId,
+    ref: 'Follower',
+  }],
+  contributors: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Contributor'
+  }],
+  items: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Item'
+  }],
+  volunteers: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Volunteer'
+  }],
+  comments: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Comment'
+  }]
 });
+
+
+function linkify (data) {
+  return [{href: '/api/users/' + data._id, ref: 'self'},
+          {href: '/api/users/' + data._id + '/comments', ref: 'comments'},
+          {href: '/api/users/' + data._id + '/campaigns', ref: 'campaigns'},
+          {href: '/api/users/' + data._id + '/followers', ref: 'followings'},
+          {href: '/api/users/' + data._id + '/contributors', ref: 'contributions'},
+          {href: '/api/users/' + data._id + '/items', ref: 'items'},
+          {href: '/api/users/' + data._id + '/volunteers', ref: 'volunteering'}]
+}
+
 
 /**
  * Virtuals
@@ -34,7 +75,8 @@ UserSchema
   .get(function() {
     return {
       'name': this.name,
-      'role': this.role
+      'role': this.role,
+      'profile_pic': this.profile_pic
     };
   });
 
@@ -44,7 +86,8 @@ UserSchema
   .get(function() {
     return {
       '_id': this._id,
-      'role': this.role
+      'role': this.role,
+      'profile_pic': this.profile_pic
     };
   });
 
@@ -119,6 +162,7 @@ UserSchema
             next(encryptErr);
           }
           _this.password = hashedPassword;
+          _this._links = linkify(_this);
           next();
         });
       });

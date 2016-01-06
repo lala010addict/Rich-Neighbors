@@ -1,70 +1,68 @@
 'use strict';
 
-// (function() {
+(function () {
 
-// class MainController {
-
-  
-
-//   constructor($http) {
-//     this.$http = $http;
-//     this.awesomeThings = [];
-
-//     $http.get('/api/things').then(response => {
-//       this.awesomeThings = response.data;
-//     });
-//   }
-
-//   addThing() {
-//     if (this.newThing) {
-//       this.$http.post('/api/things', { name: this.newThing });
-//       this.newThing = '';
-//     }
-//   }
-
-//   deleteThing(thing) {
-//     this.$http.delete('/api/things/' + thing._id);
-//   }
-// }
-
-// angular.module('bApp')
-//   .controller('MainController', MainController);
-
-// })();
+class MainController {
+  constructor($http, geolocationFactory, campaignFactory) {
+    var _this = this;
+    this.campaignFactory = campaignFactory;
+    this.geolocationFactory = geolocationFactory;
+    this.outputBar = {
+      bar: 'main'
+    };
+    this.offsetLevel = 1;
+    this.geolocationFactory.getIpInfo()
+      .then(data => _this.currentLoc = `${data.city}, ${data.region} ${data.postal}`);
+    this.geolocationFactory.getLatandLong()
+      .then(data => _this.loc = data)
+      .finally(() => {
+        _this.addMoreResults(500);
+      });
+  }
 
 
-
-angular.module('bApp.MainController', [])
-.controller('MainController', ['$scope', '$http', function($scope, $http) {
-
-  $scope.data = data;
-   $scope.Math = window.Math;
-
-
- $scope.showData = function( ){
-     
-     //show more functionality
-			var pagesShown = 1;
-		    var pageSize = 6;
-		    
-		    $scope.paginationLimit = function(data) {
-		        return pageSize * pagesShown;
-		    };
-		    $scope.hasMoreItemsToShow = function() {
-		        return pagesShown < ($scope.data.length / pageSize);
-		    };
-		    $scope.showMoreItems = function() {
-		        pagesShown = pagesShown + 1;       
-		    };	
-     
-         
+  addMoreResults(dist) {
+    var _this = this;
+    var distance = dist || 500;
+    var limit = 18 + _this.offsetLevel * 9;
+      this.campaignFactory.getCampaigns(this.loc[0], this.loc[1], limit, distance)
+      .success(data => {
+        _this.campaigns = data //_.extend($campaigns, data);
+        _this.offsetLevel += 1;
+      })
+      .error(err => {
+        console.error('Error: ' + err);
+      });
+  }
+  calDonatedAmount(x) {
+    var amounts = _.pluck(x, 'amount');
+    return _.reduce(amounts, (total, n) => {
+      return total + n;
+    });
+  }
+  limitChar(x, y) {
+    var sp = x.split('');
+    return sp.slice(0, y).join('');
+  }
+  showData() {
+    var self = this;
+    var pagesShown = 1;
+    var pageSize = 9;
+    this.paginationLimit = function() {
+      return pageSize * pagesShown;
+    };
+    this.hasMoreItemsToShow = function() {
+      return pagesShown < (self.campaigns.length / pageSize);
+    };
+    this.showMoreItems = function() {
+      pagesShown = pagesShown + 1;
+      self.addMoreResults(500);
+    }
+  }
 }
 
+MainController.$inject = ['$http', 'geolocationFactory','campaignFactory'];
 
-}]);
-
-
-
-
-
-
+angular.module('bApp.MainController', ['ui.router'])
+  .controller('MainController', MainController);
+})();

@@ -1,0 +1,73 @@
+.profile-card {
+  padding: 1rem;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  margin: 2rem 0;
+  background-color: #fff;
+  img {
+    width: 8rem;
+    display: block;
+    margin: 2rem auto;
+    text-align: center;
+    border-radius: 50%;
+    box-shadow: 2px 2px 5px #888888;
+  }
+  .profile-info {
+    padding: 1rem;
+    h4 {
+      margin-top: 0;
+      text-align: center;
+      text-transform: uppercase;
+    }
+    p {
+      text-align: center;
+    }
+    .inline-list {
+      text-align: center;
+      margin-bottom: 1rem;
+      li {
+        float: none;
+        display: inline-block;
+      }
+      i.fi-social-facebook {
+        font-size: 1.5rem;
+        color: #3b5998;
+        &:hover {
+          transform: scale(1.5);
+          transition: all .5s ease-in-out;
+        }
+      }
+      i.fi-social-twitter {
+        font-size: 1.5rem;
+        color: #55acee;
+        &:hover {
+          transform: scale(1.5);
+          transition: all .5s ease-in-out;
+        }
+      }
+      i.fi-social-linkedin {
+        font-size: 1.5rem;
+        color: #0077b5;
+        &:hover {
+          transform: scale(1.5);
+          transition: all .5s ease-in-out;
+        }
+      }
+      i.fi-social-github {
+        font-size: 1.5rem;
+        color: #333;
+        &:hover {
+          transform: scale(1.5);
+          transition: all .5s ease-in-out;
+        }
+      }
+      i.fi-social-youtube {
+        font-size: 1.5rem;
+        color: #cc181e;
+        &:hover {
+          transform: scale(1.5);
+          transition: all .5s ease-in-out;
+        }
+      }  
+    }
+  }
+}

@@ -1,8 +1,13 @@
-$icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
-@import '../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap';
-@import '../bower_components/bootstrap-social/bootstrap-social.scss';
+
+
+$icon-font-path: "../bower_components/foundation-icon-fonts/";
+@import '../bower_components/foundation-sites/scss/foundation.scss';
+@include foundation-everything;
 $fa-font-path: "../bower_components/font-awesome/fonts";
 @import '../bower_components/font-awesome/scss/font-awesome';
+
+
+
 
 /**
  * App-wide Styles
@@ -15,12 +20,424 @@ $fa-font-path: "../bower_components/font-awesome/fonts";
   padding: 0.2em 0;
 }
 
+
+
+/*
+
+    Theme Name: Biosphere
+    Theme URI: http://themeforest.net/user/DanyDuchaine
+    Description: A feature packed multi-purpose WordPress theme.
+    Author: DanyDuchaine
+    Author URI: http://themeforest.net/user/DanyDuchaine
+    License: GNU General Public License version 3.0
+    License URI: http://www.gnu.org/licenses/gpl-3.0.html
+    Version: 1.0.6
+    Tags: biosphere, donation, woocommerce, buddypress, bbpress, events, products
+
+*/
+
+
+/**
+ * #1 Reset
+ */
+
+.multicol-colors {
+    overflow: hidden;
+}
+
+.multicol-colors ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.multicol-colors li {
+    display: block;
+    float: left;
+    height: 7px;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+}
+
+.dropdown {
+    position: relative !important;
+    z-index: 500 !important;
+
+    right: 10px;
+     font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+
+.top-bar,
+.top-bar ul {
+    background-color: #172129;
+}
+.top-bar-left {
+     width: auto !important;
+ }
+
+ .top-bar-right {
+     width: auto !important;
+ }
+
+
+.top-bar a {
+    color: #FDFDFD !important;
+}
+
+#primary_nav_wrap {
+    margin-top: 15px
+}
+
+#primary_nav_wrap ul {
+    list-style: none;
+    position: relative;
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+
+#primary_nav_wrap ul a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+    /*    font-size: 12px;*/
+    line-height: 32px;
+    padding: 0 15px;
+    font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: #2199E8;
+}
+
+#primary_nav_wrap ul li {
+    position: relative;
+    float: left;
+    margin: 0;
+    padding: 0;
+    z-index: 20;
+ /*   background-color: #2199E8;*/
+}
+
+#primary_nav_wrap ul li.current-menu-item {
+    /* background: #ddd;*/
+}
+
+/*#primary_nav_wrap:hover {
+ background: pink !important;
+ z-index: 600 !important;
+}*/
+
+#primary_nav_wrap ul ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    /*background: #fff;*/
+    padding: 0;
+    z-index: 20;
+}
+
+#primary_nav_wrap ul ul li {
+    float: none;
+    width: 200px;
+    z-index: 20;
+}
+
+#primary_nav_wrap ul ul a {
+    line-height: 120%;
+    padding: 10px 15px;
+    z-index: 20;
+}
+
+#primary_nav_wrap ul ul ul {
+    top: 0;
+    left: 100%;
+    z-index: 20;
+}
+
+#primary_nav_wrap ul li:hover > ul {
+    display: block;
+    z-index: 20;
+}
+
+
+
+.header .main-header {
+    color: #F2F5F8;
+        margin-bottom: 0px !important;
+}
+
+.header-subnav {
+    float: none;
+    position: relative;
+    top: 2rem;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.header-subnav li {
+    float: none;
+    display: inline-block;
+}
+
+.header-subnav li a {
+    padding: 0.9rem 1rem 0.75rem;
+    font-size: 0.875rem;
+    color: #fff;
+    text-transform: uppercase;
+    display: block;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.header-subnav li a.isactive {
+    background: rgba(250, 250, 250, 0.7);
+  /*  color: #333;*/
+}
+
+.header-subnav li a:hover {
+    background: rgba(250, 250, 250, 0.7);
+  /*  color: #333;*/
+    transition: all .25s ease-in-out;
+}
+
+#campaignTitle {
+    background-color: #344655;
+    padding: 20px;
+    color: #EDF4EB;
+    font-weight: bold;
+}
+
+.callout {
+    background-color: rgba(82, 84, 63, 0.12);
+    border: 0px;
+    margin: 0 0 40px;
+    padding: 0;
+}
+
+textarea {
+    min-height: 150px !important;
+    max-width: 300%;
+}
+
+#geoloc {
+    color: hsl(107, 65%, 90%);
+    font-weight: bold;
+    padding-right: 20px;
+}
+
+.thumbnails {
+    max-width: 100%;
+    height: 200px !important;
+}
+
+.top-bar,
+.top-bar ul {
+    background-color: #172129;
+}
+
+body {
+    /*background: #f2f5f8;*/
+    color: #84898c;
+    font: 14px/1.8 "Open Sans", sans-serif;
+}
+
+
+.cause-content {
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+.cause-info-widget {
+    background: #344655;
+    border-radius: 3px;
+    text-align: center;
+}
+
+.cause-info-widget-donated {
+    padding: 35px;
+}
+
+.cause-info-widget-donated span {
+    color: #ebddaa;
+    display: block;
+    font-family: "Oswald", sans-serif;
+    font-size: 50px;
+    line-height: 1;
+    margin-bottom: 14px;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, .17);
+}
+
+.cause-info-widget-donated em {
+    color: #fff;
+    display: block;
+    font-family: "Droid Serif", serif;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 1;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, .17);
+}
+
+.cause-info-widget-percentage {
+    background: #415769;
+    color: #fff;
+    display: block;
+    font-family: "Droid Serif", serif;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 1;
+    padding: 25px 20px;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, .17);
+}
+
+.cause-info-widget-percentage span {
+    color: #ebddaa;
+}
+
+.cause-info-widget-percentage-bar {
+    border-radius: 6px;
+    background-color: #25323e;
+/*    background-image: -moz-linear-gradient(top, rgba(32, 43, 53, 1) 1%, rgba(44, 59, 71, 1) 99%);
+    background-image: -o-linear-gradient(top, rgba(32, 43, 53, 1) 1%, rgba(44, 59, 71, 1) 99%);
+    background-image: -webkit-linear-gradient(top, rgba(32, 43, 53, 1)) 1%, rgba(44, 59, 71, 1) 99%);
+    background-image: linear-gradient(top, rgba(32, 43, 53, 1) 1%, rgba(44, 59, 71, 1) 99%);*/
+    height: 12px;
+    margin-top: 15px;
+    position: relative;
+    padding: 0 3px;
+    overflow: hidden;
+}
+
+.cause-info-widget-percentage-bar span {
+    border-radius: 4px;
+    background: #ffda0c;
+    bottom: 3px;
+    display: block;
+    height: 6px;
+    left: 0;
+    position: relative;
+    top: 3px;
+    width: 0%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.cause-info-widget-donate {
+    padding: 25px 0;
+}
+
+.dd-button,
+input[type="submit"],
+input[type="button"] {
+    border: 0;
+    cursor: pointer;
+    color: #fff;
+    font-family: "Oswald", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    font-style: normal;
+    line-height: 1;
+    padding: 8px 10px;
+}
+
+.dd-button span {
+    vertical-align: inherit;
+}
+
+.dd-button-txt {
+    text-transform: uppercase;
+}
+
+.dd-button.big {
+    -moz-box-shadow: 0 2px 2px rgba(0, 0, 0, .15);
+    -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, .15);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, .15);
+    border-radius: 3px;
+    display: inline-block;
+    font-size: 26px;
+    padding: 14px 13px;
+}
+
+.dd-button.medium {
+    padding: 5px 7px;
+}
+
+.dd-button.small {
+    -moz-box-shadow: 0 2px 2px rgba(0, 0, 0, .17);
+    -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, .17);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, .17);
+    display: inline-block;
+    font-size: 10px;
+    line-height: 1;
+    padding: 6px;
+}
+
+.dd-button.has-icon {
+    position: relative;
+    padding-right: 40px;
+}
+
+.dd-button.big.has-icon {
+    padding-right: 60px;
+}
+
+.dd-button.has-text {
+    padding-right: 0;
+}
+
+input[type="submit"],
+.dd-button.green {
+    background: rgba(58, 219, 118, 0.62);
+}
+
+.dd-button-icon {
+    background: rgba(0, 0, 0, 0.15);
+    bottom: 0;
+    color: rgba(255, 255, 255, 0.6);
+    display: block;
+    font-size: 15px;
+    line-height: 36px;
+    padding-left: 3px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    text-align: center;
+    width: 27px;
+}
+
+.dd-button.big .dd-button-icon {
+    color: #fff;
+    font-size: 20px;
+    line-height: 57px;
+    width: 45px;
+}
+
+.dd-button-text {
+    background: rgba(0, 0, 0, 0.15);
+    display: inline-block;
+    line-height: 37px;
+    margin-left: 10px;
+    padding: 0 10px;
+    text-align: center;
+}
+
 // Component styles are injected through grunt
 // injector
 @import 'admin/admin.scss';
+@import 'campaignProfile/campaignProfile.scss';
+@import 'comments/comments.scss';
+@import 'contributed/contributed.scss';
+@import 'donate/donate.scss';
+@import 'following/following.scss';
 @import 'main/main.scss';
+@import 'myaccount/myaccount.scss';
+@import 'startCampaign/startCampaign.scss';
 @import 'submitCampaignsSuccess/submitCampaignsSuccess.scss';
+@import 'team/team.scss';
+@import 'updateCampaign/updateCampaign.scss';
+@import 'updateCampaignsSuccess/updateCampaignsSuccess.scss';
 @import '../components/colorBar/colorBar.scss';
 @import '../components/footer/footer.scss';
+@import '../components/myacc/myacc.scss';
 @import '../components/oauth-buttons/oauth-buttons.scss';
 // endinjector

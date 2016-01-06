@@ -1,16 +1,18 @@
 /**
  * Using Rails-like standard naming convention for endpoints.
- * GET     /y              ->  index
- * POST    /y              ->  create
- * GET     /y/:id          ->  show
- * PUT     /y/:id          ->  update
- * DELETE  /y/:id          ->  destroy
+ * GET     /api/comments              ->  index
+ * POST    /api/comments              ->  create
+ * GET     /api/comments/:id          ->  show
+ * PUT     /api/comments/:id          ->  update
+ * DELETE  /api/comments/:id          ->  destroy
  */
 
 'use strict';
 
 var _ = require('lodash');
 var Comment = require('./comment.model');
+var auth = require('../../auth/auth.service');
+var Campaign = require('../campaign/campaign.model');
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
@@ -59,16 +61,46 @@ function removeEntity(res) {
   };
 }
 
+
 // Gets a list of Comments
 exports.index = function(req, res) {
-  Comment.findAsync()
-    .then(responseWithResult(res))
-    .catch(handleError(res));
+ if (req.baseUrl === '/api/users/me/comments') {
+    Comment.find({user_id: req.user_id})
+      .populate( 'campaign_id', 'title', 'description')
+      .execAsync()
+      .then(responseWithResult(res))
+      .catch(handleError(res));
+  } else {
+    Comment.find(req.params)
+      .populate('user_id', 'name')
+      .execAsync()
+      .then(responseWithResult(res))
+      .catch(handleError(res));
+  }
 };
 
 // Gets a single Comment from the DB
 exports.show = function(req, res) {
+  Comment.findById(req.params.id)
+    .populate('user_id', 'name')
+    .execAsync()
+    .then(handleEntityNotFound(res))
+    .then(responseWithResult(res))
+    .catch(handleError(res));
+};
+
+exports.showParam = function(req, res, next) {
   Comment.findByIdAsync(req.params.id)
+    .then(handleEntityNotFound(res))
+    .then(function () {
+      next()
+    })
+    .catch(handleError(res));
+};
+
+// Gets a all Comments for a single Campaign from the DB
+exports.showByCampaign = function(req, res) {
+  Comment.findAsync({campaign_id: req.params.id})
     .then(handleEntityNotFound(res))
     .then(responseWithResult(res))
     .catch(handleError(res));
@@ -76,27 +108,58 @@ exports.show = function(req, res) {
 
 // Creates a new Comment in the DB
 exports.create = function(req, res) {
-  Comment.createAsync(req.body)
+  var data = _.extend(req.body, req.params, {user_id: req.user._id});
+  console.log(data);
+  if (data.parent) {
+    delete data.campaign_id;
+  }
+  Comment.createAsync(data)
+    .then(function (data) {
+      if (data.parent) {
+        return Comment.findByIdAndUpdate(data.parent,
+        {$push: {'replies': data._id}},
+        {safe: true, upsert: true, new: true})
+      } else {
+        return data;
+      }
+    })
     .then(responseWithResult(res, 201))
     .catch(handleError(res));
 };
 
+exports.pushToParent = function (req, res) {
+
+}
+// Updates an existing Comment in the DB
+// TODO: Must be tested
 // Updates an existing Comment in the DB
 exports.update = function(req, res) {
   if (req.body._id) {
     delete req.body._id;
   }
   Comment.findByIdAsync(req.params.id)
-    .then(handleEntityNotFound(res))
-    .then(saveUpdates(req.body))
-    .then(responseWithResult(res))
-    .catch(handleError(res));
+    .then(function (data) {
+      if (data.isOwner(req.user._id)) {
+        return handleEntityNotFound(res)
+          .then(saveUpdates(req.body))
+          .then(responseWithResult(res))
+          .catch(handleError(res));
+      } else {
+        return res.status(403).end();
+      }
+    })
 };
 
 // Deletes a Comment from the DB
 exports.destroy = function(req, res) {
   Comment.findByIdAsync(req.params.id)
-    .then(handleEntityNotFound(res))
-    .then(removeEntity(res))
-    .catch(handleError(res));
+    .then(function (data) {
+      if (data.isOwner(req.user._id) || auth.hasRole('admin')) {
+        return handleEntityNotFound(res)
+          .then(removeEntity(res))
+          .catch(handleError(res));
+      } else {
+        return res.status(403).end();
+      }
+    });
 };

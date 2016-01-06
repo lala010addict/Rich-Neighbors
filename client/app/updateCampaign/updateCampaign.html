@@ -1,0 +1,101 @@
+<navbar></navbar>
+<br>
+<div class="page-header dtc">
+  <div class="row">
+    <div class="column medium-9 small-centered">
+      <h1 id="pageHeader">Update Campaign</h1>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="column medium-9 small-centered">
+    <form>
+      <div class="row">
+        <div class="large-12 columns">
+          <label>Campaign Title
+            <input type="text" placeholder="Campaign Title" ng-model="formData.title" />
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="large-4 columns">
+          <label>Campaign Goal
+            <input type="text" placeholder="$$$$$$$$$$$" ng-model="formData.goal" />
+          </label>
+        </div>
+        <div class="large-4 columns">
+          <label>ZIP or Postal Code
+            <input type="text" placeholder="ZIP or Postal Code" ng-model="formData.address.zip" />
+          </label>
+        </div>
+        <div class="large-4 columns">
+          <label>Input
+            <input type="text" placeholder="" />
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="large-12 columns">
+          <label>Image URL
+            <input type="text" placeholder="Image URL" ng-model="formData.picture_url" />
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <fieldset data-ng-repeat="x in supplies">
+          <div class="large-4 columns">
+            <label>Supply Needed
+              <input type="text" ng-model="x.name" name="" placeholder="Enter Supply Name">
+            </label>
+          </div>
+          <div class="large-3 columns">
+            <label>Quantity
+              <input type="text" ng-model="x.quantity" name="" placeholder="Enter numerical value">
+            </label>
+          </div>
+          <div class="large-4 columns">
+            <span class="postfix">
+      <button class="remove"  ng-show="$last" ng-click="removeChoice()">-</button>
+ 
+   <button class="addfields" ng-show="$last" ng-click="addNewChoice()">+</button>
+</span>
+          </div>
+        </fieldset>
+      </div>
+      <div class="row">
+        <fieldset data-ng-repeat="x in volunteers">
+          <div class="large-4 columns">
+            <label>Volunteer Needed
+              <input type="text" ng-model="x.name" name="" placeholder="Enter Volunteer Position">
+            </label>
+          </div>
+          <div class="large-3 columns">
+            <label>Quantity
+              <input type="text" ng-model="x.quantity" name="" placeholder="Enter numerical value">
+            </label>
+          </div>
+          <div class="large-4 columns">
+            <span class="postfix">
+      <button class="remove"  ng-show="$last" ng-click="removeVolunteer()">-</button>
+ 
+   <button class="addfields" ng-show="$last" ng-click="addNewVolunteer()">+</button>
+</span>
+          </div>
+        </fieldset>
+      </div>
+      <!--  <div>{{volunteers}}</div> -->
+      <div class="row">
+        <div class="large-12 columns">
+          <label>About Your Campaign:
+            <textarea placeholder="Tell everyone about your campaign and why you would like to fix that pothole. Make it personal and compelling in case someone actually reads it!" ng-model="formData.description"></textarea>
+          </label>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="row">
+  <div class="column medium-9 small-centered">
+    <a ng-click="updateCampaign()" type="submit" class="button large expand">Submit Campaign</a>
+  </div>
+</div>

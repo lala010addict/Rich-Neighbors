@@ -1,0 +1,112 @@
+<div class="comments-app">
+  <h3>Comments</h3>
+  <!-- From -->
+  <div class="comment-form">
+    <!-- Comment Avatar -->
+    <div class="comment-avatar" ng-show="nav.isLoggedIn()">
+      <img src="{{profile_pic}}">
+    </div>
+    <form class="form" name="form" ng-submit="addComment()" novalidate ng-show="nav.isLoggedIn()">
+      <!-- form.$valid &&-->
+      <div class="form-row">
+        <textarea class="input" ng-model="formData.text" placeholder="Add comment..." required></textarea>
+      </div>
+      <div class="form-row" ng-show="nav.isLoggedIn()">
+        {{name}}
+      </div>
+      <!-- <div class="form-row" ng-hide="nav.isLoggedIn()">
+        <input class="input" ng-class="{ disabled: comment.anonymous }" ng-disabled="comment.anonymous" ng-model="comment.author" ng-required="!comment.anonymous" placeholder="Email" type="email">
+      </div>
+      <div class="form-row text-right" ng-hide="nav.isLoggedIn()">
+        <input id="comment-anonymous" ng-change="anonymousChanged()" ng-model="comment.anonymous" type="checkbox">
+        <label for="comment-anonymous">Anonymous</label>
+      </div> -->
+      <div class="form-row">
+        <input type="submit" value="Add Comment">
+      </div>
+    </form>
+  </div>
+  <!-- Comments List -->
+  <div class="comments">
+    <!-- Comment -->
+    <div ng-show="obj.comments.length === 0">
+      <h5> There are no comments for this campaign </h5>
+    </div>
+    <!-- <div class="comment" ng-repeat="comment in obj.comments | orderBy: '-created_at'"> -->
+    <div class="comment" ng-repeat="comment in obj.comments | orderBy: 'created_at': true" ng-init="replies=[]">
+           <!-- Comment Avatar -->
+      <div class="comment-avatar">
+        <img ng-src="{{ comment.profile_pic }}">
+      </div>
+      <!-- Comment Box -->
+      <div class="comment-box">
+        <div class="comment-text">{{ comment.text }}</div>
+        <div class="comment-footer">
+          <div class="comment-info">
+            <span class="comment-author">
+              <em ng-if="comment.anonymous">Anonymous</em>
+              <a ng-if="!comment.anonymous" href="{{ comment.author }}">{{ comment.author || comment.username}}</a>
+            </span>
+            <span class="comment-date">{{ comment.created_at | date: 'medium' }}</span>
+          </div>
+          <div class="comment-actions">
+            <a ng-hide="level > 5 || rep[$index]" ng-click="rep[$index]=true">Reply</a>
+            <a ng-show="rep[$index]" ng-click="rep[$index]=false">Hide</a>
+          </div>
+          <div class="row" ng-show="rep[$index]">
+            <form class="comment-form form reply" name="reply" ng-submit="addReply(comment._id)" novalidate ng-show="nav.isLoggedIn()">
+              <div class="comment-actions">
+              </div>
+              <div class="form-row">
+                <textarea class="input" ng-model='replyData.text'></textarea>
+              </div>
+              <div class="form-row">
+                <input type="submit" value="Add Reply">
+              </div>
+            </form>
+          </div>
+        </div>
+        <div ng-repeat="reply in replies = comment.replies | orderBy: 'created_at': true" ng-init="level = level + 1" ng-init="rep=[]">
+          <!-- Comment Avatar -->
+<!--           <div class="comment-avatar">
+            <img ng-src="{{ reply.profile_pic }}">
+          </div> -->
+          <!-- Comment Box -->
+          <div class="comment-box">
+            <div class="reply-text">{{ reply.text }}</div>
+            <div class="comment-footer">
+              <div class="comment-info">
+                <span class="comment-author">
+                  <em ng-if="comment.anonymous">Anonymous</em>
+                  <a ng-if="!comment.anonymous" href="{{ reply.author }}">{{ reply.author || reply.username}}</a>
+                </span>
+                <span class="comment-date">{{ reply.created_at | date: 'medium' }}</span>
+              </div>
+             <div class="comment-actions">
+            <a ng-hide="level > 5 || rep[$index]" ng-click="rep[$index]=true">Reply</a>
+            <a ng-show="rep[$index]" ng-click="rep[$index]=false">Hide</a>
+          </div>
+          <div class="row" ng-show="rep[$index]">
+            <form class="comment-form form reply" name="reply" ng-submit="addReply(comment._id)" novalidate ng-show="nav.isLoggedIn()">
+              <div class="comment-actions">
+              </div>
+              <div class="form-row">
+                <textarea class="input" ng-model='replyData.text'></textarea>
+              </div>
+              <div class="form-row">
+                <input type="submit" value="Add Reply">
+              </div>
+            </form>
+          </div>
+            </div>
+            <div ng-repeat="reply in replies = reply.replies | orderBy: 'created_at': true" ng-include="'comment.html'" ng-init="level = level + 1">
+            </div>
+          </div>
+        </div>
+
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>

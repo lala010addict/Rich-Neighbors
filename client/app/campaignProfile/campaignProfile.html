@@ -1,66 +1,109 @@
 <navbar></navbar>
 <br>
+
 <div class="row">
-  <div class="medium-6 large-7 columns">
-    <h1>Campaign Title</h1>
-    <p><img src="http://thecatapi.com/api/images/get?format=src&type=gif" alt="image of a planet called Campaign Image"></p>
-    <p>Nunc ut velit at mi <a href="#">varius laoreet vestibulum quis sem</a>. Ut luctus rhoncus mollis. <em>Sed at est quis felis tincidunt aliquam eu</em> id dolor. Proin placerat dui non purus pharetra sodales. Sed gravida, dolor vel consequat rutrum, turpis sapien luctus libero, ac imperdiet turpis orci et sapien. Morbi feugiat, augue sed hendrerit pellentesque, quam augue vestibulum risus, et porta dolor augue sit amet velit. Donec posuere fringilla augue, quis vestibulum lacus cursus in. Phasellus felis lorem, tristique quis porta vitae, convallis eget nunc. Proin quam nulla, consectetur vel convallis eu, rutrum ac nibh.</p>
-    <p>Nunc ut velit at mi <a href="#">varius laoreet vestibulum quis sem</a>. Ut luctus rhoncus mollis. <em>Sed at est quis felis tincidunt aliquam eu</em> id dolor. Proin placerat dui non purus pharetra sodales. Sed gravida, dolor vel consequat rutrum, turpis sapien luctus libero, ac imperdiet turpis orci et sapien. Morbi feugiat, augue sed hendrerit pellentesque, quam augue vestibulum risus, et porta dolor augue sit amet velit. Donec posuere fringilla augue, quis vestibulum lacus cursus in. Phasellus felis lorem, tristique quis porta vitae, convallis eget nunc. Proin quam nulla, consectetur vel convallis eu, rutrum ac nibh.</p>
+  <div class="medium-6 large-9 columns">
+    <h1>{{campaign.title}}</h1>
+    <p><img src="{{campaign.images[0].link}}" alt="image of a planet called Campaign Image"></p>
+    <p>{{campaign.address.city}}, {{campaign.address.state | uppercase}} - {{campaign.address.country}}</p>
+    <h3>{{campaign.days}} Days Left</h3>
+    <!-- <div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+  <h2 id="modalTitle">Awesome. I have it.</h2>
+    <p>{{campaign.address.country}}</p>
+  <p>I'm a cool paragraph that lives inside of an even cooler modal. Wins!</p>
+  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+</div> -->
+    <p>{{campaign.description}}</p>
+    <br>
   </div>
-  <div class="medium-6 large-5 columns">
-    <div id="sidebar" class="one-third column last">
-      <div id="sidebar-inner" style="height: 2970px;">
-        <div class="widget">
-          <div class="widget-wrap">
-            <div class="cause-info-widget">
-              <color-bar></color-bar>
-              <!-- #header-colors -->
-              <div class="cause-info-widget-donated">
-                <span>$23194</span>
-                <em>Donated</em>
-              </div>
-              <div class="cause-info-widget-percentage">
-                <span>5.15%</span> raised of <span>$450000</span> goal
-                <div class="cause-info-widget-percentage-bar" data-raised="5.15%">
-                  <span style="width: 5.15%;"></span>
-                </div>
-                <!-- .cause-info-widget-percentage-bar -->
-              </div>
-              <div class="cause-info-widget-donate">
-                <a href="#" class="dd-button big green has-icon">MAKE A DONATION<span class="dd-button-icon"><i class="fa fa-dollar"></i></span></a>
-              </div>
-            </div>
-            <!-- .cause-info-widget -->
-          </div>
-          <!-- .widget-wrap -->
-        </div>
-        <div class="widget">
-          <div class="widget-wrap">
-            <div class="cause-info-widget">
-              <color-bar></color-bar>
-              <div class="cause-info-widget-donated">
-                <span>Supplies</span>
-              </div>
-            </div>
-            <!-- .cause-info-widget -->
-          </div>
-          <!-- .widget-wrap -->
-        </div>
-        <!-- .widget -->
-        <div class="widget">
-          <div class="widget-wrap">
-            <div class="cause-info-widget">
-              <color-bar></color-bar>
-              <div class="cause-info-widget-donated">
-                <span>Volunteers</span>
-              </div>
-            </div>
-            <!-- .cause-info-widget -->
-          </div>
-          <!-- .widget-wrap -->
+
+
+
+
+
+
+
+
+
+  <div class="medium-6 large-3 columns">
+    <div share-square="true" share-links="Facebook, Twitter, LinkedIn, Google-Plus" share-title="{{campaign.title}}"></div>
+    <div><a class="dd-button big green has-icon" ng-click="clicktofollow()">{{follow}}<span class="dd-button-icon"><i class="fa fa-{{check}}"></i></span></a></div>
+    </div>
+
+    <div class="medium-6 large-3 columns">
+    <div class="callout-card info">
+      <div class="card-label">
+        <div class="label-text">
+          <i class="fa fa-heart"></i>
         </div>
       </div>
-      <!-- #sidebar-inner -->
+      <div class="callout-card-content">
+        <h3 class="lead">{{donated | currency:undefined:0 }} Donated</h3>
+        <!--   <div class="cause-info-widget-percentage"> -->
+        <span>{{( donated / campaign.goal* 100) | number:0}}%</span> raised of <span>${{campaign.goal}}</span> goal
+        <div class="progress" role="progressbar" data-raised="{{( donated / campaign.goal* 100)| number:2}}%">
+          <span class="progress-meter" style="width: {{( donated / campaign.goal* 100)| number:2}}%;"></span>
+        </div>
+        <!-- .cause-info-widget-percentage-bar -->
+        <!--   </div> -->
+        <div class="cause-info-widget-donate">
+          <a href="/donate" class="dd-button big green has-icon">MAKE A DONATION<span class="dd-button-icon"><i class="fa fa-dollar"></i></span></a>
+          <br>
+          <br>
+          <a href="#" class="dd-button big green has-icon" ng-click="saveDonation(100)">Donate $100</a>
+        </div>
+      </div>
     </div>
+  </div>
+  <div class="medium-6 large-3 columns">
+    <div class="callout-card info">
+      <div class="card-label">
+        <div class="label-text">
+          <i class="fa fa-gift"></i>
+        </div>
+      </div>
+      <div class="callout-card-content">
+        <h3 class="lead"> Supplies</h3>
+        <div ng-repeat="x in obj.items">
+          <li><a href="#" ng-click="showDetails = ! showDetails">{{x.name}}: {{x.quantity}} </a>
+            <p>{{filterSupply(obj.contributors, x._id ) || 0}}  donated</p>
+            <div ng-show="showDetails">
+              <p>
+                <label>Select Quantity
+                  <select ng-model="selectedItem">
+                    <option ng-repeat="n in range(x.quantity)" value="{{$index +1 }}">{{$index + 1}}</option>
+                  </select>
+                  <a class="dd-button small green" ng-click="contributeSupply(selectedItem, x._id)"> Donate</a> </label>
+              </p>
+            </div>
+          </li>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="medium-6 large-3 columns">
+    <div class="callout-card info">
+      <div class="card-label">
+        <div class="label-text">
+          <i class="fa fa-smile-o"></i>
+        </div>
+      </div>
+      <div class="callout-card-content">
+        <h3 class="lead">Volunteers</h3>
+        <div ng-repeat="x in obj.volunteers">
+          <li><a href="#" ng-click="showDetails = ! showDetails">{{x.name}}: {{x.quantity}} </a>
+            <p>{{filterVolunteer(obj.contributors, x._id ) || 0}} signed up</p>
+            <div ng-show="showDetails">
+              <a class="dd-button small green" ng-click="contributeVolunteer(x._id)"> Sign Up</a>
+            </div>
+          </li>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="medium-6 large-9 columns">
+    <comments></comments>
   </div>
 </div>

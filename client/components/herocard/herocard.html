@@ -1,0 +1,80 @@
+<style>
+/*
+Our Styles:
+ */
+  .hero .button-main-page {
+    opacity: .5;
+    color: white;
+    background: green;
+  }
+  .hero {
+  background: url("http://www.merithomes.net/wp-content/uploads/2015/03/custom-home-and-neighborhood-with-happy-kids-and-parents.jpg") no-repeat center;
+  background-size: cover;
+  height: 100vh; }
+  .hero:before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: linear-gradient(to bottom right, #002f4b, #dc4225);
+    opacity: .5; }
+  .hero .intro {
+    padding: 3rem;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%); }
+  .hero h1 {
+    color: #fff;
+    z-index: 99;
+    font-size: 5.5rem;
+    line-height: 15.5em;
+    letter-spacing: -0.025em;
+    font-weight: 1700;
+    text-align: center; }
+  .hero p {
+    color: #fff;
+    line-height: 1.75em;
+    font-weight: 200;
+    font-size: 15;
+    text-align: left;
+    margin-bottom: 2rem; }
+  .headertext {
+    vertical-align: top;
+    text-align: center;
+  }
+
+  h2.headertext {
+    color: #fff;
+  }
+
+  .liftup {
+    margin-top: -50px;
+  }
+  @media only screen and (min-width: 40.063em) {
+    .hero h1 {
+      padding-top: 4.5rem;
+      height: 50vh;
+      text-align: right;
+      font-size: 2.5rem; }
+    .hero p {
+      text-align: right; } }
+
+</style>
+
+
+<navbar></navbar>
+<section class="hero header">
+  <div class="row intro">
+    <div class="row">
+      <div class="twelve columns text-center liftup">
+        <h2 class="headertext"><strong>Let's build our community togethor!</strong></h2><br>
+        <a href="/startCampaign" class="button large success"><strong>Start a Campaign</strong></a><br><br><br><br><br><br><br><br><br>
+        <!-- TODO: Remove <br>'s and add margins to CSS -->
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+ $(document).foundation();
+</script>

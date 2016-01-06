@@ -2,22 +2,37 @@
   "name": "b",
   "version": "0.0.0",
   "dependencies": {
-    "angular": "~1.4.0",
+    "angular": "~1.4.2",
     "json3": "~3.3.1",
     "es5-shim": "~3.0.1",
-    "bootstrap-sass-official": "~3.1.1",
-    "bootstrap": "~3.1.1",
-    "bootstrap-social": "~4.9.1",
-    "angular-resource": "~1.4.0",
-    "angular-cookies": "~1.4.0",
-    "angular-sanitize": "~1.4.0",
-    "font-awesome": ">=4.1.0",
+    "angular-resource": "~1.4.2",
+    "angular-cookies": "~1.4.2",
+    "angular-sanitize": "~1.4.2",
+    "font-awesome": "fontawesome#~4.5.0",
     "lodash": "~2.4.1",
     "angular-ui-router": "~0.2.15",
     "angular-validation-match": "~1.5.2",
-    "angular-ui-map": "~0.5.0"
+    "angular-ui-map": "~0.5.0",
+    "jquery": "~2.1.4",
+    "angular-animate": "~1.4.2",
+    "angular-touch": "~1.4.2",
+    "angular-messages": "~1.4.2",
+    "angular-aria": "~1.4.2",
+    "malarkey": "yuanqing/malarkey#~1.3.1",
+    "moment": "~2.10.6",
+    "animate.css": "~3.4.0",
+    "braintree-angular": "~1.3.1",
+    "braintree-web": "~2.17.5",
+    "angular-material": "~1.0.0",
+    "ng-file-upload": "~11.0.0",
+    "foundation-sites": "~6.1.1",
+    "angular-easy-social-share": "*"
   },
   "devDependencies": {
-    "angular-mocks": "~1.4.0"
+    "angular-mocks": "~1.4.2"
+  },
+  "resolutions": {
+    "font-awesome": "~4.5.0",
+    "angular": "~1.4.2"
   }
 }

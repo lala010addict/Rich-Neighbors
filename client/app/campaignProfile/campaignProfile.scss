@@ -1,0 +1,116 @@
+// flat colors
+
+$primary: #446CB3;
+$secondary: #ADB2BD;
+$info: #89c4f4;
+$alert: #F22613;
+$success: #87D37C;
+$warning: #F89406;
+$bg: #fff;
+$font-color: #333;
+
+
+.td-easy-social-share  {
+    font-size: 40px;}
+
+
+.cause-info-widget-percentage-bar-campaign{
+    border-radius: 6px;
+    background-color: #89C4F4;
+    height: 12px;
+    margin-top: 15px;
+    position: relative;
+    padding: 0 3px;
+    overflow: hidden;
+}
+
+.callout-card {
+  background: $bg; 
+  border: 1px solid #333; 
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); 
+  margin: 1rem 0; 
+  overflow: hidden;
+  
+  .card-label {
+      border-color: transparent #333 transparent transparent;
+      border-color: rgba(255,255,255,0) #333 rgba(255,255,255,0) rgba(255,255,255,0);
+    }
+ 
+  &.primary {
+    border-color: $primary;
+    
+    .card-label {
+      border-color: transparent $primary transparent transparent;
+      border-color: rgba(255,255,255,0) $primary rgba(255,255,255,0) rgba(255,255,255,0);
+    }
+  }
+  &.secondary {
+    border-color: $secondary;
+    
+    .card-label {
+      border-color: transparent $secondary transparent transparent;
+      border-color: rgba(255,255,255,0) $secondary rgba(255,255,255,0) rgba(255,255,255,0);
+    }
+  }
+  &.info {
+    border-color: $info;
+    
+    .card-label {
+      border-color: transparent $info transparent transparent;
+      border-color: rgba(255,255,255,0) $info rgba(255,255,255,0) rgba(255,255,255,0);
+    }
+  }
+  &.alert {
+    border-color: $alert;
+    
+    .card-label {
+      border-color: transparent $alert transparent transparent;
+      border-color: rgba(255,255,255,0) $alert rgba(255,255,255,0) rgba(255,255,255,0);
+    }
+  }
+  &.success {
+    border-color: $success; 
+    
+    .card-label {
+      border-color: transparent $success transparent transparent;
+      border-color: rgba(255,255,255,0) $success rgba(255,255,255,0) rgba(255,255,255,0);
+    }
+  }
+  &.warning {
+    border-color: $warning; 
+    
+    .card-label {
+      border-color: transparent $warning transparent transparent;
+      border-color: rgba(255,255,255,0) $warning rgba(255,255,255,0) rgba(255,255,255,0);
+    }
+  }
+  
+  .card-label { 
+    border-style: solid; 
+    border-width: 0 70px 40px 0;  
+    float:right; 
+    height: 0px; 
+    width: 0px;
+    transform:rotate(360deg);
+  }
+  
+  .callout-card-content{
+    padding: 0.5rem 1.5rem 0.875rem;
+  }
+  
+  &.radius {
+    border-radius: 0.6rem;
+  }
+  
+  .label-text {
+    color: #fff; 
+    font-size: 0.75rem; 
+    font-weight: bold; 
+    position: relative; 
+    right: -40px; 
+    top: 2px; 
+    white-space: nowrap;
+    transform: rotate(30deg);
+  } 
+}
+

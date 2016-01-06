@@ -1,0 +1,10 @@
+<myacc>
+</myacc>
+<br>
+<div class="row">
+    <div class="small-12" ng-repeat="x in myContributions" id='myposts'>
+        <img id='postpic' src="{{x.images[0].link}}" />
+        <p><a href="../campaignProfile/{{x.campaign_id._id}}"> {{x.campaign_id.title | limitTo: 50}} </a></p>
+        <p> Donated: {{x.amount}} {{x.item_id.name}} {{x.volunteer_id.name}}</p>
+        <p> {{x.campaign_id.description | limitTo: 50}}</p>
+    </div>

@@ -1,0 +1,45 @@
+.remove{
+    background: #C76868;
+    color: #FFF;
+    font-weight: bold;
+    font-size: 21px;
+    border: 0;
+    cursor: pointer;
+    display: inline-block;
+    padding: 9px 20px;
+    vertical-align: top;
+    line-height: 100%;   
+}
+
+
+.addfields{
+    background: #38DCB5;
+    color: #FFF;
+    font-weight: bold;
+    font-size: 21px;
+    border: 0;
+    cursor: pointer;
+    display: inline-block;
+    padding: 9px 20px;
+    vertical-align: top;
+    line-height: 100%;   
+}
+
+input[type="password"],
+input[type="text"],
+input[type="email"],
+textarea,
+select {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background: #fdfdfd;
+    border: 1px solid #2F6194;
+    color: #0C0C69;
+    font-family: "Open Sans", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1;
+    padding: 10px;
+    width: 100%;
+}

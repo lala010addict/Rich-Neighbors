@@ -13,6 +13,14 @@ function UserResource($resource) {
         controller:'password'
       }
     },
+
+    changeProfilePic: {
+      method: 'PUT',
+      params: {
+        controller:'profile_pic'
+      }
+    },
+
     get: {
       method: 'GET',
       params: {
