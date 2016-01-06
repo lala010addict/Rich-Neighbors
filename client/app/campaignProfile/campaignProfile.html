@@ -5,7 +5,8 @@
     <h1>{{campaign.title}}</h1>
     <p><img src="{{campaign.images[0].link}}" alt="image of a planet called Campaign Image"></p>
     <p>{{campaign.address.city}}, {{campaign.address.state | uppercase}} - {{campaign.address.country}}</p>
-    <a href="#" data-reveal-id="myModal">Click Me For A Modal</a>
+  
+    <h3>{{campaign.days}} Days Left</h3>
     <!-- <div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
   <h2 id="modalTitle">Awesome. I have it.</h2>
     <p>{{campaign.address.country}}</p>
@@ -53,7 +54,7 @@
         <h3 class="lead"> Supplies</h3>
         <div ng-repeat="x in obj.items">
           <li><a href="#" ng-click="showDetails = ! showDetails">{{x.name}}: {{x.quantity}} </a>
-            <p>{{filterSupply(obj.contributors, x._id )}} donated</p>
+            <p>{{filterSupply(obj.contributors, x._id ) || 0 }} donated</p>
             <div ng-show="showDetails">
               <p>
                 <label>Select Quantity
@@ -79,7 +80,7 @@
         <h3 class="lead">Volunteers</h3>
         <div ng-repeat="x in obj.volunteers">
           <li><a href="#" ng-click="showDetails = ! showDetails">{{x.name}}: {{x.quantity}} </a>
-            <p>{{filterVolunteer(obj.contributors, x._id )}} signed up</p>
+            <p>{{filterVolunteer(obj.contributors, x._id ) || 0}} signed up</p>
             <div ng-show="showDetails">
               <a class="dd-button small green" ng-click="contributeVolunteer(x._id)"> Sign Up</a>
             </div>

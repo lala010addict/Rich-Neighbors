@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bApp')
+angular.module('bApp') 
   .factory('geolocationFactory', function ($http) {
     var getIpInfo = function() {
     var url = 'http://ipinfo.io/json';

@@ -15,7 +15,6 @@ body {
 }
 
 .card .title {
-  
     line-height: 3rem;
     font-size: 1.5rem;
     font-weight: 300;
@@ -66,8 +65,6 @@ h6 {
     border-radius: 2px 2px 0 0;
 }
 </style>
-
-<!-- <div>     {{campaigns.contributors }}</div> -->
 <div class="row">
     <div class="medium-4 columns" ng-repeat="x in campaigns | orderBy: '-created_at' | limitTo: paginationLimit()">
         <div class="card">

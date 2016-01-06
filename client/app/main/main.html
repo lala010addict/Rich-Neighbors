@@ -2,14 +2,16 @@
 <!--   <navbar></navbar> -->
   <hero-card></hero-card>
 
+
+  <br>
   <div class="row">
   <how-card></how-card>
   </div>
-
+  
   <android-demo></android-demo>
   <hr>
   <div class="row column text-center">
-    <p class="lead">Campaigns Near {{currentLoc}}
+    <p class="lead">Campaigns Near {{currentLoc}} 
 
     </p>
   </div>
@@ -19,7 +21,7 @@
   </div>
   </div>
   <div class="row column">
-    <a class="button hollow expanded" ng-click="showMoreItems()">Load More</a>
+    <a class="button hollow expanded" ng-show="hasMoreItemsToShow()" ng-click="showMoreItems()">Load More</a>
   </div>
   <footer></footer>
 </div>
