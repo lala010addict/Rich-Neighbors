@@ -1,6 +1,6 @@
-# b
+# Rich Neighbors
 
-This project was generated with the [Angular Full-Stack Generator](https://github.com/DaftMonk/generator-angular-fullstack) version 3.0.2.
+A web and mobile community-focused crowdfunding platform for pooling money, resources, and volunteers.
 
 ## Getting Started
 
