@@ -24,9 +24,13 @@ A web and mobile community-focused crowdfunding platform for pooling money, reso
 
 4. Run `grunt serve` to start the development server. It should automatically open the client in your browser when ready.
 
-## Build & development
+## Website
 
-Run `grunt build` for building and `grunt serve` for preview.
+#[Live Demo](https://rneighbors.herokuapp.com/)
+
+![Rich Neighbors](/screenshots/RichNeighbors.png?raw=true "Rich Neighbors")
+
+![Rich Neighbors](/screenshots/RichNeighbors1.png?raw=true "Rich Neighbors")
 
 ## Testing
 
