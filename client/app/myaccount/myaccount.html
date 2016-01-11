@@ -1,26 +1,17 @@
 <myacc></myacc>
+
 <ng-view></ng-view>
 <br>
-<!-- <div class="row" id='myposts' ng-repeat="x in mycampaigns">
-    <div class="large-2 columns small-3"><img id='postpic' src="{{x.campaign_id.images[0].link}}" /></div>
-    <div class="large-8 columns">
-        <p><a href="../campaignProfile/{{x._id}}"> {{x.title}} </a></p>
-        <p> {{x.description | limitTo: 50}}</p>
-        <div class="columns small-2">
-            <div><a class="dd-button small green " ng-click="updatecampaign(x._id)">Update</a></div>
-            <div><a class="dd-button small blue" ng-click="deletecampaign(x._id)">Delete </a></div>
-        </div>
-    </div>
-</div> -->
-<div class="row" id='myposts' ng-repeat="x in myfollows">
-    <div class="columns small-2"><img id='postpic' src="{{x.campaign_id.images[0].link}}" /></div>
-    <div class="columns small-8">
-        <p><a href="../campaignProfile/{{x.campaign_id._id}}"> {{x.campaign_id.title}} </a></p>
-        <p> {{x.campaign_id.description | limitTo: 50}}</p>
-    </div>
-    <div class="columns small-2">
-      <div><a class="dd-button small green " ng-click="updatecampaign(x._id)">Update</a></div>
-      <div><a class="dd-button small blue" ng-click="deletecampaign(x._id)">Delete </a></div>
-    </div>
+<div class="row" id='myposts' ng-repeat="x in mycampaigns">
+  <div class="large-2 columns small-3"><img id='postpic' src="{{x.picture_url}}" /></div>
+  <div class="large-8 columns">
+    <p><a href="../campaignProfile/{{x._id}}"> {{x.title}} </a></p>
 
+    <p> {{x.description}}</p>
+  </div>
+  <div class="large-2 columns small-3"> <div><a class="dd-button small green " ng-click="updatecampaign(x._id)">Update</a></div></div>
+    <div class="large-2 columns small-3"><div><a class="dd-button small blue" ng-click="deletecampaign(x._id)">Delete </a></div></div>
 </div>
+
+
+

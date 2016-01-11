@@ -18,11 +18,6 @@ angular.module('bApp', [
     'ngFileUpload',
     'bApp.StartCampaignController'
   ])
-//   .run(function($rootScope, $document) {
-//     $rootScope.$on('$viewContentLoaded', function () {
-//         $($document).foundation();
-//     });
-// })
   .config(function($urlRouterProvider, $locationProvider) {
     $urlRouterProvider
       .otherwise('/');

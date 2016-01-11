@@ -419,19 +419,25 @@ module.exports = function (grunt) {
       },
       production: {
         options: {
-          remote: 'git@heroku.com:richneighbors.git',
+          remote: 'git@heroku.com:rneighbors.git',
           branch: 'master',
           remoteBranch: 'master'
         }
       },
       staging: {
         options: {
-          remote: 'git@heroku.com:richneighbors-dev.git',
+          remote: 'git@heroku.com:rneighbors-dev.git',
           branch: 'develop',
           remoteBranch: 'master',
           connectCommits: false,
         }
 
+      },
+      heroku: {
+        options: {
+          remote: 'heroku',
+          branch: 'master'
+        }
       },
       openshift: {
         options: {

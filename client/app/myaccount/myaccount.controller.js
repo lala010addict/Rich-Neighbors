@@ -17,7 +17,7 @@ angular.module('bApp')
       $http.get('/api/users/me/campaigns')
         .success(function(data) {
           $scope.mycampaigns = data;
-          console.log(data);
+          //console.log(data);
         })
         .error(function(data) {
           console.log('Error: ' + data);
@@ -58,10 +58,10 @@ angular.module('bApp')
     $scope.myContributions = {};
     $scope.getMyContributions = function() {
       $http.get('/api/users/' + $scope.userID + '/contributors')
-      .success(function (data) {
-        console.log('contrib data ', data);
-        $scope.myContributions = data;
-      });
+        .success(function(data) {
+          //  console.log('contrib data ', data);
+          $scope.myContributions = data;
+        });
     };
     $scope.getMyContributions();
 
@@ -86,7 +86,7 @@ angular.module('bApp')
 
 
           $scope.myfollows = data
-          console.log('follows', data)
+            //  console.log('follows', data)
         })
         .error(function(data) {
           console.log('Error: ' + data);
@@ -105,7 +105,7 @@ angular.module('bApp')
         $http.delete('/api/campaigns/' + id)
           .success(function(data) {
             $scope.refresh();
-            console.log('deleted')
+            //  console.log('deleted')
 
           })
           .error(function(data) {
@@ -113,7 +113,7 @@ angular.module('bApp')
             console.log('Error: ' + data);
           });
       } else {
-        console.log('they changed their mind')
+        //  console.log('they changed their mind')
       }
     }
 
@@ -131,7 +131,7 @@ angular.module('bApp')
             $scope.getFollowers();
 
             console.log('unfollow')
-
+              //
 
           })
           .error(function(data) {
@@ -146,7 +146,7 @@ angular.module('bApp')
     //********************** update campaigns ******************
 
     $scope.updatecampaign = function(id) {
-      console.log(id)
+      //  console.log(id)
       $state.go('updateCampaign', {
         'id': id
       });

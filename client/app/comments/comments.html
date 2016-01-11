@@ -66,45 +66,7 @@
             </form>
           </div>
         </div>
-        <div ng-repeat="reply in replies = comment.replies | orderBy: 'created_at': true" ng-init="level = level + 1" ng-init="rep=[]">
-          <!-- Comment Avatar -->
-<!--           <div class="comment-avatar">
-            <img ng-src="{{ reply.profile_pic }}">
-          </div> -->
-          <!-- Comment Box -->
-          <div class="comment-box">
-            <div class="reply-text">{{ reply.text }}</div>
-            <div class="comment-footer">
-              <div class="comment-info">
-                <span class="comment-author">
-                  <em ng-if="comment.anonymous">Anonymous</em>
-                  <a ng-if="!comment.anonymous" href="{{ reply.author }}">{{ reply.author || reply.username}}</a>
-                </span>
-                <span class="comment-date">{{ reply.created_at | date: 'medium' }}</span>
-              </div>
-             <div class="comment-actions">
-            <a ng-hide="level > 5 || rep[$index]" ng-click="rep[$index]=true">Reply</a>
-            <a ng-show="rep[$index]" ng-click="rep[$index]=false">Hide</a>
-          </div>
-          <div class="row" ng-show="rep[$index]">
-            <form class="comment-form form reply" name="reply" ng-submit="addReply(comment._id)" novalidate ng-show="nav.isLoggedIn()">
-              <div class="comment-actions">
-              </div>
-              <div class="form-row">
-                <textarea class="input" ng-model='replyData.text'></textarea>
-              </div>
-              <div class="form-row">
-                <input type="submit" value="Add Reply">
-              </div>
-            </form>
-          </div>
-            </div>
-            <div ng-repeat="reply in replies = reply.replies | orderBy: 'created_at': true" ng-include="'comment.html'" ng-init="level = level + 1">
-            </div>
-          </div>
-        </div>
-
-        </div>
+        <div ng-repeat="comment in replies = comment.replies | orderBy: 'created_at': true" ng-include="'comment.html'" ng-init="level = level + 1" ng-init="rep=[]"></div>
       </div>
     </div>
     </div>

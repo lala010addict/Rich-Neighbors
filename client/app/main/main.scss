@@ -1,28 +1,487 @@
+.menu-text-logo {
+     padding-top: 0px !important;
+    padding-bottom: 0px  !important;
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero .button-main-page {
+    opacity: .5;
+    color: white;
+    background: green;
+}
+
+.hero {
+    background: url("/assets/images/custom-home-and-neighborhood-with-happy-kids-and-parents.jpg") no-repeat center;
+    background-size: cover;
+    height: 100vh;
+}
+
+.hero:before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: linear-gradient(to bottom right, #002f4b, #dc4225);
+    opacity: .5;
+}
+
+.hero .intro {
+    padding: 3rem;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.hero h1 {
+    color: #fff;
+    z-index: 99;
+    font-size: 5.5rem;
+    line-height: 15.5em;
+    letter-spacing: -0.025em;
+    font-weight: 1700;
+    text-align: center;
+}
+
+.hero p {
+    color: #fff;
+    line-height: 1.75em;
+    font-weight: 200;
+    font-size: 15;
+    text-align: left;
+    margin-bottom: 2rem;
+}
+
+@media only screen and (min-width: 40.063em) {
+    .hero h1 {
+        padding-top: 4.5rem;
+        height: 50vh;
+        text-align: right;
+        font-size: 2.5rem;
+    }
+    .hero p {
+        text-align: right;
+    }
+}
+
+.marvel-device {
+    display: inline-block;
+    position: relative;
+    box-sizing: content-box !important
+}
+
+.marvel-device .screen {
+    width: 100%;
+    position: relative;
+    height: 100%;
+    color: white;
+    z-index: 2;
+    text-align: center;
+    display: block;
+    -webkit-border-radius: 1px;
+    border-radius: 1px;
+    -webkit-box-shadow: 0 0 0 3px #111;
+    box-shadow: 0 0 0 3px #111
+}
+
+.marvel-device .top-bar,
+.marvel-device .bottom-bar {
+    height: 3px;
+    background: black;
+    width: 100%;
+    display: block
+}
+
+.marvel-device .middle-bar {
+    width: 3px;
+    height: 4px;
+    top: 0px;
+    left: 90px;
+    background: black;
+    position: absolute
+}
+
+.marvel-device.iphone6 {
+    width: 375px;
+    height: 667px;
+    padding: 105px 24px;
+    background: #d9dbdc;
+    -webkit-border-radius: 56px;
+    border-radius: 56px;
+    -webkit-box-shadow: inset 0 0 3px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 0 3px 0 rgba(0, 0, 0, 0.2)
+}
+
+.marvel-device.iphone6:before {
+    width: calc(100% - 12px);
+    height: calc(100% - 12px);
+    position: absolute;
+    top: 6px;
+    content: '';
+    left: 6px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+    background: #f8f8f8;
+    z-index: 1
+}
+
+.marvel-device.iphone6:after {
+    width: calc(100% - 16px);
+    height: calc(100% - 16px);
+    position: absolute;
+    top: 8px;
+    content: '';
+    left: 8px;
+    -webkit-border-radius: 48px;
+    border-radius: 48px;
+    -webkit-box-shadow: inset 0 0 3px 0 rgba(0, 0, 0, 0.1), inset 0 0 6px 3px #fff;
+    box-shadow: inset 0 0 3px 0 rgba(0, 0, 0, 0.1), inset 0 0 6px 3px #fff;
+    z-index: 2
+}
+
+.marvel-device.iphone6 .home {
+    -webkit-border-radius: 100%;
+    border-radius: 100%;
+    width: 68px;
+    height: 68px;
+    position: absolute;
+    left: 50%;
+    margin-left: -34px;
+    bottom: 22px;
+    z-index: 3;
+    background: #303233;
+    background: -moz-linear-gradient(-45deg, #303233 0%, #b5b7b9 50%, #f0f2f2 69%, #303233 100%);
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #303233), color-stop(50%, #b5b7b9), color-stop(69%, #f0f2f2), color-stop(100%, #303233));
+    background: -webkit-linear-gradient(-45deg, #303233 0%, #b5b7b9 50%, #f0f2f2 69%, #303233 100%);
+    background: -o-linear-gradient(-45deg, #303233 0%, #b5b7b9 50%, #f0f2f2 69%, #303233 100%);
+    background: -ms-linear-gradient(-45deg, #303233 0%, #b5b7b9 50%, #f0f2f2 69%, #303233 100%);
+    background: linear-gradient(135deg, #303233 0%, #b5b7b9 50%, #f0f2f2 69%, #303233 100%);
+}
+
+.marvel-device.iphone6 .home:before {
+    background: #f8f8f8;
+    position: absolute;
+    content: '';
+    -webkit-border-radius: 100%;
+    border-radius: 100%;
+    width: calc(100% - 8px);
+    height: calc(100% - 8px);
+    top: 4px;
+    left: 4px
+}
+
+.marvel-device.iphone6 .top-bar {
+    height: 14px;
+    background: #bfbfc0;
+    position: absolute;
+    top: 68px;
+    left: 0
+}
+
+.marvel-device.iphone6 .bottom-bar {
+    height: 14px;
+    background: #bfbfc0;
+    position: absolute;
+    bottom: 68px;
+    left: 0
+}
+
+.marvel-device.iphone6 .sleep {
+    position: absolute;
+    top: 190px;
+    right: -4px;
+    width: 4px;
+    height: 66px;
+    -webkit-border-radius: 0px 2px 2px 0px;
+    border-radius: 0px 2px 2px 0px;
+    background: #d9dbdc
+}
+
+.marvel-device.iphone6 .volume {
+    position: absolute;
+    left: -4px;
+    top: 188px;
+    z-index: 0;
+    height: 66px;
+    width: 4px;
+    -webkit-border-radius: 2px 0px 0px 2px;
+    border-radius: 2px 0px 0px 2px;
+    background: #d9dbdc
+}
+
+.marvel-device.iphone6 .volume:before {
+    position: absolute;
+    left: 2px;
+    top: -78px;
+    height: 40px;
+    width: 2px;
+    -webkit-border-radius: 2px 0px 0px 2px;
+    border-radius: 2px 0px 0px 2px;
+    background: inherit;
+    content: '';
+    display: block
+}
+
+.marvel-device.iphone6 .volume:after {
+    position: absolute;
+    left: 0px;
+    top: 82px;
+    height: 66px;
+    width: 4px;
+    -webkit-border-radius: 2px 0px 0px 2px;
+    border-radius: 2px 0px 0px 2px;
+    background: inherit;
+    content: '';
+    display: block
+}
+
+.marvel-device.iphone6 .camera {
+    background: #3c3d3d;
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    top: 24px;
+    left: 50%;
+    margin-left: -6px;
+    -webkit-border-radius: 100%;
+    border-radius: 100%;
+    z-index: 3
+}
+
+.marvel-device.iphone6 .sensor {
+    background: #3c3d3d;
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: 49px;
+    left: 134px;
+    z-index: 3;
+    -webkit-border-radius: 100%;
+    border-radius: 100%
+}
+
+.marvel-device.iphone6 .speaker {
+    background: #292728;
+    width: 70px;
+    height: 6px;
+    position: absolute;
+    top: 54px;
+    left: 50%;
+    margin-left: -35px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    z-index: 3
+}
+
+.marvel-device.iphone6.gold {
+    background: #f9e7d3
+}
+
+.marvel-device.iphone6.gold .top-bar,
+.marvel-device.iphone6.gold .bottom-bar {
+    background: white
+}
+
+.marvel-device.iphone6.gold .sleep,
+.marvel-device.iphone6.gold .volume {
+    background: #f9e7d3
+}
+
+.marvel-device.iphone6.gold .home {
+    background: #cebba9;
+    background: -moz-linear-gradient(-45deg, #cebba9 0%, #f9e7d3 50%, #cebba9 100%);
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #cebba9), color-stop(50%, #f9e7d3), color-stop(100%, #cebba9));
+    background: -webkit-linear-gradient(-45deg, #cebba9 0%, #f9e7d3 50%, #cebba9 100%);
+    background: -o-linear-gradient(-45deg, #cebba9 0%, #f9e7d3 50%, #cebba9 100%);
+    background: -ms-linear-gradient(-45deg, #cebba9 0%, #f9e7d3 50%, #cebba9 100%);
+    background: linear-gradient(135deg, #cebba9 0%, #f9e7d3 50%, #cebba9 100%);
+}
+
+.marvel-device.iphone6.black {
+    background: #464646;
+    -webkit-box-shadow: inset 0 0 3px 0 rgba(0, 0, 0, 0.7);
+    box-shadow: inset 0 0 3px 0 rgba(0, 0, 0, 0.7)
+}
+
+.marvel-device.iphone6.black:before {
+    background: #080808
+}
+
+.marvel-device.iphone6.black:after {
+    -webkit-box-shadow: inset 0 0 3px 0 rgba(0, 0, 0, 0.1), inset 0 0 6px 3px #212121;
+    box-shadow: inset 0 0 3px 0 rgba(0, 0, 0, 0.1), inset 0 0 6px 3px #212121
+}
+
+.marvel-device.iphone6.black .top-bar,
+.marvel-device.iphone6.black .bottom-bar {
+    background: #212121
+}
+
+.marvel-device.iphone6.black .volume,
+.marvel-device.iphone6.black .sleep {
+    background: #464646
+}
+
+.marvel-device.iphone6.black .camera {
+    background: #080808
+}
+
+.marvel-device.iphone6.black .home {
+    background: #080808;
+    background: -moz-linear-gradient(-45deg, #080808 0%, #464646 50%, #080808 100%);
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #080808), color-stop(50%, #464646), color-stop(100%, #080808));
+    background: -webkit-linear-gradient(-45deg, #080808 0%, #464646 50%, #080808 100%);
+    background: -o-linear-gradient(-45deg, #080808 0%, #464646 50%, #080808 100%);
+    background: -ms-linear-gradient(-45deg, #080808 0%, #464646 50%, #080808 100%);
+    background: linear-gradient(135deg, #080808 0%, #464646 50%, #080808 100%);
+}
+
+.marvel-device.iphone6.black .home:before {
+    background: #080808
+}
+
+.marvel-device.iphone6.landscape {
+    padding: 24px 105px;
+    height: 375px;
+    width: 667px
+}
+
+.marvel-device.iphone6.landscape .sleep {
+    top: 100%;
+    -webkit-border-radius: 0px 0px 2px 2px;
+    border-radius: 0px 0px 2px 2px;
+    right: 190px;
+    height: 4px;
+    width: 66px
+}
+
+.marvel-device.iphone6.landscape .volume {
+    width: 66px;
+    height: 4px;
+    top: -4px;
+    left: calc(100% - 188px - 66px);
+    -webkit-border-radius: 2px 2px 0px 0px;
+    border-radius: 2px 2px 0px 0px
+}
+
+.marvel-device.iphone6.landscape .volume:before {
+    width: 40px;
+    height: 2px;
+    top: 2px;
+    right: -78px;
+    left: auto;
+    -webkit-border-radius: 2px 2px 0px 0px;
+    border-radius: 2px 2px 0px 0px
+}
+
+.marvel-device.iphone6.landscape .volume:after {
+    left: -82px;
+    width: 66px;
+    height: 4px;
+    top: 0;
+    -webkit-border-radius: 2px 2px 0px 0px;
+    border-radius: 2px 2px 0px 0px
+}
+
+.marvel-device.iphone6.landscape .top-bar {
+    width: 14px;
+    height: 100%;
+    left: calc(100% - 68px - 14px);
+    top: 0
+}
+
+.marvel-device.iphone6.landscape .bottom-bar {
+    width: 14px;
+    height: 100%;
+    left: 68px;
+    top: 0
+}
+
+.marvel-device.iphone6.landscape .home {
+    top: 50%;
+    margin-top: -34px;
+    margin-left: 0;
+    left: 22px
+}
+
+.marvel-device.iphone6.landscape .sensor {
+    top: 134px;
+    left: calc(100% - 49px - 16px)
+}
+
+.marvel-device.iphone6.landscape .speaker {
+    height: 70px;
+    width: 6px;
+    left: calc(100% - 54px - 6px);
+    top: 50%;
+    margin-left: 0px;
+    margin-top: -35px
+}
+
+.marvel-device.iphone6.landscape .camera {
+    left: calc(100% - 32px);
+    top: 50%;
+    margin-left: 0px;
+    margin-top: -5px
+}
+
+.marvel-device .s5 {}
+
+.play-button {
+    height: 50%;
+    width: 50%;
+    padding-top: 15px;
+    margin-top: 15px;
+}
+
+.main-logo {
+    width: 35%;
+    height: 35%;
+}
+
+.top-bar-right {
+    padding-top: 19px;
+}
+
+.top-bar {
+    padding-top: 0px;
+     padding-bottom: 0px;
+}
+
 .thing-form {
-  margin: 20px 0;
+    margin: 20px 0;
 }
 
 #banner {
-  border-bottom: none;
-  margin-top: -20px;
+    border-bottom: none;
+    margin-top: -20px;
 }
 
 #banner h1 {
-  font-size: 60px;
-  line-height: 1;
-  letter-spacing: -1px;
+    font-size: 60px;
+    line-height: 1;
+    letter-spacing: -1px;
 }
 
 .hero-unit {
-  position: relative;
-  padding: 30px 15px;
-  color: #F5F5F5;
-  text-align: center;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
-  background: #4393B9;
+    position: relative;
+    padding: 30px 15px;
+    color: #F5F5F5;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+    background: #4393B9;
 }
 
 .navbar-text {
-  margin-left: 15px;
+    margin-left: 15px;
 }
 
+h2 {
+    color: white !important;
+    font-weight: bold;
+}

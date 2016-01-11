@@ -1,11 +1,12 @@
 <navbar></navbar>
 <br>
-
 <div class="row">
   <div class="medium-6 large-9 columns">
     <h1>{{campaign.title}}</h1>
-    <p><img src="{{campaign.images[0].link}}" alt="image of a planet called Campaign Image"></p>
+   <!--  <p><img src="{{campaign.images[0].link}}" alt="image of a planet called Campaign Image"></p> -->
+    <p><img src="{{campaign.picture_url}}"></p>
     <p>{{campaign.address.city}}, {{campaign.address.state | uppercase}} - {{campaign.address.country}}</p>
+  
     <h3>{{campaign.days}} Days Left</h3>
     <!-- <div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
   <h2 id="modalTitle">Awesome. I have it.</h2>
@@ -16,21 +17,9 @@
     <p>{{campaign.description}}</p>
     <br>
   </div>
-
-
-
-
-
-
-
-
-
   <div class="medium-6 large-3 columns">
     <div share-square="true" share-links="Facebook, Twitter, LinkedIn, Google-Plus" share-title="{{campaign.title}}"></div>
     <div><a class="dd-button big green has-icon" ng-click="clicktofollow()">{{follow}}<span class="dd-button-icon"><i class="fa fa-{{check}}"></i></span></a></div>
-    </div>
-
-    <div class="medium-6 large-3 columns">
     <div class="callout-card info">
       <div class="card-label">
         <div class="label-text">
@@ -66,7 +55,7 @@
         <h3 class="lead"> Supplies</h3>
         <div ng-repeat="x in obj.items">
           <li><a href="#" ng-click="showDetails = ! showDetails">{{x.name}}: {{x.quantity}} </a>
-            <p>{{filterSupply(obj.contributors, x._id ) || 0}}  donated</p>
+            <p>{{filterSupply(obj.contributors, x._id ) || 0 }} donated</p>
             <div ng-show="showDetails">
               <p>
                 <label>Select Quantity

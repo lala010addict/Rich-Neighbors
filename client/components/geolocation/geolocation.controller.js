@@ -6,46 +6,46 @@ angular.module('bApp.geolocation', ["ui.map", "ui.event"])
 
 .factory('GeoLoc', ['$http', function($http) {
 
-  // var variableA = '';
+  var variableA = '';
 
-  // var setVariable = function(variableB) {
-  //   variableA = variableB;
-  //   console.log("Info saved!");
-  //   console.log(variableA);
-  // };
-  // var getVariable = function() {
-  //   console.log("Info sent!");
-  //   console.log(variableA);
-  //   return variableA;
-  // };
+  var setVariable = function(variableB) {
+    variableA = variableB;
+    // console.log("Info saved!");
+    // console.log(variableA);
+  };
+  var getVariable = function() {
+    // console.log("Info sent!");
+    // console.log(variableA);
+    return variableA;
+  };
 
 
-  // var getAddress = function(lat, lng) {
+  var getAddress = function(lat, lng) {
 
-  //   var apiAddress = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + ',' + lng
+    var apiAddress = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + ',' + lng
 
-  //   return $http.get(apiAddress, {
-  //     cache: true
-  //   }).success(function(data) {
+    return $http.get(apiAddress, {
+      cache: true
+    }).success(function(data) {
 
-  //     //  zipcode = data.results[0].address_components[6].long_name;
-  //     //  console.log(zipcode);
-  //     return data
+      //  zipcode = data.results[0].address_components[6].long_name;
+      //  console.log(zipcode);
+      return data
 
-  //   });
+    });
 
-  // }
-return 1;
-  // return {
-  //   setVariable: setVariable,
-  //   getVariable: getVariable,
-  //   getAddress: getAddress,
-  // };
+  }
+
+  return {
+    setVariable: setVariable,
+    getVariable: getVariable,
+    getAddress: getAddress,
+  };
 }])
 
 
 
-.controller('GeolocationController', function($scope, $http, GeoLoc, geolocationFactory ) {
+.controller('GeolocationController', function($scope, $http, GeoLoc) {
   $scope.lat = "0";
   $scope.lng = "0";
   $scope.address = "";
@@ -60,7 +60,6 @@ return 1;
   $scope.showResult = function() {
     return $scope.error == "";
   }
-
 
   $scope.mapOptions = {
     center: new google.maps.LatLng($scope.lat, $scope.lng),
@@ -118,7 +117,7 @@ return 1;
 
     GeoLoc.getAddress(lat, lng)
       .success(function(data) {
-        console.log(data.results[2].formatted_address)
+     //   console.log(data.results[2].formatted_address)
         $scope.address = data.results[2].formatted_address
         $scope.zipcode = data.results[0].address_components[6].long_name;
         GeoLoc.setVariable(data.results[0].address_components[6].long_name);
@@ -130,5 +129,5 @@ return 1;
 
   //https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452
 
-  // $scope.getLocation();
+  $scope.getLocation();
 });

@@ -9,7 +9,7 @@ angular.module('bApp')
     var call = function(url, ref) {
       $http.get(url, ref)
         .success(function(data) {
-          console.log(ref)
+       //   console.log(ref)
             // obj.push({
             //   ref: data
             // });

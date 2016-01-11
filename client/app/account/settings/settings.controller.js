@@ -27,7 +27,7 @@ class SettingsController {
 
   changeProfilePic(form) {
     this.submitted = true;
-  console.log(this.user)
+//  console.log(this.user)
    this.Auth.changeProfilePic(this.user.profile_pic);
 this.user.profile_pic = '';
   };

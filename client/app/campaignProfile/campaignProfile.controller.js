@@ -31,7 +31,7 @@ angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
     $scope.saveDonation = function(amount) {
       donationFactory.saveDonation(amount, $stateParams.id, $stateParams._userId)
         .success(function(data) {
-          console.log(data);
+         // console.log(data);
           $scope.updateDonatedAmount();
         });
     };
@@ -42,7 +42,7 @@ angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
           $scope.updateDonatedAmount();
           $scope.campaign = data;
           //$scope.comments = data.comments;
-          console.log(data);
+          //console.log(data);
           generalFactory.setCampaignId(data._id);
 
           var amounts = _.pluck(data.contributors, 'amount');
@@ -50,17 +50,16 @@ angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
           $scope.donated = _.reduce(amounts, function(total, n) {
             return total + n;
           });
-          console.log('donated:', _.reduce(amounts, function(total, n) {
-            return total + n;
-          }));
+        //  console.log('donated:', _.reduce(amounts, function(total, n) {
+          //   return total + n;
+          // }));
           var links = data._links.slice(1, 5);
-          $scope.linkApiCalls(links);
+          $scope.linkApiCalls(data._links);
         })
         .error(function(data) {
           console.log('Error: ' + data);
         });
     }
-
 
     $scope.getCampaigns();
 
@@ -115,7 +114,7 @@ angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
           $scope.form.$setPristine();
         })
         .error(function(data) {
-          console.log($scope.getCurrentUser());
+        //  console.log($scope.getCurrentUser());
           console.log('Error: ' + $scope.formData);
         });
     };
@@ -128,13 +127,13 @@ angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
             'ref': 'comments'
           }
           $scope.linkApiCalls([commentApi]);
-          console.log($scope.obj.comments);
+        //  console.log($scope.obj.comments);
           $scope.replyData.text = '';
           $scope.replyData.parent = null;
           $scope.form.$setPristine();
         })
         .error(function(data) {
-          console.log($scope.getCurrentUser());
+        //  console.log($scope.getCurrentUser());
           console.log('Error: ' + $scope.formData);
         });
     };
@@ -157,10 +156,10 @@ angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
     $scope.checkiffollowed = function() {
         $http.get('/api/campaigns/' + $scope.followers.campaign_id + '/followers')
           .success(function(data) {
-            console.log('checkiffollowed', data)
+          //  console.log('checkiffollowed', data)
             _.forEach(data, function(item) {
               if (item.user_id === $scope.followers.user_id) {
-                console.log('yes!!!!')
+              //  console.log('yes!!!!')
                 $scope.followid = item._id;
                 $scope.follow = 'Followed'
                 $scope.check = 'check';
@@ -200,22 +199,22 @@ angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
             $scope.check = 'check';
 
             $scope.followid = data._id;
-            console.log(data);
-            console.log($scope.followid);
+            // console.log(data);
+            // console.log($scope.followid);
           })
           .error(function(data) {
 
             console.log('Error: ' + data);
           });
       } else {
-        console.log('delete');
+        // console.log('delete');
 
         $http.delete('/api/followers/' + $scope.followid)
           .success(function(data) {
             $scope.follow = 'Follow';
             $scope.check = 'plus';
-            console.log('deleted');
-            console.log(data);
+            // console.log('deleted');
+            // console.log(data);
           })
           .error(function(data) {
             console.log('Error: ' + data);
@@ -247,16 +246,14 @@ angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
     $scope.supplySignUp.amount = ''
 
     $scope.contributeSupply = function(quantity, id) {
-      console.log(quantity, id)
+      // console.log(quantity, id)
       $scope.supplySignUp.item_id = id;
       $scope.supplySignUp.amount = quantity;
       $http.post('/api/contributors', $scope.supplySignUp)
         .success(function(data) {
 
           alert("Thanks for Donating!")
-
           $scope.getCampaigns();
-
         })
         .error(function(data) {
 
@@ -275,13 +272,12 @@ angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
     $scope.supplyVolunteer.amount = '1'
 
     $scope.contributeVolunteer = function(id) {
-      console.log(id)
+      // console.log(id)
       $scope.supplyVolunteer.volunteer_id = id;
       $http.post('/api/contributors', $scope.supplyVolunteer)
         .success(function(data) {
           alert("Thanks for Signing Up!")
           $scope.getCampaigns();
-
         })
         .error(function(data) {
 
@@ -293,6 +289,25 @@ angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
     //**************************filtering out supply contributions **********************
 
     $scope.filterSupply = function(x, id) {
+
+      // console.log('obj.contributors', x);
+      // console.log('id', id)
+      // console.log('filtered', _.pluck(_.filter(_.pluck(_.filter(x, {
+      //   'type': "Supply"
+      // }), "item_id"), {
+      //   '_id': "5679bbd0e134af5d22bdb9e8"
+      // }), 'quantity'));
+
+
+      // console.log('filteredid', _.pluck(_.filter(x, {
+  //   'type': "Supply",
+  //   'item_id': {
+  //     '_id': "5679bbd0e134af5d22bdb9e8"
+  //   }
+  // }), 'amount'))
+
+
+
       var numbers = _.pluck(_.filter(x, {
         'type': "Supply",
         'item_id': {
@@ -306,12 +321,23 @@ angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
         return total + n;
       })
 
+      // console.log('reducednumber', reducednumber)
+
       return reducednumber
     }
 
 
     //**************************filtering out supply contributions **********************
     $scope.filterVolunteer = function(x, id) {
+
+
+      // console.log('filteredid', _.pluck(_.filter(x, {
+      //   'type': "Supply",
+      //   'item_id': {
+      //     '_id': "5679bbd0e134af5d22bdb9e8"
+      //   }
+      // }), 'amount'))
+
 
       var numbers = _.pluck(_.filter(x, {
         'type': "Volunteer",
@@ -321,9 +347,12 @@ angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
       }), 'amount')
 
 
+
       var reducednumber = _.reduce(numbers, function(total, n) {
         return total + n;
       })
+
+      // console.log('reducednumber', reducednumber)
 
       return reducednumber
     }

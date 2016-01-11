@@ -7,7 +7,8 @@ var xssFilter = require('xss-filters');
 var CommentSchema = new Schema({
   campaign_id: {
     type: Schema.Types.ObjectId,
-    ref: 'Campaign'
+    ref: 'Campaign',
+    required: true
   },
   parent: {
     type: Schema.Types.ObjectId,

@@ -18,6 +18,7 @@ module.exports = function(app) {
   // });
 
   // Insert routes below
+  app.use('/api/cloudinaryimagess', require('./api/cloudinaryimages'));
   app.use('/api/images', require('./api/image'));
   app.use('/api/payments', require('./api/payment'));
   app.use('/api/contributors', require('./api/contributor'));

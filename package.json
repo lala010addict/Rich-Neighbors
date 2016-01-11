@@ -8,6 +8,7 @@
     "bluebird": "^2.9.34",
     "body-parser": "^1.13.3",
     "braintree": "^1.32.0",
+    "cloudinary": "^1.2.6",
     "composable-middleware": "^0.3.0",
     "compression": "^1.5.2",
     "connect-mongo": "^0.8.1",

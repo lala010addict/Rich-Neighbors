@@ -21,7 +21,7 @@ angular.module('bApp')
 
     $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
       //	 next.referrer = current.id;
-      console.log('hi')
+    //  console.log('hi')
       $rootScope.$watch('campaigns')
 
      // console.log($rootScope);

@@ -107,7 +107,7 @@ angular.module('bApp.StartCampaignController', ['ngFileUpload'])
 
     $scope.createCampaign = function() {
       //console.log('scope.loc:: ', $scope.formData.loc);
-      if ($scope.picture.length >= 1) {
+      // if ($scope.picture.length >= 1) {
         $http.post('/api/campaigns', $scope.formData)
           .then(function(data) {
             console.log(data);
@@ -123,9 +123,9 @@ angular.module('bApp.StartCampaignController', ['ngFileUpload'])
           .catch(function(err) {
             console.error('Error: ' + err);
           });
-      } else {
-        alert('Please add at least 1 picture')
-      }
+      // } else {
+      //   alert('Please add at least 1 picture')
+      // }
     }
 
   }])

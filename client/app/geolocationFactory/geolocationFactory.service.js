@@ -1,32 +1,38 @@
 'use strict';
 
-class geolocationService {
-
-  constructor($http) {
-    this.http = $http;
-  }
-  getIpInfo() {
-    return this.http.get('http://ipinfo.io/json').then(result => result.data);
-  }
-  getLatandLong() {
-    return this.getIpInfo().then(result => result.loc.split(',').map(val => {return Number(val)}));
-  }
-  static factory($http){
-    return new geolocationService($http);
-  }
-}
-
-geolocationService.$inject = ['$http'];
-
-angular.module('bApp')
-  .factory('geolocationFactory', geolocationService.factory)
-  // Is the below factory in use?
+angular.module('bApp') 
+  .factory('geolocationFactory', function ($http) {
+    var getIpInfo = function() {
+    var url = 'http://ipinfo.io/json';
+      return $http.get(url)
+      .success(function(data) {
+        var addressDetails = data;
+        return addressDetails;
+      });
+    };
+    var getLatandLong = function() {
+      getIpInfo()
+      .success(function(data) {
+        var result = data.loc.split(',');
+        console.log(result);
+        return result;
+      });
+    };
+    return {
+      getLoc: function () {
+        return getIpInfo();
+      },
+      getLatandLong: function() {
+        return getLatandLong();
+      }
+    };
+  })
   .factory('generalFactory', function () {
     var campaignId = '';
     var setCampaignId = function(id) {
-      console.log('currentCampId = ', campaignId);
+    // console.log('currentCampId = ', campaignId);
       campaignId = id;
-      console.log('it has now been changed to = ', campaignId);
+     // console.log('it has now been changed to = ', campaignId);
     };
     var getCampaignId = function() {
       console.log('from the get: ', campaignId);

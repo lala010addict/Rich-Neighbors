@@ -114,10 +114,6 @@ var CampaignSchema = new Schema({
   expires: {
     type: Date
   },
-  donated: {
-    type: Number,
-    default: 0
-  },
   _links: Array
 });
 
@@ -130,6 +126,7 @@ function linkify (data) {
           {href: '/api/campaigns/' + data._id + '/followers', ref: 'followers'},
           {href: '/api/campaigns/' + data._id + '/contributors', ref: 'contributors'},
           {href: '/api/campaigns/' + data._id + '/items', ref: 'items'},
+          {href: '/api/campaigns/' + data._id + '/images', ref: 'images'},
           {href: '/api/campaigns/' + data._id + '/volunteers', ref: 'volunteers'}]
 }
 
