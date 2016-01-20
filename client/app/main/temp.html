@@ -65,7 +65,7 @@ h6 {
     border-radius: 2px 2px 0 0;
 }
 </style>
-<div class="row">
+<div class="row" >
     <div class="medium-4 columns" ng-repeat="x in campaigns | orderBy: '-created_at' | limitTo: paginationLimit()">
         <div class="card">
      <span class="title" style="text-center"><h6> {{x.title | limitTo: 40}}</h6></span>
