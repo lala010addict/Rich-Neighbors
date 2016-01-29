@@ -29,17 +29,6 @@ angular.module('bApp.StartCampaignController', ['ngFileUpload'])
     $scope.volunteers = [{}];
     $scope.picture = [];
 
-    // uploader.onBeforeUploadItem = function (item) {
-    //   item.headers = {
-    //     Authorization: 'Bearer ' + $cookies.get('token')
-    //   };
-    //   item.url = '/api/campaigns/' + $scope.campaign_id + '/images';
-    // };
-
-    //$scope.supplyForm.name = $scope.supplies.supply.name;
-    // $scope.supplyForm.quantity = $scope.supply.quantity;
-    //$scope.campaign_id = '';
-    // $scope.stateParams = "";
 
     $scope.addNewChoice = function(item, qty) {
       var newItemNo = $scope.supplies.length + 1;
