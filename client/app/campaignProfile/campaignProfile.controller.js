@@ -163,31 +163,22 @@ angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
                 $scope.followid = item._id;
                 $scope.follow = 'Followed'
                 $scope.check = 'check';
-
               }
             })
-
           })
           .error(function(data) {
-
             console.log('Error: ' + data);
           });
-
-
       }
       //**************************sign up for supplies and volunteers**********************
 
     $scope.range = function(count) {
-
       var quantity = [];
-
       for (var i = 1; i < count + 1; i++) {
         quantity.push(i);
       }
-
       return quantity;
     }
-
     $scope.checkiffollowed();
 
     $scope.clicktofollow = function() {
@@ -221,7 +212,6 @@ angular.module('bApp.CampaignProfileController', ['td.easySocialShare'])
           });
       }
     };
-
 
     //**************************sign up for supplies **********************
     $scope.selectedItem = '1'
