@@ -30,7 +30,6 @@ angular.module('bApp')
   .factory('generalFactory', function () {
     var campaignId = '';
     var setCampaignId = function(id) {
-    // console.log('currentCampId = ', campaignId);
       campaignId = id;
      // console.log('it has now been changed to = ', campaignId);
     };
